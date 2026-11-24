@@ -1,0 +1,3234 @@
+{
+  "format": "mpl.production-ir",
+  "version": 3,
+  "timeUnit": "whole-note",
+  "tempoMap": [
+    {
+      "atWholeNotes": "0",
+      "barBeat": "1:1",
+      "bpm": 160
+    }
+  ],
+  "meterMap": [
+    {
+      "atWholeNotes": "0",
+      "barBeat": "1:1",
+      "meter": "4/4"
+    }
+  ],
+  "tracks": [
+    {
+      "name": "Piano",
+      "instrument": "GrandPiano",
+      "role": "melodic",
+      "assetSlots": [
+        {
+          "name": "main",
+          "kind": "instrument",
+          "preferredAsset": "GrandPiano"
+        }
+      ],
+      "assetBindings": [
+        {
+          "slot": "main",
+          "assetId": "GrandPiano",
+          "provider": "symbolic",
+          "resolved": true
+        }
+      ],
+      "clips": [
+        {
+          "name": "Intro",
+          "sourceObject": 5,
+          "sourceLabel": "IntroPiano",
+          "instanceId": 4211852026,
+          "startWholeNotes": "0",
+          "startBarBeat": "1:1",
+          "durationWholeNotes": "4",
+          "expression": {
+            "velocity": -1,
+            "timing": -1,
+            "gate": -1,
+            "pan": -1
+          },
+          "notes": [
+            {
+              "pitch": "F4",
+              "midi": 65,
+              "offsetWholeNotes": "0",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "1/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "1/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "1/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "3/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "G4",
+              "midi": 67,
+              "offsetWholeNotes": "1",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Bb4",
+              "midi": 70,
+              "offsetWholeNotes": "9/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Db5",
+              "midi": 73,
+              "offsetWholeNotes": "5/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "F5",
+              "midi": 77,
+              "offsetWholeNotes": "3/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Db5",
+              "midi": 73,
+              "offsetWholeNotes": "7/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "9/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "5/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "11/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "F4",
+              "midi": 65,
+              "offsetWholeNotes": "23/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "F4",
+              "midi": 65,
+              "offsetWholeNotes": "3",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "25/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "13/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "7/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "15/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            }
+          ]
+        },
+        {
+          "name": "Drop A",
+          "sourceObject": 6,
+          "sourceLabel": "DropAPiano",
+          "instanceId": 128884352,
+          "startWholeNotes": "4",
+          "startBarBeat": "5:1",
+          "durationWholeNotes": "8",
+          "expression": {
+            "velocity": -1,
+            "timing": -1,
+            "gate": -1,
+            "pan": -1
+          },
+          "notes": [
+            {
+              "pitch": "F4",
+              "midi": 65,
+              "offsetWholeNotes": "0",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "1/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "1/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "1/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "3/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "1",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "9/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "5/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "G5",
+              "midi": 79,
+              "offsetWholeNotes": "3/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "7/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "G4",
+              "midi": 67,
+              "offsetWholeNotes": "2",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Bb4",
+              "midi": 70,
+              "offsetWholeNotes": "17/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Db5",
+              "midi": 73,
+              "offsetWholeNotes": "9/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "F5",
+              "midi": 77,
+              "offsetWholeNotes": "5/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Db5",
+              "midi": 73,
+              "offsetWholeNotes": "11/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "3",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "G5",
+              "midi": 79,
+              "offsetWholeNotes": "13/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "7/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "15/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "31/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "F4",
+              "midi": 65,
+              "offsetWholeNotes": "4",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "33/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "17/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "9/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "19/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "5",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "41/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "21/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "G5",
+              "midi": 79,
+              "offsetWholeNotes": "11/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "23/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "6",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "25/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "13/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "27/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "F4",
+              "midi": 65,
+              "offsetWholeNotes": "55/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "G4",
+              "midi": 67,
+              "offsetWholeNotes": "7",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Bb4",
+              "midi": 70,
+              "offsetWholeNotes": "57/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Db5",
+              "midi": 73,
+              "offsetWholeNotes": "29/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "F5",
+              "midi": 77,
+              "offsetWholeNotes": "15/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Db5",
+              "midi": 73,
+              "offsetWholeNotes": "31/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            }
+          ]
+        },
+        {
+          "name": "Drop B",
+          "sourceObject": 7,
+          "sourceLabel": "DropBPiano",
+          "instanceId": 4184242386,
+          "startWholeNotes": "12",
+          "startBarBeat": "13:1",
+          "durationWholeNotes": "8",
+          "expression": {
+            "velocity": 0,
+            "timing": 2,
+            "gate": -1,
+            "pan": -1
+          },
+          "notes": [
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "0",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "1/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "1/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "G5",
+              "midi": 79,
+              "offsetWholeNotes": "1/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "3/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "G4",
+              "midi": 67,
+              "offsetWholeNotes": "1",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Bb4",
+              "midi": 70,
+              "offsetWholeNotes": "9/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Db5",
+              "midi": 73,
+              "offsetWholeNotes": "5/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "F5",
+              "midi": 77,
+              "offsetWholeNotes": "3/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Db5",
+              "midi": 73,
+              "offsetWholeNotes": "7/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "F4",
+              "midi": 65,
+              "offsetWholeNotes": "2",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "17/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "9/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "5/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "11/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "3",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "25/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "13/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "G5",
+              "midi": 79,
+              "offsetWholeNotes": "7/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "15/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "G5",
+              "midi": 79,
+              "offsetWholeNotes": "17/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "9/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "19/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "39/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "G4",
+              "midi": 67,
+              "offsetWholeNotes": "5",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Bb4",
+              "midi": 70,
+              "offsetWholeNotes": "41/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Db5",
+              "midi": 73,
+              "offsetWholeNotes": "21/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "F5",
+              "midi": 77,
+              "offsetWholeNotes": "11/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Db5",
+              "midi": 73,
+              "offsetWholeNotes": "23/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "F4",
+              "midi": 65,
+              "offsetWholeNotes": "6",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "49/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "25/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "13/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "27/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "7",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "29/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "15/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "31/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "F4",
+              "midi": 65,
+              "offsetWholeNotes": "63/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            }
+          ]
+        },
+        {
+          "name": "Outro",
+          "sourceObject": 8,
+          "sourceLabel": "OutroPiano",
+          "instanceId": 2719308306,
+          "startWholeNotes": "20",
+          "startBarBeat": "21:1",
+          "durationWholeNotes": "4",
+          "expression": {
+            "velocity": -1,
+            "timing": -1,
+            "gate": -1,
+            "pan": -1
+          },
+          "notes": [
+            {
+              "pitch": "F4",
+              "midi": 65,
+              "offsetWholeNotes": "0",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "1/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "1/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "1/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "3/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "1",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "5/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "3/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "7/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "F4",
+              "midi": 65,
+              "offsetWholeNotes": "15/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "G4",
+              "midi": 67,
+              "offsetWholeNotes": "2",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Bb4",
+              "midi": 70,
+              "offsetWholeNotes": "17/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Db5",
+              "midi": 73,
+              "offsetWholeNotes": "9/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "F5",
+              "midi": 77,
+              "offsetWholeNotes": "5/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Db5",
+              "midi": 73,
+              "offsetWholeNotes": "11/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "F4",
+              "midi": 65,
+              "offsetWholeNotes": "3",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "25/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "13/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "7/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "15/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pad",
+      "instrument": "WarmPad",
+      "role": "harmony",
+      "assetSlots": [
+        {
+          "name": "main",
+          "kind": "instrument",
+          "preferredAsset": "WarmPad"
+        }
+      ],
+      "assetBindings": [
+        {
+          "slot": "main",
+          "assetId": "WarmPad",
+          "provider": "symbolic",
+          "resolved": true
+        }
+      ],
+      "clips": [
+        {
+          "name": "Drop A",
+          "sourceObject": 15,
+          "sourceLabel": "PadVoicing",
+          "instanceId": 3361554144,
+          "startWholeNotes": "4",
+          "startBarBeat": "5:1",
+          "durationWholeNotes": "8",
+          "expression": {
+            "velocity": -1,
+            "timing": -1,
+            "gate": -1,
+            "pan": -1
+          },
+          "notes": [
+            {
+              "pitch": "F2",
+              "midi": 41,
+              "offsetWholeNotes": "0",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab2",
+              "midi": 44,
+              "offsetWholeNotes": "0",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "C3",
+              "midi": 48,
+              "offsetWholeNotes": "0",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Db3",
+              "midi": 49,
+              "offsetWholeNotes": "1",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "F3",
+              "midi": 53,
+              "offsetWholeNotes": "1",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Ab3",
+              "midi": 56,
+              "offsetWholeNotes": "1",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Ab2",
+              "midi": 44,
+              "offsetWholeNotes": "2",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "C3",
+              "midi": 48,
+              "offsetWholeNotes": "2",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Eb3",
+              "midi": 51,
+              "offsetWholeNotes": "2",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Eb3",
+              "midi": 51,
+              "offsetWholeNotes": "3",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "G3",
+              "midi": 55,
+              "offsetWholeNotes": "3",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Bb3",
+              "midi": 58,
+              "offsetWholeNotes": "3",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "F2",
+              "midi": 41,
+              "offsetWholeNotes": "4",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab2",
+              "midi": 44,
+              "offsetWholeNotes": "4",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "C3",
+              "midi": 48,
+              "offsetWholeNotes": "4",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Db3",
+              "midi": 49,
+              "offsetWholeNotes": "5",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "F3",
+              "midi": 53,
+              "offsetWholeNotes": "5",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Ab3",
+              "midi": 56,
+              "offsetWholeNotes": "5",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Ab2",
+              "midi": 44,
+              "offsetWholeNotes": "6",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "C3",
+              "midi": 48,
+              "offsetWholeNotes": "6",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Eb3",
+              "midi": 51,
+              "offsetWholeNotes": "6",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Eb3",
+              "midi": 51,
+              "offsetWholeNotes": "7",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "G3",
+              "midi": 55,
+              "offsetWholeNotes": "7",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Bb3",
+              "midi": 58,
+              "offsetWholeNotes": "7",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            }
+          ]
+        },
+        {
+          "name": "Drop B",
+          "sourceObject": 15,
+          "sourceLabel": "PadVoicing",
+          "instanceId": 3985141554,
+          "startWholeNotes": "12",
+          "startBarBeat": "13:1",
+          "durationWholeNotes": "8",
+          "expression": {
+            "velocity": -1,
+            "timing": -1,
+            "gate": -1,
+            "pan": -1
+          },
+          "notes": [
+            {
+              "pitch": "F2",
+              "midi": 41,
+              "offsetWholeNotes": "0",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab2",
+              "midi": 44,
+              "offsetWholeNotes": "0",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "C3",
+              "midi": 48,
+              "offsetWholeNotes": "0",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Db3",
+              "midi": 49,
+              "offsetWholeNotes": "1",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "F3",
+              "midi": 53,
+              "offsetWholeNotes": "1",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Ab3",
+              "midi": 56,
+              "offsetWholeNotes": "1",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Ab2",
+              "midi": 44,
+              "offsetWholeNotes": "2",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "C3",
+              "midi": 48,
+              "offsetWholeNotes": "2",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Eb3",
+              "midi": 51,
+              "offsetWholeNotes": "2",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Eb3",
+              "midi": 51,
+              "offsetWholeNotes": "3",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "G3",
+              "midi": 55,
+              "offsetWholeNotes": "3",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Bb3",
+              "midi": 58,
+              "offsetWholeNotes": "3",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "F2",
+              "midi": 41,
+              "offsetWholeNotes": "4",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab2",
+              "midi": 44,
+              "offsetWholeNotes": "4",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "C3",
+              "midi": 48,
+              "offsetWholeNotes": "4",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Db3",
+              "midi": 49,
+              "offsetWholeNotes": "5",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "F3",
+              "midi": 53,
+              "offsetWholeNotes": "5",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Ab3",
+              "midi": 56,
+              "offsetWholeNotes": "5",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Ab2",
+              "midi": 44,
+              "offsetWholeNotes": "6",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "C3",
+              "midi": 48,
+              "offsetWholeNotes": "6",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Eb3",
+              "midi": 51,
+              "offsetWholeNotes": "6",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Eb3",
+              "midi": 51,
+              "offsetWholeNotes": "7",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "G3",
+              "midi": 55,
+              "offsetWholeNotes": "7",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Bb3",
+              "midi": 58,
+              "offsetWholeNotes": "7",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bass",
+      "instrument": "SubBass",
+      "role": "bass",
+      "assetSlots": [
+        {
+          "name": "main",
+          "kind": "instrument",
+          "preferredAsset": "SubBass"
+        }
+      ],
+      "assetBindings": [
+        {
+          "slot": "main",
+          "assetId": "SubBass",
+          "provider": "symbolic",
+          "resolved": true
+        }
+      ],
+      "clips": [
+        {
+          "name": "Drop A",
+          "sourceObject": 16,
+          "sourceLabel": "BassRoots",
+          "instanceId": 3548582762,
+          "startWholeNotes": "4",
+          "startBarBeat": "5:1",
+          "durationWholeNotes": "8",
+          "expression": {
+            "velocity": -1,
+            "timing": -1,
+            "gate": -1,
+            "pan": -1
+          },
+          "notes": [
+            {
+              "pitch": "F1",
+              "midi": 29,
+              "offsetWholeNotes": "0",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Db2",
+              "midi": 37,
+              "offsetWholeNotes": "1",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab1",
+              "midi": 32,
+              "offsetWholeNotes": "2",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb2",
+              "midi": 39,
+              "offsetWholeNotes": "3",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "F1",
+              "midi": 29,
+              "offsetWholeNotes": "4",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Db2",
+              "midi": 37,
+              "offsetWholeNotes": "5",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab1",
+              "midi": 32,
+              "offsetWholeNotes": "6",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb2",
+              "midi": 39,
+              "offsetWholeNotes": "7",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            }
+          ]
+        },
+        {
+          "name": "Drop B",
+          "sourceObject": 16,
+          "sourceLabel": "BassRoots",
+          "instanceId": 2511103828,
+          "startWholeNotes": "12",
+          "startBarBeat": "13:1",
+          "durationWholeNotes": "8",
+          "expression": {
+            "velocity": -1,
+            "timing": -1,
+            "gate": -1,
+            "pan": -1
+          },
+          "notes": [
+            {
+              "pitch": "F1",
+              "midi": 29,
+              "offsetWholeNotes": "0",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Db2",
+              "midi": 37,
+              "offsetWholeNotes": "1",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab1",
+              "midi": 32,
+              "offsetWholeNotes": "2",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb2",
+              "midi": 39,
+              "offsetWholeNotes": "3",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "F1",
+              "midi": 29,
+              "offsetWholeNotes": "4",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Db2",
+              "midi": 37,
+              "offsetWholeNotes": "5",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab1",
+              "midi": 32,
+              "offsetWholeNotes": "6",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb2",
+              "midi": 39,
+              "offsetWholeNotes": "7",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Lead",
+      "instrument": "LeadSynth",
+      "role": "melodic",
+      "assetSlots": [
+        {
+          "name": "main",
+          "kind": "instrument",
+          "preferredAsset": "LeadSynth"
+        }
+      ],
+      "assetBindings": [
+        {
+          "slot": "main",
+          "assetId": "LeadSynth",
+          "provider": "symbolic",
+          "resolved": true
+        }
+      ],
+      "clips": [
+        {
+          "name": "Lead",
+          "sourceObject": 18,
+          "sourceLabel": "LeadMotif",
+          "instanceId": 1646493706,
+          "startWholeNotes": "12",
+          "startBarBeat": "13:1",
+          "durationWholeNotes": "63/8",
+          "expression": {
+            "velocity": 1,
+            "timing": -1,
+            "gate": -1,
+            "pan": -1
+          },
+          "notes": [
+            {
+              "pitch": "F4",
+              "midi": 65,
+              "offsetWholeNotes": "1/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "1/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "3/8",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "5/8",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "7/8",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "F4",
+              "midi": 65,
+              "offsetWholeNotes": "5/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "5/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "3/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "7/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "F4",
+              "midi": 65,
+              "offsetWholeNotes": "19/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "19/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "21/8",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "23/8",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "25/8",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "F4",
+              "midi": 65,
+              "offsetWholeNotes": "7/2",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "7/2",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "15/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "17/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "F4",
+              "midi": 65,
+              "offsetWholeNotes": "37/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "37/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "39/8",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "41/8",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "43/8",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "F4",
+              "midi": 65,
+              "offsetWholeNotes": "23/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "23/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "6",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "25/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "13/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "F4",
+              "midi": 65,
+              "offsetWholeNotes": "55/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "55/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "57/8",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "59/8",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "61/8",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Drums",
+      "instrument": "DrumKit",
+      "role": "percussion",
+      "assetSlots": [
+        {
+          "name": "main",
+          "kind": "instrument",
+          "preferredAsset": "DrumKit"
+        }
+      ],
+      "assetBindings": [
+        {
+          "slot": "main",
+          "assetId": "DrumKit",
+          "provider": "symbolic",
+          "resolved": true
+        }
+      ],
+      "clips": [
+        {
+          "name": "Drop A",
+          "sourceObject": 20,
+          "sourceLabel": "DrumLoop",
+          "instanceId": 1806581740,
+          "startWholeNotes": "4",
+          "startBarBeat": "5:1",
+          "durationWholeNotes": "8",
+          "expression": {
+            "velocity": -1,
+            "timing": -1,
+            "gate": -1,
+            "pan": -1
+          },
+          "notes": [
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "0",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "0",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "1/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "1/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "1/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "3/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "1/2",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "1/2",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "5/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "3/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "3/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "7/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "1",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "1",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "9/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "5/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "5/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "11/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "3/2",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "3/2",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "13/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "7/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "7/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "15/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "2",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "2",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "17/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "9/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "9/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "19/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "5/2",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "5/2",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "21/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "11/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "11/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "23/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "3",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "3",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "25/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "13/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "13/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "27/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "7/2",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "7/2",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "29/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "15/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "15/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "31/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "4",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "33/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "17/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "17/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "35/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "9/2",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "9/2",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "37/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "19/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "19/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "39/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "5",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "5",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "41/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "21/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "21/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "43/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "11/2",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "11/2",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "45/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "23/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "23/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "47/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "6",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "6",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "49/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "25/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "25/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "51/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "13/2",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "13/2",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "53/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "27/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "27/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "55/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "7",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "7",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "57/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "29/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "29/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "59/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "15/2",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "15/2",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "61/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "31/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "31/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "63/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            }
+          ]
+        },
+        {
+          "name": "Drop B",
+          "sourceObject": 20,
+          "sourceLabel": "DrumLoop",
+          "instanceId": 1121600990,
+          "startWholeNotes": "12",
+          "startBarBeat": "13:1",
+          "durationWholeNotes": "8",
+          "expression": {
+            "velocity": -1,
+            "timing": -1,
+            "gate": -1,
+            "pan": -1
+          },
+          "notes": [
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "0",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "0",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "1/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "1/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "1/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "3/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "1/2",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "1/2",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "5/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "3/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "3/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "7/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "1",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "1",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "9/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "5/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "5/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "11/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "3/2",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "3/2",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "13/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "7/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "7/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "15/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "2",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "2",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "17/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "9/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "9/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "19/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "5/2",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "5/2",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "21/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "11/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "11/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "23/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "3",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "3",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "25/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "13/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "13/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "27/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "7/2",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "7/2",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "29/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "15/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "15/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "31/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "4",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "33/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "17/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "17/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "35/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "9/2",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "9/2",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "37/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "19/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "19/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "39/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "5",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "5",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "41/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "21/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "21/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "43/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "11/2",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "11/2",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "45/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "23/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "23/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "47/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "6",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "6",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "49/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "25/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "25/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "51/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "13/2",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "13/2",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "53/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "27/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "27/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "55/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "7",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "7",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "57/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "29/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "29/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "59/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "C2",
+              "midi": 36,
+              "offsetWholeNotes": "15/2",
+              "durationWholeNotes": "1/8",
+              "velocity": 110
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "15/2",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "61/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "D2",
+              "midi": 38,
+              "offsetWholeNotes": "31/4",
+              "durationWholeNotes": "1/8",
+              "velocity": 100
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "31/4",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            },
+            {
+              "pitch": "F#2",
+              "midi": 42,
+              "offsetWholeNotes": "63/8",
+              "durationWholeNotes": "1/16",
+              "velocity": 72
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "automation": [
+    {
+      "label": "Piano.volume",
+      "parameter": "track:Piano:volume",
+      "scope": "track",
+      "unit": "ratio",
+      "minimum": 0,
+      "maximum": 1,
+      "curve": 3,
+      "domain": "musical",
+      "mode": "replace",
+      "enabled": true
+    },
+    {
+      "label": "Piano.modulation",
+      "parameter": "track:Piano:modulation",
+      "scope": "track",
+      "unit": "ratio",
+      "minimum": 0,
+      "maximum": 1,
+      "curve": 4,
+      "domain": "musical",
+      "mode": "add",
+      "enabled": true
+    },
+    {
+      "label": "master.volume",
+      "parameter": "master:volume",
+      "scope": "master",
+      "unit": "ratio",
+      "minimum": 0,
+      "maximum": 1,
+      "curve": 5,
+      "domain": "musical",
+      "mode": "replace",
+      "enabled": true
+    }
+  ],
+  "totalDurationWholeNotes": "24"
+}

@@ -1,0 +1,576 @@
+{
+  "format": "mpl.ast",
+  "version": 1,
+  "file": "F:/MPL/examples\\core.mpl",
+  "span": {
+    "line": 3,
+    "column": 1,
+    "endLine": 49,
+    "endColumn": 25,
+    "offset": 80,
+    "length": 627
+  },
+  "project": {
+    "name": "Core",
+    "span": {
+      "line": 3,
+      "column": 1,
+      "endLine": 7,
+      "endColumn": 2,
+      "offset": 80,
+      "length": 67
+    },
+    "tempo": {
+      "kind": "integer",
+      "span": {
+        "line": 4,
+        "column": 11,
+        "endLine": 4,
+        "endColumn": 14,
+        "offset": 105,
+        "length": 3
+      },
+      "unit": "bpm",
+      "value": 160
+    },
+    "meter": {
+      "kind": "rational",
+      "span": {
+        "line": 5,
+        "column": 11,
+        "endLine": 5,
+        "endColumn": 14,
+        "offset": 124,
+        "length": 3
+      },
+      "numerator": 4,
+      "denominator": 4
+    },
+    "key": {
+      "kind": "key",
+      "span": {
+        "line": 6,
+        "column": 9,
+        "endLine": 6,
+        "endColumn": 16,
+        "offset": 137,
+        "length": 7
+      },
+      "text": "F minor"
+    }
+  },
+  "declarations": [
+    {
+      "kind": "asset",
+      "name": "GrandPiano",
+      "assetKind": "instrument",
+      "provider": "GrandPiano",
+      "span": {
+        "line": 9,
+        "column": 1,
+        "endLine": 9,
+        "endColumn": 45,
+        "offset": 149,
+        "length": 44
+      }
+    },
+    {
+      "kind": "asset",
+      "name": "SubBass",
+      "assetKind": "instrument",
+      "provider": "SubBass",
+      "span": {
+        "line": 10,
+        "column": 1,
+        "endLine": 10,
+        "endColumn": 39,
+        "offset": 194,
+        "length": 38
+      }
+    },
+    {
+      "kind": "let",
+      "name": "A",
+      "span": {
+        "line": 12,
+        "column": 1,
+        "endLine": 18,
+        "endColumn": 3,
+        "offset": 234,
+        "length": 75
+      },
+      "value": {
+        "kind": "melody",
+        "span": {
+          "line": 12,
+          "column": 9,
+          "endLine": 18,
+          "endColumn": 2,
+          "offset": 242,
+          "length": 66
+        },
+        "entries": [
+          {
+            "pitch": "F4",
+            "duration": {
+              "kind": "rational",
+              "span": {
+                "line": 13,
+                "column": 7,
+                "endLine": 13,
+                "endColumn": 10,
+                "offset": 257,
+                "length": 3
+              },
+              "numerator": 1,
+              "denominator": 8
+            }
+          },
+          {
+            "pitch": "Ab4",
+            "duration": {
+              "kind": "rational",
+              "span": {
+                "line": 14,
+                "column": 8,
+                "endLine": 14,
+                "endColumn": 11,
+                "offset": 269,
+                "length": 3
+              },
+              "numerator": 1,
+              "denominator": 8
+            }
+          },
+          {
+            "pitch": "C5",
+            "duration": {
+              "kind": "rational",
+              "span": {
+                "line": 15,
+                "column": 7,
+                "endLine": 15,
+                "endColumn": 10,
+                "offset": 280,
+                "length": 3
+              },
+              "numerator": 1,
+              "denominator": 4
+            }
+          },
+          {
+            "pitch": "Eb5",
+            "duration": {
+              "kind": "rational",
+              "span": {
+                "line": 16,
+                "column": 8,
+                "endLine": 16,
+                "endColumn": 11,
+                "offset": 292,
+                "length": 3
+              },
+              "numerator": 1,
+              "denominator": 4
+            }
+          },
+          {
+            "pitch": "C5",
+            "duration": {
+              "kind": "rational",
+              "span": {
+                "line": 17,
+                "column": 7,
+                "endLine": 17,
+                "endColumn": 10,
+                "offset": 303,
+                "length": 3
+              },
+              "numerator": 1,
+              "denominator": 4
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "let",
+      "name": "B",
+      "span": {
+        "line": 20,
+        "column": 1,
+        "endLine": 20,
+        "endColumn": 29,
+        "offset": 311,
+        "length": 28
+      },
+      "value": {
+        "kind": "call",
+        "span": {
+          "line": 20,
+          "column": 9,
+          "endLine": 20,
+          "endColumn": 28,
+          "offset": 319,
+          "length": 19
+        },
+        "text": "transpose",
+        "arguments": [
+          {
+            "kind": "identifier",
+            "span": {
+              "line": 20,
+              "column": 19,
+              "endLine": 20,
+              "endColumn": 20,
+              "offset": 329,
+              "length": 1
+            },
+            "text": "A"
+          },
+          {
+            "kind": "integer",
+            "span": {
+              "line": 20,
+              "column": 22,
+              "endLine": 20,
+              "endColumn": 24,
+              "offset": 332,
+              "length": 2
+            },
+            "unit": "st",
+            "value": 12
+          }
+        ]
+      }
+    },
+    {
+      "kind": "let",
+      "name": "C",
+      "span": {
+        "line": 21,
+        "column": 1,
+        "endLine": 21,
+        "endColumn": 20,
+        "offset": 340,
+        "length": 19
+      },
+      "value": {
+        "kind": "call",
+        "span": {
+          "line": 21,
+          "column": 9,
+          "endLine": 21,
+          "endColumn": 19,
+          "offset": 348,
+          "length": 10
+        },
+        "text": "reverse",
+        "arguments": [
+          {
+            "kind": "identifier",
+            "span": {
+              "line": 21,
+              "column": 17,
+              "endLine": 21,
+              "endColumn": 18,
+              "offset": 356,
+              "length": 1
+            },
+            "text": "A"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "let",
+      "name": "Main",
+      "span": {
+        "line": 22,
+        "column": 1,
+        "endLine": 22,
+        "endColumn": 33,
+        "offset": 360,
+        "length": 32
+      },
+      "value": {
+        "kind": "call",
+        "span": {
+          "line": 22,
+          "column": 12,
+          "endLine": 22,
+          "endColumn": 32,
+          "offset": 371,
+          "length": 20
+        },
+        "text": "sequence",
+        "arguments": [
+          {
+            "kind": "identifier",
+            "span": {
+              "line": 22,
+              "column": 21,
+              "endLine": 22,
+              "endColumn": 22,
+              "offset": 380,
+              "length": 1
+            },
+            "text": "A"
+          },
+          {
+            "kind": "identifier",
+            "span": {
+              "line": 22,
+              "column": 24,
+              "endLine": 22,
+              "endColumn": 25,
+              "offset": 383,
+              "length": 1
+            },
+            "text": "B"
+          },
+          {
+            "kind": "identifier",
+            "span": {
+              "line": 22,
+              "column": 27,
+              "endLine": 22,
+              "endColumn": 28,
+              "offset": 386,
+              "length": 1
+            },
+            "text": "C"
+          },
+          {
+            "kind": "identifier",
+            "span": {
+              "line": 22,
+              "column": 30,
+              "endLine": 22,
+              "endColumn": 31,
+              "offset": 389,
+              "length": 1
+            },
+            "text": "A"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "let",
+      "name": "BassLine",
+      "span": {
+        "line": 23,
+        "column": 1,
+        "endLine": 23,
+        "endColumn": 40,
+        "offset": 393,
+        "length": 39
+      },
+      "value": {
+        "kind": "call",
+        "span": {
+          "line": 23,
+          "column": 16,
+          "endLine": 23,
+          "endColumn": 39,
+          "offset": 408,
+          "length": 23
+        },
+        "text": "transpose",
+        "arguments": [
+          {
+            "kind": "identifier",
+            "span": {
+              "line": 23,
+              "column": 26,
+              "endLine": 23,
+              "endColumn": 30,
+              "offset": 418,
+              "length": 4
+            },
+            "text": "Main"
+          },
+          {
+            "kind": "unary-minus",
+            "span": {
+              "line": 23,
+              "column": 32,
+              "endLine": 23,
+              "endColumn": 35,
+              "offset": 424,
+              "length": 3
+            },
+            "operand": {
+              "kind": "integer",
+              "span": {
+                "line": 23,
+                "column": 33,
+                "endLine": 23,
+                "endColumn": 35,
+                "offset": 425,
+                "length": 2
+              },
+              "unit": "st",
+              "value": 24
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": "track",
+      "name": "Piano",
+      "asset": "GrandPiano",
+      "role": "melodic",
+      "span": {
+        "line": 25,
+        "column": 1,
+        "endLine": 28,
+        "endColumn": 2,
+        "offset": 434,
+        "length": 55
+      }
+    },
+    {
+      "kind": "track",
+      "name": "Bass",
+      "asset": "SubBass",
+      "role": "bass",
+      "span": {
+        "line": 30,
+        "column": 1,
+        "endLine": 33,
+        "endColumn": 2,
+        "offset": 491,
+        "length": 48
+      }
+    },
+    {
+      "kind": "section",
+      "name": "Core",
+      "span": {
+        "line": 35,
+        "column": 1,
+        "endLine": 43,
+        "endColumn": 2,
+        "offset": 541,
+        "length": 110
+      },
+      "duration": {
+        "kind": "integer",
+        "span": {
+          "line": 35,
+          "column": 14,
+          "endLine": 35,
+          "endColumn": 15,
+          "offset": 554,
+          "length": 1
+        },
+        "unit": "bars",
+        "value": 4
+      },
+      "clips": [
+        {
+          "track": "Piano",
+          "name": "Main",
+          "span": {
+            "line": 36,
+            "column": 3,
+            "endLine": 38,
+            "endColumn": 4,
+            "offset": 566,
+            "length": 38
+          },
+          "play": {
+            "kind": "identifier",
+            "span": {
+              "line": 37,
+              "column": 10,
+              "endLine": 37,
+              "endColumn": 14,
+              "offset": 595,
+              "length": 4
+            },
+            "text": "Main"
+          },
+          "velocity": {
+            "kind": "invalid"
+          },
+          "timing": {
+            "kind": "invalid"
+          },
+          "gate": {
+            "kind": "invalid"
+          },
+          "pan": {
+            "kind": "invalid"
+          }
+        },
+        {
+          "track": "Bass",
+          "name": "Bass",
+          "span": {
+            "line": 40,
+            "column": 3,
+            "endLine": 42,
+            "endColumn": 4,
+            "offset": 608,
+            "length": 41
+          },
+          "play": {
+            "kind": "identifier",
+            "span": {
+              "line": 41,
+              "column": 10,
+              "endLine": 41,
+              "endColumn": 18,
+              "offset": 636,
+              "length": 8
+            },
+            "text": "BassLine"
+          },
+          "velocity": {
+            "kind": "invalid"
+          },
+          "timing": {
+            "kind": "invalid"
+          },
+          "gate": {
+            "kind": "invalid"
+          },
+          "pan": {
+            "kind": "invalid"
+          }
+        }
+      ]
+    }
+  ],
+  "arrangement": [
+    {
+      "section": "Core",
+      "span": {
+        "line": 46,
+        "column": 8,
+        "endLine": 46,
+        "endColumn": 12,
+        "offset": 674,
+        "length": 4
+      }
+    }
+  ],
+  "exports": [
+    {
+      "format": "midi",
+      "path": "core.mid",
+      "span": {
+        "line": 49,
+        "column": 1,
+        "endLine": 49,
+        "endColumn": 25,
+        "offset": 683,
+        "length": 24
+      }
+    }
+  ]
+}

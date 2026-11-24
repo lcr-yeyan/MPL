@@ -1,0 +1,6186 @@
+{
+  "format": "mpl.trace",
+  "version": 3,
+  "context": {
+    "key": "F minor",
+    "meter": "4/4"
+  },
+  "music": {
+    "objects": 21,
+    "evaluated": 21,
+    "evaluations": 21,
+    "cacheHits": 60
+  },
+  "temporal": {
+    "objects": 6,
+    "evaluated": 6,
+    "evaluations": 6,
+    "cacheHits": 511,
+    "curves": [
+      {
+        "id": 0,
+        "kind": "linear",
+        "label": "Crescendo",
+        "inputs": [],
+        "value": {
+          "domain": "relative",
+          "extent": "1",
+          "segments": [
+            {
+              "start": "0",
+              "end": "1",
+              "from": 0.55,
+              "to": 1.15,
+              "interpolation": "linear"
+            }
+          ]
+        }
+      },
+      {
+        "id": 1,
+        "kind": "smoothstep",
+        "label": "Decrescendo",
+        "inputs": [],
+        "value": {
+          "domain": "relative",
+          "extent": "1",
+          "segments": [
+            {
+              "start": "0",
+              "end": "1",
+              "from": 1.15,
+              "to": 0.5,
+              "interpolation": "smoothstep"
+            }
+          ]
+        }
+      },
+      {
+        "id": 2,
+        "kind": "keyframes",
+        "label": "Humanize",
+        "inputs": [],
+        "value": {
+          "domain": "relative",
+          "extent": "1",
+          "segments": [
+            {
+              "start": "0",
+              "end": "1/4",
+              "from": 0,
+              "to": 0.04,
+              "interpolation": "linear"
+            },
+            {
+              "start": "1/4",
+              "end": "3/4",
+              "from": 0.04,
+              "to": -0.03,
+              "interpolation": "step"
+            },
+            {
+              "start": "3/4",
+              "end": "1",
+              "from": -0.03,
+              "to": 0,
+              "interpolation": "linear"
+            }
+          ]
+        }
+      },
+      {
+        "id": 3,
+        "kind": "linear",
+        "label": "Volume",
+        "inputs": [],
+        "value": {
+          "domain": "musical",
+          "extent": "8",
+          "segments": [
+            {
+              "start": "0",
+              "end": "8",
+              "from": 0.6,
+              "to": 1,
+              "interpolation": "linear"
+            }
+          ]
+        }
+      },
+      {
+        "id": 4,
+        "kind": "stretch",
+        "label": "VolumeX2",
+        "inputs": [
+          3
+        ],
+        "value": {
+          "domain": "musical",
+          "extent": "16",
+          "segments": [
+            {
+              "start": "0",
+              "end": "16",
+              "from": 0.6,
+              "to": 1,
+              "interpolation": "linear"
+            }
+          ]
+        }
+      },
+      {
+        "id": 5,
+        "kind": "reverse",
+        "label": "VolumeRev",
+        "inputs": [
+          3
+        ],
+        "value": {
+          "domain": "musical",
+          "extent": "8",
+          "segments": [
+            {
+              "start": "0",
+              "end": "8",
+              "from": 1,
+              "to": 0.6,
+              "interpolation": "linear"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "production": {
+    "tracks": 5,
+    "clips": 11,
+    "notes": 411,
+    "durationWholeNotes": "24"
+  },
+  "objects": [
+    {
+      "id": 0,
+      "kind": "literal",
+      "label": "A",
+      "inputs": [],
+      "contextDependencies": [],
+      "noteCount": 5
+    },
+    {
+      "id": 1,
+      "kind": "diatonic-transpose",
+      "label": "A1",
+      "inputs": [
+        0
+      ],
+      "contextDependencies": [
+        "key"
+      ],
+      "noteCount": 5
+    },
+    {
+      "id": 2,
+      "kind": "diatonic-transpose",
+      "label": "B",
+      "inputs": [
+        0
+      ],
+      "contextDependencies": [
+        "key"
+      ],
+      "noteCount": 5
+    },
+    {
+      "id": 3,
+      "kind": "reverse",
+      "label": "RevA",
+      "inputs": [
+        0
+      ],
+      "contextDependencies": [],
+      "noteCount": 5
+    },
+    {
+      "id": 4,
+      "kind": "reverse",
+      "label": "RevB",
+      "inputs": [
+        2
+      ],
+      "contextDependencies": [],
+      "noteCount": 5
+    },
+    {
+      "id": 5,
+      "kind": "sequence",
+      "label": "IntroPiano",
+      "inputs": [
+        0,
+        1,
+        3,
+        0
+      ],
+      "contextDependencies": [],
+      "noteCount": 20
+    },
+    {
+      "id": 6,
+      "kind": "sequence",
+      "label": "DropAPiano",
+      "inputs": [
+        0,
+        2,
+        1,
+        4,
+        0,
+        2,
+        3,
+        1
+      ],
+      "contextDependencies": [],
+      "noteCount": 40
+    },
+    {
+      "id": 7,
+      "kind": "sequence",
+      "label": "DropBPiano",
+      "inputs": [
+        2,
+        1,
+        0,
+        2,
+        4,
+        1,
+        0,
+        3
+      ],
+      "contextDependencies": [],
+      "noteCount": 40
+    },
+    {
+      "id": 8,
+      "kind": "sequence",
+      "label": "OutroPiano",
+      "inputs": [
+        0,
+        3,
+        1,
+        0
+      ],
+      "contextDependencies": [],
+      "noteCount": 20
+    },
+    {
+      "id": 9,
+      "kind": "literal",
+      "label": "RootF",
+      "inputs": [],
+      "contextDependencies": [],
+      "noteCount": 1
+    },
+    {
+      "id": 10,
+      "kind": "literal",
+      "label": "RootDb",
+      "inputs": [],
+      "contextDependencies": [],
+      "noteCount": 1
+    },
+    {
+      "id": 11,
+      "kind": "literal",
+      "label": "RootAb",
+      "inputs": [],
+      "contextDependencies": [],
+      "noteCount": 1
+    },
+    {
+      "id": 12,
+      "kind": "literal",
+      "label": "RootEb",
+      "inputs": [],
+      "contextDependencies": [],
+      "noteCount": 1
+    },
+    {
+      "id": 13,
+      "kind": "sequence",
+      "label": "Progression",
+      "inputs": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "contextDependencies": [],
+      "noteCount": 4
+    },
+    {
+      "id": 14,
+      "kind": "repeat",
+      "label": "ProgressionEight",
+      "inputs": [
+        13
+      ],
+      "contextDependencies": [],
+      "noteCount": 8
+    },
+    {
+      "id": 15,
+      "kind": "harmonize",
+      "label": "PadVoicing",
+      "inputs": [
+        14
+      ],
+      "contextDependencies": [
+        "key"
+      ],
+      "noteCount": 24
+    },
+    {
+      "id": 16,
+      "kind": "transpose",
+      "label": "BassRoots",
+      "inputs": [
+        14
+      ],
+      "contextDependencies": [],
+      "noteCount": 8
+    },
+    {
+      "id": 17,
+      "kind": "syncopate",
+      "label": "",
+      "inputs": [
+        0
+      ],
+      "contextDependencies": [
+        "meter"
+      ],
+      "noteCount": 5
+    },
+    {
+      "id": 18,
+      "kind": "repeat",
+      "label": "LeadMotif",
+      "inputs": [
+        17
+      ],
+      "contextDependencies": [],
+      "noteCount": 35
+    },
+    {
+      "id": 19,
+      "kind": "literal",
+      "label": "DrumPattern",
+      "inputs": [],
+      "contextDependencies": [],
+      "noteCount": 12
+    },
+    {
+      "id": 20,
+      "kind": "repeat",
+      "label": "DrumLoop",
+      "inputs": [
+        19
+      ],
+      "contextDependencies": [],
+      "noteCount": 96
+    }
+  ],
+  "automation": [
+    {
+      "label": "Piano.volume",
+      "parameter": "track:Piano:volume",
+      "unit": "ratio",
+      "minimum": 0,
+      "maximum": 1,
+      "curve": 3,
+      "domain": "musical",
+      "mode": "replace",
+      "enabled": true
+    },
+    {
+      "label": "Piano.modulation",
+      "parameter": "track:Piano:modulation",
+      "unit": "ratio",
+      "minimum": 0,
+      "maximum": 1,
+      "curve": 4,
+      "domain": "musical",
+      "mode": "add",
+      "enabled": true
+    },
+    {
+      "label": "master.volume",
+      "parameter": "master:volume",
+      "unit": "ratio",
+      "minimum": 0,
+      "maximum": 1,
+      "curve": 5,
+      "domain": "musical",
+      "mode": "replace",
+      "enabled": true
+    }
+  ],
+  "expressions": [
+    {
+      "track": "Piano",
+      "clip": "Intro",
+      "instanceId": 4211852026,
+      "velocity": -1,
+      "timing": -1,
+      "gate": -1,
+      "pan": -1
+    },
+    {
+      "track": "Piano",
+      "clip": "Drop A",
+      "instanceId": 128884352,
+      "velocity": -1,
+      "timing": -1,
+      "gate": -1,
+      "pan": -1
+    },
+    {
+      "track": "Piano",
+      "clip": "Drop B",
+      "instanceId": 4184242386,
+      "velocity": 0,
+      "timing": 2,
+      "gate": -1,
+      "pan": -1
+    },
+    {
+      "track": "Piano",
+      "clip": "Outro",
+      "instanceId": 2719308306,
+      "velocity": -1,
+      "timing": -1,
+      "gate": -1,
+      "pan": -1
+    },
+    {
+      "track": "Pad",
+      "clip": "Drop A",
+      "instanceId": 3361554144,
+      "velocity": -1,
+      "timing": -1,
+      "gate": -1,
+      "pan": -1
+    },
+    {
+      "track": "Pad",
+      "clip": "Drop B",
+      "instanceId": 3985141554,
+      "velocity": -1,
+      "timing": -1,
+      "gate": -1,
+      "pan": -1
+    },
+    {
+      "track": "Bass",
+      "clip": "Drop A",
+      "instanceId": 3548582762,
+      "velocity": -1,
+      "timing": -1,
+      "gate": -1,
+      "pan": -1
+    },
+    {
+      "track": "Bass",
+      "clip": "Drop B",
+      "instanceId": 2511103828,
+      "velocity": -1,
+      "timing": -1,
+      "gate": -1,
+      "pan": -1
+    },
+    {
+      "track": "Lead",
+      "clip": "Lead",
+      "instanceId": 1646493706,
+      "velocity": 1,
+      "timing": -1,
+      "gate": -1,
+      "pan": -1
+    },
+    {
+      "track": "Drums",
+      "clip": "Drop A",
+      "instanceId": 1806581740,
+      "velocity": -1,
+      "timing": -1,
+      "gate": -1,
+      "pan": -1
+    },
+    {
+      "track": "Drums",
+      "clip": "Drop B",
+      "instanceId": 1121600990,
+      "velocity": -1,
+      "timing": -1,
+      "gate": -1,
+      "pan": -1
+    }
+  ],
+  "provenance": [
+    {
+      "track": "Piano",
+      "clip": "Intro",
+      "instanceId": 4211852026,
+      "sourceObject": 5,
+      "sourceLabel": "IntroPiano",
+      "startWholeNotes": "0",
+      "derivation": [
+        5,
+        0,
+        1,
+        3
+      ],
+      "notes": [
+        {
+          "index": 0,
+          "pitch": "F4",
+          "atWholeNotes": "0",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4211852026:0",
+          "originChain": [
+            5,
+            0
+          ]
+        },
+        {
+          "index": 1,
+          "pitch": "Ab4",
+          "atWholeNotes": "1/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4211852026:1",
+          "originChain": [
+            5,
+            0
+          ]
+        },
+        {
+          "index": 2,
+          "pitch": "C5",
+          "atWholeNotes": "1/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4211852026:2",
+          "originChain": [
+            5,
+            0
+          ]
+        },
+        {
+          "index": 3,
+          "pitch": "Eb5",
+          "atWholeNotes": "1/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4211852026:3",
+          "originChain": [
+            5,
+            0
+          ]
+        },
+        {
+          "index": 4,
+          "pitch": "C5",
+          "atWholeNotes": "3/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4211852026:4",
+          "originChain": [
+            5,
+            0
+          ]
+        },
+        {
+          "index": 5,
+          "pitch": "G4",
+          "atWholeNotes": "1",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4211852026:5",
+          "originChain": [
+            5,
+            0
+          ]
+        },
+        {
+          "index": 6,
+          "pitch": "Bb4",
+          "atWholeNotes": "9/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4211852026:6",
+          "originChain": [
+            5,
+            0
+          ]
+        },
+        {
+          "index": 7,
+          "pitch": "Db5",
+          "atWholeNotes": "5/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4211852026:7",
+          "originChain": [
+            5,
+            0
+          ]
+        },
+        {
+          "index": 8,
+          "pitch": "F5",
+          "atWholeNotes": "3/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4211852026:8",
+          "originChain": [
+            5,
+            0
+          ]
+        },
+        {
+          "index": 9,
+          "pitch": "Db5",
+          "atWholeNotes": "7/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4211852026:9",
+          "originChain": [
+            5,
+            0
+          ]
+        },
+        {
+          "index": 10,
+          "pitch": "C5",
+          "atWholeNotes": "2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4211852026:10",
+          "originChain": [
+            5,
+            0
+          ]
+        },
+        {
+          "index": 11,
+          "pitch": "Eb5",
+          "atWholeNotes": "9/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4211852026:11",
+          "originChain": [
+            5,
+            0
+          ]
+        },
+        {
+          "index": 12,
+          "pitch": "C5",
+          "atWholeNotes": "5/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4211852026:12",
+          "originChain": [
+            5,
+            0
+          ]
+        },
+        {
+          "index": 13,
+          "pitch": "Ab4",
+          "atWholeNotes": "11/4",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4211852026:13",
+          "originChain": [
+            5,
+            0
+          ]
+        },
+        {
+          "index": 14,
+          "pitch": "F4",
+          "atWholeNotes": "23/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4211852026:14",
+          "originChain": [
+            5,
+            0
+          ]
+        },
+        {
+          "index": 15,
+          "pitch": "F4",
+          "atWholeNotes": "3",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4211852026:15",
+          "originChain": [
+            5,
+            0
+          ]
+        },
+        {
+          "index": 16,
+          "pitch": "Ab4",
+          "atWholeNotes": "25/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4211852026:16",
+          "originChain": [
+            5,
+            0
+          ]
+        },
+        {
+          "index": 17,
+          "pitch": "C5",
+          "atWholeNotes": "13/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4211852026:17",
+          "originChain": [
+            5,
+            0
+          ]
+        },
+        {
+          "index": 18,
+          "pitch": "Eb5",
+          "atWholeNotes": "7/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4211852026:18",
+          "originChain": [
+            5,
+            0
+          ]
+        },
+        {
+          "index": 19,
+          "pitch": "C5",
+          "atWholeNotes": "15/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4211852026:19",
+          "originChain": [
+            5,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "track": "Piano",
+      "clip": "Drop A",
+      "instanceId": 128884352,
+      "sourceObject": 6,
+      "sourceLabel": "DropAPiano",
+      "startWholeNotes": "4",
+      "derivation": [
+        6,
+        0,
+        2,
+        1,
+        4,
+        3
+      ],
+      "notes": [
+        {
+          "index": 0,
+          "pitch": "F4",
+          "atWholeNotes": "4",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:0",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 1,
+          "pitch": "Ab4",
+          "atWholeNotes": "33/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:1",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 2,
+          "pitch": "C5",
+          "atWholeNotes": "17/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:2",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 3,
+          "pitch": "Eb5",
+          "atWholeNotes": "9/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:3",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 4,
+          "pitch": "C5",
+          "atWholeNotes": "19/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:4",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 5,
+          "pitch": "Ab4",
+          "atWholeNotes": "5",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:5",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 6,
+          "pitch": "C5",
+          "atWholeNotes": "41/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:6",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 7,
+          "pitch": "Eb5",
+          "atWholeNotes": "21/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:7",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 8,
+          "pitch": "G5",
+          "atWholeNotes": "11/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:8",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 9,
+          "pitch": "Eb5",
+          "atWholeNotes": "23/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:9",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 10,
+          "pitch": "G4",
+          "atWholeNotes": "6",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:10",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 11,
+          "pitch": "Bb4",
+          "atWholeNotes": "49/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:11",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 12,
+          "pitch": "Db5",
+          "atWholeNotes": "25/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:12",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 13,
+          "pitch": "F5",
+          "atWholeNotes": "13/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:13",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 14,
+          "pitch": "Db5",
+          "atWholeNotes": "27/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:14",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 15,
+          "pitch": "Eb5",
+          "atWholeNotes": "7",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:15",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 16,
+          "pitch": "G5",
+          "atWholeNotes": "29/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:16",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 17,
+          "pitch": "Eb5",
+          "atWholeNotes": "15/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:17",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 18,
+          "pitch": "C5",
+          "atWholeNotes": "31/4",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:18",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 19,
+          "pitch": "Ab4",
+          "atWholeNotes": "63/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:19",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 20,
+          "pitch": "F4",
+          "atWholeNotes": "8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:20",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 21,
+          "pitch": "Ab4",
+          "atWholeNotes": "65/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:21",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 22,
+          "pitch": "C5",
+          "atWholeNotes": "33/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:22",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 23,
+          "pitch": "Eb5",
+          "atWholeNotes": "17/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:23",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 24,
+          "pitch": "C5",
+          "atWholeNotes": "35/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:24",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 25,
+          "pitch": "Ab4",
+          "atWholeNotes": "9",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:25",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 26,
+          "pitch": "C5",
+          "atWholeNotes": "73/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:26",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 27,
+          "pitch": "Eb5",
+          "atWholeNotes": "37/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:27",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 28,
+          "pitch": "G5",
+          "atWholeNotes": "19/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:28",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 29,
+          "pitch": "Eb5",
+          "atWholeNotes": "39/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:29",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 30,
+          "pitch": "C5",
+          "atWholeNotes": "10",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:30",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 31,
+          "pitch": "Eb5",
+          "atWholeNotes": "41/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:31",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 32,
+          "pitch": "C5",
+          "atWholeNotes": "21/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:32",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 33,
+          "pitch": "Ab4",
+          "atWholeNotes": "43/4",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:33",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 34,
+          "pitch": "F4",
+          "atWholeNotes": "87/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:34",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 35,
+          "pitch": "G4",
+          "atWholeNotes": "11",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:35",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 36,
+          "pitch": "Bb4",
+          "atWholeNotes": "89/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:36",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 37,
+          "pitch": "Db5",
+          "atWholeNotes": "45/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:37",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 38,
+          "pitch": "F5",
+          "atWholeNotes": "23/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:38",
+          "originChain": [
+            6,
+            0
+          ]
+        },
+        {
+          "index": 39,
+          "pitch": "Db5",
+          "atWholeNotes": "47/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "128884352:39",
+          "originChain": [
+            6,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "track": "Piano",
+      "clip": "Drop B",
+      "instanceId": 4184242386,
+      "sourceObject": 7,
+      "sourceLabel": "DropBPiano",
+      "startWholeNotes": "12",
+      "derivation": [
+        7,
+        2,
+        0,
+        1,
+        4,
+        3
+      ],
+      "notes": [
+        {
+          "index": 0,
+          "pitch": "Ab4",
+          "atWholeNotes": "12",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:0",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 1,
+          "pitch": "C5",
+          "atWholeNotes": "97/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:1",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 2,
+          "pitch": "Eb5",
+          "atWholeNotes": "49/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:2",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 3,
+          "pitch": "G5",
+          "atWholeNotes": "25/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:3",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 4,
+          "pitch": "Eb5",
+          "atWholeNotes": "51/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:4",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 5,
+          "pitch": "G4",
+          "atWholeNotes": "13",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:5",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 6,
+          "pitch": "Bb4",
+          "atWholeNotes": "105/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:6",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 7,
+          "pitch": "Db5",
+          "atWholeNotes": "53/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:7",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 8,
+          "pitch": "F5",
+          "atWholeNotes": "27/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:8",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 9,
+          "pitch": "Db5",
+          "atWholeNotes": "55/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:9",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 10,
+          "pitch": "F4",
+          "atWholeNotes": "14",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:10",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 11,
+          "pitch": "Ab4",
+          "atWholeNotes": "113/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:11",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 12,
+          "pitch": "C5",
+          "atWholeNotes": "57/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:12",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 13,
+          "pitch": "Eb5",
+          "atWholeNotes": "29/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:13",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 14,
+          "pitch": "C5",
+          "atWholeNotes": "59/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:14",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 15,
+          "pitch": "Ab4",
+          "atWholeNotes": "15",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:15",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 16,
+          "pitch": "C5",
+          "atWholeNotes": "121/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:16",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 17,
+          "pitch": "Eb5",
+          "atWholeNotes": "61/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:17",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 18,
+          "pitch": "G5",
+          "atWholeNotes": "31/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:18",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 19,
+          "pitch": "Eb5",
+          "atWholeNotes": "63/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:19",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 20,
+          "pitch": "Eb5",
+          "atWholeNotes": "16",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:20",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 21,
+          "pitch": "G5",
+          "atWholeNotes": "65/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:21",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 22,
+          "pitch": "Eb5",
+          "atWholeNotes": "33/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:22",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 23,
+          "pitch": "C5",
+          "atWholeNotes": "67/4",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:23",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 24,
+          "pitch": "Ab4",
+          "atWholeNotes": "135/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:24",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 25,
+          "pitch": "G4",
+          "atWholeNotes": "17",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:25",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 26,
+          "pitch": "Bb4",
+          "atWholeNotes": "137/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:26",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 27,
+          "pitch": "Db5",
+          "atWholeNotes": "69/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:27",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 28,
+          "pitch": "F5",
+          "atWholeNotes": "35/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:28",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 29,
+          "pitch": "Db5",
+          "atWholeNotes": "71/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:29",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 30,
+          "pitch": "F4",
+          "atWholeNotes": "18",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:30",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 31,
+          "pitch": "Ab4",
+          "atWholeNotes": "145/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:31",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 32,
+          "pitch": "C5",
+          "atWholeNotes": "73/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:32",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 33,
+          "pitch": "Eb5",
+          "atWholeNotes": "37/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:33",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 34,
+          "pitch": "C5",
+          "atWholeNotes": "75/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:34",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 35,
+          "pitch": "C5",
+          "atWholeNotes": "19",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:35",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 36,
+          "pitch": "Eb5",
+          "atWholeNotes": "77/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:36",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 37,
+          "pitch": "C5",
+          "atWholeNotes": "39/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:37",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 38,
+          "pitch": "Ab4",
+          "atWholeNotes": "79/4",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:38",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        },
+        {
+          "index": 39,
+          "pitch": "F4",
+          "atWholeNotes": "159/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "4184242386:39",
+          "originChain": [
+            7,
+            2,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "track": "Piano",
+      "clip": "Outro",
+      "instanceId": 2719308306,
+      "sourceObject": 8,
+      "sourceLabel": "OutroPiano",
+      "startWholeNotes": "20",
+      "derivation": [
+        8,
+        0,
+        3,
+        1
+      ],
+      "notes": [
+        {
+          "index": 0,
+          "pitch": "F4",
+          "atWholeNotes": "20",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2719308306:0",
+          "originChain": [
+            8,
+            0
+          ]
+        },
+        {
+          "index": 1,
+          "pitch": "Ab4",
+          "atWholeNotes": "161/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2719308306:1",
+          "originChain": [
+            8,
+            0
+          ]
+        },
+        {
+          "index": 2,
+          "pitch": "C5",
+          "atWholeNotes": "81/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2719308306:2",
+          "originChain": [
+            8,
+            0
+          ]
+        },
+        {
+          "index": 3,
+          "pitch": "Eb5",
+          "atWholeNotes": "41/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2719308306:3",
+          "originChain": [
+            8,
+            0
+          ]
+        },
+        {
+          "index": 4,
+          "pitch": "C5",
+          "atWholeNotes": "83/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2719308306:4",
+          "originChain": [
+            8,
+            0
+          ]
+        },
+        {
+          "index": 5,
+          "pitch": "C5",
+          "atWholeNotes": "21",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2719308306:5",
+          "originChain": [
+            8,
+            0
+          ]
+        },
+        {
+          "index": 6,
+          "pitch": "Eb5",
+          "atWholeNotes": "85/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2719308306:6",
+          "originChain": [
+            8,
+            0
+          ]
+        },
+        {
+          "index": 7,
+          "pitch": "C5",
+          "atWholeNotes": "43/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2719308306:7",
+          "originChain": [
+            8,
+            0
+          ]
+        },
+        {
+          "index": 8,
+          "pitch": "Ab4",
+          "atWholeNotes": "87/4",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2719308306:8",
+          "originChain": [
+            8,
+            0
+          ]
+        },
+        {
+          "index": 9,
+          "pitch": "F4",
+          "atWholeNotes": "175/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2719308306:9",
+          "originChain": [
+            8,
+            0
+          ]
+        },
+        {
+          "index": 10,
+          "pitch": "G4",
+          "atWholeNotes": "22",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2719308306:10",
+          "originChain": [
+            8,
+            0
+          ]
+        },
+        {
+          "index": 11,
+          "pitch": "Bb4",
+          "atWholeNotes": "177/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2719308306:11",
+          "originChain": [
+            8,
+            0
+          ]
+        },
+        {
+          "index": 12,
+          "pitch": "Db5",
+          "atWholeNotes": "89/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2719308306:12",
+          "originChain": [
+            8,
+            0
+          ]
+        },
+        {
+          "index": 13,
+          "pitch": "F5",
+          "atWholeNotes": "45/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2719308306:13",
+          "originChain": [
+            8,
+            0
+          ]
+        },
+        {
+          "index": 14,
+          "pitch": "Db5",
+          "atWholeNotes": "91/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2719308306:14",
+          "originChain": [
+            8,
+            0
+          ]
+        },
+        {
+          "index": 15,
+          "pitch": "F4",
+          "atWholeNotes": "23",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2719308306:15",
+          "originChain": [
+            8,
+            0
+          ]
+        },
+        {
+          "index": 16,
+          "pitch": "Ab4",
+          "atWholeNotes": "185/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2719308306:16",
+          "originChain": [
+            8,
+            0
+          ]
+        },
+        {
+          "index": 17,
+          "pitch": "C5",
+          "atWholeNotes": "93/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2719308306:17",
+          "originChain": [
+            8,
+            0
+          ]
+        },
+        {
+          "index": 18,
+          "pitch": "Eb5",
+          "atWholeNotes": "47/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2719308306:18",
+          "originChain": [
+            8,
+            0
+          ]
+        },
+        {
+          "index": 19,
+          "pitch": "C5",
+          "atWholeNotes": "95/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2719308306:19",
+          "originChain": [
+            8,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "track": "Pad",
+      "clip": "Drop A",
+      "instanceId": 3361554144,
+      "sourceObject": 15,
+      "sourceLabel": "PadVoicing",
+      "startWholeNotes": "4",
+      "derivation": [
+        15,
+        14,
+        13,
+        9,
+        10,
+        11,
+        12
+      ],
+      "notes": [
+        {
+          "index": 0,
+          "pitch": "F2",
+          "atWholeNotes": "4",
+          "durationWholeNotes": "1",
+          "origin": 9,
+          "originLabel": "RootF",
+          "noteInstance": "3361554144:0",
+          "originChain": [
+            15,
+            14,
+            13,
+            9
+          ]
+        },
+        {
+          "index": 1,
+          "pitch": "Ab2",
+          "atWholeNotes": "4",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3361554144:1",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 2,
+          "pitch": "C3",
+          "atWholeNotes": "4",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3361554144:2",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 3,
+          "pitch": "Db3",
+          "atWholeNotes": "5",
+          "durationWholeNotes": "1",
+          "origin": 10,
+          "originLabel": "RootDb",
+          "noteInstance": "3361554144:3",
+          "originChain": [
+            15,
+            14,
+            13,
+            10
+          ]
+        },
+        {
+          "index": 4,
+          "pitch": "F3",
+          "atWholeNotes": "5",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3361554144:4",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 5,
+          "pitch": "Ab3",
+          "atWholeNotes": "5",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3361554144:5",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 6,
+          "pitch": "Ab2",
+          "atWholeNotes": "6",
+          "durationWholeNotes": "1",
+          "origin": 11,
+          "originLabel": "RootAb",
+          "noteInstance": "3361554144:6",
+          "originChain": [
+            15,
+            14,
+            13,
+            11
+          ]
+        },
+        {
+          "index": 7,
+          "pitch": "C3",
+          "atWholeNotes": "6",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3361554144:7",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 8,
+          "pitch": "Eb3",
+          "atWholeNotes": "6",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3361554144:8",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 9,
+          "pitch": "Eb3",
+          "atWholeNotes": "7",
+          "durationWholeNotes": "1",
+          "origin": 12,
+          "originLabel": "RootEb",
+          "noteInstance": "3361554144:9",
+          "originChain": [
+            15,
+            14,
+            13,
+            12
+          ]
+        },
+        {
+          "index": 10,
+          "pitch": "G3",
+          "atWholeNotes": "7",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3361554144:10",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 11,
+          "pitch": "Bb3",
+          "atWholeNotes": "7",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3361554144:11",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 12,
+          "pitch": "F2",
+          "atWholeNotes": "8",
+          "durationWholeNotes": "1",
+          "origin": 9,
+          "originLabel": "RootF",
+          "noteInstance": "3361554144:12",
+          "originChain": [
+            15,
+            14,
+            13,
+            9
+          ]
+        },
+        {
+          "index": 13,
+          "pitch": "Ab2",
+          "atWholeNotes": "8",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3361554144:13",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 14,
+          "pitch": "C3",
+          "atWholeNotes": "8",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3361554144:14",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 15,
+          "pitch": "Db3",
+          "atWholeNotes": "9",
+          "durationWholeNotes": "1",
+          "origin": 10,
+          "originLabel": "RootDb",
+          "noteInstance": "3361554144:15",
+          "originChain": [
+            15,
+            14,
+            13,
+            10
+          ]
+        },
+        {
+          "index": 16,
+          "pitch": "F3",
+          "atWholeNotes": "9",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3361554144:16",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 17,
+          "pitch": "Ab3",
+          "atWholeNotes": "9",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3361554144:17",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 18,
+          "pitch": "Ab2",
+          "atWholeNotes": "10",
+          "durationWholeNotes": "1",
+          "origin": 11,
+          "originLabel": "RootAb",
+          "noteInstance": "3361554144:18",
+          "originChain": [
+            15,
+            14,
+            13,
+            11
+          ]
+        },
+        {
+          "index": 19,
+          "pitch": "C3",
+          "atWholeNotes": "10",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3361554144:19",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 20,
+          "pitch": "Eb3",
+          "atWholeNotes": "10",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3361554144:20",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 21,
+          "pitch": "Eb3",
+          "atWholeNotes": "11",
+          "durationWholeNotes": "1",
+          "origin": 12,
+          "originLabel": "RootEb",
+          "noteInstance": "3361554144:21",
+          "originChain": [
+            15,
+            14,
+            13,
+            12
+          ]
+        },
+        {
+          "index": 22,
+          "pitch": "G3",
+          "atWholeNotes": "11",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3361554144:22",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 23,
+          "pitch": "Bb3",
+          "atWholeNotes": "11",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3361554144:23",
+          "originChain": [
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "track": "Pad",
+      "clip": "Drop B",
+      "instanceId": 3985141554,
+      "sourceObject": 15,
+      "sourceLabel": "PadVoicing",
+      "startWholeNotes": "12",
+      "derivation": [
+        15,
+        14,
+        13,
+        9,
+        10,
+        11,
+        12
+      ],
+      "notes": [
+        {
+          "index": 0,
+          "pitch": "F2",
+          "atWholeNotes": "12",
+          "durationWholeNotes": "1",
+          "origin": 9,
+          "originLabel": "RootF",
+          "noteInstance": "3985141554:0",
+          "originChain": [
+            15,
+            14,
+            13,
+            9
+          ]
+        },
+        {
+          "index": 1,
+          "pitch": "Ab2",
+          "atWholeNotes": "12",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3985141554:1",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 2,
+          "pitch": "C3",
+          "atWholeNotes": "12",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3985141554:2",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 3,
+          "pitch": "Db3",
+          "atWholeNotes": "13",
+          "durationWholeNotes": "1",
+          "origin": 10,
+          "originLabel": "RootDb",
+          "noteInstance": "3985141554:3",
+          "originChain": [
+            15,
+            14,
+            13,
+            10
+          ]
+        },
+        {
+          "index": 4,
+          "pitch": "F3",
+          "atWholeNotes": "13",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3985141554:4",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 5,
+          "pitch": "Ab3",
+          "atWholeNotes": "13",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3985141554:5",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 6,
+          "pitch": "Ab2",
+          "atWholeNotes": "14",
+          "durationWholeNotes": "1",
+          "origin": 11,
+          "originLabel": "RootAb",
+          "noteInstance": "3985141554:6",
+          "originChain": [
+            15,
+            14,
+            13,
+            11
+          ]
+        },
+        {
+          "index": 7,
+          "pitch": "C3",
+          "atWholeNotes": "14",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3985141554:7",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 8,
+          "pitch": "Eb3",
+          "atWholeNotes": "14",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3985141554:8",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 9,
+          "pitch": "Eb3",
+          "atWholeNotes": "15",
+          "durationWholeNotes": "1",
+          "origin": 12,
+          "originLabel": "RootEb",
+          "noteInstance": "3985141554:9",
+          "originChain": [
+            15,
+            14,
+            13,
+            12
+          ]
+        },
+        {
+          "index": 10,
+          "pitch": "G3",
+          "atWholeNotes": "15",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3985141554:10",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 11,
+          "pitch": "Bb3",
+          "atWholeNotes": "15",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3985141554:11",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 12,
+          "pitch": "F2",
+          "atWholeNotes": "16",
+          "durationWholeNotes": "1",
+          "origin": 9,
+          "originLabel": "RootF",
+          "noteInstance": "3985141554:12",
+          "originChain": [
+            15,
+            14,
+            13,
+            9
+          ]
+        },
+        {
+          "index": 13,
+          "pitch": "Ab2",
+          "atWholeNotes": "16",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3985141554:13",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 14,
+          "pitch": "C3",
+          "atWholeNotes": "16",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3985141554:14",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 15,
+          "pitch": "Db3",
+          "atWholeNotes": "17",
+          "durationWholeNotes": "1",
+          "origin": 10,
+          "originLabel": "RootDb",
+          "noteInstance": "3985141554:15",
+          "originChain": [
+            15,
+            14,
+            13,
+            10
+          ]
+        },
+        {
+          "index": 16,
+          "pitch": "F3",
+          "atWholeNotes": "17",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3985141554:16",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 17,
+          "pitch": "Ab3",
+          "atWholeNotes": "17",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3985141554:17",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 18,
+          "pitch": "Ab2",
+          "atWholeNotes": "18",
+          "durationWholeNotes": "1",
+          "origin": 11,
+          "originLabel": "RootAb",
+          "noteInstance": "3985141554:18",
+          "originChain": [
+            15,
+            14,
+            13,
+            11
+          ]
+        },
+        {
+          "index": 19,
+          "pitch": "C3",
+          "atWholeNotes": "18",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3985141554:19",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 20,
+          "pitch": "Eb3",
+          "atWholeNotes": "18",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3985141554:20",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 21,
+          "pitch": "Eb3",
+          "atWholeNotes": "19",
+          "durationWholeNotes": "1",
+          "origin": 12,
+          "originLabel": "RootEb",
+          "noteInstance": "3985141554:21",
+          "originChain": [
+            15,
+            14,
+            13,
+            12
+          ]
+        },
+        {
+          "index": 22,
+          "pitch": "G3",
+          "atWholeNotes": "19",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3985141554:22",
+          "originChain": [
+            15
+          ]
+        },
+        {
+          "index": 23,
+          "pitch": "Bb3",
+          "atWholeNotes": "19",
+          "durationWholeNotes": "1",
+          "origin": 15,
+          "originLabel": "PadVoicing",
+          "noteInstance": "3985141554:23",
+          "originChain": [
+            15
+          ]
+        }
+      ]
+    },
+    {
+      "track": "Bass",
+      "clip": "Drop A",
+      "instanceId": 3548582762,
+      "sourceObject": 16,
+      "sourceLabel": "BassRoots",
+      "startWholeNotes": "4",
+      "derivation": [
+        16,
+        14,
+        13,
+        9,
+        10,
+        11,
+        12
+      ],
+      "notes": [
+        {
+          "index": 0,
+          "pitch": "F1",
+          "atWholeNotes": "4",
+          "durationWholeNotes": "1",
+          "origin": 9,
+          "originLabel": "RootF",
+          "noteInstance": "3548582762:0",
+          "originChain": [
+            16,
+            14,
+            13,
+            9
+          ]
+        },
+        {
+          "index": 1,
+          "pitch": "Db2",
+          "atWholeNotes": "5",
+          "durationWholeNotes": "1",
+          "origin": 10,
+          "originLabel": "RootDb",
+          "noteInstance": "3548582762:1",
+          "originChain": [
+            16,
+            14,
+            13,
+            10
+          ]
+        },
+        {
+          "index": 2,
+          "pitch": "Ab1",
+          "atWholeNotes": "6",
+          "durationWholeNotes": "1",
+          "origin": 11,
+          "originLabel": "RootAb",
+          "noteInstance": "3548582762:2",
+          "originChain": [
+            16,
+            14,
+            13,
+            11
+          ]
+        },
+        {
+          "index": 3,
+          "pitch": "Eb2",
+          "atWholeNotes": "7",
+          "durationWholeNotes": "1",
+          "origin": 12,
+          "originLabel": "RootEb",
+          "noteInstance": "3548582762:3",
+          "originChain": [
+            16,
+            14,
+            13,
+            12
+          ]
+        },
+        {
+          "index": 4,
+          "pitch": "F1",
+          "atWholeNotes": "8",
+          "durationWholeNotes": "1",
+          "origin": 9,
+          "originLabel": "RootF",
+          "noteInstance": "3548582762:4",
+          "originChain": [
+            16,
+            14,
+            13,
+            9
+          ]
+        },
+        {
+          "index": 5,
+          "pitch": "Db2",
+          "atWholeNotes": "9",
+          "durationWholeNotes": "1",
+          "origin": 10,
+          "originLabel": "RootDb",
+          "noteInstance": "3548582762:5",
+          "originChain": [
+            16,
+            14,
+            13,
+            10
+          ]
+        },
+        {
+          "index": 6,
+          "pitch": "Ab1",
+          "atWholeNotes": "10",
+          "durationWholeNotes": "1",
+          "origin": 11,
+          "originLabel": "RootAb",
+          "noteInstance": "3548582762:6",
+          "originChain": [
+            16,
+            14,
+            13,
+            11
+          ]
+        },
+        {
+          "index": 7,
+          "pitch": "Eb2",
+          "atWholeNotes": "11",
+          "durationWholeNotes": "1",
+          "origin": 12,
+          "originLabel": "RootEb",
+          "noteInstance": "3548582762:7",
+          "originChain": [
+            16,
+            14,
+            13,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "track": "Bass",
+      "clip": "Drop B",
+      "instanceId": 2511103828,
+      "sourceObject": 16,
+      "sourceLabel": "BassRoots",
+      "startWholeNotes": "12",
+      "derivation": [
+        16,
+        14,
+        13,
+        9,
+        10,
+        11,
+        12
+      ],
+      "notes": [
+        {
+          "index": 0,
+          "pitch": "F1",
+          "atWholeNotes": "12",
+          "durationWholeNotes": "1",
+          "origin": 9,
+          "originLabel": "RootF",
+          "noteInstance": "2511103828:0",
+          "originChain": [
+            16,
+            14,
+            13,
+            9
+          ]
+        },
+        {
+          "index": 1,
+          "pitch": "Db2",
+          "atWholeNotes": "13",
+          "durationWholeNotes": "1",
+          "origin": 10,
+          "originLabel": "RootDb",
+          "noteInstance": "2511103828:1",
+          "originChain": [
+            16,
+            14,
+            13,
+            10
+          ]
+        },
+        {
+          "index": 2,
+          "pitch": "Ab1",
+          "atWholeNotes": "14",
+          "durationWholeNotes": "1",
+          "origin": 11,
+          "originLabel": "RootAb",
+          "noteInstance": "2511103828:2",
+          "originChain": [
+            16,
+            14,
+            13,
+            11
+          ]
+        },
+        {
+          "index": 3,
+          "pitch": "Eb2",
+          "atWholeNotes": "15",
+          "durationWholeNotes": "1",
+          "origin": 12,
+          "originLabel": "RootEb",
+          "noteInstance": "2511103828:3",
+          "originChain": [
+            16,
+            14,
+            13,
+            12
+          ]
+        },
+        {
+          "index": 4,
+          "pitch": "F1",
+          "atWholeNotes": "16",
+          "durationWholeNotes": "1",
+          "origin": 9,
+          "originLabel": "RootF",
+          "noteInstance": "2511103828:4",
+          "originChain": [
+            16,
+            14,
+            13,
+            9
+          ]
+        },
+        {
+          "index": 5,
+          "pitch": "Db2",
+          "atWholeNotes": "17",
+          "durationWholeNotes": "1",
+          "origin": 10,
+          "originLabel": "RootDb",
+          "noteInstance": "2511103828:5",
+          "originChain": [
+            16,
+            14,
+            13,
+            10
+          ]
+        },
+        {
+          "index": 6,
+          "pitch": "Ab1",
+          "atWholeNotes": "18",
+          "durationWholeNotes": "1",
+          "origin": 11,
+          "originLabel": "RootAb",
+          "noteInstance": "2511103828:6",
+          "originChain": [
+            16,
+            14,
+            13,
+            11
+          ]
+        },
+        {
+          "index": 7,
+          "pitch": "Eb2",
+          "atWholeNotes": "19",
+          "durationWholeNotes": "1",
+          "origin": 12,
+          "originLabel": "RootEb",
+          "noteInstance": "2511103828:7",
+          "originChain": [
+            16,
+            14,
+            13,
+            12
+          ]
+        }
+      ]
+    },
+    {
+      "track": "Lead",
+      "clip": "Lead",
+      "instanceId": 1646493706,
+      "sourceObject": 18,
+      "sourceLabel": "LeadMotif",
+      "startWholeNotes": "12",
+      "derivation": [
+        18,
+        17,
+        0
+      ],
+      "notes": [
+        {
+          "index": 0,
+          "pitch": "F4",
+          "atWholeNotes": "97/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:0",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 1,
+          "pitch": "Ab4",
+          "atWholeNotes": "97/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:1",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 2,
+          "pitch": "C5",
+          "atWholeNotes": "99/8",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:2",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 3,
+          "pitch": "Eb5",
+          "atWholeNotes": "101/8",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:3",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 4,
+          "pitch": "C5",
+          "atWholeNotes": "103/8",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:4",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 5,
+          "pitch": "F4",
+          "atWholeNotes": "53/4",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:5",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 6,
+          "pitch": "Ab4",
+          "atWholeNotes": "53/4",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:6",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 7,
+          "pitch": "C5",
+          "atWholeNotes": "27/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:7",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 8,
+          "pitch": "Eb5",
+          "atWholeNotes": "55/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:8",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 9,
+          "pitch": "C5",
+          "atWholeNotes": "14",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:9",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 10,
+          "pitch": "F4",
+          "atWholeNotes": "115/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:10",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 11,
+          "pitch": "Ab4",
+          "atWholeNotes": "115/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:11",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 12,
+          "pitch": "C5",
+          "atWholeNotes": "117/8",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:12",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 13,
+          "pitch": "Eb5",
+          "atWholeNotes": "119/8",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:13",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 14,
+          "pitch": "C5",
+          "atWholeNotes": "121/8",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:14",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 15,
+          "pitch": "F4",
+          "atWholeNotes": "31/2",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:15",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 16,
+          "pitch": "Ab4",
+          "atWholeNotes": "31/2",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:16",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 17,
+          "pitch": "C5",
+          "atWholeNotes": "63/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:17",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 18,
+          "pitch": "Eb5",
+          "atWholeNotes": "16",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:18",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 19,
+          "pitch": "C5",
+          "atWholeNotes": "65/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:19",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 20,
+          "pitch": "F4",
+          "atWholeNotes": "133/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:20",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 21,
+          "pitch": "Ab4",
+          "atWholeNotes": "133/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:21",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 22,
+          "pitch": "C5",
+          "atWholeNotes": "135/8",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:22",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 23,
+          "pitch": "Eb5",
+          "atWholeNotes": "137/8",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:23",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 24,
+          "pitch": "C5",
+          "atWholeNotes": "139/8",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:24",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 25,
+          "pitch": "F4",
+          "atWholeNotes": "71/4",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:25",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 26,
+          "pitch": "Ab4",
+          "atWholeNotes": "71/4",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:26",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 27,
+          "pitch": "C5",
+          "atWholeNotes": "18",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:27",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 28,
+          "pitch": "Eb5",
+          "atWholeNotes": "73/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:28",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 29,
+          "pitch": "C5",
+          "atWholeNotes": "37/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:29",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 30,
+          "pitch": "F4",
+          "atWholeNotes": "151/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:30",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 31,
+          "pitch": "Ab4",
+          "atWholeNotes": "151/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:31",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 32,
+          "pitch": "C5",
+          "atWholeNotes": "153/8",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:32",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 33,
+          "pitch": "Eb5",
+          "atWholeNotes": "155/8",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:33",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        },
+        {
+          "index": 34,
+          "pitch": "C5",
+          "atWholeNotes": "157/8",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1646493706:34",
+          "originChain": [
+            18,
+            17,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "track": "Drums",
+      "clip": "Drop A",
+      "instanceId": 1806581740,
+      "sourceObject": 20,
+      "sourceLabel": "DrumLoop",
+      "startWholeNotes": "4",
+      "derivation": [
+        20,
+        19
+      ],
+      "notes": [
+        {
+          "index": 0,
+          "pitch": "C2",
+          "atWholeNotes": "4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:0",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 1,
+          "pitch": "F#2",
+          "atWholeNotes": "4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:1",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 2,
+          "pitch": "F#2",
+          "atWholeNotes": "33/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:2",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 3,
+          "pitch": "D2",
+          "atWholeNotes": "17/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:3",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 4,
+          "pitch": "F#2",
+          "atWholeNotes": "17/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:4",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 5,
+          "pitch": "F#2",
+          "atWholeNotes": "35/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:5",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 6,
+          "pitch": "C2",
+          "atWholeNotes": "9/2",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:6",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 7,
+          "pitch": "F#2",
+          "atWholeNotes": "9/2",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:7",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 8,
+          "pitch": "F#2",
+          "atWholeNotes": "37/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:8",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 9,
+          "pitch": "D2",
+          "atWholeNotes": "19/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:9",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 10,
+          "pitch": "F#2",
+          "atWholeNotes": "19/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:10",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 11,
+          "pitch": "F#2",
+          "atWholeNotes": "39/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:11",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 12,
+          "pitch": "C2",
+          "atWholeNotes": "5",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:12",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 13,
+          "pitch": "F#2",
+          "atWholeNotes": "5",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:13",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 14,
+          "pitch": "F#2",
+          "atWholeNotes": "41/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:14",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 15,
+          "pitch": "D2",
+          "atWholeNotes": "21/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:15",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 16,
+          "pitch": "F#2",
+          "atWholeNotes": "21/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:16",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 17,
+          "pitch": "F#2",
+          "atWholeNotes": "43/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:17",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 18,
+          "pitch": "C2",
+          "atWholeNotes": "11/2",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:18",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 19,
+          "pitch": "F#2",
+          "atWholeNotes": "11/2",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:19",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 20,
+          "pitch": "F#2",
+          "atWholeNotes": "45/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:20",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 21,
+          "pitch": "D2",
+          "atWholeNotes": "23/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:21",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 22,
+          "pitch": "F#2",
+          "atWholeNotes": "23/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:22",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 23,
+          "pitch": "F#2",
+          "atWholeNotes": "47/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:23",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 24,
+          "pitch": "C2",
+          "atWholeNotes": "6",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:24",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 25,
+          "pitch": "F#2",
+          "atWholeNotes": "6",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:25",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 26,
+          "pitch": "F#2",
+          "atWholeNotes": "49/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:26",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 27,
+          "pitch": "D2",
+          "atWholeNotes": "25/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:27",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 28,
+          "pitch": "F#2",
+          "atWholeNotes": "25/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:28",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 29,
+          "pitch": "F#2",
+          "atWholeNotes": "51/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:29",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 30,
+          "pitch": "C2",
+          "atWholeNotes": "13/2",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:30",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 31,
+          "pitch": "F#2",
+          "atWholeNotes": "13/2",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:31",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 32,
+          "pitch": "F#2",
+          "atWholeNotes": "53/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:32",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 33,
+          "pitch": "D2",
+          "atWholeNotes": "27/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:33",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 34,
+          "pitch": "F#2",
+          "atWholeNotes": "27/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:34",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 35,
+          "pitch": "F#2",
+          "atWholeNotes": "55/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:35",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 36,
+          "pitch": "C2",
+          "atWholeNotes": "7",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:36",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 37,
+          "pitch": "F#2",
+          "atWholeNotes": "7",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:37",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 38,
+          "pitch": "F#2",
+          "atWholeNotes": "57/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:38",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 39,
+          "pitch": "D2",
+          "atWholeNotes": "29/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:39",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 40,
+          "pitch": "F#2",
+          "atWholeNotes": "29/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:40",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 41,
+          "pitch": "F#2",
+          "atWholeNotes": "59/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:41",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 42,
+          "pitch": "C2",
+          "atWholeNotes": "15/2",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:42",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 43,
+          "pitch": "F#2",
+          "atWholeNotes": "15/2",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:43",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 44,
+          "pitch": "F#2",
+          "atWholeNotes": "61/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:44",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 45,
+          "pitch": "D2",
+          "atWholeNotes": "31/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:45",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 46,
+          "pitch": "F#2",
+          "atWholeNotes": "31/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:46",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 47,
+          "pitch": "F#2",
+          "atWholeNotes": "63/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:47",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 48,
+          "pitch": "C2",
+          "atWholeNotes": "8",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:48",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 49,
+          "pitch": "F#2",
+          "atWholeNotes": "8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:49",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 50,
+          "pitch": "F#2",
+          "atWholeNotes": "65/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:50",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 51,
+          "pitch": "D2",
+          "atWholeNotes": "33/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:51",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 52,
+          "pitch": "F#2",
+          "atWholeNotes": "33/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:52",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 53,
+          "pitch": "F#2",
+          "atWholeNotes": "67/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:53",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 54,
+          "pitch": "C2",
+          "atWholeNotes": "17/2",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:54",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 55,
+          "pitch": "F#2",
+          "atWholeNotes": "17/2",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:55",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 56,
+          "pitch": "F#2",
+          "atWholeNotes": "69/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:56",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 57,
+          "pitch": "D2",
+          "atWholeNotes": "35/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:57",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 58,
+          "pitch": "F#2",
+          "atWholeNotes": "35/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:58",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 59,
+          "pitch": "F#2",
+          "atWholeNotes": "71/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:59",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 60,
+          "pitch": "C2",
+          "atWholeNotes": "9",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:60",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 61,
+          "pitch": "F#2",
+          "atWholeNotes": "9",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:61",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 62,
+          "pitch": "F#2",
+          "atWholeNotes": "73/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:62",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 63,
+          "pitch": "D2",
+          "atWholeNotes": "37/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:63",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 64,
+          "pitch": "F#2",
+          "atWholeNotes": "37/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:64",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 65,
+          "pitch": "F#2",
+          "atWholeNotes": "75/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:65",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 66,
+          "pitch": "C2",
+          "atWholeNotes": "19/2",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:66",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 67,
+          "pitch": "F#2",
+          "atWholeNotes": "19/2",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:67",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 68,
+          "pitch": "F#2",
+          "atWholeNotes": "77/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:68",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 69,
+          "pitch": "D2",
+          "atWholeNotes": "39/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:69",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 70,
+          "pitch": "F#2",
+          "atWholeNotes": "39/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:70",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 71,
+          "pitch": "F#2",
+          "atWholeNotes": "79/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:71",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 72,
+          "pitch": "C2",
+          "atWholeNotes": "10",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:72",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 73,
+          "pitch": "F#2",
+          "atWholeNotes": "10",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:73",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 74,
+          "pitch": "F#2",
+          "atWholeNotes": "81/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:74",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 75,
+          "pitch": "D2",
+          "atWholeNotes": "41/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:75",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 76,
+          "pitch": "F#2",
+          "atWholeNotes": "41/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:76",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 77,
+          "pitch": "F#2",
+          "atWholeNotes": "83/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:77",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 78,
+          "pitch": "C2",
+          "atWholeNotes": "21/2",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:78",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 79,
+          "pitch": "F#2",
+          "atWholeNotes": "21/2",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:79",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 80,
+          "pitch": "F#2",
+          "atWholeNotes": "85/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:80",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 81,
+          "pitch": "D2",
+          "atWholeNotes": "43/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:81",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 82,
+          "pitch": "F#2",
+          "atWholeNotes": "43/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:82",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 83,
+          "pitch": "F#2",
+          "atWholeNotes": "87/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:83",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 84,
+          "pitch": "C2",
+          "atWholeNotes": "11",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:84",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 85,
+          "pitch": "F#2",
+          "atWholeNotes": "11",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:85",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 86,
+          "pitch": "F#2",
+          "atWholeNotes": "89/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:86",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 87,
+          "pitch": "D2",
+          "atWholeNotes": "45/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:87",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 88,
+          "pitch": "F#2",
+          "atWholeNotes": "45/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:88",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 89,
+          "pitch": "F#2",
+          "atWholeNotes": "91/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:89",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 90,
+          "pitch": "C2",
+          "atWholeNotes": "23/2",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:90",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 91,
+          "pitch": "F#2",
+          "atWholeNotes": "23/2",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:91",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 92,
+          "pitch": "F#2",
+          "atWholeNotes": "93/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:92",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 93,
+          "pitch": "D2",
+          "atWholeNotes": "47/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:93",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 94,
+          "pitch": "F#2",
+          "atWholeNotes": "47/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:94",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 95,
+          "pitch": "F#2",
+          "atWholeNotes": "95/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1806581740:95",
+          "originChain": [
+            20,
+            19
+          ]
+        }
+      ]
+    },
+    {
+      "track": "Drums",
+      "clip": "Drop B",
+      "instanceId": 1121600990,
+      "sourceObject": 20,
+      "sourceLabel": "DrumLoop",
+      "startWholeNotes": "12",
+      "derivation": [
+        20,
+        19
+      ],
+      "notes": [
+        {
+          "index": 0,
+          "pitch": "C2",
+          "atWholeNotes": "12",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:0",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 1,
+          "pitch": "F#2",
+          "atWholeNotes": "12",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:1",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 2,
+          "pitch": "F#2",
+          "atWholeNotes": "97/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:2",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 3,
+          "pitch": "D2",
+          "atWholeNotes": "49/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:3",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 4,
+          "pitch": "F#2",
+          "atWholeNotes": "49/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:4",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 5,
+          "pitch": "F#2",
+          "atWholeNotes": "99/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:5",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 6,
+          "pitch": "C2",
+          "atWholeNotes": "25/2",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:6",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 7,
+          "pitch": "F#2",
+          "atWholeNotes": "25/2",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:7",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 8,
+          "pitch": "F#2",
+          "atWholeNotes": "101/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:8",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 9,
+          "pitch": "D2",
+          "atWholeNotes": "51/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:9",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 10,
+          "pitch": "F#2",
+          "atWholeNotes": "51/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:10",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 11,
+          "pitch": "F#2",
+          "atWholeNotes": "103/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:11",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 12,
+          "pitch": "C2",
+          "atWholeNotes": "13",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:12",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 13,
+          "pitch": "F#2",
+          "atWholeNotes": "13",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:13",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 14,
+          "pitch": "F#2",
+          "atWholeNotes": "105/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:14",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 15,
+          "pitch": "D2",
+          "atWholeNotes": "53/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:15",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 16,
+          "pitch": "F#2",
+          "atWholeNotes": "53/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:16",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 17,
+          "pitch": "F#2",
+          "atWholeNotes": "107/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:17",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 18,
+          "pitch": "C2",
+          "atWholeNotes": "27/2",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:18",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 19,
+          "pitch": "F#2",
+          "atWholeNotes": "27/2",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:19",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 20,
+          "pitch": "F#2",
+          "atWholeNotes": "109/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:20",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 21,
+          "pitch": "D2",
+          "atWholeNotes": "55/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:21",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 22,
+          "pitch": "F#2",
+          "atWholeNotes": "55/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:22",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 23,
+          "pitch": "F#2",
+          "atWholeNotes": "111/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:23",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 24,
+          "pitch": "C2",
+          "atWholeNotes": "14",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:24",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 25,
+          "pitch": "F#2",
+          "atWholeNotes": "14",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:25",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 26,
+          "pitch": "F#2",
+          "atWholeNotes": "113/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:26",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 27,
+          "pitch": "D2",
+          "atWholeNotes": "57/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:27",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 28,
+          "pitch": "F#2",
+          "atWholeNotes": "57/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:28",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 29,
+          "pitch": "F#2",
+          "atWholeNotes": "115/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:29",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 30,
+          "pitch": "C2",
+          "atWholeNotes": "29/2",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:30",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 31,
+          "pitch": "F#2",
+          "atWholeNotes": "29/2",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:31",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 32,
+          "pitch": "F#2",
+          "atWholeNotes": "117/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:32",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 33,
+          "pitch": "D2",
+          "atWholeNotes": "59/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:33",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 34,
+          "pitch": "F#2",
+          "atWholeNotes": "59/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:34",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 35,
+          "pitch": "F#2",
+          "atWholeNotes": "119/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:35",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 36,
+          "pitch": "C2",
+          "atWholeNotes": "15",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:36",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 37,
+          "pitch": "F#2",
+          "atWholeNotes": "15",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:37",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 38,
+          "pitch": "F#2",
+          "atWholeNotes": "121/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:38",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 39,
+          "pitch": "D2",
+          "atWholeNotes": "61/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:39",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 40,
+          "pitch": "F#2",
+          "atWholeNotes": "61/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:40",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 41,
+          "pitch": "F#2",
+          "atWholeNotes": "123/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:41",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 42,
+          "pitch": "C2",
+          "atWholeNotes": "31/2",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:42",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 43,
+          "pitch": "F#2",
+          "atWholeNotes": "31/2",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:43",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 44,
+          "pitch": "F#2",
+          "atWholeNotes": "125/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:44",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 45,
+          "pitch": "D2",
+          "atWholeNotes": "63/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:45",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 46,
+          "pitch": "F#2",
+          "atWholeNotes": "63/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:46",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 47,
+          "pitch": "F#2",
+          "atWholeNotes": "127/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:47",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 48,
+          "pitch": "C2",
+          "atWholeNotes": "16",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:48",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 49,
+          "pitch": "F#2",
+          "atWholeNotes": "16",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:49",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 50,
+          "pitch": "F#2",
+          "atWholeNotes": "129/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:50",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 51,
+          "pitch": "D2",
+          "atWholeNotes": "65/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:51",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 52,
+          "pitch": "F#2",
+          "atWholeNotes": "65/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:52",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 53,
+          "pitch": "F#2",
+          "atWholeNotes": "131/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:53",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 54,
+          "pitch": "C2",
+          "atWholeNotes": "33/2",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:54",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 55,
+          "pitch": "F#2",
+          "atWholeNotes": "33/2",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:55",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 56,
+          "pitch": "F#2",
+          "atWholeNotes": "133/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:56",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 57,
+          "pitch": "D2",
+          "atWholeNotes": "67/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:57",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 58,
+          "pitch": "F#2",
+          "atWholeNotes": "67/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:58",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 59,
+          "pitch": "F#2",
+          "atWholeNotes": "135/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:59",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 60,
+          "pitch": "C2",
+          "atWholeNotes": "17",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:60",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 61,
+          "pitch": "F#2",
+          "atWholeNotes": "17",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:61",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 62,
+          "pitch": "F#2",
+          "atWholeNotes": "137/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:62",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 63,
+          "pitch": "D2",
+          "atWholeNotes": "69/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:63",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 64,
+          "pitch": "F#2",
+          "atWholeNotes": "69/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:64",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 65,
+          "pitch": "F#2",
+          "atWholeNotes": "139/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:65",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 66,
+          "pitch": "C2",
+          "atWholeNotes": "35/2",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:66",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 67,
+          "pitch": "F#2",
+          "atWholeNotes": "35/2",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:67",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 68,
+          "pitch": "F#2",
+          "atWholeNotes": "141/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:68",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 69,
+          "pitch": "D2",
+          "atWholeNotes": "71/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:69",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 70,
+          "pitch": "F#2",
+          "atWholeNotes": "71/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:70",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 71,
+          "pitch": "F#2",
+          "atWholeNotes": "143/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:71",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 72,
+          "pitch": "C2",
+          "atWholeNotes": "18",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:72",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 73,
+          "pitch": "F#2",
+          "atWholeNotes": "18",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:73",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 74,
+          "pitch": "F#2",
+          "atWholeNotes": "145/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:74",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 75,
+          "pitch": "D2",
+          "atWholeNotes": "73/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:75",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 76,
+          "pitch": "F#2",
+          "atWholeNotes": "73/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:76",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 77,
+          "pitch": "F#2",
+          "atWholeNotes": "147/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:77",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 78,
+          "pitch": "C2",
+          "atWholeNotes": "37/2",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:78",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 79,
+          "pitch": "F#2",
+          "atWholeNotes": "37/2",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:79",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 80,
+          "pitch": "F#2",
+          "atWholeNotes": "149/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:80",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 81,
+          "pitch": "D2",
+          "atWholeNotes": "75/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:81",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 82,
+          "pitch": "F#2",
+          "atWholeNotes": "75/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:82",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 83,
+          "pitch": "F#2",
+          "atWholeNotes": "151/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:83",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 84,
+          "pitch": "C2",
+          "atWholeNotes": "19",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:84",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 85,
+          "pitch": "F#2",
+          "atWholeNotes": "19",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:85",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 86,
+          "pitch": "F#2",
+          "atWholeNotes": "153/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:86",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 87,
+          "pitch": "D2",
+          "atWholeNotes": "77/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:87",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 88,
+          "pitch": "F#2",
+          "atWholeNotes": "77/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:88",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 89,
+          "pitch": "F#2",
+          "atWholeNotes": "155/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:89",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 90,
+          "pitch": "C2",
+          "atWholeNotes": "39/2",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:90",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 91,
+          "pitch": "F#2",
+          "atWholeNotes": "39/2",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:91",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 92,
+          "pitch": "F#2",
+          "atWholeNotes": "157/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:92",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 93,
+          "pitch": "D2",
+          "atWholeNotes": "79/4",
+          "durationWholeNotes": "1/8",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:93",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 94,
+          "pitch": "F#2",
+          "atWholeNotes": "79/4",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:94",
+          "originChain": [
+            20,
+            19
+          ]
+        },
+        {
+          "index": 95,
+          "pitch": "F#2",
+          "atWholeNotes": "159/8",
+          "durationWholeNotes": "1/16",
+          "origin": 19,
+          "originLabel": "DrumPattern",
+          "noteInstance": "1121600990:95",
+          "originChain": [
+            20,
+            19
+          ]
+        }
+      ]
+    }
+  ],
+  "passes": [
+    {
+      "name": "validate-production"
+    },
+    {
+      "name": "validate-assets"
+    }
+  ],
+  "diagnostics": [
+    {
+      "severity": "warning",
+      "code": "midi-quantization",
+      "message": "track 'Piano' clip 'Drop B' expression timing was quantized to MIDI ticks"
+    },
+    {
+      "severity": "warning",
+      "code": "midi-unsupported-automation",
+      "message": "automation 'master:volume' targets a non-track scope, which the MIDI backend cannot express; skipped"
+    }
+  ]
+}

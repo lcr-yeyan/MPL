@@ -1,0 +1,533 @@
+{
+  "format": "mpl.music-ir",
+  "version": 2,
+  "timeUnit": "whole-note",
+  "context": {
+    "key": "F minor",
+    "meter": "4/4"
+  },
+  "objects": [
+    {
+      "id": 0,
+      "kind": "literal",
+      "label": "A",
+      "inputs": [],
+      "contextDependencies": [],
+      "value": {
+        "duration": "1",
+        "noteCount": 5,
+        "notes": [
+          {
+            "pitch": "F4",
+            "midi": 65,
+            "offset": "0",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Ab4",
+            "midi": 68,
+            "offset": "1/8",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "C5",
+            "midi": 72,
+            "offset": "1/4",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Eb5",
+            "midi": 75,
+            "offset": "1/2",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "C5",
+            "midi": 72,
+            "offset": "3/4",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": 1,
+      "kind": "transpose",
+      "label": "B = A + 12st",
+      "inputs": [
+        0
+      ],
+      "contextDependencies": [],
+      "parameters": {
+        "intervalSemitones": 12
+      },
+      "value": {
+        "duration": "1",
+        "noteCount": 5,
+        "notes": [
+          {
+            "pitch": "F5",
+            "midi": 77,
+            "offset": "0",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Ab5",
+            "midi": 80,
+            "offset": "1/8",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "C6",
+            "midi": 84,
+            "offset": "1/4",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Eb6",
+            "midi": 87,
+            "offset": "1/2",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "C6",
+            "midi": 84,
+            "offset": "3/4",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "kind": "reverse",
+      "label": "C = reverse(A)",
+      "inputs": [
+        0
+      ],
+      "contextDependencies": [],
+      "value": {
+        "duration": "1",
+        "noteCount": 5,
+        "notes": [
+          {
+            "pitch": "C5",
+            "midi": 72,
+            "offset": "0",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Eb5",
+            "midi": 75,
+            "offset": "1/4",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "C5",
+            "midi": 72,
+            "offset": "1/2",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Ab4",
+            "midi": 68,
+            "offset": "3/4",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "F4",
+            "midi": 65,
+            "offset": "7/8",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "kind": "sequence",
+      "label": "Main",
+      "inputs": [
+        0,
+        1,
+        2,
+        0
+      ],
+      "contextDependencies": [],
+      "value": {
+        "duration": "4",
+        "noteCount": 20,
+        "notes": [
+          {
+            "pitch": "F4",
+            "midi": 65,
+            "offset": "0",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Ab4",
+            "midi": 68,
+            "offset": "1/8",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "C5",
+            "midi": 72,
+            "offset": "1/4",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Eb5",
+            "midi": 75,
+            "offset": "1/2",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "C5",
+            "midi": 72,
+            "offset": "3/4",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "F5",
+            "midi": 77,
+            "offset": "1",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Ab5",
+            "midi": 80,
+            "offset": "9/8",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "C6",
+            "midi": 84,
+            "offset": "5/4",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Eb6",
+            "midi": 87,
+            "offset": "3/2",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "C6",
+            "midi": 84,
+            "offset": "7/4",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "C5",
+            "midi": 72,
+            "offset": "2",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Eb5",
+            "midi": 75,
+            "offset": "9/4",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "C5",
+            "midi": 72,
+            "offset": "5/2",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Ab4",
+            "midi": 68,
+            "offset": "11/4",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "F4",
+            "midi": 65,
+            "offset": "23/8",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "F4",
+            "midi": 65,
+            "offset": "3",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Ab4",
+            "midi": 68,
+            "offset": "25/8",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "C5",
+            "midi": 72,
+            "offset": "13/4",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Eb5",
+            "midi": 75,
+            "offset": "7/2",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "C5",
+            "midi": 72,
+            "offset": "15/4",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "kind": "transpose",
+      "label": "Bass",
+      "inputs": [
+        3
+      ],
+      "contextDependencies": [],
+      "parameters": {
+        "intervalSemitones": -24
+      },
+      "value": {
+        "duration": "4",
+        "noteCount": 20,
+        "notes": [
+          {
+            "pitch": "F2",
+            "midi": 41,
+            "offset": "0",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Ab2",
+            "midi": 44,
+            "offset": "1/8",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "C3",
+            "midi": 48,
+            "offset": "1/4",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Eb3",
+            "midi": 51,
+            "offset": "1/2",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "C3",
+            "midi": 48,
+            "offset": "3/4",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "F3",
+            "midi": 53,
+            "offset": "1",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Ab3",
+            "midi": 56,
+            "offset": "9/8",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "C4",
+            "midi": 60,
+            "offset": "5/4",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Eb4",
+            "midi": 63,
+            "offset": "3/2",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "C4",
+            "midi": 60,
+            "offset": "7/4",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "C3",
+            "midi": 48,
+            "offset": "2",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Eb3",
+            "midi": 51,
+            "offset": "9/4",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "C3",
+            "midi": 48,
+            "offset": "5/2",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Ab2",
+            "midi": 44,
+            "offset": "11/4",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "F2",
+            "midi": 41,
+            "offset": "23/8",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "F2",
+            "midi": 41,
+            "offset": "3",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Ab2",
+            "midi": 44,
+            "offset": "25/8",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "C3",
+            "midi": 48,
+            "offset": "13/4",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Eb3",
+            "midi": 51,
+            "offset": "7/2",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "C3",
+            "midi": 48,
+            "offset": "15/4",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          }
+        ]
+      }
+    }
+  ]
+}

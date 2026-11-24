@@ -1,0 +1,578 @@
+{
+  "format": "mpl.music-ir",
+  "version": 2,
+  "timeUnit": "whole-note",
+  "context": {
+    "key": "F minor",
+    "meter": "4/4"
+  },
+  "objects": [
+    {
+      "id": 0,
+      "kind": "literal",
+      "label": "A",
+      "inputs": [],
+      "contextDependencies": [],
+      "value": {
+        "duration": "1",
+        "noteCount": 5,
+        "notes": [
+          {
+            "pitch": "F4",
+            "midi": 65,
+            "offset": "0",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Ab4",
+            "midi": 68,
+            "offset": "1/8",
+            "duration": "1/8",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "C5",
+            "midi": 72,
+            "offset": "1/4",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "Eb5",
+            "midi": 75,
+            "offset": "1/2",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          },
+          {
+            "pitch": "C5",
+            "midi": 72,
+            "offset": "3/4",
+            "duration": "1/4",
+            "velocity": 96,
+            "origin": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": 1,
+      "kind": "literal",
+      "label": "i",
+      "inputs": [],
+      "contextDependencies": [],
+      "value": {
+        "duration": "1",
+        "noteCount": 1,
+        "notes": [
+          {
+            "pitch": "F2",
+            "midi": 41,
+            "offset": "0",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "kind": "literal",
+      "label": "VI",
+      "inputs": [],
+      "contextDependencies": [],
+      "value": {
+        "duration": "1",
+        "noteCount": 1,
+        "notes": [
+          {
+            "pitch": "Db3",
+            "midi": 49,
+            "offset": "0",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "kind": "literal",
+      "label": "III",
+      "inputs": [],
+      "contextDependencies": [],
+      "value": {
+        "duration": "1",
+        "noteCount": 1,
+        "notes": [
+          {
+            "pitch": "Ab2",
+            "midi": 44,
+            "offset": "0",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "kind": "literal",
+      "label": "VII",
+      "inputs": [],
+      "contextDependencies": [],
+      "value": {
+        "duration": "1",
+        "noteCount": 1,
+        "notes": [
+          {
+            "pitch": "Eb3",
+            "midi": 51,
+            "offset": "0",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "kind": "sequence",
+      "label": "i-VI-III-VII",
+      "inputs": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "contextDependencies": [],
+      "value": {
+        "duration": "4",
+        "noteCount": 4,
+        "notes": [
+          {
+            "pitch": "F2",
+            "midi": 41,
+            "offset": "0",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 1
+          },
+          {
+            "pitch": "Db3",
+            "midi": 49,
+            "offset": "1",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 2
+          },
+          {
+            "pitch": "Ab2",
+            "midi": 44,
+            "offset": "2",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 3
+          },
+          {
+            "pitch": "Eb3",
+            "midi": 51,
+            "offset": "3",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "kind": "repeat",
+      "label": "Progression x2",
+      "inputs": [
+        5
+      ],
+      "contextDependencies": [],
+      "parameters": {
+        "count": 2
+      },
+      "value": {
+        "duration": "8",
+        "noteCount": 8,
+        "notes": [
+          {
+            "pitch": "F2",
+            "midi": 41,
+            "offset": "0",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 1
+          },
+          {
+            "pitch": "Db3",
+            "midi": 49,
+            "offset": "1",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 2
+          },
+          {
+            "pitch": "Ab2",
+            "midi": 44,
+            "offset": "2",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 3
+          },
+          {
+            "pitch": "Eb3",
+            "midi": 51,
+            "offset": "3",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 4
+          },
+          {
+            "pitch": "F2",
+            "midi": 41,
+            "offset": "4",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 1
+          },
+          {
+            "pitch": "Db3",
+            "midi": 49,
+            "offset": "5",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 2
+          },
+          {
+            "pitch": "Ab2",
+            "midi": 44,
+            "offset": "6",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 3
+          },
+          {
+            "pitch": "Eb3",
+            "midi": 51,
+            "offset": "7",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "kind": "harmonize",
+      "label": "Pad Voicing",
+      "inputs": [
+        6
+      ],
+      "contextDependencies": [
+        "key"
+      ],
+      "parameters": {
+        "degreeOffsets": [
+          2,
+          4
+        ],
+        "velocity": 80
+      },
+      "value": {
+        "duration": "8",
+        "noteCount": 24,
+        "notes": [
+          {
+            "pitch": "F2",
+            "midi": 41,
+            "offset": "0",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 1
+          },
+          {
+            "pitch": "Ab2",
+            "midi": 44,
+            "offset": "0",
+            "duration": "1",
+            "velocity": 80,
+            "origin": 7
+          },
+          {
+            "pitch": "C3",
+            "midi": 48,
+            "offset": "0",
+            "duration": "1",
+            "velocity": 80,
+            "origin": 7
+          },
+          {
+            "pitch": "Db3",
+            "midi": 49,
+            "offset": "1",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 2
+          },
+          {
+            "pitch": "F3",
+            "midi": 53,
+            "offset": "1",
+            "duration": "1",
+            "velocity": 80,
+            "origin": 7
+          },
+          {
+            "pitch": "Ab3",
+            "midi": 56,
+            "offset": "1",
+            "duration": "1",
+            "velocity": 80,
+            "origin": 7
+          },
+          {
+            "pitch": "Ab2",
+            "midi": 44,
+            "offset": "2",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 3
+          },
+          {
+            "pitch": "C3",
+            "midi": 48,
+            "offset": "2",
+            "duration": "1",
+            "velocity": 80,
+            "origin": 7
+          },
+          {
+            "pitch": "Eb3",
+            "midi": 51,
+            "offset": "2",
+            "duration": "1",
+            "velocity": 80,
+            "origin": 7
+          },
+          {
+            "pitch": "Eb3",
+            "midi": 51,
+            "offset": "3",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 4
+          },
+          {
+            "pitch": "G3",
+            "midi": 55,
+            "offset": "3",
+            "duration": "1",
+            "velocity": 80,
+            "origin": 7
+          },
+          {
+            "pitch": "Bb3",
+            "midi": 58,
+            "offset": "3",
+            "duration": "1",
+            "velocity": 80,
+            "origin": 7
+          },
+          {
+            "pitch": "F2",
+            "midi": 41,
+            "offset": "4",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 1
+          },
+          {
+            "pitch": "Ab2",
+            "midi": 44,
+            "offset": "4",
+            "duration": "1",
+            "velocity": 80,
+            "origin": 7
+          },
+          {
+            "pitch": "C3",
+            "midi": 48,
+            "offset": "4",
+            "duration": "1",
+            "velocity": 80,
+            "origin": 7
+          },
+          {
+            "pitch": "Db3",
+            "midi": 49,
+            "offset": "5",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 2
+          },
+          {
+            "pitch": "F3",
+            "midi": 53,
+            "offset": "5",
+            "duration": "1",
+            "velocity": 80,
+            "origin": 7
+          },
+          {
+            "pitch": "Ab3",
+            "midi": 56,
+            "offset": "5",
+            "duration": "1",
+            "velocity": 80,
+            "origin": 7
+          },
+          {
+            "pitch": "Ab2",
+            "midi": 44,
+            "offset": "6",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 3
+          },
+          {
+            "pitch": "C3",
+            "midi": 48,
+            "offset": "6",
+            "duration": "1",
+            "velocity": 80,
+            "origin": 7
+          },
+          {
+            "pitch": "Eb3",
+            "midi": 51,
+            "offset": "6",
+            "duration": "1",
+            "velocity": 80,
+            "origin": 7
+          },
+          {
+            "pitch": "Eb3",
+            "midi": 51,
+            "offset": "7",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 4
+          },
+          {
+            "pitch": "G3",
+            "midi": 55,
+            "offset": "7",
+            "duration": "1",
+            "velocity": 80,
+            "origin": 7
+          },
+          {
+            "pitch": "Bb3",
+            "midi": 58,
+            "offset": "7",
+            "duration": "1",
+            "velocity": 80,
+            "origin": 7
+          }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "kind": "transpose",
+      "label": "Bass Roots",
+      "inputs": [
+        6
+      ],
+      "contextDependencies": [],
+      "parameters": {
+        "intervalSemitones": -12
+      },
+      "value": {
+        "duration": "8",
+        "noteCount": 8,
+        "notes": [
+          {
+            "pitch": "F1",
+            "midi": 29,
+            "offset": "0",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 1
+          },
+          {
+            "pitch": "Db2",
+            "midi": 37,
+            "offset": "1",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 2
+          },
+          {
+            "pitch": "Ab1",
+            "midi": 32,
+            "offset": "2",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 3
+          },
+          {
+            "pitch": "Eb2",
+            "midi": 39,
+            "offset": "3",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 4
+          },
+          {
+            "pitch": "F1",
+            "midi": 29,
+            "offset": "4",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 1
+          },
+          {
+            "pitch": "Db2",
+            "midi": 37,
+            "offset": "5",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 2
+          },
+          {
+            "pitch": "Ab1",
+            "midi": 32,
+            "offset": "6",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 3
+          },
+          {
+            "pitch": "Eb2",
+            "midi": 39,
+            "offset": "7",
+            "duration": "1",
+            "velocity": 96,
+            "origin": 4
+          }
+        ]
+      }
+    }
+  ]
+}

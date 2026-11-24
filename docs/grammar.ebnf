@@ -1,0 +1,91 @@
+(* MPL V0.1.0 grammar (EBNF)
+   Terminals: identifiers, numbers, rationals, strings, punctuation.
+   The project declaration must be the first declaration. *)
+
+program        = project_decl, { declaration }, EOF ;
+
+project_decl   = "project", [ ident ], "{", { project_field }, "}" ;
+project_field  = "tempo", "=", number, "bpm", ";"
+               | "meter", "=", integer, "/", integer, ";"
+               | "key", "=", tonal_name, ";" ;
+
+declaration    = asset_decl | let_decl | curve_decl | track_decl
+               | section_decl | automation_decl | arrangement_decl
+               | export_decl ;
+
+asset_decl     = "asset", ident, "=", asset_kind, "(", string, ")", ";" ;
+asset_kind     = "instrument" | "sample" ;
+
+let_decl       = "let", ident, "=", expr, ";" ;
+
+curve_decl     = "curve", ident, "on", domain, [ "for", time_expr ],
+                 "=", expr, ";" ;
+domain         = "musical" | "relative" | "physical" | "sample" ;
+
+track_decl     = "track", ident, "{", { track_field }, "}" ;
+track_field    = "asset", "=", ident, ";"
+               | "role", "=", role, ";" ;
+role           = "melodic" | "bass" | "harmony" | "percussion" | "texture" ;
+
+section_decl   = "section", ident, "(", time_expr, ")", "{", { clip_decl }, "}" ;
+clip_decl      = "clip", ident, [ string ], [ "at", time_expr ], "{",
+                 "play", expr, ";", { expression_field }, "}" ;
+expression_field = ("velocity" | "timing" | "gate" | "pan"), "=", expr, ";" ;
+
+automation_decl = "automation", target, "=", expr, [ mode ], ";" ;
+target         = ident, ".", ident | "master", ".", ident ;
+mode           = "replace" | "add" | "multiply" ;
+
+arrangement_decl = "arrangement", "{", { "play", ident, ";" }, "}" ;
+export_decl    = "export", ( "midi" | "wav" | "audio" ), "(", string, ")", ";" ;
+
+expr           = unary ;
+unary          = "-", unary | primary ;
+primary        = number, [ unit ]
+               | rational
+               | string
+               | ident
+               | ident, "(", [ arguments ], ")"
+               | "[", [ arguments ], "]"
+               | melody_literal
+               | notes_literal
+               | keyframes_literal ;
+
+arguments      = expr, { ",", expr } ;
+time_expr      = number, [ time_unit ] | rational, [ time_unit ] ;
+time_unit      = "whole" | "bars" | "beats" ;
+unit           = "st" | "bpm" | time_unit | "Hz" | "dB" | "ms" | "s" ;
+
+melody_literal = "melody", "{", [ melody_entry, { ",", melody_entry } ], "}" ;
+melody_entry   = pitch, ":", time_expr ;
+
+notes_literal  = "notes", [ "span", time_expr ], "{",
+                 [ note_entry, { ",", note_entry } ], "}" ;
+note_entry     = pitch, "@", time_expr, "for", time_expr, [ "vel", integer ] ;
+
+keyframes_literal = "keyframes", "{", [ keyframe, { ",", keyframe } ], "}" ;
+keyframe       = time_expr, ":", number, interpolation ;
+interpolation  = "step" | "linear" | "smoothstep" ;
+
+tonal_name     = pitch_class, mode_word ;
+pitch_class    = "A".."G", { "#" | "b" } ;
+mode_word      = "major" | "minor" ;
+
+pitch          = "A".."G", { "#" | "b" }, integer ;
+ident          = letter, { letter | digit | "_" | "#" } ;
+integer        = digit, { digit } ;
+number         = [ "-" ], digit, { digit }, [ ".", digit, { digit } ] ;
+rational       = integer, "/", integer ;
+string         = '"', { escaped_char | character - '"' }, '"' ;
+
+(* Notes
+   - Bare numeric/rational literals are contextually typed; explicit units
+     make them Interval, Tempo, or Duration. There is no implicit conversion
+     between duration units.
+   - A rational literal in a music literal is a whole-note fraction.
+   - `melody`, `notes`, `keyframes` are contextual keywords.
+   - Builtin operators are identifiers resolved by semantic analysis:
+     transpose, reverse, stretch, repeat, sequence, parallel,
+     diatonicTranspose, harmonize, syncopate,
+     constant, linear, step, smoothstep, shift.
+*)

@@ -1,0 +1,552 @@
+{
+  "format": "mpl.production-ir",
+  "version": 3,
+  "timeUnit": "whole-note",
+  "tempoMap": [
+    {
+      "atWholeNotes": "0",
+      "barBeat": "1:1",
+      "bpm": 160
+    }
+  ],
+  "meterMap": [
+    {
+      "atWholeNotes": "0",
+      "barBeat": "1:1",
+      "meter": "4/4"
+    }
+  ],
+  "tracks": [
+    {
+      "name": "Piano",
+      "instrument": "GrandPiano",
+      "role": "melodic",
+      "assetSlots": [
+        {
+          "name": "main",
+          "kind": "instrument",
+          "preferredAsset": "GrandPiano"
+        }
+      ],
+      "assetBindings": [
+        {
+          "slot": "main",
+          "assetId": "GrandPiano",
+          "provider": "symbolic",
+          "resolved": true
+        }
+      ],
+      "clips": [
+        {
+          "name": "A Linear Crescendo",
+          "sourceObject": 0,
+          "sourceLabel": "A",
+          "instanceId": 0,
+          "startWholeNotes": "0",
+          "startBarBeat": "1:1",
+          "durationWholeNotes": "1",
+          "expression": {
+            "velocity": 0,
+            "timing": -1,
+            "gate": -1,
+            "pan": -1
+          },
+          "notes": [
+            {
+              "pitch": "F4",
+              "midi": 65,
+              "offsetWholeNotes": "0",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "1/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "1/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "1/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "3/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            }
+          ]
+        },
+        {
+          "name": "A Smooth Decrescendo",
+          "sourceObject": 0,
+          "sourceLabel": "A",
+          "instanceId": 1,
+          "startWholeNotes": "1",
+          "startBarBeat": "2:1",
+          "durationWholeNotes": "1",
+          "expression": {
+            "velocity": 1,
+            "timing": -1,
+            "gate": -1,
+            "pan": -1
+          },
+          "notes": [
+            {
+              "pitch": "F4",
+              "midi": 65,
+              "offsetWholeNotes": "0",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "1/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "1/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "1/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "3/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            }
+          ]
+        },
+        {
+          "name": "A Humanized",
+          "sourceObject": 0,
+          "sourceLabel": "A",
+          "instanceId": 2,
+          "startWholeNotes": "2",
+          "startBarBeat": "3:1",
+          "durationWholeNotes": "1",
+          "expression": {
+            "velocity": 3,
+            "timing": 2,
+            "gate": 4,
+            "pan": 5
+          },
+          "notes": [
+            {
+              "pitch": "F4",
+              "midi": 65,
+              "offsetWholeNotes": "0",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab4",
+              "midi": 68,
+              "offsetWholeNotes": "1/8",
+              "durationWholeNotes": "1/8",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "1/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb5",
+              "midi": 75,
+              "offsetWholeNotes": "1/2",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            },
+            {
+              "pitch": "C5",
+              "midi": 72,
+              "offsetWholeNotes": "3/4",
+              "durationWholeNotes": "1/4",
+              "velocity": 96
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pad",
+      "instrument": "WarmPad",
+      "role": "harmony",
+      "assetSlots": [
+        {
+          "name": "main",
+          "kind": "instrument",
+          "preferredAsset": "WarmPad"
+        }
+      ],
+      "assetBindings": [
+        {
+          "slot": "main",
+          "assetId": "WarmPad",
+          "provider": "symbolic",
+          "resolved": true
+        }
+      ],
+      "clips": [
+        {
+          "name": "Pad",
+          "sourceObject": 7,
+          "sourceLabel": "Pad Voicing",
+          "instanceId": 3,
+          "startWholeNotes": "0",
+          "startBarBeat": "1:1",
+          "durationWholeNotes": "8",
+          "expression": {
+            "velocity": -1,
+            "timing": -1,
+            "gate": -1,
+            "pan": -1
+          },
+          "notes": [
+            {
+              "pitch": "F2",
+              "midi": 41,
+              "offsetWholeNotes": "0",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab2",
+              "midi": 44,
+              "offsetWholeNotes": "0",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "C3",
+              "midi": 48,
+              "offsetWholeNotes": "0",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Db3",
+              "midi": 49,
+              "offsetWholeNotes": "1",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "F3",
+              "midi": 53,
+              "offsetWholeNotes": "1",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Ab3",
+              "midi": 56,
+              "offsetWholeNotes": "1",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Ab2",
+              "midi": 44,
+              "offsetWholeNotes": "2",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "C3",
+              "midi": 48,
+              "offsetWholeNotes": "2",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Eb3",
+              "midi": 51,
+              "offsetWholeNotes": "2",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Eb3",
+              "midi": 51,
+              "offsetWholeNotes": "3",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "G3",
+              "midi": 55,
+              "offsetWholeNotes": "3",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Bb3",
+              "midi": 58,
+              "offsetWholeNotes": "3",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "F2",
+              "midi": 41,
+              "offsetWholeNotes": "4",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab2",
+              "midi": 44,
+              "offsetWholeNotes": "4",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "C3",
+              "midi": 48,
+              "offsetWholeNotes": "4",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Db3",
+              "midi": 49,
+              "offsetWholeNotes": "5",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "F3",
+              "midi": 53,
+              "offsetWholeNotes": "5",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Ab3",
+              "midi": 56,
+              "offsetWholeNotes": "5",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Ab2",
+              "midi": 44,
+              "offsetWholeNotes": "6",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "C3",
+              "midi": 48,
+              "offsetWholeNotes": "6",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Eb3",
+              "midi": 51,
+              "offsetWholeNotes": "6",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Eb3",
+              "midi": 51,
+              "offsetWholeNotes": "7",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "G3",
+              "midi": 55,
+              "offsetWholeNotes": "7",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            },
+            {
+              "pitch": "Bb3",
+              "midi": 58,
+              "offsetWholeNotes": "7",
+              "durationWholeNotes": "1",
+              "velocity": 80
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bass",
+      "instrument": "SubBass",
+      "role": "bass",
+      "assetSlots": [
+        {
+          "name": "main",
+          "kind": "instrument",
+          "preferredAsset": "SubBass"
+        }
+      ],
+      "assetBindings": [
+        {
+          "slot": "main",
+          "assetId": "SubBass",
+          "provider": "symbolic",
+          "resolved": true
+        }
+      ],
+      "clips": [
+        {
+          "name": "Bass",
+          "sourceObject": 8,
+          "sourceLabel": "Bass Roots",
+          "instanceId": 4,
+          "startWholeNotes": "0",
+          "startBarBeat": "1:1",
+          "durationWholeNotes": "8",
+          "expression": {
+            "velocity": -1,
+            "timing": -1,
+            "gate": -1,
+            "pan": -1
+          },
+          "notes": [
+            {
+              "pitch": "F1",
+              "midi": 29,
+              "offsetWholeNotes": "0",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Db2",
+              "midi": 37,
+              "offsetWholeNotes": "1",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab1",
+              "midi": 32,
+              "offsetWholeNotes": "2",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb2",
+              "midi": 39,
+              "offsetWholeNotes": "3",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "F1",
+              "midi": 29,
+              "offsetWholeNotes": "4",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Db2",
+              "midi": 37,
+              "offsetWholeNotes": "5",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Ab1",
+              "midi": 32,
+              "offsetWholeNotes": "6",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            },
+            {
+              "pitch": "Eb2",
+              "midi": 39,
+              "offsetWholeNotes": "7",
+              "durationWholeNotes": "1",
+              "velocity": 96
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "automation": [
+    {
+      "label": "Piano volume",
+      "parameter": "track:Piano:volume",
+      "scope": "track",
+      "unit": "ratio",
+      "minimum": 0,
+      "maximum": 1,
+      "curve": 6,
+      "domain": "musical",
+      "mode": "replace",
+      "enabled": true
+    },
+    {
+      "label": "Piano bloom",
+      "parameter": "track:Piano:modulation",
+      "scope": "track",
+      "unit": "ratio",
+      "minimum": 0,
+      "maximum": 1,
+      "curve": 7,
+      "domain": "musical",
+      "mode": "add",
+      "enabled": true
+    },
+    {
+      "label": "Piano expression",
+      "parameter": "track:Piano:expression",
+      "scope": "track",
+      "unit": "ratio",
+      "minimum": 0,
+      "maximum": 1,
+      "curve": 8,
+      "domain": "musical",
+      "mode": "replace",
+      "enabled": true
+    },
+    {
+      "label": "Master fade",
+      "parameter": "master:volume",
+      "scope": "master",
+      "unit": "ratio",
+      "minimum": 0,
+      "maximum": 1,
+      "curve": 8,
+      "domain": "musical",
+      "mode": "replace",
+      "enabled": true
+    }
+  ],
+  "totalDurationWholeNotes": "8"
+}

@@ -1,0 +1,1113 @@
+{
+  "format": "mpl.trace",
+  "version": 3,
+  "context": {
+    "key": "F minor",
+    "meter": "4/4"
+  },
+  "music": {
+    "objects": 9,
+    "evaluated": 9,
+    "evaluations": 9,
+    "cacheHits": 12
+  },
+  "temporal": {
+    "objects": 9,
+    "evaluated": 9,
+    "evaluations": 9,
+    "cacheHits": 299,
+    "curves": [
+      {
+        "id": 0,
+        "kind": "linear",
+        "label": "Crescendo",
+        "inputs": [],
+        "value": {
+          "domain": "relative",
+          "extent": "1",
+          "segments": [
+            {
+              "start": "0",
+              "end": "1",
+              "from": 0.55,
+              "to": 1.15,
+              "interpolation": "linear"
+            }
+          ]
+        }
+      },
+      {
+        "id": 1,
+        "kind": "smoothstep",
+        "label": "Decrescendo",
+        "inputs": [],
+        "value": {
+          "domain": "relative",
+          "extent": "1",
+          "segments": [
+            {
+              "start": "0",
+              "end": "1",
+              "from": 1.15,
+              "to": 0.5,
+              "interpolation": "smoothstep"
+            }
+          ]
+        }
+      },
+      {
+        "id": 2,
+        "kind": "keyframes",
+        "label": "Humanize",
+        "inputs": [],
+        "value": {
+          "domain": "relative",
+          "extent": "1",
+          "segments": [
+            {
+              "start": "0",
+              "end": "1/4",
+              "from": 0,
+              "to": 0.04,
+              "interpolation": "linear"
+            },
+            {
+              "start": "1/4",
+              "end": "3/4",
+              "from": 0.04,
+              "to": -0.03,
+              "interpolation": "step"
+            },
+            {
+              "start": "3/4",
+              "end": "1",
+              "from": -0.03,
+              "to": 0,
+              "interpolation": "linear"
+            }
+          ]
+        }
+      },
+      {
+        "id": 3,
+        "kind": "constant",
+        "label": "Velocity 0.9",
+        "inputs": [],
+        "value": {
+          "domain": "relative",
+          "extent": "1",
+          "segments": [
+            {
+              "start": "0",
+              "end": "1",
+              "from": 0.9,
+              "to": 0.9,
+              "interpolation": "step"
+            }
+          ]
+        }
+      },
+      {
+        "id": 4,
+        "kind": "constant",
+        "label": "Gate",
+        "inputs": [],
+        "value": {
+          "domain": "relative",
+          "extent": "1",
+          "segments": [
+            {
+              "start": "0",
+              "end": "1",
+              "from": 1,
+              "to": 1,
+              "interpolation": "step"
+            }
+          ]
+        }
+      },
+      {
+        "id": 5,
+        "kind": "constant",
+        "label": "Per-note pan",
+        "inputs": [],
+        "value": {
+          "domain": "relative",
+          "extent": "1",
+          "segments": [
+            {
+              "start": "0",
+              "end": "1",
+              "from": 0,
+              "to": 0,
+              "interpolation": "step"
+            }
+          ]
+        }
+      },
+      {
+        "id": 6,
+        "kind": "linear",
+        "label": "Volume 4 bars",
+        "inputs": [],
+        "value": {
+          "domain": "musical",
+          "extent": "4",
+          "segments": [
+            {
+              "start": "0",
+              "end": "4",
+              "from": 0.55,
+              "to": 1,
+              "interpolation": "linear"
+            }
+          ]
+        }
+      },
+      {
+        "id": 7,
+        "kind": "stretch",
+        "label": "Volume x2",
+        "inputs": [
+          6
+        ],
+        "value": {
+          "domain": "musical",
+          "extent": "8",
+          "segments": [
+            {
+              "start": "0",
+              "end": "8",
+              "from": 0.55,
+              "to": 1,
+              "interpolation": "linear"
+            }
+          ]
+        }
+      },
+      {
+        "id": 8,
+        "kind": "reverse",
+        "label": "Volume reversed",
+        "inputs": [
+          6
+        ],
+        "value": {
+          "domain": "musical",
+          "extent": "4",
+          "segments": [
+            {
+              "start": "0",
+              "end": "4",
+              "from": 1,
+              "to": 0.55,
+              "interpolation": "linear"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "production": {
+    "tracks": 3,
+    "clips": 5,
+    "notes": 47,
+    "durationWholeNotes": "8"
+  },
+  "objects": [
+    {
+      "id": 0,
+      "kind": "literal",
+      "label": "A",
+      "inputs": [],
+      "contextDependencies": [],
+      "noteCount": 5
+    },
+    {
+      "id": 1,
+      "kind": "literal",
+      "label": "i",
+      "inputs": [],
+      "contextDependencies": [],
+      "noteCount": 1
+    },
+    {
+      "id": 2,
+      "kind": "literal",
+      "label": "VI",
+      "inputs": [],
+      "contextDependencies": [],
+      "noteCount": 1
+    },
+    {
+      "id": 3,
+      "kind": "literal",
+      "label": "III",
+      "inputs": [],
+      "contextDependencies": [],
+      "noteCount": 1
+    },
+    {
+      "id": 4,
+      "kind": "literal",
+      "label": "VII",
+      "inputs": [],
+      "contextDependencies": [],
+      "noteCount": 1
+    },
+    {
+      "id": 5,
+      "kind": "sequence",
+      "label": "i-VI-III-VII",
+      "inputs": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "contextDependencies": [],
+      "noteCount": 4
+    },
+    {
+      "id": 6,
+      "kind": "repeat",
+      "label": "Progression x2",
+      "inputs": [
+        5
+      ],
+      "contextDependencies": [],
+      "noteCount": 8
+    },
+    {
+      "id": 7,
+      "kind": "harmonize",
+      "label": "Pad Voicing",
+      "inputs": [
+        6
+      ],
+      "contextDependencies": [
+        "key"
+      ],
+      "noteCount": 24
+    },
+    {
+      "id": 8,
+      "kind": "transpose",
+      "label": "Bass Roots",
+      "inputs": [
+        6
+      ],
+      "contextDependencies": [],
+      "noteCount": 8
+    }
+  ],
+  "automation": [
+    {
+      "label": "Piano volume",
+      "parameter": "track:Piano:volume",
+      "unit": "ratio",
+      "minimum": 0,
+      "maximum": 1,
+      "curve": 6,
+      "domain": "musical",
+      "mode": "replace",
+      "enabled": true
+    },
+    {
+      "label": "Piano bloom",
+      "parameter": "track:Piano:modulation",
+      "unit": "ratio",
+      "minimum": 0,
+      "maximum": 1,
+      "curve": 7,
+      "domain": "musical",
+      "mode": "add",
+      "enabled": true
+    },
+    {
+      "label": "Piano expression",
+      "parameter": "track:Piano:expression",
+      "unit": "ratio",
+      "minimum": 0,
+      "maximum": 1,
+      "curve": 8,
+      "domain": "musical",
+      "mode": "replace",
+      "enabled": true
+    },
+    {
+      "label": "Master fade",
+      "parameter": "master:volume",
+      "unit": "ratio",
+      "minimum": 0,
+      "maximum": 1,
+      "curve": 8,
+      "domain": "musical",
+      "mode": "replace",
+      "enabled": true
+    }
+  ],
+  "expressions": [
+    {
+      "track": "Piano",
+      "clip": "A Linear Crescendo",
+      "instanceId": 0,
+      "velocity": 0,
+      "timing": -1,
+      "gate": -1,
+      "pan": -1
+    },
+    {
+      "track": "Piano",
+      "clip": "A Smooth Decrescendo",
+      "instanceId": 1,
+      "velocity": 1,
+      "timing": -1,
+      "gate": -1,
+      "pan": -1
+    },
+    {
+      "track": "Piano",
+      "clip": "A Humanized",
+      "instanceId": 2,
+      "velocity": 3,
+      "timing": 2,
+      "gate": 4,
+      "pan": 5
+    },
+    {
+      "track": "Pad",
+      "clip": "Pad",
+      "instanceId": 3,
+      "velocity": -1,
+      "timing": -1,
+      "gate": -1,
+      "pan": -1
+    },
+    {
+      "track": "Bass",
+      "clip": "Bass",
+      "instanceId": 4,
+      "velocity": -1,
+      "timing": -1,
+      "gate": -1,
+      "pan": -1
+    }
+  ],
+  "provenance": [
+    {
+      "track": "Piano",
+      "clip": "A Linear Crescendo",
+      "instanceId": 0,
+      "sourceObject": 0,
+      "sourceLabel": "A",
+      "startWholeNotes": "0",
+      "derivation": [
+        0
+      ],
+      "notes": [
+        {
+          "index": 0,
+          "pitch": "F4",
+          "atWholeNotes": "0",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "0:0",
+          "originChain": [
+            0
+          ]
+        },
+        {
+          "index": 1,
+          "pitch": "Ab4",
+          "atWholeNotes": "1/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "0:1",
+          "originChain": [
+            0
+          ]
+        },
+        {
+          "index": 2,
+          "pitch": "C5",
+          "atWholeNotes": "1/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "0:2",
+          "originChain": [
+            0
+          ]
+        },
+        {
+          "index": 3,
+          "pitch": "Eb5",
+          "atWholeNotes": "1/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "0:3",
+          "originChain": [
+            0
+          ]
+        },
+        {
+          "index": 4,
+          "pitch": "C5",
+          "atWholeNotes": "3/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "0:4",
+          "originChain": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "track": "Piano",
+      "clip": "A Smooth Decrescendo",
+      "instanceId": 1,
+      "sourceObject": 0,
+      "sourceLabel": "A",
+      "startWholeNotes": "1",
+      "derivation": [
+        0
+      ],
+      "notes": [
+        {
+          "index": 0,
+          "pitch": "F4",
+          "atWholeNotes": "1",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1:0",
+          "originChain": [
+            0
+          ]
+        },
+        {
+          "index": 1,
+          "pitch": "Ab4",
+          "atWholeNotes": "9/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1:1",
+          "originChain": [
+            0
+          ]
+        },
+        {
+          "index": 2,
+          "pitch": "C5",
+          "atWholeNotes": "5/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1:2",
+          "originChain": [
+            0
+          ]
+        },
+        {
+          "index": 3,
+          "pitch": "Eb5",
+          "atWholeNotes": "3/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1:3",
+          "originChain": [
+            0
+          ]
+        },
+        {
+          "index": 4,
+          "pitch": "C5",
+          "atWholeNotes": "7/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "1:4",
+          "originChain": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "track": "Piano",
+      "clip": "A Humanized",
+      "instanceId": 2,
+      "sourceObject": 0,
+      "sourceLabel": "A",
+      "startWholeNotes": "2",
+      "derivation": [
+        0
+      ],
+      "notes": [
+        {
+          "index": 0,
+          "pitch": "F4",
+          "atWholeNotes": "2",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2:0",
+          "originChain": [
+            0
+          ]
+        },
+        {
+          "index": 1,
+          "pitch": "Ab4",
+          "atWholeNotes": "17/8",
+          "durationWholeNotes": "1/8",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2:1",
+          "originChain": [
+            0
+          ]
+        },
+        {
+          "index": 2,
+          "pitch": "C5",
+          "atWholeNotes": "9/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2:2",
+          "originChain": [
+            0
+          ]
+        },
+        {
+          "index": 3,
+          "pitch": "Eb5",
+          "atWholeNotes": "5/2",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2:3",
+          "originChain": [
+            0
+          ]
+        },
+        {
+          "index": 4,
+          "pitch": "C5",
+          "atWholeNotes": "11/4",
+          "durationWholeNotes": "1/4",
+          "origin": 0,
+          "originLabel": "A",
+          "noteInstance": "2:4",
+          "originChain": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "track": "Pad",
+      "clip": "Pad",
+      "instanceId": 3,
+      "sourceObject": 7,
+      "sourceLabel": "Pad Voicing",
+      "startWholeNotes": "0",
+      "derivation": [
+        7,
+        6,
+        5,
+        1,
+        2,
+        3,
+        4
+      ],
+      "notes": [
+        {
+          "index": 0,
+          "pitch": "F2",
+          "atWholeNotes": "0",
+          "durationWholeNotes": "1",
+          "origin": 1,
+          "originLabel": "i",
+          "noteInstance": "3:0",
+          "originChain": [
+            7,
+            6,
+            5,
+            1
+          ]
+        },
+        {
+          "index": 1,
+          "pitch": "Ab2",
+          "atWholeNotes": "0",
+          "durationWholeNotes": "1",
+          "origin": 7,
+          "originLabel": "Pad Voicing",
+          "noteInstance": "3:1",
+          "originChain": [
+            7
+          ]
+        },
+        {
+          "index": 2,
+          "pitch": "C3",
+          "atWholeNotes": "0",
+          "durationWholeNotes": "1",
+          "origin": 7,
+          "originLabel": "Pad Voicing",
+          "noteInstance": "3:2",
+          "originChain": [
+            7
+          ]
+        },
+        {
+          "index": 3,
+          "pitch": "Db3",
+          "atWholeNotes": "1",
+          "durationWholeNotes": "1",
+          "origin": 2,
+          "originLabel": "VI",
+          "noteInstance": "3:3",
+          "originChain": [
+            7,
+            6,
+            5,
+            2
+          ]
+        },
+        {
+          "index": 4,
+          "pitch": "F3",
+          "atWholeNotes": "1",
+          "durationWholeNotes": "1",
+          "origin": 7,
+          "originLabel": "Pad Voicing",
+          "noteInstance": "3:4",
+          "originChain": [
+            7
+          ]
+        },
+        {
+          "index": 5,
+          "pitch": "Ab3",
+          "atWholeNotes": "1",
+          "durationWholeNotes": "1",
+          "origin": 7,
+          "originLabel": "Pad Voicing",
+          "noteInstance": "3:5",
+          "originChain": [
+            7
+          ]
+        },
+        {
+          "index": 6,
+          "pitch": "Ab2",
+          "atWholeNotes": "2",
+          "durationWholeNotes": "1",
+          "origin": 3,
+          "originLabel": "III",
+          "noteInstance": "3:6",
+          "originChain": [
+            7,
+            6,
+            5,
+            3
+          ]
+        },
+        {
+          "index": 7,
+          "pitch": "C3",
+          "atWholeNotes": "2",
+          "durationWholeNotes": "1",
+          "origin": 7,
+          "originLabel": "Pad Voicing",
+          "noteInstance": "3:7",
+          "originChain": [
+            7
+          ]
+        },
+        {
+          "index": 8,
+          "pitch": "Eb3",
+          "atWholeNotes": "2",
+          "durationWholeNotes": "1",
+          "origin": 7,
+          "originLabel": "Pad Voicing",
+          "noteInstance": "3:8",
+          "originChain": [
+            7
+          ]
+        },
+        {
+          "index": 9,
+          "pitch": "Eb3",
+          "atWholeNotes": "3",
+          "durationWholeNotes": "1",
+          "origin": 4,
+          "originLabel": "VII",
+          "noteInstance": "3:9",
+          "originChain": [
+            7,
+            6,
+            5,
+            4
+          ]
+        },
+        {
+          "index": 10,
+          "pitch": "G3",
+          "atWholeNotes": "3",
+          "durationWholeNotes": "1",
+          "origin": 7,
+          "originLabel": "Pad Voicing",
+          "noteInstance": "3:10",
+          "originChain": [
+            7
+          ]
+        },
+        {
+          "index": 11,
+          "pitch": "Bb3",
+          "atWholeNotes": "3",
+          "durationWholeNotes": "1",
+          "origin": 7,
+          "originLabel": "Pad Voicing",
+          "noteInstance": "3:11",
+          "originChain": [
+            7
+          ]
+        },
+        {
+          "index": 12,
+          "pitch": "F2",
+          "atWholeNotes": "4",
+          "durationWholeNotes": "1",
+          "origin": 1,
+          "originLabel": "i",
+          "noteInstance": "3:12",
+          "originChain": [
+            7,
+            6,
+            5,
+            1
+          ]
+        },
+        {
+          "index": 13,
+          "pitch": "Ab2",
+          "atWholeNotes": "4",
+          "durationWholeNotes": "1",
+          "origin": 7,
+          "originLabel": "Pad Voicing",
+          "noteInstance": "3:13",
+          "originChain": [
+            7
+          ]
+        },
+        {
+          "index": 14,
+          "pitch": "C3",
+          "atWholeNotes": "4",
+          "durationWholeNotes": "1",
+          "origin": 7,
+          "originLabel": "Pad Voicing",
+          "noteInstance": "3:14",
+          "originChain": [
+            7
+          ]
+        },
+        {
+          "index": 15,
+          "pitch": "Db3",
+          "atWholeNotes": "5",
+          "durationWholeNotes": "1",
+          "origin": 2,
+          "originLabel": "VI",
+          "noteInstance": "3:15",
+          "originChain": [
+            7,
+            6,
+            5,
+            2
+          ]
+        },
+        {
+          "index": 16,
+          "pitch": "F3",
+          "atWholeNotes": "5",
+          "durationWholeNotes": "1",
+          "origin": 7,
+          "originLabel": "Pad Voicing",
+          "noteInstance": "3:16",
+          "originChain": [
+            7
+          ]
+        },
+        {
+          "index": 17,
+          "pitch": "Ab3",
+          "atWholeNotes": "5",
+          "durationWholeNotes": "1",
+          "origin": 7,
+          "originLabel": "Pad Voicing",
+          "noteInstance": "3:17",
+          "originChain": [
+            7
+          ]
+        },
+        {
+          "index": 18,
+          "pitch": "Ab2",
+          "atWholeNotes": "6",
+          "durationWholeNotes": "1",
+          "origin": 3,
+          "originLabel": "III",
+          "noteInstance": "3:18",
+          "originChain": [
+            7,
+            6,
+            5,
+            3
+          ]
+        },
+        {
+          "index": 19,
+          "pitch": "C3",
+          "atWholeNotes": "6",
+          "durationWholeNotes": "1",
+          "origin": 7,
+          "originLabel": "Pad Voicing",
+          "noteInstance": "3:19",
+          "originChain": [
+            7
+          ]
+        },
+        {
+          "index": 20,
+          "pitch": "Eb3",
+          "atWholeNotes": "6",
+          "durationWholeNotes": "1",
+          "origin": 7,
+          "originLabel": "Pad Voicing",
+          "noteInstance": "3:20",
+          "originChain": [
+            7
+          ]
+        },
+        {
+          "index": 21,
+          "pitch": "Eb3",
+          "atWholeNotes": "7",
+          "durationWholeNotes": "1",
+          "origin": 4,
+          "originLabel": "VII",
+          "noteInstance": "3:21",
+          "originChain": [
+            7,
+            6,
+            5,
+            4
+          ]
+        },
+        {
+          "index": 22,
+          "pitch": "G3",
+          "atWholeNotes": "7",
+          "durationWholeNotes": "1",
+          "origin": 7,
+          "originLabel": "Pad Voicing",
+          "noteInstance": "3:22",
+          "originChain": [
+            7
+          ]
+        },
+        {
+          "index": 23,
+          "pitch": "Bb3",
+          "atWholeNotes": "7",
+          "durationWholeNotes": "1",
+          "origin": 7,
+          "originLabel": "Pad Voicing",
+          "noteInstance": "3:23",
+          "originChain": [
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "track": "Bass",
+      "clip": "Bass",
+      "instanceId": 4,
+      "sourceObject": 8,
+      "sourceLabel": "Bass Roots",
+      "startWholeNotes": "0",
+      "derivation": [
+        8,
+        6,
+        5,
+        1,
+        2,
+        3,
+        4
+      ],
+      "notes": [
+        {
+          "index": 0,
+          "pitch": "F1",
+          "atWholeNotes": "0",
+          "durationWholeNotes": "1",
+          "origin": 1,
+          "originLabel": "i",
+          "noteInstance": "4:0",
+          "originChain": [
+            8,
+            6,
+            5,
+            1
+          ]
+        },
+        {
+          "index": 1,
+          "pitch": "Db2",
+          "atWholeNotes": "1",
+          "durationWholeNotes": "1",
+          "origin": 2,
+          "originLabel": "VI",
+          "noteInstance": "4:1",
+          "originChain": [
+            8,
+            6,
+            5,
+            2
+          ]
+        },
+        {
+          "index": 2,
+          "pitch": "Ab1",
+          "atWholeNotes": "2",
+          "durationWholeNotes": "1",
+          "origin": 3,
+          "originLabel": "III",
+          "noteInstance": "4:2",
+          "originChain": [
+            8,
+            6,
+            5,
+            3
+          ]
+        },
+        {
+          "index": 3,
+          "pitch": "Eb2",
+          "atWholeNotes": "3",
+          "durationWholeNotes": "1",
+          "origin": 4,
+          "originLabel": "VII",
+          "noteInstance": "4:3",
+          "originChain": [
+            8,
+            6,
+            5,
+            4
+          ]
+        },
+        {
+          "index": 4,
+          "pitch": "F1",
+          "atWholeNotes": "4",
+          "durationWholeNotes": "1",
+          "origin": 1,
+          "originLabel": "i",
+          "noteInstance": "4:4",
+          "originChain": [
+            8,
+            6,
+            5,
+            1
+          ]
+        },
+        {
+          "index": 5,
+          "pitch": "Db2",
+          "atWholeNotes": "5",
+          "durationWholeNotes": "1",
+          "origin": 2,
+          "originLabel": "VI",
+          "noteInstance": "4:5",
+          "originChain": [
+            8,
+            6,
+            5,
+            2
+          ]
+        },
+        {
+          "index": 6,
+          "pitch": "Ab1",
+          "atWholeNotes": "6",
+          "durationWholeNotes": "1",
+          "origin": 3,
+          "originLabel": "III",
+          "noteInstance": "4:6",
+          "originChain": [
+            8,
+            6,
+            5,
+            3
+          ]
+        },
+        {
+          "index": 7,
+          "pitch": "Eb2",
+          "atWholeNotes": "7",
+          "durationWholeNotes": "1",
+          "origin": 4,
+          "originLabel": "VII",
+          "noteInstance": "4:7",
+          "originChain": [
+            8,
+            6,
+            5,
+            4
+          ]
+        }
+      ]
+    }
+  ],
+  "passes": [
+    {
+      "name": "validate-production"
+    },
+    {
+      "name": "validate-assets"
+    }
+  ],
+  "diagnostics": [
+    {
+      "severity": "warning",
+      "code": "midi-unsupported-expression",
+      "message": "track 'Piano' clip 'A Humanized' has per-note pan automation, which MIDI cannot express; the lane is ignored"
+    },
+    {
+      "severity": "warning",
+      "code": "midi-quantization",
+      "message": "track 'Piano' clip 'A Humanized' expression timing was quantized to MIDI ticks"
+    },
+    {
+      "severity": "warning",
+      "code": "midi-unsupported-automation",
+      "message": "automation 'master:volume' targets a non-track scope, which the MIDI backend cannot express; skipped"
+    }
+  ]
+}
