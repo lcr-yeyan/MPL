@@ -199,4 +199,52 @@ bool operator<(const Rational& lhs, const Rational& rhs) {
                             rhs.denominator_) < 0;
 }
 
+std::optional<Rational> rationalLcm(const Rational& lhs, const Rational& rhs) {
+    if (!lhs.isPositive() || !rhs.isPositive()) {
+        return std::nullopt;
+    }
+    // The musical layer caps components at kMusicalRationalLimit, so the
+    // intermediate lcm of two numerators (<= 1e18) fits int64. This avoids
+    // non-portable 128-bit arithmetic and keeps the capacity contract explicit.
+    const auto withinLimit = [](const Rational& value) {
+        return value.numerator() <= kMusicalRationalLimit &&
+               value.denominator() <= kMusicalRationalLimit;
+    };
+    if (!withinLimit(lhs) || !withinLimit(rhs)) {
+        return std::nullopt;
+    }
+    const std::int64_t numeratorGcd = std::gcd(lhs.numerator(), rhs.numerator());
+    const std::int64_t denominatorGcd = std::gcd(lhs.denominator(), rhs.denominator());
+    const std::int64_t numerator =
+        (lhs.numerator() / numeratorGcd) * rhs.numerator();
+    const std::int64_t denominator = denominatorGcd;
+    const std::int64_t divisor = std::gcd(numerator, denominator);
+    const std::int64_t finalNumerator = numerator / divisor;
+    const std::int64_t finalDenominator = denominator / divisor;
+    if (finalNumerator > kMusicalRationalLimit ||
+        finalDenominator > kMusicalRationalLimit) {
+        return std::nullopt;
+    }
+    return Rational(finalNumerator, finalDenominator);
+}
+
+std::optional<std::int64_t> integerQuotient(const Rational& value, const Rational& unit) {
+    if (!unit.isPositive()) {
+        return std::nullopt;
+    }
+    try {
+        const Rational quotient = value / unit;
+        if (!quotient.isInteger()) {
+            return std::nullopt;
+        }
+        return quotient.numerator();
+    } catch (const Error&) {
+        return std::nullopt;
+    }
+}
+
+bool isIntegerMultiple(const Rational& value, const Rational& unit) {
+    return integerQuotient(value, unit).has_value();
+}
+
 }  // namespace mpl

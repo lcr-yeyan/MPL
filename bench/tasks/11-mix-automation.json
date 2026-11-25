@@ -1,0 +1,21 @@
+{
+  "id": "mpl-bench-001-mix-automation",
+  "title": "Track volume automation target",
+  "category": "mix_and_automation",
+  "template": "mix-automation",
+  "seed": 1111,
+  "baseline": "../baselines/mix.mpl",
+  "allowedScope": "program",
+  "frame": { "allow": [ { "object": "production", "key": "*", "property": "mix" }, { "object": "production", "key": "*", "property": "automation" }, { "object": "clip", "key": "*", "property": "symbolicEvents" } ] },
+  "tolerance": 0.01,
+  "budget": { "maxRepairs": 3, "maxSeconds": 120, "maxTokens": 8000 },
+  "target": [
+    { "name": "logical_extent", "value": "2" },
+    { "name": "event_count", "value": 4 },
+    { "name": "track_symbolic_events", "fromBaseline": true }
+  ],
+  "preserve": [
+    { "name": "normalized_rhythm" },
+    { "name": "pitch_sequence" }
+  ]
+}

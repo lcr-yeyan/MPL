@@ -1,6 +1,6 @@
 {
   "format": "mpl.production-ir",
-  "version": 3,
+  "version": 5,
   "timeUnit": "whole-note",
   "tempoMap": [
     {
@@ -12,8 +12,11 @@
   "meterMap": [
     {
       "atWholeNotes": "0",
+      "barIndex": 0,
       "barBeat": "1:1",
-      "meter": "4/4"
+      "meter": "4/4",
+      "grouping": "1+1+1+1",
+      "explicitGrouping": false
     }
   ],
   "tracks": [
@@ -3230,5 +3233,61 @@
       "enabled": true
     }
   ],
+  "logicalExtentWholeNotes": "24",
+  "mix": {
+    "processors": [],
+    "tracks": [
+      {
+        "name": "Piano",
+        "gainDb": 0,
+        "pan": 0,
+        "inserts": [],
+        "sends": [],
+        "sidechains": []
+      },
+      {
+        "name": "Pad",
+        "gainDb": 0,
+        "pan": 0,
+        "inserts": [],
+        "sends": [],
+        "sidechains": []
+      },
+      {
+        "name": "Bass",
+        "gainDb": 0,
+        "pan": 0,
+        "inserts": [],
+        "sends": [],
+        "sidechains": []
+      },
+      {
+        "name": "Lead",
+        "gainDb": 0,
+        "pan": 0,
+        "inserts": [],
+        "sends": [],
+        "sidechains": []
+      },
+      {
+        "name": "Drums",
+        "gainDb": 0,
+        "pan": 0,
+        "inserts": [],
+        "sends": [],
+        "sidechains": []
+      }
+    ],
+    "buses": [],
+    "master": {
+      "name": "master",
+      "gainDb": 0,
+      "pan": 0,
+      "inserts": [],
+      "sends": [],
+      "sidechains": []
+    },
+    "processorAutomation": []
+  },
   "totalDurationWholeNotes": "24"
 }

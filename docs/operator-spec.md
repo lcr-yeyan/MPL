@@ -219,3 +219,126 @@ F4  -2 → Db4
 Temporal IR 的 Constant / Linear / Step / Smoothstep / Keyframes / Shift / Stretch /
 Reverse / Repeat 语义、定义域、边界与序列化格式见 `docs/temporal-spec.md`。这些算子
 与音乐算子一样是纯值图，不使用不可序列化的函数对象。
+
+## 10. V0.3.0-beta：Rhythm 与度量算子
+
+完整语义见 `docs/rhythm-semantics.md` 与 `docs/meter-map-spec.md`。
+
+### 10.1 类型分派
+
+`sequence`、`repeat`、`rotate`、`stretch`、`shift` 按首参类型分派：
+
+- `Fragment`：原有 Music IR 行为；
+- `Curve`：Temporal IR 行为（`sequence` 不支持 Curve）；
+- `Rhythm`：节奏代数行为。
+
+`overlay`、`subdivide`、`accent`、`realign`、`quantize`、`period`、`commonPeriod`、
+`metricAccent`、`metricWeight`、`zip`、`cycle`、`intersect`、`union`、`difference`、
+`complement`、`accentFollow` 是 V0.3.0-beta 新增算子。
+
+### 10.2 Rhythm 算子边界
+
+| 算子 | 非法参数/边界 | 结果 |
+| --- | --- | --- |
+| `repeat` | count < 1 或 > 256 | 抛 `rhythm` |
+| `rotate` | 周期 ≤ 0 | 抛 `rhythm` |
+| `stretch` | factor ≤ 0 | 抛 `rhythm` |
+| `subdivide` | parts < 1 或 > 64 | 抛 `rhythm` |
+| `accent` | 空 levels 或 level 不在 0..8 | 抛 `rhythm` |
+| `realign` | target 非周期整数倍 | 抛 `rhythm-realign` |
+| `quantize` | grid ≤ 0 | 抛 `rhythm` |
+| `complement` | span 非 grid 整数倍 | 抛 `rhythm` |
+| 共同周期 | 分子/分母超过 1e9 | 抛 `rhythm-period-overflow` |
+| 事件数 | > 4096 | 抛 `rhythm-event-limit` |
+
+### 10.3 Rhythm × Pitch
+
+`zip(rhythm, pitches, baseVelocity)`：
+
+- 严格相等；否则 `rhythm-pitch-count`；
+- 休止不消耗音高；
+- 力度 = `clamp(base + accent * 8, 1, 127)`；
+- 负 onset → `rhythm-pitch`。
+
+`cycle(rhythm, pitches, baseVelocity)`：
+
+- 音高循环填充；
+- 其余同 zip。
+
+### 10.4 跨声部关系
+
+- `onsetSet(rhythm, unit)` 把起音归约为纯起音集合（duration = unit，丢弃休止）。
+- `intersect`/`union`/`difference` 可选第三参数 grid；无 grid 时精确匹配。
+- 这些算子只比较**起音**，不比较持续区间。
+- `complement(rhythm, span, grid)`：span 必须是 grid 整数倍。
+- `accentFollow(source, target, [grid])`：只改 target 的 accent，保留其 onset/duration/rest。
+- 结果逻辑长度为共同周期；不自动生成“避免冲突”的节奏。
+
+### 10.5 syncopate 的显式拍号上下文
+
+V0.3.0-beta 的 `syncopate` 在 Lowering 时携带当前 MetricScope（MeterMap + anchor）：
+
+- 音符绝对位置落在分母单位拍点时后移 displacement；
+- 7/8 的拍点与 4/4 的拍点不同，因此同一函数在不同 Section 中产生不同结果；
+- 全局表达式仍可使用 project 初始拍号；函数缓存键包含度量上下文。
+
+### 10.6 度量单位
+
+`bars`/`beats` 不再是全局常量折叠：
+
+- 所有正 `bars`（整数或分数）都要求 anchor 是小节起点；
+- 正整数逐小节边界行走，可跨拍号变化；正分数按 anchor 处小节长度缩放；
+- 负 `bars` 是线性位移；
+- `beats` 使用 anchor 处拍长；
+- 解析失败为 `meter-metric-duration`，不静默近似。
+
+## 11. V0.3.0 Final：和声、声部连接与模块算子
+
+完整契约见 `docs/pitch-harmony-spec.md`、`docs/voice-relations-spec.md`、`docs/module-spec.md`。
+
+### 11.1 和弦与和声查询
+
+| 算子 | 语义 |
+| --- | --- |
+| `chord("Dm7")` | 解析和弦符号 |
+| `chordAt(h, at)` | 查询绝对时间处的和弦；gap 返回空和弦 |
+| `chordAtBar(h, bar)` | 查询第 bar 小节处的和弦（需 `context meter`） |
+| `harmonyLength(h)` | 和声逻辑长度 |
+| `harmonyOverlaps(h, at)` | 该时刻覆盖事件数 |
+| `chordName` / `chordPitchClasses` / `chordContains` / `chordTone` | 和弦查询 |
+
+### 11.2 排列与声部连接
+
+| 算子 | 语义 |
+| --- | --- |
+| `voicing(c, low, high, voices, inversion, maxSpacing)` | 确定性和弦排列 |
+| `voiceLead(prev, c, low, high, maxMove, maxSpacing, allowCrossing)` | 有界搜索 |
+| `voicingNotes` / `voicingStatus` / `voicingMovement` / `voicingCrossings` / `voicingComplete` | 结果查询 |
+| `voiceDistance` / `commonTones` | 分析 |
+
+状态：`strictly-satisfied`、`satisfied-within-tolerance`、`unsatisfied`、
+`backend-capability`、`budget-exhausted`、`provably-unsatisfiable`。
+
+### 11.3 关系分析
+
+| 算子 | 语义 |
+| --- | --- |
+| `interval(a, b)` | `b.midi - a.midi` |
+| `pitchClass(p)` | 0..11 |
+| `pitchRange(list)` / `fragmentRange(f)` | 音域 |
+| `noteOverlap(a, b)` | 持续区间重叠音符对 |
+| `parallelPerfects(lower, upper)` | 显式平行纯五/八度计数 |
+
+默认不判错；只有显式调用并据结果行动时才构成约束。
+
+### 11.4 Rhythm 边界
+
+- `rotate` 跨周期切分产生 `continuation`，不是新 attack；
+- `retrigger(rhythm)` 显式重新触发；
+- Tie 未实现。
+
+### 11.5 模块
+
+`module`/`import`/`export` 是链接期语法，不是运行时算子。导入后导出函数/let/curve
+直接可用；私有符号不可见。
+

@@ -1,0 +1,21 @@
+{
+  "format": "mpl.audio-analysis",
+  "version": 1,
+  "sampleRate": 48000,
+  "channels": 2,
+  "frames": 256800,
+  "startFrame": 0,
+  "endFrame": 256800,
+  "truePeakOversampling": 4,
+  "samplePeak": 0.7735458612,
+  "samplePeakDbfs": -2.230278663,
+  "rms": 0.1436630282,
+  "rmsDbfs": -16.85309967,
+  "crestFactorDb": 14.62282101,
+  "truePeak": 0.7744201435,
+  "truePeakDbtp": -2.220467182,
+  "integratedLoudnessLufs": -14.00000028,
+  "maxShortTermLoudnessLufs": -13.51001271,
+  "clipped": false,
+  "nonFinite": false
+}

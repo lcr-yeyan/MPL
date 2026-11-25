@@ -1,0 +1,18 @@
+{
+    "format":  "mpl.model-smoke",
+    "version":  1,
+    "arm":  "A0",
+    "task":  "01-basic-notes",
+    "timestamp":  "2026-11-25T17:03:45.8209555+08:00",
+    "model_requested":  "deepseek-chat",
+    "model_response":  "deepseek-flash",
+    "temperature":  0,
+    "max_tokens":  600,
+    "prompt_tokens":  168,
+    "completion_tokens":  151,
+    "total_tokens":  319,
+    "latency_ms":  1288,
+    "finish_reason":  "stop",
+    "verification_status":  "pass",
+    "candidate_file":  "candidate.json"
+}

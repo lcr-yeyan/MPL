@@ -12,6 +12,8 @@ namespace mpl {
 enum class TypeKind {
     Error,
     Number,
+    Integer,
+    Boolean,
     Scalar,
     Duration,
     Position,
@@ -25,6 +27,10 @@ enum class TypeKind {
     Key,
     String,
     Fragment,
+    Rhythm,
+    Chord,
+    Harmony,
+    Voicing,
     Curve,
     List,
     Asset,
@@ -32,6 +38,7 @@ enum class TypeKind {
     Section,
     Processor,
     Bus,
+    Function,
 };
 
 struct Type {
@@ -57,12 +64,18 @@ std::string_view typeKindName(TypeKind kind);
 std::string typeName(const Type& type);
 
 struct Constant {
-    enum class Kind { None, Rational, Number, Integer, Text };
+    enum class Kind { None, Rational, Number, Integer, Text, Metric };
+    enum class MetricUnit { None, Bars, Beats };
     Kind kind = Kind::None;
     Rational rational{0, 1};
     double number = 0.0;
     std::int64_t integer = 0;
     std::string text;
+    /// Set when the literal was written with a metric unit. `rational` then
+    /// holds the value folded under the project meter for static validation;
+    /// lowering re-resolves `metricAmount` against the actual meter context.
+    MetricUnit metricUnit = MetricUnit::None;
+    Rational metricAmount{0, 1};
 
     static Constant none() { return Constant{}; }
     static Constant rationalValue(const Rational& value) {
@@ -84,6 +97,16 @@ struct Constant {
         constant.integer = value;
         constant.number = static_cast<double>(value);
         constant.rational = Rational(value, 1);
+        return constant;
+    }
+    static Constant metricValue(const Rational& amount, MetricUnit unit,
+                                const Rational& folded) {
+        Constant constant;
+        constant.kind = Kind::Metric;
+        constant.metricAmount = amount;
+        constant.metricUnit = unit;
+        constant.rational = folded;
+        constant.number = folded.toDouble();
         return constant;
     }
 };

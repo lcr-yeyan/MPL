@@ -34,6 +34,8 @@ public:
     virtual void reset() = 0;
     virtual void process(float* buffer, int frames, int channels, const ParameterRamp& parameters,
                          const float* sidechain) = 0;
+    /// Processing delay introduced by this processor, not artistic delay.
+    virtual double latencySeconds() const { return 0.0; }
     virtual double tailSeconds() const { return 0.0; }
 };
 

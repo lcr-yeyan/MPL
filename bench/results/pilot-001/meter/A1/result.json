@@ -1,0 +1,15 @@
+{
+  "format": "mpl.model-run",
+  "version": 1,
+  "label": "pilot-v1-A1",
+  "arm": "A1",
+  "task": "mpl-bench-001-asymmetric-meter",
+  "model": "deepseek-flash",
+  "attempts": 2,
+  "status": "pass",
+  "candidate": "F:/MPL/bench/results/pilot-001/meter/A1/candidate-0.json",
+  "inputTokens": 413,
+  "outputTokens": 218,
+  "modelCalls": 1,
+  "latencyMilliseconds": 1386
+}

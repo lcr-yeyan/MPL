@@ -19,6 +19,8 @@ public:
 
     JsonWriter& key(std::string_view name);
 
+    JsonWriter& nullValue();
+
     JsonWriter& value(std::string_view text);
     JsonWriter& value(const char* text);
     JsonWriter& value(std::int64_t number);

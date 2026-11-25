@@ -1,0 +1,14 @@
+{
+  "format": "mpl.task-verification",
+  "version": 1,
+  "taskId": "mpl-bench-001-function",
+  "status": "error",
+  "validityStatus": "failed",
+  "targetStatus": "",
+  "preserveStatus": "",
+  "frameStatus": "",
+  "comparisons": [],
+  "diagnostics": [
+    "candidate compile failed: parse-expected-integer: expected velocity integer; parse-expected-rbrace: expected '}' to close notes; parse-expected-semicolon: expected ';' after declaration or statement; parse-unexpected-declaration: unexpected token at declaration scope"
+  ]
+}

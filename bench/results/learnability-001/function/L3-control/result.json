@@ -1,0 +1,15 @@
+{
+  "format": "mpl.model-run",
+  "version": 1,
+  "label": "learnability-control",
+  "arm": "B0R",
+  "task": "mpl-bench-001-function",
+  "model": "deepseek-flash",
+  "attempts": 2,
+  "status": "pass",
+  "candidate": "F:/MPL/bench/results/learnability-001/function/L3-control/candidate-0.mpl",
+  "inputTokens": 2777,
+  "outputTokens": 137,
+  "modelCalls": 1,
+  "latencyMilliseconds": 1508
+}

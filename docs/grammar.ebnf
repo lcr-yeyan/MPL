@@ -1,17 +1,32 @@
-(* MPL V0.1.0 grammar (EBNF)
+(* MPL V0.3.0 Final grammar (EBNF)
    Terminals: identifiers, numbers, rationals, strings, punctuation.
-   The project declaration must be the first declaration. *)
+   In an application file the project declaration must be the first
+   declaration; library files may omit it. *)
 
-program        = project_decl, { declaration }, EOF ;
+program        = [ module_header ], { import_decl }, [ project_decl ], { declaration }, EOF ;
+module_header  = "module", ident, ";" ;
+import_decl    = "import", string, ";" ;
 
 project_decl   = "project", [ ident ], "{", { project_field }, "}" ;
 project_field  = "tempo", "=", number, "bpm", ";"
                | "meter", "=", integer, "/", integer, ";"
                | "key", "=", tonal_name, ";" ;
 
-declaration    = asset_decl | let_decl | curve_decl | track_decl
+declaration    = exported_decl | asset_decl | let_decl | curve_decl | processor_decl
+               | bus_decl | master_decl | function_decl | track_decl
                | section_decl | automation_decl | arrangement_decl
                | export_decl ;
+
+exported_decl  = "export", ( function_decl | let_decl | curve_decl ) ;
+
+function_decl  = "fn", ident, "(", [ param, { ",", param } ], ")", "->", type,
+                 [ "context", context_item, { ",", context_item } ],
+                 "{", function_body, "}" ;
+param          = ident, ":", type ;
+type           = ident | "[", type, "]" ;
+context_item   = "key" | "meter" ;
+function_body  = { let_stmt }, "return", expr, ";" ;
+let_stmt       = "let", ident, "=", expr, ";" ;
 
 asset_decl     = "asset", ident, "=", asset_kind, "(", string, ")", ";" ;
 asset_kind     = "instrument" | "sample" ;
@@ -22,33 +37,70 @@ curve_decl     = "curve", ident, "on", domain, [ "for", time_expr ],
                  "=", expr, ";" ;
 domain         = "musical" | "relative" | "physical" | "sample" ;
 
+processor_decl = "processor", ident, "=", processor_kind, "{",
+                 [ "mode", "=", ident, ";" ], { processor_field }, "}", [ ";" ] ;
+processor_kind = "gain" | "pan" | "biquad" | "eq" | "compressor" | "delay" | "reverb" | "limiter" ;
+processor_field = ident, "=", expr, ";" ;
+
+bus_decl       = "bus", ident, "{", { bus_field }, "}", [ ";" ] ;
+bus_field      = "insert", ident, ";"
+               | "gain", "=", expr, ";"
+               | "pan", "=", expr, ";" ;
+
+master_decl    = "master", "{", { bus_field }, "}", [ ";" ] ;
+
 track_decl     = "track", ident, "{", { track_field }, "}" ;
 track_field    = "asset", "=", ident, ";"
-               | "role", "=", role, ";" ;
+               | "role", "=", role, ";"
+               | "gain", "=", expr, ";"
+               | "pan", "=", expr, ";"
+               | "insert", ident, ";"
+               | "send", expr, "to", ident, ";"
+               | "sidechain", ident, "from", ident, ";" ;
 role           = "melodic" | "bass" | "harmony" | "percussion" | "texture" ;
 
-section_decl   = "section", ident, "(", time_expr, ")", "{", { clip_decl }, "}" ;
+section_decl   = "section", ident, "(", time_expr, ")", [ meter_header ], "{",
+                 { section_item }, "}" ;
+meter_header   = "meter", rational, [ grouping ] ;
+section_item   = clip_decl
+               | "meter", rational, [ grouping ], "at", time_expr,
+                 [ grouping ], ";" ;
+grouping       = "grouping", integer, { "+", integer } ;
 clip_decl      = "clip", ident, [ string ], [ "at", time_expr ], "{",
                  "play", expr, ";", { expression_field }, "}" ;
 expression_field = ("velocity" | "timing" | "gate" | "pan"), "=", expr, ";" ;
 
 automation_decl = "automation", target, "=", expr, [ mode ], ";" ;
-target         = ident, ".", ident | "master", ".", ident ;
+target         = ident, ".", ident
+               | ident, ".", ident, ".", ident     (* <strip>.<processor>.<parameter> *)
+               | "master", ".", ident
+               | "master", ".", ident, ".", ident ;
 mode           = "replace" | "add" | "multiply" ;
 
 arrangement_decl = "arrangement", "{", { "play", ident, ";" }, "}" ;
 export_decl    = "export", ( "midi" | "wav" | "audio" ), "(", string, ")", ";" ;
 
-expr           = unary ;
-unary          = "-", unary | primary ;
+expr           = or_expr ;
+or_expr        = and_expr, { "||", and_expr } ;
+and_expr       = equality, { "&&", equality } ;
+equality       = comparison, { ( "==" | "!=" ), comparison } ;
+comparison     = additive, { ( "<" | "<=" | ">" | ">=" ), additive } ;
+additive       = multiplicative, { ( "+" | "-" ), multiplicative } ;
+multiplicative = unary, { ( "*" | "/" | "%" ), unary } ;
+unary          = "-", unary | "!", unary | primary ;
 primary        = number, [ unit ]
                | rational
                | string
+               | "true" | "false"
+               | "if", expr, "{", expr, "}", "else", "{", expr, "}"
+               | "for", ident, "in", expr, "{", expr, "}"
                | ident
                | ident, "(", [ arguments ], ")"
                | "[", [ arguments ], "]"
                | melody_literal
                | notes_literal
+               | rhythm_literal
+               | harmony_literal
                | keyframes_literal ;
 
 arguments      = expr, { ",", expr } ;
@@ -62,6 +114,15 @@ melody_entry   = pitch, ":", time_expr ;
 notes_literal  = "notes", [ "span", time_expr ], "{",
                  [ note_entry, { ",", note_entry } ], "}" ;
 note_entry     = pitch, "@", time_expr, "for", time_expr, [ "vel", integer ] ;
+
+rhythm_literal = "rhythm", [ "span", time_expr ], "{",
+                 [ rhythm_entry, { ",", rhythm_entry } ], "}" ;
+rhythm_entry   = "hit", time_expr, [ "accent", integer ]
+               | "rest", time_expr ;
+
+harmony_literal = "harmony", [ "span", time_expr ], "{",
+                  [ harmony_entry, { ",", harmony_entry } ], "}" ;
+harmony_entry  = string, "@", time_expr, "for", time_expr ;
 
 keyframes_literal = "keyframes", "{", [ keyframe, { ",", keyframe } ], "}" ;
 keyframe       = time_expr, ":", number, interpolation ;
@@ -83,9 +144,37 @@ string         = '"', { escaped_char | character - '"' }, '"' ;
      make them Interval, Tempo, or Duration. There is no implicit conversion
      between duration units.
    - A rational literal in a music literal is a whole-note fraction.
-   - `melody`, `notes`, `keyframes` are contextual keywords.
+   - `melody`, `notes`, `rhythm`, `harmony`, `keyframes` are contextual keywords.
+   - `hit` and `rest` are contextual keywords inside a rhythm literal.
    - Builtin operators are identifiers resolved by semantic analysis:
      transpose, reverse, stretch, repeat, sequence, parallel,
      diatonicTranspose, harmonize, syncopate,
-     constant, linear, step, smoothstep, shift.
+     constant, linear, step, smoothstep, shift,
+     note, rest, rotate, range, length, round, ratio, random,
+     sequenceAll, parallelAll,
+     overlay, subdivide, accent, realign, period, commonPeriod, quantize,
+     metricAccent, metricWeight, zip, cycle,
+     intersect, union, difference, complement, accentFollow, onsetSet, retrigger,
+     chord, chordAt, chordAtBar, harmonyLength, harmonyOverlaps,
+     chordName, chordPitchClasses, chordContains, chordTone,
+     voicing, voiceLead, voicingNotes, voicingStatus, voicingMovement,
+     voicingCrossings, voicingComplete, voiceDistance, commonTones,
+     interval, pitchClass, pitchRange, noteOverlap, fragmentRange, parallelPerfects.
+   - `stretch`, `repeat`, `rotate`, `shift` and `sequence` are overloaded for
+     Fragment, Curve and/or Rhythm where the type system permits. `overlay` is
+     the rhythm-only equivalent of `parallel`.
+   - `bars`/`beats` are metric units: lowering resolves them against the
+     enclosing MeterMap and anchor. All positive bars require a bar-boundary
+     anchor; integer bars walk boundaries, fractional bars scale the anchor bar
+     length. Negative bars are linear displacements.
+   - `meter N/D grouping A+B+C` is a section header; `meter N/D at <pos>
+     grouping A+B+C;` is a meter change inside that section.
+   - Files may start with `module Name;` and `import "path";`. Imported modules
+     may declare only exported/private functions, lets and curves.
+   - Functions are pure. `return` is the final statement. Recursion, infinite
+     loops, global mutation and I/O are not part of V0.3.0-rc.
+   - Function context is explicit: `context key, meter`. Functions that read
+     the metric hierarchy or use bars/beats must declare `context meter`.
+   - Type names include Fragment, Rhythm, Chord, Harmony, Voicing, Curve,
+     Duration, Position, Pitch, Int, Number, Scalar, Bool, String, Key and [T].
 *)

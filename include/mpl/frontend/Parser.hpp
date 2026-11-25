@@ -14,7 +14,8 @@ namespace mpl {
 
 class Parser {
 public:
-    Parser(std::vector<Token> tokens, DiagnosticSink& diagnostics);
+    Parser(std::vector<Token> tokens, DiagnosticSink& diagnostics,
+           bool requireProject = true);
 
     Module parse();
 
@@ -38,24 +39,39 @@ private:
 
     void parseProject(bool store);
     void parseAsset();
-    void parseLet();
-    void parseCurve();
+    void parseLet(bool exported = false);
+    void parseCurve(bool exported = false);
     void parseProcessor();
     void parseBus();
     void parseMaster();
+    void parseFunction(bool exported = false);
+    void parseImport();
+    std::string parseTypeName();
+    void parseFunctionBody(FunctionDecl& decl);
     void parseTrack();
     void parseSection();
     void parseClip(SectionDecl& section);
     void parseAutomation();
     void parseArrangement();
     void parseExport();
+    std::optional<MeterSpec> parseMeterSpec();
 
     ExprId parseExpr();
+    ExprId parseOr();
+    ExprId parseAnd();
+    ExprId parseEquality();
+    ExprId parseComparison();
+    ExprId parseAdditive();
+    ExprId parseMultiplicative();
     ExprId parseUnary();
     ExprId parsePrimary();
+    ExprId parseIfExpr();
+    ExprId parseForExpr();
     ExprId parseCall(const Token& callee);
     ExprId parseMelody(const Token& start);
     ExprId parseNotes(const Token& start);
+    ExprId parseRhythm(const Token& start);
+    ExprId parseHarmony(const Token& start);
     ExprId parseKeyframes(const Token& start);
     ExprId parseList(const Token& start);
     void parseOptionalUnit(Expr& expr);
@@ -64,6 +80,7 @@ private:
     DiagnosticSink& diagnostics_;
     std::size_t position_ = 0;
     Module module_;
+    bool requireProject_ = true;
     std::size_t projectDeclarationIndex_ = 0;
 };
 

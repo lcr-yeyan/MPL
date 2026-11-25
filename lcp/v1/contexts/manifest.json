@@ -1,0 +1,84 @@
+{
+    "format":  "mpl.language-context-package",
+    "version":  1,
+    "name":  "MPL-LCP",
+    "language":  "0.3.0",
+    "stdlib":  "0.3.0",
+    "compiler":  "0.4.0-rc",
+    "generatedBy":  "manual extraction from frozen specs; examples checked with mplc 0.4.0-rc",
+    "tokenEstimateMethod":  "ceil(UTF-8 bytes / 4); not model-tokenizer exact",
+    "components":  {
+                       "lcp/v1/core/00-output.md":  "cd91a971a966e65caf779d5a25ca22c18bd8d2c7220e02f837484dda62303979",
+                       "lcp/v1/core/10-grammar.md":  "654564624cf6b96e1586a8b00d386d538c4bf988868bf880c80ee791ea7acd30",
+                       "lcp/v1/core/20-types.md":  "ca6f8518833ea2c0b0f21c97dc80aab6c15595fd43d3df0525e556e1a3bdea76",
+                       "lcp/v1/core/30-builtins.md":  "f75dd36241647827718fb8003e171154f8854df102acf8889a396d268594ba1d",
+                       "lcp/v1/core/40-semantics.md":  "ee9d649b7dd1644a4053ab12ccb7236910a28f5d473db37c946792cd88aa7b78",
+                       "lcp/v1/core/50-diagnostics.md":  "ddd057dbb29a1b20985516a3bbca78c36f594196d6b6cbd57cd62cd470444f36",
+                       "lcp/v1/core/60-examples.md":  "9b01ff27793c95ddfe7faa3c0865912991736fbba5de30425e2f32a5720016f9",
+                       "lcp/v1/stdlib/10-stdlib.md":  "28b87093f3cd7ecfcfb7effcf57adaa9618466be3f62539d02407910e504b593"
+                   },
+    "examples":  {
+                     "lcp/v1/examples/basic.mpl":  {
+                                                       "sha256":  "b2b376e9223f6cb16900c69b8fc9bdf78a0b237e8ecbbd528d14cbe97f2ac5ad",
+                                                       "verified":  true
+                                                   },
+                     "lcp/v1/examples/function.mpl":  {
+                                                          "sha256":  "b22fe5caf3bfe05f4ef8fc8ab17e050e1dc3aab89b1ca44b2d818df38d07d559",
+                                                          "verified":  true
+                                                      },
+                     "lcp/v1/examples/meter.mpl":  {
+                                                       "sha256":  "405a3969f73cf805d619796d944a0f7e38fd88cecc4353e63f31c5cd171403f1",
+                                                       "verified":  true
+                                                   }
+                 },
+    "variants":  {
+                     "L0":  {
+                                "file":  "L0.md",
+                                "sha256":  "79790382e432f6198f01464e138485817b76fd6817770ffbac178cffa508127c",
+                                "bytes":  397,
+                                "estimatedTokens":  100
+                            },
+                     "L1":  {
+                                "file":  "L1.md",
+                                "sha256":  "bf1e8550ebc0113f36cbaeec27a9bc0be6f5379c2fe4c3145c4a7f412d15bc6c",
+                                "bytes":  2706,
+                                "estimatedTokens":  677
+                            },
+                     "L2":  {
+                                "file":  "L2.md",
+                                "sha256":  "57ddf4cb62774e50a23915c6ef0e828365193040a9bba95b3e487cb35a67a5f7",
+                                "bytes":  4261,
+                                "estimatedTokens":  1066
+                            },
+                     "L3":  {
+                                "file":  "L3.md",
+                                "sha256":  "e944fe63d121ce79786fda1422d09e7c39e0393f64111c984ba0bebb7c4978ec",
+                                "bytes":  8160,
+                                "estimatedTokens":  2040
+                            },
+                     "L4":  {
+                                "file":  "L4.md",
+                                "sha256":  "e944fe63d121ce79786fda1422d09e7c39e0393f64111c984ba0bebb7c4978ec",
+                                "bytes":  8160,
+                                "estimatedTokens":  2040
+                            },
+                     "Core":  {
+                                  "file":  "Core.md",
+                                  "sha256":  "e944fe63d121ce79786fda1422d09e7c39e0393f64111c984ba0bebb7c4978ec",
+                                  "bytes":  8160,
+                                  "estimatedTokens":  2040
+                              },
+                     "C":  {
+                               "file":  "C.md",
+                               "sha256":  "5ab78a5959e3bc4c73e21c8e5b26649b55c7e146b73ecbaa99cab3f34d4c8071",
+                               "bytes":  9496,
+                               "estimatedTokens":  2374
+                           },
+                     "A":  {
+                               "file":  "A.md",
+                               "sha256":  "2ff7330424dd3e28cdf325807b9eaf265b09c569828d234c8bd870b5f944433d",
+                               "bytes":  518,
+                               "estimatedTokens":  130
+                           }
+                 }
+}

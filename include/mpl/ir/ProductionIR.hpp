@@ -1,6 +1,7 @@
 #pragma once
 
 #include "mpl/core/Ids.hpp"
+#include "mpl/core/MeterMap.hpp"
 #include "mpl/core/Time.hpp"
 #include "mpl/ir/Assets.hpp"
 #include "mpl/ir/Automation.hpp"
@@ -28,7 +29,16 @@ struct TempoEvent {
 struct MeterEvent {
     Position position;
     Meter meter;
+    /// Empty means "uniform one-unit groups"; use effectiveGrouping().
+    MetricGrouping grouping;
+    std::int64_t barIndex = 0;
 };
+
+/// Grouping actually in effect for an event, defaulting to uniform groups.
+inline MetricGrouping effectiveGrouping(const MeterEvent& event) {
+    return event.grouping.groups.empty() ? MetricGrouping::uniform(event.meter)
+                                         : event.grouping;
+}
 
 struct ClipIR {
     std::string name;

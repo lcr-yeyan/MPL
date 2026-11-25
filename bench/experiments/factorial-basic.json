@@ -1,0 +1,12 @@
+{
+  "id": "offline-factorial-basic",
+  "task": "../tasks/01-basic-notes.json",
+  "submissions": [
+    { "arm": "A0", "candidate": "../candidates/basic-flat.json", "modelCalls": 0 },
+    { "arm": "A1", "candidate": "../candidates/basic-flat.json", "modelCalls": 0 },
+    { "arm": "B0", "candidate": "../baselines/basic.mpl", "modelCalls": 0 },
+    { "arm": "B1", "candidate": "../baselines/basic.mpl", "modelCalls": 0 },
+    { "arm": "C0", "candidate": "../baselines/basic.mpl", "modelCalls": 0 },
+    { "arm": "C1", "candidate": "../baselines/basic.mpl", "modelCalls": 0 }
+  ]
+}

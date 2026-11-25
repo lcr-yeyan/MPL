@@ -149,3 +149,38 @@ mplc build <file> --output <dir> [--ppq N] [--json]
 ## 10. 范围限制
 
 不实现：用户函数、模块、生成算子、约束表达式、LLM、情绪/审美策略、实时 DSP、物理/采样域曲线求值。保留语法扩展点，但不加入无语义功能。
+
+## 11. V0.2.0-beta：混音声明与 Lowering
+
+新增声明与 AST：
+
+```text
+ProcessorDecl { name, kind, mode, fields[] }
+BusDecl { name, gain, pan, inserts[] }
+MasterDecl { gain, pan, inserts[] }
+TrackDecl { ..., gain, pan, inserts[], sends[], sidechains[] }
+AutomationDecl { ..., processor }   // 三段目标
+```
+
+处理流程：
+
+1. Lexer 新增关键字 `processor`、`bus`、`insert`、`send`、`sidechain`；`to`/`from` 作为上下文标识符。
+2. Parser 按声明顺序收集 Processor/Bus/Master；Track 增加 gain/pan/insert/send/sidechain；Automation 支持 `<strip>.<processor>.<parameter>`。
+3. Sema 增加 `Processor`/`Bus` 符号与类型，校验参数描述符、单位、范围、引用与三条自动化路径。
+4. Lowering 构建 `MixSpec`（processors、track strips、buses、master、processorAutomation），并设置 `Project::setLogicalExtent(arrangement cursor)`。
+5. Compiler 将 MixSpec 与 logicalExtent 复制到 Production IR；Production IR JSON 版本 4。
+6. AudioExecution 从 MixSpec 构建 `SignalGraphPlan`；Reference Backend 按拓扑序渲染。
+
+符号解析顺序：处理器与 Bus 必须先于引用它们的 Track/Automation 声明。Master 块在其它声明之后统一校验。
+
+AST JSON 只在字段存在时输出 `gain`/`pan`/`inserts`/`sends`/`sidechains`/`processor`，因此未使用混音功能的旧 AST 黄金保持不变。
+
+## 12. V0.3.0-alpha：函数与局部作用域
+
+- `FunctionDecl` 进入 `Module::functions`；函数名进入全局 SymbolTable 仅用于重名检查。
+- Sema 使用作用域栈检查参数/局部 `let`，不污染全局符号；函数签名先收集，函数体后检查。
+- Typed HIR 增加 `FunctionInfo`（参数、返回类型、上下文、版本）与 `functionIndex`。
+- Lowering 使用局部值栈求值函数；全局 let/curve 惰性求值。
+- 函数结果返回 Music IR/Temporal IR 对象 id，保留依赖图。
+- 函数缓存键：name + version + Key + Meter + args；Trace 记录 functions/functionCalls/functionCache。
+- 预算：集合 1024、循环 8192、调用深度 32、总调用 4096；递归在 Sema 拒绝。

@@ -1,0 +1,20 @@
+{
+  "id": "mpl-bench-001-basic-notes",
+  "title": "Basic notes and quarter-note rhythm",
+  "category": "basic_notes_rhythm",
+  "template": "basic-grid",
+  "seed": 1101,
+  "baseline": "../baselines/basic.mpl",
+  "allowedScope": "program",
+  "tolerance": 0.0,
+  "budget": { "maxRepairs": 3, "maxSeconds": 120, "maxTokens": 8000 },
+  "target": [
+    { "name": "event_count", "value": 4 },
+    { "name": "onset_set", "value": ["0", "1/4", "1/2", "3/4"] },
+    { "name": "pitch_sequence", "value": [[60, 62, 64, 65]] }
+  ],
+  "preserve": [
+    { "name": "logical_extent" },
+    { "name": "content_extent" }
+  ]
+}

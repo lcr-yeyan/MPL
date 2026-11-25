@@ -1,0 +1,41 @@
+{
+  "format": "mpl.task-verification",
+  "version": 1,
+  "taskId": "mpl-bench-001-voice-leading",
+  "status": "pass",
+  "validityStatus": "ok",
+  "targetStatus": "pass",
+  "preserveStatus": "pass",
+  "frameStatus": "",
+  "comparisons": [
+    {
+      "name": "event_count",
+      "status": "pass",
+      "expected": "8",
+      "actual": "8",
+      "reason": ""
+    },
+    {
+      "name": "pitch_sequence",
+      "status": "pass",
+      "expected": "[[50,53,57,60,50,53,55,59]]",
+      "actual": "[\n  [\n    50,\n    53,\n    57,\n    60,\n    50,\n    53,\n    55,\n    59\n  ]\n]",
+      "reason": ""
+    },
+    {
+      "name": "preserve:logical_extent",
+      "status": "pass",
+      "expected": "\"2\"",
+      "actual": "\"2\"",
+      "reason": ""
+    },
+    {
+      "name": "preserve:onset_set",
+      "status": "pass",
+      "expected": "[\"0\",\"1/4\",\"1/2\",\"3/4\",\"1\",\"5/4\",\"3/2\",\"7/4\"]",
+      "actual": "[\n  \"0\",\n  \"1/4\",\n  \"1/2\",\n  \"3/4\",\n  \"1\",\n  \"5/4\",\n  \"3/2\",\n  \"7/4\"\n]",
+      "reason": ""
+    }
+  ],
+  "diagnostics": []
+}

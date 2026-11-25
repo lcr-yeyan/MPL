@@ -1,0 +1,48 @@
+{
+  "format": "mpl.task-verification",
+  "version": 1,
+  "taskId": "mpl-bench-001-basic-notes",
+  "status": "pass",
+  "validityStatus": "ok",
+  "targetStatus": "pass",
+  "preserveStatus": "pass",
+  "frameStatus": "",
+  "comparisons": [
+    {
+      "name": "event_count",
+      "status": "pass",
+      "expected": "4",
+      "actual": "4",
+      "reason": ""
+    },
+    {
+      "name": "onset_set",
+      "status": "pass",
+      "expected": "[\"0\",\"1/4\",\"1/2\",\"3/4\"]",
+      "actual": "[\n  \"0\",\n  \"1/4\",\n  \"1/2\",\n  \"3/4\"\n]",
+      "reason": ""
+    },
+    {
+      "name": "pitch_sequence",
+      "status": "pass",
+      "expected": "[[60,62,64,65]]",
+      "actual": "[\n  [\n    60,\n    62,\n    64,\n    65\n  ]\n]",
+      "reason": ""
+    },
+    {
+      "name": "preserve:logical_extent",
+      "status": "pass",
+      "expected": "\"1\"",
+      "actual": "\"1\"",
+      "reason": ""
+    },
+    {
+      "name": "preserve:content_extent",
+      "status": "pass",
+      "expected": "\"1\"",
+      "actual": "\"1\"",
+      "reason": ""
+    }
+  ],
+  "diagnostics": []
+}

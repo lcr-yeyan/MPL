@@ -1,0 +1,19 @@
+{
+  "id": "mpl-bench-001-multi-period",
+  "title": "Three-cell against two-cell common period",
+  "category": "multi_period_relation",
+  "template": "multi-period",
+  "seed": 1103,
+  "baseline": "../baselines/poly.mpl",
+  "allowedScope": "program",
+  "tolerance": 0.0,
+  "budget": { "maxRepairs": 3, "maxSeconds": 120, "maxTokens": 8000 },
+  "target": [
+    { "name": "event_count", "value": 12 },
+    { "name": "normalized_rhythm", "fromBaseline": true }
+  ],
+  "preserve": [
+    { "name": "logical_extent" },
+    { "name": "pitch_sequence" }
+  ]
+}

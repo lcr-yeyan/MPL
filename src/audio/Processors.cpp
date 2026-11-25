@@ -3,8 +3,10 @@
 #include <algorithm>
 #include <cmath>
 #include <cstddef>
+#include <deque>
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
 namespace mpl {
@@ -417,6 +419,113 @@ private:
     std::vector<std::size_t> allpassIndices_;
 };
 
+class LimiterProcessor final : public AudioProcessor {
+public:
+    void prepare(int sampleRate, int channels) override {
+        sampleRate_ = sampleRate;
+        channels_ = std::max(1, channels);
+        const std::size_t maximum =
+            static_cast<std::size_t>(std::ceil(0.05 * sampleRate)) + 2;
+        delay_.assign(static_cast<std::size_t>(channels_), std::vector<float>(maximum, 0.0f));
+        reset();
+    }
+
+    void reset() override {
+        for (std::vector<float>& channel : delay_) {
+            std::fill(channel.begin(), channel.end(), 0.0f);
+        }
+        writeIndex_ = 0;
+        delayLength_ = 0;
+        gain_ = 1.0;
+        minimumQueue_.clear();
+    }
+
+    void process(float* buffer, int frames, int channels, const ParameterRamp& parameters,
+                 const float*) override {
+        if (delay_.empty() || channels != channels_) {
+            return;
+        }
+        const double ceilingDb =
+            std::clamp(parameters.at("ceiling", 1.0, -1.0), -24.0, 0.0);
+        const double ceiling = dbToLinear(ceilingDb);
+        const double attack =
+            std::clamp(parameters.at("attack", 0.0, 0.005), 0.001, 0.05);
+        const double release = std::max(0.01, parameters.at("release", 1.0, 0.1));
+        latencySeconds_ = attack;
+
+        const std::size_t length = static_cast<std::size_t>(
+            std::max<long long>(1, std::llround(attack * sampleRate_)));
+        if (length != delayLength_) {
+            for (std::vector<float>& channel : delay_) {
+                std::fill(channel.begin(), channel.end(), 0.0f);
+            }
+            writeIndex_ = 0;
+            delayLength_ = length;
+            minimumQueue_.clear();
+        }
+        if (delay_.front().size() < length) {
+            return;
+        }
+
+        const double releaseCoefficient = std::exp(-1.0 / (release * sampleRate_));
+        const double attackCoefficient =
+            1.0 - std::exp(-1.0 / (std::max(0.0001, attack) * sampleRate_));
+        for (int frame = 0; frame < frames; ++frame) {
+            double peak = 0.0;
+            for (int channel = 0; channel < channels; ++channel) {
+                peak = std::max(
+                    peak,
+                    std::fabs(static_cast<double>(
+                        buffer[static_cast<std::size_t>(frame) * channels + channel])));
+            }
+            const double desired = peak > ceiling && peak > 0.0 ? ceiling / peak : 1.0;
+
+            const long long position =
+                static_cast<long long>(writeIndex_) + totalFrames_;
+            while (!minimumQueue_.empty() && minimumQueue_.back().second >= desired) {
+                minimumQueue_.pop_back();
+            }
+            minimumQueue_.emplace_back(position, desired);
+            const long long oldest =
+                position - static_cast<long long>(delayLength_);
+            while (!minimumQueue_.empty() && minimumQueue_.front().first < oldest) {
+                minimumQueue_.pop_front();
+            }
+
+            const double target = minimumQueue_.front().second;
+            const double coefficient =
+                target < gain_ ? attackCoefficient : 1.0 - releaseCoefficient;
+            gain_ += (target - gain_) * coefficient;
+
+            for (int channel = 0; channel < channels; ++channel) {
+                const std::size_t index =
+                    static_cast<std::size_t>(frame) * channels + channel;
+                float& slot = delay_[static_cast<std::size_t>(channel)][writeIndex_];
+                const float delayed = slot;
+                slot = buffer[index];
+                const double limited = std::clamp(static_cast<double>(delayed) * gain_,
+                                                  -ceiling, ceiling);
+                buffer[index] = static_cast<float>(limited);
+            }
+            writeIndex_ = (writeIndex_ + 1) % delayLength_;
+            ++totalFrames_;
+        }
+    }
+
+    double latencySeconds() const override { return latencySeconds_; }
+
+private:
+    int sampleRate_ = 48000;
+    int channels_ = 2;
+    std::vector<std::vector<float>> delay_;
+    std::size_t writeIndex_ = 0;
+    std::size_t delayLength_ = 0;
+    long long totalFrames_ = 0;
+    double gain_ = 1.0;
+    double latencySeconds_ = 0.0;
+    std::deque<std::pair<long long, double>> minimumQueue_;
+};
+
 }  // namespace
 
 std::unique_ptr<AudioProcessor> createProcessor(ProcessorKind kind, const std::string& mode) {
@@ -427,6 +536,7 @@ std::unique_ptr<AudioProcessor> createProcessor(ProcessorKind kind, const std::s
         case ProcessorKind::Compressor: return std::make_unique<CompressorProcessor>();
         case ProcessorKind::Delay: return std::make_unique<DelayProcessor>();
         case ProcessorKind::Reverb: return std::make_unique<ReverbProcessor>();
+        case ProcessorKind::Limiter: return std::make_unique<LimiterProcessor>();
     }
     return nullptr;
 }

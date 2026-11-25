@@ -15,7 +15,7 @@ using SymbolId = std::uint32_t;
 
 inline constexpr SymbolId kInvalidSymbolId = 0xFFFFFFFFu;
 
-enum class SymbolKind { Let, Asset, Curve, Track, Section, Processor, Bus };
+enum class SymbolKind { Let, Asset, Curve, Track, Section, Processor, Bus, Function };
 
 struct Symbol {
     std::string name;

@@ -1,0 +1,16 @@
+{
+    "format":  "mpl.task-verification",
+    "version":  1,
+    "taskId":  "mpl-bench-001-basic-notes",
+    "status":  "error",
+    "validityStatus":  "failed",
+    "targetStatus":  "",
+    "preserveStatus":  "",
+    "frameStatus":  "",
+    "comparisons":  [
+
+                    ],
+    "diagnostics":  [
+                        "candidate compile failed: parse-expected-equal: expected \u0027=\u0027 after tempo; parse-expected-semicolon: expected \u0027;\u0027 after declaration or statement; parse-unexpected-project-field: unknown project field; parse-unexpected-project-field: unknown project field; parse-unexpected-project-field: unknown project field; parse-unexpected-project-field: unknown project field; parse-unexpected-project-field: unknown project field; parse-unexpected-declaration: unexpected token at declaration scope; parse-expected-lbrace: expected \u0027{\u0027 to start clip; parse-unexpected-clip-item: expected play or an expression lane; parse-missing-play: clip requires a play expression; parse-unexpected-section-item: expected a clip or meter change in section; parse-unexpected-declaration: unexpected token at declaration scope"
+                    ]
+}

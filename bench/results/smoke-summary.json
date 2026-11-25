@@ -1,0 +1,93 @@
+{
+    "format":  "mpl.model-smoke-summary",
+    "version":  1,
+    "model":  "deepseek-flash",
+    "provider":  "deepseek",
+    "note":  "Smoke tests only; not the 30-60 formal Pilot and not a model success rate.",
+    "calls":  8,
+    "pass":  3,
+    "totalTokens":  3031,
+    "totalLatencyMs":  11242,
+    "results":  [
+                    {
+                        "arm":  "C1-style",
+                        "task":  "10-local-edit",
+                        "status":  "pass",
+                        "model":  "deepseek-flash",
+                        "promptTokens":  240,
+                        "completionTokens":  158,
+                        "totalTokens":  398,
+                        "latencyMs":  1608
+                    },
+                    {
+                        "arm":  "A0",
+                        "task":  "01-basic-notes",
+                        "status":  "pass",
+                        "model":  "deepseek-flash",
+                        "promptTokens":  168,
+                        "completionTokens":  151,
+                        "totalTokens":  319,
+                        "latencyMs":  1288
+                    },
+                    {
+                        "arm":  "A1",
+                        "task":  "01-basic-notes",
+                        "status":  "pass",
+                        "model":  "deepseek-flash",
+                        "promptTokens":  168,
+                        "completionTokens":  151,
+                        "totalTokens":  319,
+                        "latencyMs":  1542
+                    },
+                    {
+                        "arm":  "B0",
+                        "task":  "01-basic-notes",
+                        "status":  "error",
+                        "model":  "deepseek-flash",
+                        "promptTokens":  145,
+                        "completionTokens":  161,
+                        "totalTokens":  306,
+                        "latencyMs":  1500
+                    },
+                    {
+                        "arm":  "B1",
+                        "task":  "01-basic-notes",
+                        "status":  "error",
+                        "model":  "deepseek-flash",
+                        "promptTokens":  145,
+                        "completionTokens":  161,
+                        "totalTokens":  306,
+                        "latencyMs":  945
+                    },
+                    {
+                        "arm":  "C0",
+                        "task":  "01-basic-notes",
+                        "status":  "error",
+                        "model":  "deepseek-flash",
+                        "promptTokens":  145,
+                        "completionTokens":  161,
+                        "totalTokens":  306,
+                        "latencyMs":  1778
+                    },
+                    {
+                        "arm":  "C1",
+                        "task":  "01-basic-notes",
+                        "status":  "error",
+                        "model":  "deepseek-flash",
+                        "promptTokens":  145,
+                        "completionTokens":  161,
+                        "totalTokens":  306,
+                        "latencyMs":  1205
+                    },
+                    {
+                        "arm":  "C1-repair",
+                        "task":  "01-basic-notes",
+                        "status":  "error",
+                        "model":  "deepseek-flash",
+                        "promptTokens":  615,
+                        "completionTokens":  156,
+                        "totalTokens":  771,
+                        "latencyMs":  1376
+                    }
+                ]
+}

@@ -105,6 +105,12 @@ JsonWriter& JsonWriter::value(std::string_view text) {
     return *this;
 }
 
+JsonWriter& JsonWriter::nullValue() {
+    beginValue();
+    out_ += "null";
+    return *this;
+}
+
 JsonWriter& JsonWriter::value(const char* text) {
     return value(std::string_view(text == nullptr ? "" : text));
 }

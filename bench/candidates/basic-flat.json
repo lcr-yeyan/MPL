@@ -1,0 +1,20 @@
+{
+  "format": "mpl.flat-events",
+  "version": 1,
+  "logicalExtent": "1",
+  "tempoBpm": 120,
+  "meterMap": [
+    {"position": "0", "numerator": 4, "denominator": 4, "grouping": "2+2"}
+  ],
+  "tracks": [
+    {
+      "id": "Piano",
+      "events": [
+        {"pitch": 60, "onset": "0", "duration": "1/4", "velocity": 96},
+        {"pitch": 62, "onset": "1/4", "duration": "1/4", "velocity": 96},
+        {"pitch": 64, "onset": "1/2", "duration": "1/4", "velocity": 96},
+        {"pitch": 65, "onset": "3/4", "duration": "1/4", "velocity": 96}
+      ]
+    }
+  ]
+}

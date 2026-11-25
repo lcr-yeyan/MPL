@@ -1,0 +1,82 @@
+{
+    "format":  "mpl.language-context-package",
+    "version":  "1.1",
+    "name":  "MPL-LCP",
+    "language":  "0.3.0",
+    "stdlib":  "0.3.0",
+    "compiler":  "0.4.0",
+    "generatedBy":  "v1 plus list-indexing and edit-preservation clarifications; examples checked with mplc 0.4.0",
+    "tokenEstimateMethod":  "ceil(UTF-8 bytes / 4); not model-tokenizer exact",
+    "components":  {
+                       "core/00-output.md":  "974404e999ff5160eee4fb6f373631e8c6ee455013bc30aa39b3eedfcd85c8b3",
+                       "core/10-grammar.md":  "654564624cf6b96e1586a8b00d386d538c4bf988868bf880c80ee791ea7acd30",
+                       "core/20-types.md":  "85f5ad3fefb889f4f34a498866e81c6946d36caa4206185c9a66aab02bfae885",
+                       "core/30-builtins.md":  "f75dd36241647827718fb8003e171154f8854df102acf8889a396d268594ba1d",
+                       "core/40-semantics.md":  "ee9d649b7dd1644a4053ab12ccb7236910a28f5d473db37c946792cd88aa7b78",
+                       "core/50-diagnostics.md":  "9be9776bea01f0e0c578ba2f2fcd2e9e25375cabd85289feb1aff85b5fe07540",
+                       "core/60-examples.md":  "9c41ee7c3bc8b915d2ac1aed2ec738e921d4e70333afcdce84a862b08b42d885",
+                       "stdlib/10-stdlib.md":  "28b87093f3cd7ecfcfb7effcf57adaa9618466be3f62539d02407910e504b593"
+                   },
+    "examples":  {
+                     "examples/basic.mpl":  {
+                                                "sha256":  "b2b376e9223f6cb16900c69b8fc9bdf78a0b237e8ecbbd528d14cbe97f2ac5ad",
+                                                "verified":  true
+                                            },
+                     "examples/function.mpl":  {
+                                                   "sha256":  "b22fe5caf3bfe05f4ef8fc8ab17e050e1dc3aab89b1ca44b2d818df38d07d559",
+                                                   "verified":  true
+                                               },
+                     "examples/meter.mpl":  {
+                                                "sha256":  "405a3969f73cf805d619796d944a0f7e38fd88cecc4353e63f31c5cd171403f1",
+                                                "verified":  true
+                                            },
+                     "examples/voices.mpl":  {
+                                                 "sha256":  "eb225e0c82efccd0d3e556a1d0d2b56929370058a6cde7625ffac64b776d238c",
+                                                 "verified":  true
+                                             }
+                 },
+    "variants":  {
+                     "L0":  {
+                                "file":  "L0.md",
+                                "sha256":  "974404e999ff5160eee4fb6f373631e8c6ee455013bc30aa39b3eedfcd85c8b3",
+                                "bytes":  615,
+                                "estimatedTokens":  154
+                            },
+                     "L1":  {
+                                "file":  "L1.md",
+                                "sha256":  "3d6923344a55c0c64057791efaeb758a9025668cc7b3687469b8efbf1296d2da",
+                                "bytes":  3144,
+                                "estimatedTokens":  786
+                            },
+                     "L2":  {
+                                "file":  "L2.md",
+                                "sha256":  "cafcec31d7c7cef2bc909705a7d314d5d10eb96f6102f14942cfa2b50872b2a3",
+                                "bytes":  5322,
+                                "estimatedTokens":  1331
+                            },
+                     "L3":  {
+                                "file":  "L3.md",
+                                "sha256":  "03a86d292c53154ff85f1281a24ba3547bb6127300e5ff2022f37e2f765cb797",
+                                "bytes":  9363,
+                                "estimatedTokens":  2341
+                            },
+                     "L4":  {
+                                "file":  "L4.md",
+                                "sha256":  "03a86d292c53154ff85f1281a24ba3547bb6127300e5ff2022f37e2f765cb797",
+                                "bytes":  9363,
+                                "estimatedTokens":  2341
+                            },
+                     "Core":  {
+                                  "file":  "Core.md",
+                                  "sha256":  "03a86d292c53154ff85f1281a24ba3547bb6127300e5ff2022f37e2f765cb797",
+                                  "bytes":  9363,
+                                  "estimatedTokens":  2341
+                              },
+                     "C":  {
+                               "file":  "C.md",
+                               "sha256":  "5da2d463e60c331930515b19489abda13f4875c59cd382be51668c28bf0b7e4f",
+                               "bytes":  10706,
+                               "estimatedTokens":  2677
+                           }
+                 }
+}

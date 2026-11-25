@@ -37,6 +37,7 @@ std::string_view symbolKindName(SymbolKind kind) {
         case SymbolKind::Section: return "section";
         case SymbolKind::Processor: return "processor";
         case SymbolKind::Bus: return "bus";
+        case SymbolKind::Function: return "function";
     }
     return "symbol";
 }

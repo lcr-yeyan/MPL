@@ -27,6 +27,10 @@ const std::vector<ProcessorParameterDescriptor> kReverbParameters{
     {"room", ParameterUnit::Ratio, 0.0, 1.0, 0.6, false},
     {"damping", ParameterUnit::Ratio, 0.0, 1.0, 0.4, false},
     {"mix", ParameterUnit::Ratio, 0.0, 1.0, 0.3, false}};
+const std::vector<ProcessorParameterDescriptor> kLimiterParameters{
+    {"ceiling", ParameterUnit::Decibel, -24.0, 0.0, -1.0, false},
+    {"attack", ParameterUnit::Seconds, 0.001, 0.05, 0.005, false},
+    {"release", ParameterUnit::Seconds, 0.01, 2.0, 0.1, false}};
 
 }  // namespace
 
@@ -38,6 +42,7 @@ std::string_view processorKindName(ProcessorKind kind) {
         case ProcessorKind::Compressor: return "compressor";
         case ProcessorKind::Delay: return "delay";
         case ProcessorKind::Reverb: return "reverb";
+        case ProcessorKind::Limiter: return "limiter";
     }
     return "unknown";
 }
@@ -55,6 +60,8 @@ bool processorKindFromName(std::string_view name, ProcessorKind& kind) {
         kind = ProcessorKind::Delay;
     } else if (name == "reverb") {
         kind = ProcessorKind::Reverb;
+    } else if (name == "limiter") {
+        kind = ProcessorKind::Limiter;
     } else {
         return false;
     }
@@ -69,6 +76,7 @@ const std::vector<ProcessorParameterDescriptor>& processorParameters(ProcessorKi
         case ProcessorKind::Compressor: return kCompressorParameters;
         case ProcessorKind::Delay: return kDelayParameters;
         case ProcessorKind::Reverb: return kReverbParameters;
+        case ProcessorKind::Limiter: return kLimiterParameters;
     }
     return kGainParameters;
 }

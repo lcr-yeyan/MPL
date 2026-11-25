@@ -7,6 +7,8 @@
 #include <algorithm>
 #include <cmath>
 #include <cstdint>
+#include <cstdio>
+#include <cstring>
 #include <map>
 #include <memory>
 #include <set>
@@ -344,7 +346,7 @@ BackendCapabilities ReferenceAudioBackend::capabilities() const {
                                2,
                                {ProcessorKind::Gain, ProcessorKind::Pan, ProcessorKind::Biquad,
                                 ProcessorKind::Compressor, ProcessorKind::Delay,
-                                ProcessorKind::Reverb}};
+                                ProcessorKind::Reverb, ProcessorKind::Limiter}};
 }
 
 AudioBuffer ReferenceAudioBackend::renderPlan(const AudioExecutionPlan& originalPlan,
@@ -577,6 +579,18 @@ AudioBuffer ReferenceAudioBackend::renderPlan(const AudioExecutionPlan& original
         }
     }
 
+    const int latencyFrames =
+        std::clamp(plan.outputLatencyFrames, 0, static_cast<int>(buffer.frameCount()));
+    if (latencyFrames > 0) {
+        const std::size_t remainingFrames = buffer.frameCount() -
+                                            static_cast<std::size_t>(latencyFrames);
+        std::memmove(buffer.samples.data(),
+                     buffer.samples.data() +
+                         static_cast<std::size_t>(latencyFrames) * channels,
+                     remainingFrames * static_cast<std::size_t>(channels) * sizeof(float));
+        buffer.samples.resize(remainingFrames * static_cast<std::size_t>(channels));
+    }
+
     if (plan.config.termination == RenderTermination::SilenceThreshold) {
         const double threshold = std::pow(10.0, plan.config.silenceThresholdDb / 20.0);
         std::size_t minimumFrames = std::min(
@@ -600,6 +614,19 @@ AudioBuffer ReferenceAudioBackend::renderPlan(const AudioExecutionPlan& original
             --keep;
         }
         buffer.samples.resize(keep * static_cast<std::size_t>(channels));
+    }
+
+    double outputPeak = 0.0;
+    for (const float sample : buffer.samples) {
+        outputPeak = std::max(outputPeak, std::fabs(static_cast<double>(sample)));
+    }
+    if (outputPeak > 1.0) {
+        char message[128];
+        std::snprintf(message, sizeof(message),
+                      "rendered peak is %.2f dBFS; float samples are preserved without "
+                      "normalisation or clipping",
+                      20.0 * std::log10(outputPeak));
+        diagnostics.push_back(Diagnostic::warning("audio-peak-over", message));
     }
 
     return buffer;

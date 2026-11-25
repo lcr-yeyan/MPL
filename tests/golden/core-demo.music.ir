@@ -1,6 +1,6 @@
 {
   "format": "mpl.music-ir",
-  "version": 2,
+  "version": 3,
   "timeUnit": "whole-note",
   "context": {
     "key": "F minor",

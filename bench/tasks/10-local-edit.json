@@ -1,0 +1,20 @@
+{
+  "id": "mpl-bench-001-local-edit",
+  "title": "Local pitch edit preserving rhythm and extent",
+  "category": "local_structure_edit",
+  "template": "local-edit",
+  "seed": 1110,
+  "baseline": "../baselines/basic.mpl",
+  "allowedScope": "program",
+  "frame": { "allow": [ { "object": "clip", "key": "*", "property": "symbolicEvents" } ] },
+  "tolerance": 0.0,
+  "budget": { "maxRepairs": 3, "maxSeconds": 120, "maxTokens": 8000 },
+  "target": [
+    { "name": "pitch_sequence", "value": [[60, 62, 64, 67]] }
+  ],
+  "preserve": [
+    { "name": "event_count" },
+    { "name": "onset_set" },
+    { "name": "logical_extent" }
+  ]
+}

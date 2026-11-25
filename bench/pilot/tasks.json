@@ -1,0 +1,21 @@
+{
+  "format": "mpl.pilot-benchmark",
+  "version": 1,
+  "model": "deepseek-chat",
+  "note": "Exploratory six-arm pilot on development/pilot tasks; not held-out, not confirmatory.",
+  "tasks": [
+    { "id": "basic", "task": "../tasks/01-basic-notes.json", "mplPrompt": "prompts/mpl/01-basic.md", "flatPrompt": "prompts/flat/01-basic.md" },
+    { "id": "meter", "task": "../tasks/02-asymmetric-meter.json", "mplPrompt": "prompts/mpl/02-meter.md", "flatPrompt": "prompts/flat/02-meter.md" },
+    { "id": "multi-period", "task": "../tasks/03-multi-period.json", "mplPrompt": "prompts/mpl/03-multi.md", "flatPrompt": "prompts/flat/03-multi.md" },
+    { "id": "theme", "task": "../tasks/04-theme-transform.json", "mplPrompt": "prompts/mpl/04-theme.md", "flatPrompt": "prompts/flat/04-theme.md" },
+    { "id": "voice-leading", "task": "../tasks/07-voice-leading.json", "mplPrompt": "prompts/mpl/07-voice-leading.md", "flatPrompt": "prompts/flat/07-voice-leading.md" }
+  ],
+  "conditions": [
+    { "id": "A0", "arm": "A0", "context": "../../lcp/v1.1/contexts/A.md", "attempts": 1, "label": "pilot-v1-A0" },
+    { "id": "A1", "arm": "A1", "context": "../../lcp/v1.1/contexts/A.md", "attempts": 2, "label": "pilot-v1-A1" },
+    { "id": "B0", "arm": "B0", "context": "../../lcp/v1.1/contexts/Core.md", "attempts": 1, "label": "pilot-v1-B0" },
+    { "id": "B1", "arm": "B1", "context": "../../lcp/v1.1/contexts/Core.md", "attempts": 2, "label": "pilot-v1-B1" },
+    { "id": "C0", "arm": "C0", "context": "../../lcp/v1.1/contexts/C.md", "attempts": 1, "label": "pilot-v1-C0" },
+    { "id": "C1", "arm": "C1", "context": "../../lcp/v1.1/contexts/C.md", "attempts": 2, "label": "pilot-v1-C1" }
+  ]
+}

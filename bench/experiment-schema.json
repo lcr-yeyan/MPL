@@ -1,0 +1,36 @@
+{
+  "format": "mpl.experiment-schema",
+  "version": 2,
+  "required": ["id", "task", "submissions"],
+  "fields": {
+    "id": "experiment identifier",
+    "task": "path to a task JSON, resolved relative to this file",
+    "submissions": "array of submission objects"
+  },
+  "submission": {
+    "arm": "A0/A1 flat events; B0/B1 MPL Core; C0/C1 MPL+stdlib; suffix 1 means semantic feedback",
+    "candidate": "final candidate program, resolved relative to this file",
+    "initialCandidate": "optional first candidate before repairs",
+    "audio": "optional rendered WAV for audio tasks",
+    "renderManifest": "optional Render Artifact Manifest; required to trust audio",
+    "inputTokens": "model input tokens consumed, including context and feedback",
+    "outputTokens": "model output tokens consumed, including repairs",
+    "cacheTokens": "provider-reported cached tokens (0 if unsupported)",
+    "modelCalls": "number of model calls; 0 means offline/imported",
+    "repairs": "number of repair attempts applied",
+    "latencyMilliseconds": "measured or provider-reported latency",
+    "model": "model identifier",
+    "modelVersion": "model version",
+    "sampling": "sampling configuration identifier or JSON",
+    "promptVersion": "prompt/context version",
+    "error": "provider or generation error, if any"
+  },
+  "result": {
+    "format": "mpl.experiment-result",
+    "version": 2,
+    "modelGenerated": "true only if at least one submission reports modelCalls > 0",
+    "observedSuccessRate": "null unless modelGenerated and at least one run completed",
+    "completed": "pass + fail + unverifiable; excludes not-run/unsupported/not-applicable/invalid-arm",
+    "runs": "per-arm status, initialStatus, verification, token and latency records"
+  }
+}

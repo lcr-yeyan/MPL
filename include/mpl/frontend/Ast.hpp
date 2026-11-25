@@ -1,5 +1,6 @@
 #pragma once
 
+#include "mpl/core/ModuleInfo.hpp"
 #include "mpl/frontend/Source.hpp"
 
 #include <cstdint>
@@ -28,12 +29,53 @@ enum class ExprKind {
     Melody,
     Notes,
     Keyframes,
+    Boolean,
+    Binary,
+    Not,
+    If,
+    For,
+    Rhythm,
+    Harmony,
 };
 
 struct MelodyEntry {
     SourceSpan span;
     std::string pitch;
     ExprId duration = kInvalidExprId;
+};
+
+/// One entry of a rhythm literal. Entries are laid out sequentially; rests keep
+/// explicit silence in the rhythm's structure.
+struct RhythmEntry {
+    SourceSpan span;
+    bool rest = false;
+    ExprId duration = kInvalidExprId;
+    int accent = 0;
+};
+
+/// One entry of a harmony literal. The chord is given as a string so chord
+/// symbols do not become lexical keywords.
+struct HarmonyEntry {
+    SourceSpan span;
+    std::string chord;
+    ExprId offset = kInvalidExprId;
+    ExprId duration = kInvalidExprId;
+};
+
+/// Time signature plus optional metric grouping (for example 2+2+3).
+struct MeterSpec {
+    SourceSpan span;
+    int numerator = 4;
+    int denominator = 4;
+    std::vector<int> grouping;
+    bool explicitGrouping = false;
+};
+
+/// A meter change inside a section, expressed relative to the section start.
+struct MeterChange {
+    SourceSpan span;
+    ExprId at = kInvalidExprId;
+    MeterSpec meter;
 };
 
 struct NoteEntry {
@@ -60,11 +102,40 @@ struct Expr {
     std::int64_t numerator = 0;
     std::int64_t denominator = 1;
     std::string unit;
+    bool boolean = false;
     std::vector<ExprId> args;
     std::vector<MelodyEntry> melody;
     std::vector<NoteEntry> notes;
+    std::vector<RhythmEntry> rhythm;
+    std::vector<HarmonyEntry> harmony;
     std::vector<KeyframeEntry> keyframes;
     ExprId explicitSpan = kInvalidExprId;
+};
+
+struct ParamDecl {
+    SourceSpan span;
+    std::string name;
+    std::string type;
+};
+
+enum class StmtKind { Let, Return };
+
+struct Stmt {
+    StmtKind kind = StmtKind::Let;
+    SourceSpan span;
+    std::string name;
+    ExprId value = kInvalidExprId;
+};
+
+struct FunctionDecl {
+    SourceSpan span;
+    std::string name;
+    std::vector<ParamDecl> params;
+    std::string returnType;
+    bool contextKey = false;
+    bool contextMeter = false;
+    bool exported = false;
+    std::vector<Stmt> body;
 };
 
 struct ProjectDecl {
@@ -86,6 +157,7 @@ struct LetDecl {
     SourceSpan span;
     std::string name;
     ExprId value = kInvalidExprId;
+    bool exported = false;
 };
 
 struct CurveDecl {
@@ -94,6 +166,12 @@ struct CurveDecl {
     std::string domain;
     ExprId extent = kInvalidExprId;
     ExprId value = kInvalidExprId;
+    bool exported = false;
+};
+
+struct ImportDecl {
+    SourceSpan span;
+    std::string path;
 };
 
 struct SendDecl {
@@ -165,6 +243,8 @@ struct SectionDecl {
     SourceSpan span;
     std::string name;
     ExprId duration = kInvalidExprId;
+    std::optional<MeterSpec> meter;
+    std::vector<MeterChange> meterChanges;
     std::vector<ClipDecl> clips;
 };
 
@@ -199,6 +279,10 @@ struct DeclRef {
 struct Module {
     SourceSpan span;
     std::string file;
+    std::string moduleName;
+    bool isLibrary = false;
+    std::vector<ImportDecl> imports;
+    std::vector<ModuleRecord> modules;
     std::optional<ProjectDecl> project;
     std::vector<AssetDecl> assets;
     std::vector<LetDecl> lets;
@@ -208,6 +292,7 @@ struct Module {
     std::vector<AutomationDecl> automations;
     std::vector<ProcessorDecl> processors;
     std::vector<BusDecl> buses;
+    std::vector<FunctionDecl> functions;
     std::optional<MasterDecl> master;
     std::optional<ArrangementDecl> arrangement;
     std::vector<ExportDecl> exports;

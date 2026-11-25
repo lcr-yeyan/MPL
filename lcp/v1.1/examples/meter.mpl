@@ -1,0 +1,22 @@
+project Meter {
+  tempo = 120 bpm;
+  meter = 7/8;
+  key = D minor;
+}
+
+asset PianoAsset = instrument("GrandPiano");
+
+let M = notes span 7/8 whole {
+  A3 @ 0 for 1/8 vel 104,
+  B3 @ 1/8 for 1/8 vel 88,
+  C4 @ 2/8 for 1/8 vel 88,
+  D4 @ 3/8 for 1/8 vel 96,
+  E4 @ 4/8 for 1/8 vel 88,
+  F4 @ 5/8 for 1/8 vel 88,
+  G4 @ 6/8 for 1/8 vel 92
+};
+
+track Piano { asset = PianoAsset; role = melodic; }
+section S(1 bars) meter 7/8 grouping 2+2+3 { clip Piano "Meter" { play M; } }
+arrangement { play S; }
+export midi("meter.mid");

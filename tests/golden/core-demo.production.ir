@@ -1,6 +1,6 @@
 {
   "format": "mpl.production-ir",
-  "version": 3,
+  "version": 5,
   "timeUnit": "whole-note",
   "tempoMap": [
     {
@@ -12,8 +12,11 @@
   "meterMap": [
     {
       "atWholeNotes": "0",
+      "barIndex": 0,
       "barBeat": "1:1",
-      "meter": "4/4"
+      "meter": "4/4",
+      "grouping": "1+1+1+1",
+      "explicitGrouping": false
     }
   ],
   "tracks": [
@@ -377,5 +380,20 @@
     }
   ],
   "automation": [],
+  "logicalExtentWholeNotes": "0",
+  "mix": {
+    "processors": [],
+    "tracks": [],
+    "buses": [],
+    "master": {
+      "name": "master",
+      "gainDb": 0,
+      "pan": 0,
+      "inserts": [],
+      "sends": [],
+      "sidechains": []
+    },
+    "processorAutomation": []
+  },
   "totalDurationWholeNotes": "4"
 }

@@ -7,6 +7,7 @@
 #include <cctype>
 #include <cmath>
 #include <cstdint>
+#include <limits>
 #include <map>
 #include <memory>
 #include <queue>
@@ -259,8 +260,18 @@ double processorTailSeconds(const ProcessorSpec& processor) {
             const double room = std::clamp(processorParameter(processor, "room", 0.6), 0.0, 1.0);
             return std::min(10.0, 2.5 + room * 2.5);
         }
+        case ProcessorKind::Limiter:
+            return 0.0;
     }
     return 0.0;
+}
+
+double processorLatencySeconds(const ProcessorSpec& processor) {
+    if (processor.kind != ProcessorKind::Limiter) {
+        return 0.0;
+    }
+    const double attack = processorParameter(processor, "attack", 0.005);
+    return std::clamp(attack, 0.001, 0.05);
 }
 
 bool validateSignalGraph(SignalGraphPlan& graph, std::vector<Diagnostic>& diagnostics) {
@@ -637,6 +648,7 @@ AudioExecutionPlan buildAudioExecutionPlan(const ProductionIR& production,
             node.inputChannels = config.channels;
             node.outputChannels = config.channels;
             node.hasSidechainInput = node.processor.kind == ProcessorKind::Compressor;
+            node.latencySeconds = processorLatencySeconds(node.processor);
             attachProcessorAutomation(node, production.mix, strip.name, insert);
             const int nodeId = addSignalNode(graph, std::move(node));
             const std::string key = strip.name + "|" + insert;
@@ -770,6 +782,57 @@ AudioExecutionPlan buildAudioExecutionPlan(const ProductionIR& production,
 
     validateSignalGraph(graph, diagnostics);
 
+    {
+        std::vector<std::vector<int>> mainIncoming(graph.nodes.size());
+        for (const SignalConnectionPlan& connection : graph.connections) {
+            if (!connection.sidechain && connection.to >= 0 &&
+                connection.to < static_cast<int>(graph.nodes.size()) &&
+                connection.from >= 0) {
+                mainIncoming[static_cast<std::size_t>(connection.to)].push_back(
+                    connection.from);
+            }
+        }
+        std::vector<double> arrival(graph.nodes.size(), 0.0);
+        bool orderValid = graph.order.size() == graph.nodes.size();
+        if (orderValid) {
+            for (const int nodeId : graph.order) {
+                double minimum = std::numeric_limits<double>::infinity();
+                double maximum = 0.0;
+                for (const int from : mainIncoming[static_cast<std::size_t>(nodeId)]) {
+                    const double latency =
+                        arrival[static_cast<std::size_t>(from)] +
+                        graph.nodes[static_cast<std::size_t>(from)].latencySeconds;
+                    minimum = std::min(minimum, latency);
+                    maximum = std::max(maximum, latency);
+                }
+                if (!mainIncoming[static_cast<std::size_t>(nodeId)].empty()) {
+                    arrival[static_cast<std::size_t>(nodeId)] = maximum;
+                    if (minimum < maximum - 1e-9) {
+                        plan.latencyMisaligned = true;
+                        const std::string message =
+                            "signal paths into '" + graph.nodes[static_cast<std::size_t>(nodeId)].name +
+                            "' have different processing latencies; automatic delay "
+                            "compensation is not implemented";
+                        if (config.policy == UnsupportedPolicy::Strict) {
+                            addError(diagnostics, "audio-latency-misaligned", message);
+                        } else {
+                            addWarning(diagnostics, "audio-latency-misaligned", message);
+                        }
+                    }
+                }
+            }
+        }
+        if (orderValid && graph.outputNode >= 0 &&
+            graph.outputNode < static_cast<int>(graph.nodes.size())) {
+            plan.outputLatencySeconds =
+                arrival[static_cast<std::size_t>(graph.outputNode)] +
+                graph.nodes[static_cast<std::size_t>(graph.outputNode)].latencySeconds;
+            plan.outputLatencyFrames =
+                std::max(0, static_cast<int>(std::llround(plan.outputLatencySeconds *
+                                                          config.sampleRate)));
+        }
+    }
+
     double processorTail = plan.processorTailSeconds;
     if (processorTail > config.maxTailSeconds) {
         addWarning(diagnostics, "audio-tail-capped",
@@ -785,7 +848,8 @@ AudioExecutionPlan buildAudioExecutionPlan(const ProductionIR& production,
     const double base = std::max(plan.logicalExtentSeconds, voiceContentEnd + processorTail);
     plan.renderedSeconds = base + tail;
     plan.totalFrames =
-        std::max(0, static_cast<int>(std::llround(plan.renderedSeconds * config.sampleRate)));
+        std::max(0, static_cast<int>(std::llround(plan.renderedSeconds * config.sampleRate))) +
+        plan.outputLatencyFrames;
     return plan;
 }
 

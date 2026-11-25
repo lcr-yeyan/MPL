@@ -142,10 +142,12 @@ Temporal IR 不依赖 Music IR；修改曲线不会失效任何音乐对象。�
 
 ### 9.3 实例与身份
 
-- 定义：Music IR 对象，`ObjectId` 稳定。
+- 定义：Music IR 对象，`ObjectId` 稳定；`Fragment` 与 `Rhythm` 共用该 id 空间但类型分离。
+- 调用：Function Invocation 记录调用点、实例序号、深度与 `metricContext`；同参同定义同上下文共享 Music Value。
 - 播放：Production IR 的 clip，`InstanceId` 按 lowering 顺序分配；同一对象可被多个 clip 引用。
 - 音符：`NoteInstanceId = (InstanceId, noteIndex)`；trace 直接输出字符串 `"instance:index"`。
 - 参数：`ParameterId` 使用名称而非索引，添加/重排轨道不会改变已有参数 id。
+- 节奏：Rhythm 事件带 `origin`；Rhythm × Pitch 的 note 额外带 `rhythmOrigin` 与 `rhythmEventIndex`。
 - 实例编号在当前项目 lowering 顺序下稳定；改变轨道/片段顺序会重新编号，这是当前实现的限制。
 
 ### 9.4 表情与自动化
@@ -153,6 +155,14 @@ Temporal IR 不依赖 Music IR；修改曲线不会失效任何音乐对象。�
 - `PerformanceExpression` 属于 clip 实例，包含 velocity / timing / gate / pan 四条 Relative 曲线。
 - 表情曲线必须是 extent = 1 的 Relative 曲线，并在参数范围内；否则编译诊断。
 - `AutomationBinding` 属于 Production IR，目标为 track/clip/master 参数。曲线在 musical 或 relative 域求值。
+
+### 9.5 和声、排列与模块身份
+
+- `HarmonyTimeline` 是 Music IR 值对象；`harmony-literal` 与 `harmony-query` 共用 ObjectId 空间。
+- `ChordSymbol` 是和弦身份；`Voicing` 是具体排列；二者不互相替代。
+- `voiceLead` 结果是值，不自动变成 Clip；需要显式组合为 Fragment 才进入 Production。
+- 模块在链接期消失：`ModuleRecord` 只记录 name/path/contentHash/imports/exports，不进入音乐语义。
+- 模块私有名被 mangle；公开名进入根命名空间；ModuleRecord 与 Trace 提供依赖溯源。
 - 组合：Replace 提供基值；Add 求和；Multiply 求积。多个 Replace 冲突是错误。
 - MIDI 后端把 track/musical 绑定采样为 CC；其他作用域/域产生明确诊断。
 

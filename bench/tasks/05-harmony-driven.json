@@ -1,0 +1,20 @@
+{
+  "id": "mpl-bench-001-harmony-driven",
+  "title": "Rhythm driven by a shared harmonic timeline",
+  "category": "harmony_driven_generation",
+  "template": "harmony-driven",
+  "seed": 1105,
+  "baseline": "../baselines/harmony.mpl",
+  "allowedScope": "program",
+  "tolerance": 0.0,
+  "budget": { "maxRepairs": 3, "maxSeconds": 120, "maxTokens": 8000 },
+  "target": [
+    { "name": "event_count", "value": 10 },
+    { "name": "pitch_sequence", "value": [[50, 53, 57, 60, 50, 55, 59, 62, 65, 55]] },
+    { "name": "harmonic_timeline", "fromBaseline": true }
+  ],
+  "preserve": [
+    { "name": "logical_extent" },
+    { "name": "normalized_rhythm" }
+  ]
+}

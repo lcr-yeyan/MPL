@@ -1,5 +1,6 @@
 #include "mpl/Compiler.hpp"
 
+#include "mpl/Version.hpp"
 #include "mpl/core/Error.hpp"
 #include "mpl/ir/Automation.hpp"
 #include "mpl/util/JsonWriter.hpp"
@@ -59,6 +60,30 @@ public:
             if (meter.position.inWholeNotes().isNegative()) {
                 diagnostics.push_back(
                     Diagnostic::error("negative-position", "meter event starts before zero"));
+            }
+            std::string groupingError;
+            if (!effectiveGrouping(meter).isValid(meter.meter, &groupingError)) {
+                diagnostics.push_back(Diagnostic::error("invalid-meter-grouping",
+                                                        groupingError));
+            }
+        }
+
+        if (!production.meterMap.empty()) {
+            MeterMap map(production.meterMap.front().meter,
+                         effectiveGrouping(production.meterMap.front()));
+            for (std::size_t index = 1; index < production.meterMap.size(); ++index) {
+                const MeterEvent& event = production.meterMap[index];
+                std::string meterError;
+                if (!map.tryAdd(event.position, event.meter, effectiveGrouping(event),
+                                meterError)) {
+                    diagnostics.push_back(Diagnostic::error(
+                        "invalid-meter-map",
+                        "meter event #" + std::to_string(index) + ": " + meterError));
+                }
+            }
+            std::string mapError;
+            if (!map.validate(mapError)) {
+                diagnostics.push_back(Diagnostic::error("invalid-meter-map", mapError));
             }
         }
 
@@ -320,6 +345,83 @@ bool Compilation::hasErrors() const {
     });
 }
 
+std::uint64_t Compilation::stdlibHash() const {
+    std::uint64_t hash = 1469598103934665603ull;
+    bool found = false;
+    for (const ModuleRecord& module : modules) {
+        if (module.name.rfind("Std", 0) != 0) {
+            continue;
+        }
+        found = true;
+        hash ^= module.resolvedHash + 0x9e3779b97f4a7c15ull + (hash << 6) + (hash >> 2);
+    }
+    return found ? hash : 0;
+}
+
+std::string Compilation::toReportJson() const {
+    JsonWriter json;
+    json.beginObject();
+    json.key("format").value("mpl.compiler-report");
+    json.key("version").value(1);
+    json.key("compilerVersion").value(std::string(kCompilerVersion));
+    json.key("languageVersion").value(std::string(kLanguageVersion));
+    json.key("stdlibVersion").value(std::string(kStdlibVersion));
+    json.key("benchmarkVersion").value(std::string(kBenchmarkVersion));
+    json.key("observationVersion").value(std::string(kObservationVersion));
+    json.key("protocolVersion").value(std::string(kProtocolVersion));
+    json.key("stdlibHash").value(std::to_string(stdlibHash()));
+
+    json.key("phases").beginObject();
+    json.key("compile").value(hasErrors() ? "failed" : "ok");
+    json.key("validate").value(hasErrors() ? "failed" : "ok");
+    json.key("execute").value("not-run");
+    json.key("backend").beginObject();
+    json.key("status").value("not-run");
+    json.key("approximations").beginArray();
+    json.endArray();
+    json.endObject();
+    json.endObject();
+
+    json.key("diagnostics").beginArray();
+    for (const Diagnostic& diagnostic : diagnostics) {
+        json.beginObject();
+        json.key("severity").value(diagnostic.severityName());
+        json.key("code").value(diagnostic.code);
+        json.key("message").value(diagnostic.message);
+        json.endObject();
+    }
+    json.endArray();
+
+    json.key("passes").beginArray();
+    for (const PassStats& pass : passes) {
+        json.beginObject();
+        json.key("name").value(pass.name);
+        json.endObject();
+    }
+    json.endArray();
+
+    json.key("modules").beginArray();
+    for (const ModuleRecord& module : modules) {
+        json.beginObject();
+        json.key("name").value(module.name);
+        json.key("path").value(module.path);
+        json.key("contentHash").value(std::to_string(module.contentHash));
+        json.key("resolvedHash").value(std::to_string(module.resolvedHash));
+        json.endObject();
+    }
+    json.endArray();
+
+    json.key("counts").beginObject();
+    json.key("musicObjects").value(static_cast<std::int64_t>(music.size()));
+    json.key("tracks").value(static_cast<std::int64_t>(production.tracks.size()));
+    json.key("clips").value(static_cast<std::int64_t>(production.clipCount()));
+    json.key("notes").value(static_cast<std::int64_t>(production.noteCount()));
+    json.endObject();
+
+    json.endObject();
+    return json.take();
+}
+
 std::size_t Compilation::warningCount() const {
     return static_cast<std::size_t>(
         std::count_if(diagnostics.begin(), diagnostics.end(), [](const Diagnostic& diagnostic) {
@@ -331,12 +433,30 @@ std::string Compilation::toTraceJson(bool includePassTimings) const {
     JsonWriter json;
     json.beginObject();
     json.key("format").value("mpl.trace");
-    json.key("version").value(3);
+    json.key("version").value(5);
 
     json.key("context").beginObject();
     json.key("key").value(music.key().name());
     json.key("meter").value(music.meter().toString());
     json.endObject();
+
+    json.key("random").beginObject();
+    json.key("algorithm").value("splitmix64");
+    json.key("version").value(1);
+    json.key("primitive").value("random(seed,index)");
+    json.endObject();
+
+    json.key("meterMap").beginArray();
+    for (const MeterEvent& meter : production.meterMap) {
+        json.beginObject();
+        json.key("atWholeNotes").value(meter.position.toString());
+        json.key("barIndex").value(meter.barIndex);
+        json.key("meter").value(meter.meter.toString());
+        json.key("grouping").value(effectiveGrouping(meter).toString());
+        json.key("explicitGrouping").value(effectiveGrouping(meter).explicitGrouping);
+        json.endObject();
+    }
+    json.endArray();
 
     json.key("music").beginObject();
     json.key("objects").value(static_cast<std::int64_t>(music.size()));
@@ -376,6 +496,91 @@ std::string Compilation::toTraceJson(bool includePassTimings) const {
     json.key("notes").value(static_cast<std::int64_t>(production.noteCount()));
     json.key("durationWholeNotes").value(production.totalDuration().toString());
     json.endObject();
+
+    if (!functionDefinitions.empty()) {
+        json.key("functions").beginArray();
+        for (const FunctionDefinitionRecord& definition : functionDefinitions) {
+            json.beginObject();
+            json.key("name").value(definition.name);
+            json.key("returnType").value(definition.returnType);
+            json.key("version").value(std::to_string(definition.version));
+            json.key("contextKey").value(definition.contextKey);
+            json.key("contextMeter").value(definition.contextMeter);
+            json.key("parameters").beginArray();
+            for (const auto& parameter : definition.parameters) {
+                json.beginObject();
+                json.key("name").value(parameter.first);
+                json.key("type").value(parameter.second);
+                json.endObject();
+            }
+            json.endArray();
+            json.endObject();
+        }
+        json.endArray();
+    }
+
+    if (!functionCalls.empty()) {
+        std::size_t cacheHits = 0;
+        json.key("functionCalls").beginArray();
+        for (const FunctionCallRecord& call : functionCalls) {
+            if (call.cacheHit) {
+                ++cacheHits;
+            }
+            json.beginObject();
+            json.key("function").value(call.function);
+            json.key("instance").value(call.instance);
+            json.key("depth").value(call.depth);
+            json.key("file").value(call.callFile);
+            json.key("line").value(call.callLine);
+            json.key("column").value(call.callColumn);
+            json.key("arguments").value(call.arguments);
+            json.key("contextKey").value(call.contextKey);
+            json.key("contextMeter").value(call.contextMeter);
+            json.key("metricContext").value(call.metricContext);
+            json.key("cacheHit").value(call.cacheHit);
+            json.key("objects").beginArray();
+            for (const ObjectId object : call.objects) {
+                json.value(static_cast<std::int64_t>(object));
+            }
+            json.endArray();
+            json.key("operators").beginArray();
+            for (const std::string& operation : call.operators) {
+                json.value(operation);
+            }
+            json.endArray();
+            json.endObject();
+        }
+        json.endArray();
+        json.key("functionCache").beginObject();
+        json.key("calls").value(static_cast<std::int64_t>(functionCalls.size()));
+        json.key("hits").value(static_cast<std::int64_t>(cacheHits));
+        json.key("misses")
+            .value(static_cast<std::int64_t>(functionCalls.size() - cacheHits));
+        json.endObject();
+    }
+
+    if (!modules.empty()) {
+        json.key("modules").beginArray();
+        for (const ModuleRecord& module : modules) {
+            json.beginObject();
+            json.key("name").value(module.name);
+            json.key("path").value(module.path);
+            json.key("contentHash").value(std::to_string(module.contentHash));
+            json.key("resolvedHash").value(std::to_string(module.resolvedHash));
+            json.key("imports").beginArray();
+            for (const std::string& importName : module.imports) {
+                json.value(importName);
+            }
+            json.endArray();
+            json.key("exports").beginArray();
+            for (const std::string& exportName : module.exports) {
+                json.value(exportName);
+            }
+            json.endArray();
+            json.endObject();
+        }
+        json.endArray();
+    }
 
     json.key("objects").beginArray();
     for (const MusicNode& node : music.nodes()) {
@@ -481,6 +686,14 @@ std::string Compilation::toTraceJson(bool includePassTimings) const {
                     .value(note.origin != kInvalidObjectId && music.contains(note.origin)
                                ? music.node(note.origin).label
                                : std::string{});
+                if (note.rhythmOrigin != kInvalidObjectId) {
+                    json.key("rhythmOrigin")
+                        .value(static_cast<std::int64_t>(note.rhythmOrigin));
+                }
+                if (note.rhythmEventIndex != kInvalidRhythmEvent) {
+                    json.key("rhythmEvent")
+                        .value(static_cast<std::int64_t>(note.rhythmEventIndex));
+                }
                 json.key("noteInstance")
                     .value(NoteInstanceId{clip.instanceId, static_cast<std::uint32_t>(index)}
                                .str());
@@ -544,11 +757,24 @@ Compilation Compiler::compile(Project project) const {
     ProductionIR& production = result.production;
     production.automation = project.automation();
     production.mix = project.mix();
-    if (project.logicalExtent().has_value()) {
-        production.logicalExtent = *project.logicalExtent();
-    }
+    production.logicalExtent = project.logicalExtent().value_or(Duration(Rational(0, 1)));
+    result.functionDefinitions = project.functionDefinitions();
+    result.functionCalls = project.functionCalls();
+    result.modules = project.modules();
+    result.sections = project.sections();
     production.tempoMap.push_back(TempoEvent{Position{}, tempo});
-    production.meterMap.push_back(MeterEvent{Position{}, meter});
+    if (!project.meterMap().events().empty()) {
+        for (const MeterMapEvent& event : project.meterMap().events()) {
+            MeterEvent meter;
+            meter.position = event.position;
+            meter.meter = event.meter;
+            meter.grouping = event.grouping;
+            meter.barIndex = event.barIndex;
+            production.meterMap.push_back(std::move(meter));
+        }
+    } else {
+        production.meterMap.push_back(MeterEvent{Position{}, meter});
+    }
 
     InstanceId nextInstance = 0;
     std::set<InstanceId> explicitInstances;

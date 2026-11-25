@@ -1,0 +1,19 @@
+{
+  "id": "mpl-bench-001-theme-transform",
+  "title": "Theme cell and diatonic transposed answer",
+  "category": "theme_transformation",
+  "template": "theme-transform",
+  "seed": 1104,
+  "baseline": "../baselines/theme.mpl",
+  "allowedScope": "program",
+  "tolerance": 0.0,
+  "budget": { "maxRepairs": 3, "maxSeconds": 120, "maxTokens": 8000 },
+  "target": [
+    { "name": "event_count", "value": 6 },
+    { "name": "pitch_sequence", "value": [[60, 62, 64, 64, 65, 67]] }
+  ],
+  "preserve": [
+    { "name": "logical_extent" },
+    { "name": "onset_set" }
+  ]
+}

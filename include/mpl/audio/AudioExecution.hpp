@@ -128,6 +128,8 @@ struct SignalNodePlan {
     int inputChannels = 2;
     int outputChannels = 2;
     bool hasSidechainInput = false;
+    /// Processing latency (not artistic delay) introduced by this node.
+    double latencySeconds = 0.0;
 };
 
 struct SignalConnectionPlan {
@@ -154,6 +156,11 @@ struct AudioExecutionPlan {
     double contentEndSeconds = 0.0;
     double processorTailSeconds = 0.0;
     double renderedSeconds = 0.0;
+    /// Total processing latency of the graph; compensated by trimming the
+    /// rendered output so musical positions stay aligned.
+    double outputLatencySeconds = 0.0;
+    int outputLatencyFrames = 0;
+    bool latencyMisaligned = false;
     int totalFrames = 0;
 };
 

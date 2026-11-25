@@ -1,0 +1,16 @@
+{
+  "format": "mpl.render-manifest",
+  "version": 1,
+  "sourceHash": "a1f1a1eb725f231b",
+  "moduleHash": "14650fb0739d0383",
+  "productionHash": "8a8c01d48fecc055",
+  "assetManifestHash": "fe6d8cdd075e83de",
+  "rendererVersion": "mpl-reference-audio-1",
+  "configuration": "{\n  \"sampleRate\": 48000,\n  \"blockSize\": 256,\n  \"channels\": 2,\n  \"tailSeconds\": 1\n}",
+  "audioHash": "a482d27356673a27",
+  "sourceSha256": "e95c16fbe3025b1857fe7ad13886a110c5350de2d67c92e2fa8eefded402b64c",
+  "moduleSha256": "14f2e40ffe381838099bd9fea4d9961b459186733e52c3f5e8506c390f6296e5",
+  "productionSha256": "ae51a0df24545d85fa71a748e83ce8804f8bb09d465dbe1ff077dc3caa6fc0fa",
+  "assetSha256": "158bf66c4b08a53e3176db901aff3496eb3c93d736b0b6b7c64b3f2e733c993b",
+  "audioSha256": "91a76643d1c9b0462ab589662a5cd679510eada0dacc12adeac77dd7b3be7ae9"
+}

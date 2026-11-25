@@ -19,6 +19,15 @@ void Project::setKey(Key key) {
 
 void Project::setMeter(int numerator, int denominator) {
     music_.setMeter(Meter{numerator, denominator});
+    meterMap_ = MeterMap(Meter{numerator, denominator});
+}
+
+void Project::setMeterMap(MeterMap map) {
+    // The Music IR's single-meter context stays the project-declared meter;
+    // the full arrangement map is production data. This avoids invalidating
+    // already-evaluated syncopate nodes when the first section uses another
+    // meter.
+    meterMap_ = std::move(map);
 }
 
 TrackSpec& Project::addTrack(std::string name, std::string instrument, ObjectId part,

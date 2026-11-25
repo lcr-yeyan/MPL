@@ -1,0 +1,252 @@
+{
+  "format": "mpl.experiment-statistics",
+  "version": 1,
+  "note": "Descriptive statistics only; pilot data are not confirmatory and no model success is claimed when no model calls were made.",
+  "arms": [
+    {
+      "arm": "A0",
+      "runs": 5,
+      "pass": 5,
+      "fail": 0,
+      "unverifiable": 0,
+      "notApplicable": 0,
+      "invalidArm": 0,
+      "error": 0,
+      "inputTokens": 1972,
+      "outputTokens": 1104,
+      "meanLatencyMilliseconds": 1182.4
+    },
+    {
+      "arm": "A1",
+      "runs": 5,
+      "pass": 5,
+      "fail": 0,
+      "unverifiable": 0,
+      "notApplicable": 0,
+      "invalidArm": 0,
+      "error": 0,
+      "inputTokens": 1972,
+      "outputTokens": 1104,
+      "meanLatencyMilliseconds": 1379
+    },
+    {
+      "arm": "B0",
+      "runs": 5,
+      "pass": 5,
+      "fail": 0,
+      "unverifiable": 0,
+      "notApplicable": 0,
+      "invalidArm": 0,
+      "error": 0,
+      "inputTokens": 15845,
+      "outputTokens": 914,
+      "meanLatencyMilliseconds": 1560.4
+    },
+    {
+      "arm": "B1",
+      "runs": 5,
+      "pass": 5,
+      "fail": 0,
+      "unverifiable": 0,
+      "notApplicable": 0,
+      "invalidArm": 0,
+      "error": 0,
+      "inputTokens": 15845,
+      "outputTokens": 914,
+      "meanLatencyMilliseconds": 1357
+    },
+    {
+      "arm": "C0",
+      "runs": 5,
+      "pass": 5,
+      "fail": 0,
+      "unverifiable": 0,
+      "notApplicable": 0,
+      "invalidArm": 0,
+      "error": 0,
+      "inputTokens": 17960,
+      "outputTokens": 914,
+      "meanLatencyMilliseconds": 1333.4
+    },
+    {
+      "arm": "C1",
+      "runs": 5,
+      "pass": 5,
+      "fail": 0,
+      "unverifiable": 0,
+      "notApplicable": 0,
+      "invalidArm": 0,
+      "error": 0,
+      "inputTokens": 17960,
+      "outputTokens": 914,
+      "meanLatencyMilliseconds": 1422
+    }
+  ],
+  "paired": [
+    {
+      "armA": "A0",
+      "armB": "A1",
+      "n": 5,
+      "finalMeanDifference": 0,
+      "finalCiLow": 0,
+      "finalCiHigh": 0,
+      "firstMeanDifference": 0,
+      "firstCiLow": 0,
+      "firstCiHigh": 0
+    },
+    {
+      "armA": "A0",
+      "armB": "B0",
+      "n": 5,
+      "finalMeanDifference": 0,
+      "finalCiLow": 0,
+      "finalCiHigh": 0,
+      "firstMeanDifference": 0,
+      "firstCiLow": 0,
+      "firstCiHigh": 0
+    },
+    {
+      "armA": "A0",
+      "armB": "B1",
+      "n": 5,
+      "finalMeanDifference": 0,
+      "finalCiLow": 0,
+      "finalCiHigh": 0,
+      "firstMeanDifference": 0,
+      "firstCiLow": 0,
+      "firstCiHigh": 0
+    },
+    {
+      "armA": "A0",
+      "armB": "C0",
+      "n": 5,
+      "finalMeanDifference": 0,
+      "finalCiLow": 0,
+      "finalCiHigh": 0,
+      "firstMeanDifference": 0,
+      "firstCiLow": 0,
+      "firstCiHigh": 0
+    },
+    {
+      "armA": "A0",
+      "armB": "C1",
+      "n": 5,
+      "finalMeanDifference": 0,
+      "finalCiLow": 0,
+      "finalCiHigh": 0,
+      "firstMeanDifference": 0,
+      "firstCiLow": 0,
+      "firstCiHigh": 0
+    },
+    {
+      "armA": "A1",
+      "armB": "B0",
+      "n": 5,
+      "finalMeanDifference": 0,
+      "finalCiLow": 0,
+      "finalCiHigh": 0,
+      "firstMeanDifference": 0,
+      "firstCiLow": 0,
+      "firstCiHigh": 0
+    },
+    {
+      "armA": "A1",
+      "armB": "B1",
+      "n": 5,
+      "finalMeanDifference": 0,
+      "finalCiLow": 0,
+      "finalCiHigh": 0,
+      "firstMeanDifference": 0,
+      "firstCiLow": 0,
+      "firstCiHigh": 0
+    },
+    {
+      "armA": "A1",
+      "armB": "C0",
+      "n": 5,
+      "finalMeanDifference": 0,
+      "finalCiLow": 0,
+      "finalCiHigh": 0,
+      "firstMeanDifference": 0,
+      "firstCiLow": 0,
+      "firstCiHigh": 0
+    },
+    {
+      "armA": "A1",
+      "armB": "C1",
+      "n": 5,
+      "finalMeanDifference": 0,
+      "finalCiLow": 0,
+      "finalCiHigh": 0,
+      "firstMeanDifference": 0,
+      "firstCiLow": 0,
+      "firstCiHigh": 0
+    },
+    {
+      "armA": "B0",
+      "armB": "B1",
+      "n": 5,
+      "finalMeanDifference": 0,
+      "finalCiLow": 0,
+      "finalCiHigh": 0,
+      "firstMeanDifference": 0,
+      "firstCiLow": 0,
+      "firstCiHigh": 0
+    },
+    {
+      "armA": "B0",
+      "armB": "C0",
+      "n": 5,
+      "finalMeanDifference": 0,
+      "finalCiLow": 0,
+      "finalCiHigh": 0,
+      "firstMeanDifference": 0,
+      "firstCiLow": 0,
+      "firstCiHigh": 0
+    },
+    {
+      "armA": "B0",
+      "armB": "C1",
+      "n": 5,
+      "finalMeanDifference": 0,
+      "finalCiLow": 0,
+      "finalCiHigh": 0,
+      "firstMeanDifference": 0,
+      "firstCiLow": 0,
+      "firstCiHigh": 0
+    },
+    {
+      "armA": "B1",
+      "armB": "C0",
+      "n": 5,
+      "finalMeanDifference": 0,
+      "finalCiLow": 0,
+      "finalCiHigh": 0,
+      "firstMeanDifference": 0,
+      "firstCiLow": 0,
+      "firstCiHigh": 0
+    },
+    {
+      "armA": "B1",
+      "armB": "C1",
+      "n": 5,
+      "finalMeanDifference": 0,
+      "finalCiLow": 0,
+      "finalCiHigh": 0,
+      "firstMeanDifference": 0,
+      "firstCiLow": 0,
+      "firstCiHigh": 0
+    },
+    {
+      "armA": "C0",
+      "armB": "C1",
+      "n": 5,
+      "finalMeanDifference": 0,
+      "finalCiLow": 0,
+      "finalCiHigh": 0,
+      "firstMeanDifference": 0,
+      "firstCiLow": 0,
+      "firstCiHigh": 0
+    }
+  ]
+}

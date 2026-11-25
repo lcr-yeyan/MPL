@@ -1,0 +1,19 @@
+{
+  "id": "mpl-bench-001-function",
+  "title": "User-defined function producing a two-note cell",
+  "category": "function_definition",
+  "template": "function-cell",
+  "seed": 1113,
+  "baseline": "../baselines/function.mpl",
+  "allowedScope": "program",
+  "tolerance": 0.0,
+  "budget": { "maxRepairs": 2, "maxSeconds": 120, "maxTokens": 8000 },
+  "target": [
+    { "name": "event_count", "value": 2 },
+    { "name": "pitch_sequence", "value": [[60, 64]] }
+  ],
+  "preserve": [
+    { "name": "logical_extent" },
+    { "name": "onset_set" }
+  ]
+}

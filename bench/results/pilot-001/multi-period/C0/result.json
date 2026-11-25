@@ -1,0 +1,15 @@
+{
+  "format": "mpl.model-run",
+  "version": 1,
+  "label": "pilot-v1-C0",
+  "arm": "C0",
+  "task": "mpl-bench-001-multi-period",
+  "model": "deepseek-flash",
+  "attempts": 1,
+  "status": "pass",
+  "candidate": "F:/MPL/bench/results/pilot-001/multi-period/C0/candidate-0.mpl",
+  "inputTokens": 3614,
+  "outputTokens": 160,
+  "modelCalls": 1,
+  "latencyMilliseconds": 1351
+}

@@ -1,0 +1,20 @@
+{
+  "id": "mpl-bench-001-rhythm-replacement",
+  "title": "Replace quarter-note rhythm with eighth-note rhythm under fixed harmony",
+  "category": "rhythm_replacement",
+  "template": "rhythm-replacement",
+  "seed": 1108,
+  "baseline": "../baselines/replacement.mpl",
+  "allowedScope": "program",
+  "tolerance": 0.0,
+  "budget": { "maxRepairs": 3, "maxSeconds": 120, "maxTokens": 8000 },
+  "target": [
+    { "name": "event_count", "value": 16 },
+    { "name": "onset_set", "value": ["0", "1/8", "1/4", "3/8", "1/2", "5/8", "3/4", "7/8",
+                                      "1", "9/8", "5/4", "11/8", "3/2", "13/8", "7/4", "15/8"] }
+  ],
+  "preserve": [
+    { "name": "harmonic_timeline" },
+    { "name": "logical_extent" }
+  ]
+}

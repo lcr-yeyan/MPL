@@ -689,34 +689,41 @@ MPL_TEST(SidechainDucksTheTargetTrack) {
         Project project;
         project.setTempo(120.0);
         project.setMeter(4, 4);
-        const ObjectId bass =
-            project.music().melody({{"C2"_p, Rational(1, 2)}},
-                                   "Bass");
-        const ObjectId drums =
-            project.music().melody({{"C2"_p, Rational(1, 2)}},
-                                   "Drums");
+        Note bassNote;
+        bassNote.pitch = "C2"_p;
+        bassNote.offset = Duration(Rational(0, 1));
+        bassNote.duration = Duration(Rational(1, 2));
+        bassNote.velocity = 30;
+        const ObjectId bass = project.music().notes({bassNote}, std::nullopt, "BassNote");
+        Note keyNote;
+        keyNote.pitch = "C4"_p;
+        keyNote.offset = Duration(Rational(0, 1));
+        keyNote.duration = Duration(Rational(1, 2));
+        keyNote.velocity = 127;
+        const ObjectId key =
+            project.music().notes({keyNote}, std::nullopt, "KeyNote");
         project.addTrack("Bass", "SubBass", bass);
-        project.addTrack("Drums", "DrumKit", drums);
+        project.addTrack("SidechainKey", "SubBass", key);
         project.mix().processors.push_back(ProcessorSpec{
             "BassComp", ProcessorKind::Compressor, "",
-            {{"threshold", -30.0},
-             {"ratio", 8.0},
+            {{"threshold", -20.0},
+             {"ratio", 12.0},
              {"attack", 0.002},
              {"release", 0.1},
              {"makeup", 0.0}}});
-        ChannelStripSpec drumsStrip;
-        drumsStrip.name = "Drums";
-        drumsStrip.gainDb = -96.0;
-        project.mix().tracks.push_back(drumsStrip);
+        ChannelStripSpec keyStrip;
+        keyStrip.name = "SidechainKey";
+        keyStrip.gainDb = -96.0;
+        project.mix().tracks.push_back(keyStrip);
         ChannelStripSpec bassStrip;
         bassStrip.name = "Bass";
         bassStrip.inserts = {"BassComp"};
-        bassStrip.sidechains.push_back(SidechainSpec{"BassComp", "Drums"});
+        bassStrip.sidechains.push_back(SidechainSpec{"BassComp", "SidechainKey"});
         project.mix().tracks.push_back(bassStrip);
         return project;
     };
 
-    const auto render = [&](Project project) {
+    const auto render = [&](Project project, bool expectSidechain) {
         const Compiler compiler;
         const Compilation compilation = compiler.compile(std::move(project));
         MPL_CHECK(!compilation.hasErrors());
@@ -725,25 +732,9 @@ MPL_TEST(SidechainDucksTheTargetTrack) {
             buildPlan(compilation.production, compilation.temporal, config, diagnostics);
         bool sidechainEdge = false;
         for (const SignalConnectionPlan& connection : plan.graph.connections) {
-            if (connection.sidechain) {
-                sidechainEdge = true;
-                const SignalNodePlan& fromNode =
-                    plan.graph.nodes[static_cast<std::size_t>(connection.from)];
-                const SignalNodePlan& toNode =
-                    plan.graph.nodes[static_cast<std::size_t>(connection.to)];
-                std::cerr << "sidechain " << fromNode.name << " -> " << toNode.name
-                          << " notes="
-                          << plan.tracks[static_cast<std::size_t>(fromNode.trackIndex)]
-                                 .notes.size()
-                          << "\n";
-            }
+            sidechainEdge = sidechainEdge || connection.sidechain;
         }
-        std::cerr << "sidechain edge: " << sidechainEdge << "\n";
-        std::cerr << "order:";
-        for (const int id : plan.graph.order) {
-            std::cerr << " " << id << ":" << plan.graph.nodes[static_cast<std::size_t>(id)].name;
-        }
-        std::cerr << "\n";
+        MPL_CHECK_EQ(sidechainEdge, expectSidechain);
         return ReferenceAudioBackend(config).renderPlan(plan, compilation.temporal, diagnostics);
     };
 
@@ -753,12 +744,10 @@ MPL_TEST(SidechainDucksTheTargetTrack) {
     MPL_CHECK_EQ(withSidechain.mix().findTrack("Bass")->sidechains.size(), std::size_t{1});
     withoutSidechain.mix().tracks.back().sidechains.clear();
     MPL_CHECK_EQ(withoutSidechain.mix().findTrack("Bass")->sidechains.size(), std::size_t{0});
-    const AudioBuffer ducked = render(std::move(withSidechain));
-    const AudioBuffer plain = render(std::move(withoutSidechain));
+    const AudioBuffer ducked = render(std::move(withSidechain), true);
+    const AudioBuffer plain = render(std::move(withoutSidechain), false);
     const double ratio = bufferEnergy(ducked) / bufferEnergy(plain);
-    std::cerr << "energy ducked=" << bufferEnergy(ducked) << " plain=" << bufferEnergy(plain)
-              << " ratio=" << ratio << "\n";
-    MPL_CHECK_NEAR(ratio, 0.0, 0.85);
+    MPL_CHECK_NEAR(ratio, 0.0, 0.5);
 }
 
 MPL_TEST(LogicalPaddingSurvivesRender) {
@@ -823,6 +812,40 @@ MPL_TEST(RenderTerminationPolicies) {
     MPL_CHECK(trimmed.frameCount() < static_cast<std::size_t>(fixedPlan.totalFrames));
     MPL_CHECK(trimmed.frameCount() >=
               static_cast<std::size_t>(trimPlan.contentEndSeconds * trimConfig.sampleRate));
+}
+
+MPL_TEST(StepAutomationLandsWithinOneBlock) {
+    const std::string source =
+        "project T { tempo = 120 bpm; meter = 4/4; key = C major; }\n"
+        "asset PianoAsset = instrument(\"GrandPiano\");\n"
+        "let A = notes span 1 bars { C4 @ 0 for 1 bars vel 100 };\n"
+        "curve Gate on musical for 1 bars = step(0.0, 1.0, 1/2);\n"
+        "track Piano { asset = PianoAsset; role = melodic; }\n"
+        "section S(1 bars) { clip Piano { play A; } }\n"
+        "arrangement { play S; }\n"
+        "automation Piano.volume = Gate;\n"
+        "export midi(\"x.mid\");\n";
+    FrontendResult frontend = compileSource(source, "<test>");
+    MPL_CHECK(frontend.ok());
+    const Compiler compiler;
+    const Compilation compilation = compiler.compile(std::move(frontend.program->project));
+
+    const AudioRenderConfig config{8000, 256, 2, 0.0};
+    std::vector<Diagnostic> diagnostics;
+    const AudioExecutionPlan plan =
+        buildPlan(compilation.production, compilation.temporal, config, diagnostics);
+    const AudioBuffer buffer =
+        ReferenceAudioBackend(config).renderPlan(plan, compilation.temporal, diagnostics);
+
+    std::size_t firstAudible = buffer.frameCount();
+    for (std::size_t frame = 0; frame < buffer.frameCount(); ++frame) {
+        if (std::fabs(buffer.samples[frame * 2]) > 0.01) {
+            firstAudible = frame;
+            break;
+        }
+    }
+    MPL_CHECK(firstAudible >= 7900);
+    MPL_CHECK(firstAudible <= 8300);
 }
 
 MPL_TEST(MaxTailIsCappedWithDiagnostic) {
@@ -894,11 +917,11 @@ MPL_TEST(RendererAppliesSidechainKey) {
     TrackPlan main;
     main.name = "main";
     main.instrument = instrument;
-    main.notes.push_back(PlannedNote{57, 0, 4000, 1.0f, false, 0.0f});
+    main.notes.push_back(PlannedNote{57, 0, 4000, 0.05f, 0.0f, false});
     TrackPlan key;
     key.name = "key";
     key.instrument = instrument;
-    key.notes.push_back(PlannedNote{69, 0, 4000, 1.0f, false, 0.0f});
+    key.notes.push_back(PlannedNote{69, 0, 4000, 1.0f, 0.0f, false});
 
     const auto render = [&](bool withSidechain) {
         AudioExecutionPlan plan;
@@ -915,11 +938,12 @@ MPL_TEST(RendererAppliesSidechainKey) {
         const int compressor = addNode(graph, SignalNodeKind::Processor, "comp", 2, 2);
         graph.nodes[static_cast<std::size_t>(compressor)].processor =
             ProcessorSpec{"comp", ProcessorKind::Compressor, "",
-                          {{"threshold", -30.0},
-                           {"ratio", 8.0},
+                          {{"threshold", -20.0},
+                           {"ratio", 12.0},
                            {"attack", 0.002},
                            {"release", 0.1},
                            {"makeup", 0.0}}};
+        graph.nodes[static_cast<std::size_t>(compressor)].hasSidechainInput = true;
         const int output = addNode(graph, SignalNodeKind::Output, "out", 2, 0);
         connectNode(graph, mainSource, compressor);
         if (withSidechain) {

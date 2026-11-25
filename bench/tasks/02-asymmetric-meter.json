@@ -1,0 +1,19 @@
+{
+  "id": "mpl-bench-001-asymmetric-meter",
+  "title": "7/8 asymmetric meter with 2+2+3 grouping",
+  "category": "asymmetric_meter",
+  "template": "asymmetric-meter",
+  "seed": 1102,
+  "baseline": "../baselines/meter.mpl",
+  "allowedScope": "program",
+  "tolerance": 0.0,
+  "budget": { "maxRepairs": 3, "maxSeconds": 120, "maxTokens": 8000 },
+  "target": [
+    { "name": "event_count", "value": 7 },
+    { "name": "logical_extent", "value": "7/8" },
+    { "name": "onset_set", "value": ["0", "1/8", "1/4", "3/8", "1/2", "5/8", "3/4"] }
+  ],
+  "preserve": [
+    { "name": "pitch_sequence" }
+  ]
+}

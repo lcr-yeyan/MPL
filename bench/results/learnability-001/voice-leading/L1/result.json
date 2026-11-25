@@ -1,0 +1,15 @@
+{
+  "format": "mpl.model-run",
+  "version": 1,
+  "label": "learnability-L1",
+  "arm": "B0",
+  "task": "mpl-bench-001-voice-leading",
+  "model": "deepseek-flash",
+  "attempts": 1,
+  "status": "error",
+  "candidate": "F:/MPL/bench/results/learnability-001/voice-leading/L1/candidate-0.mpl",
+  "inputTokens": 1126,
+  "outputTokens": 227,
+  "modelCalls": 1,
+  "latencyMilliseconds": 1618
+}

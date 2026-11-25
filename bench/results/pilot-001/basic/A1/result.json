@@ -1,0 +1,15 @@
+{
+  "format": "mpl.model-run",
+  "version": 1,
+  "label": "pilot-v1-A1",
+  "arm": "A1",
+  "task": "mpl-bench-001-basic-notes",
+  "model": "deepseek-flash",
+  "attempts": 2,
+  "status": "pass",
+  "candidate": "F:/MPL/bench/results/pilot-001/basic/A1/candidate-0.json",
+  "inputTokens": 378,
+  "outputTokens": 151,
+  "modelCalls": 1,
+  "latencyMilliseconds": 1268
+}

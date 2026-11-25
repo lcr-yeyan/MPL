@@ -309,10 +309,16 @@ std::vector<MidiTrack> MidiBackend::buildTracks(const ProductionIR& production,
         if (tick < 0) {
             throw Error("meter event starts before tick zero", "midi");
         }
+        if (!isExactAtPpq(meter.position)) {
+            throw Error("meter event at " + meter.position.toString() +
+                            " is not representable at PPQ " + std::to_string(options_.ppq),
+                        "midi");
+        }
         denominatorExponent(meter.meter.denominator);
+        const MetricGrouping grouping = effectiveGrouping(meter);
         conductor.events.push_back(MidiEvent{MidiEventKind::MetaTimeSignature, tick, 0,
-                                             meter.meter.numerator, meter.meter.denominator, {},
-                                             0.0});
+                                             meter.meter.numerator, meter.meter.denominator,
+                                             grouping.toString(), 0.0});
         conductorLastTick = std::max(conductorLastTick, tick);
     }
 
@@ -716,8 +722,11 @@ std::string MidiBackend::describe(const ProductionIR& production, const Temporal
                     out += "tempo " + bpmText(event.value) + " bpm\n";
                     break;
                 case MidiEventKind::MetaTimeSignature:
-                    out += "meter " + std::to_string(event.a) + "/" + std::to_string(event.b) +
-                           "\n";
+                    out += "meter " + std::to_string(event.a) + "/" + std::to_string(event.b);
+                    if (!event.text.empty()) {
+                        out += " (" + event.text + ")";
+                    }
+                    out += "\n";
                     break;
                 case MidiEventKind::MetaEndOfTrack:
                     out += "end-of-track\n";

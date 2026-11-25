@@ -1,0 +1,14 @@
+{
+  "format": "mpl.task-verification",
+  "version": 1,
+  "taskId": "mpl-bench-001-theme-transform",
+  "status": "error",
+  "validityStatus": "failed",
+  "targetStatus": "",
+  "preserveStatus": "",
+  "frameStatus": "",
+  "comparisons": [],
+  "diagnostics": [
+    "candidate compile failed: parse-expected-equal: expected '=' after tempo; parse-expected-equal: expected '=' after meter; parse-expected-equal: expected '=' after key; parse-unexpected-project-field: unknown project field; parse-unexpected-project-field: unknown project field; parse-unexpected-project-field: unknown project field; parse-unexpected-project-field: unknown project field; parse-unexpected-project-field: unknown project field; parse-unexpected-project-field: unknown project field; parse-unexpected-project-field: unknown project field; parse-unexpected-declaration: unexpected token at declaration scope; parse-expected-lparen: expected '(' after section name; parse-expected-rparen: expected ')' after section duration; parse-expected-lbrace: expected '{' to start section; parse-unexpected-section-item: expected a clip or meter change in section; parse-unexpected-declaration: unexpected token at declaration scope"
+  ]
+}

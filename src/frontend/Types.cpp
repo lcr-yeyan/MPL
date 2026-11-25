@@ -6,6 +6,8 @@ std::string_view typeKindName(TypeKind kind) {
     switch (kind) {
         case TypeKind::Error: return "error";
         case TypeKind::Number: return "number";
+        case TypeKind::Integer: return "integer";
+        case TypeKind::Boolean: return "boolean";
         case TypeKind::Scalar: return "scalar";
         case TypeKind::Duration: return "duration";
         case TypeKind::Position: return "position";
@@ -19,6 +21,10 @@ std::string_view typeKindName(TypeKind kind) {
         case TypeKind::Key: return "key";
         case TypeKind::String: return "string";
         case TypeKind::Fragment: return "fragment";
+        case TypeKind::Rhythm: return "rhythm";
+        case TypeKind::Chord: return "chord";
+        case TypeKind::Harmony: return "harmony";
+        case TypeKind::Voicing: return "voicing";
         case TypeKind::Curve: return "curve";
         case TypeKind::List: return "list";
         case TypeKind::Asset: return "asset";
@@ -26,6 +32,7 @@ std::string_view typeKindName(TypeKind kind) {
         case TypeKind::Section: return "section";
         case TypeKind::Processor: return "processor";
         case TypeKind::Bus: return "bus";
+        case TypeKind::Function: return "function";
     }
     return "unknown";
 }

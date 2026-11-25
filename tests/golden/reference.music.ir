@@ -1,6 +1,6 @@
 {
   "format": "mpl.music-ir",
-  "version": 2,
+  "version": 3,
   "timeUnit": "whole-note",
   "context": {
     "key": "F minor",
@@ -1855,7 +1855,9 @@
         "meter"
       ],
       "parameters": {
-        "displacement": "1/8"
+        "displacement": "1/8",
+        "metricContext": "0 4/4",
+        "anchor": "0"
       },
       "value": {
         "duration": "9/8",

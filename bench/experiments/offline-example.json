@@ -1,0 +1,12 @@
+{
+  "id": "offline-local-edit-factorial",
+  "task": "../tasks/10-local-edit.json",
+  "submissions": [
+    { "arm": "A0", "candidate": "../candidates/local-edit-flat.json", "modelCalls": 0 },
+    { "arm": "A1", "candidate": "../candidates/local-edit-flat.json", "modelCalls": 0 },
+    { "arm": "B0", "candidate": "../candidates/local-edit.mpl", "modelCalls": 0 },
+    { "arm": "B1", "candidate": "../candidates/local-edit.mpl", "modelCalls": 0 },
+    { "arm": "C0", "candidate": "../candidates/local-edit.mpl", "modelCalls": 0 },
+    { "arm": "C1", "candidate": "../candidates/local-edit.mpl", "modelCalls": 0 }
+  ]
+}

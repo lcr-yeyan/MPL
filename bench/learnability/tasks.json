@@ -1,0 +1,22 @@
+{
+  "format": "mpl.learnability-benchmark",
+  "version": 1,
+  "model": "deepseek-chat",
+  "note": "Development-set learnability diagnostic; not the formal six-arm Pilot.",
+  "tasks": [
+    { "id": "basic", "task": "../tasks/01-basic-notes.json", "prompt": "prompts/01-basic.md" },
+    { "id": "meter", "task": "../tasks/02-asymmetric-meter.json", "prompt": "prompts/02-meter.md" },
+    { "id": "theme", "task": "../tasks/04-theme-transform.json", "prompt": "prompts/04-theme.md" },
+    { "id": "function", "task": "../tasks/13-function.json", "prompt": "prompts/13-function.md" },
+    { "id": "voice-leading", "task": "../tasks/07-voice-leading.json", "prompt": "prompts/07-voice-leading.md" },
+    { "id": "local-edit", "task": "../tasks/10-local-edit.json", "prompt": "prompts/10-local-edit.md" }
+  ],
+  "conditions": [
+    { "id": "L0", "context": "../../lcp/v1/contexts/L0.md", "attempts": 1, "arm": "B0", "label": "learnability-L0" },
+    { "id": "L1", "context": "../../lcp/v1/contexts/L1.md", "attempts": 1, "arm": "B0", "label": "learnability-L1" },
+    { "id": "L2", "context": "../../lcp/v1/contexts/L2.md", "attempts": 1, "arm": "B0", "label": "learnability-L2" },
+    { "id": "L3", "context": "../../lcp/v1/contexts/L3.md", "attempts": 1, "arm": "B0", "label": "learnability-L3" },
+    { "id": "L4", "context": "../../lcp/v1/contexts/L4.md", "attempts": 2, "arm": "B1", "label": "learnability-L4" },
+    { "id": "L3-control", "context": "../../lcp/v1/contexts/L3.md", "attempts": 2, "arm": "B0R", "label": "learnability-control" }
+  ]
+}

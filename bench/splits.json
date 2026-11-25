@@ -1,0 +1,26 @@
+{
+  "format": "mpl.bench-splits",
+  "version": 1,
+  "frozen": true,
+  "note": "Formal evaluation must not expose held-out answers to model context.",
+  "splits": {
+    "dev": [
+      "01-basic-notes.json",
+      "02-asymmetric-meter.json",
+      "03-multi-period.json",
+      "04-theme-transform.json"
+    ],
+    "pilot": [
+      "05-harmony-driven.json",
+      "06-chord-voicing.json",
+      "07-voice-leading.json",
+      "08-rhythm-replacement.json"
+    ],
+    "heldout": [
+      "09-harmony-replacement.json",
+      "10-local-edit.json",
+      "11-mix-automation.json",
+      "12-mastering-target.json"
+    ]
+  }
+}

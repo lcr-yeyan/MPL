@@ -1,0 +1,15 @@
+{
+  "format": "mpl.model-run",
+  "version": 1,
+  "label": "learnability-L1",
+  "arm": "B0",
+  "task": "mpl-bench-001-theme-transform",
+  "model": "deepseek-flash",
+  "attempts": 1,
+  "status": "error",
+  "candidate": "F:/MPL/bench/results/learnability-001/theme/L1/candidate-0.mpl",
+  "inputTokens": 1072,
+  "outputTokens": 184,
+  "modelCalls": 1,
+  "latencyMilliseconds": 1935
+}

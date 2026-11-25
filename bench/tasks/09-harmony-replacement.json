@@ -1,0 +1,19 @@
+{
+  "id": "mpl-bench-001-harmony-replacement",
+  "title": "Replace Dm9/G7b9 with Fmaj7/G7 under fixed rhythm",
+  "category": "harmony_replacement",
+  "template": "harmony-replacement",
+  "seed": 1109,
+  "baseline": "../baselines/replacement.mpl",
+  "allowedScope": "program",
+  "tolerance": 0.0,
+  "budget": { "maxRepairs": 3, "maxSeconds": 120, "maxTokens": 8000 },
+  "target": [
+    { "name": "event_count", "value": 8 },
+    { "name": "pitch_sequence", "value": [[53, 57, 60, 64, 55, 59, 62, 65]] }
+  ],
+  "preserve": [
+    { "name": "normalized_rhythm" },
+    { "name": "onset_set" }
+  ]
+}

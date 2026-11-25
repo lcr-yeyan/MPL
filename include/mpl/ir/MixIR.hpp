@@ -10,7 +10,7 @@
 
 namespace mpl {
 
-enum class ProcessorKind { Gain, Pan, Biquad, Compressor, Delay, Reverb };
+enum class ProcessorKind { Gain, Pan, Biquad, Compressor, Delay, Reverb, Limiter };
 
 std::string_view processorKindName(ProcessorKind kind);
 

@@ -5,11 +5,14 @@
 #include "mpl/music/Pitch.hpp"
 
 #include <cstddef>
+#include <cstdint>
 #include <optional>
 #include <utility>
 #include <vector>
 
 namespace mpl {
+
+inline constexpr std::uint32_t kInvalidRhythmEvent = 0xFFFFFFFFu;
 
 /// A single sounding note. Offsets are relative to the enclosing fragment.
 ///
@@ -23,6 +26,12 @@ struct Note {
     Duration duration;
     int velocity = 96;
     ObjectId origin = kInvalidObjectId;
+    /// Set when the note was produced by combining a Rhythm with pitches. It
+    /// points at the rhythm event's generating object so the trace can explain
+    /// the rhythmic source independently of the pitched derivation.
+    ObjectId rhythmOrigin = kInvalidObjectId;
+    /// Index of the source RhythmEvent inside that rhythm object.
+    std::uint32_t rhythmEventIndex = kInvalidRhythmEvent;
 };
 
 /// A span of music. Motif, Phrase and Pattern all lower to this value in

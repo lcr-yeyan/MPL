@@ -6,12 +6,19 @@
 #include "mpl/frontend/Hir.hpp"
 #include "mpl/frontend/Lowering.hpp"
 
+#include <filesystem>
 #include <optional>
 #include <string>
 #include <string_view>
 #include <vector>
 
 namespace mpl {
+
+struct FrontendOptions {
+    /// Extra directories searched for `import "..."` paths.
+    std::vector<std::filesystem::path> importPaths;
+    bool allowFileImports = true;
+};
 
 struct FrontendProgram {
     Module module;
@@ -31,5 +38,7 @@ struct FrontendResult {
 /// Full closure: lex, parse, resolve/type-check, lower to Core. Does not write
 /// artifacts or run the MIDI backend.
 FrontendResult compileSource(std::string_view source, std::string file);
+FrontendResult compileSource(std::string_view source, std::string file,
+                             const FrontendOptions& options);
 
 }  // namespace mpl

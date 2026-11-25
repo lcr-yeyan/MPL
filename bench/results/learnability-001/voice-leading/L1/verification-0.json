@@ -1,0 +1,14 @@
+{
+  "format": "mpl.task-verification",
+  "version": 1,
+  "taskId": "mpl-bench-001-voice-leading",
+  "status": "error",
+  "validityStatus": "failed",
+  "targetStatus": "",
+  "preserveStatus": "",
+  "frameStatus": "",
+  "comparisons": [],
+  "diagnostics": [
+    "candidate compile failed: type-mismatch: voiceLead previous voices must be a list of pitches; type-unknown-operator: unknown operator 'arpeggiate'; type-unknown-operator: unknown operator 'arpeggiate'"
+  ]
+}

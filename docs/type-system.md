@@ -26,13 +26,21 @@
 | `Scalar` | 无单位数字 | 比例、因子 |
 | `String` | 字符串 | 资产、路径、片段名 |
 | `Fragment` | 音乐字面量/算子 | Music IR 对象 |
+| `Rhythm` | `rhythm { ... }` / 节奏算子 | Music IR 节奏值对象（V0.3.0-beta） |
+| `Chord` | `chord("Dm7")` / `chordAt` | 和弦符号（V0.3.0-rc） |
+| `Harmony` | `harmony { ... }` | 和声时间线（V0.3.0-rc） |
+| `Voicing` | `voicing` / `voiceLead` | 具体排列与连接结果（V0.3.0-rc） |
 | `Curve` | 曲线声明/算子 | Temporal IR 对象 |
-| `List<T>` | `[...]` | 当前用于 harmonize 音级 |
+| `List<T>` | `[...]` | harmonize 音级、zip/cycle 音高、accent levels 等 |
 | `Asset` | asset 声明 | 符号音源 |
 | `Track` | track 声明 | 轨道 |
 | `Section` | section 声明 | 段落 |
 
 `Motif` / `Phrase` 在 Core 中都是 `Fragment`；语言层不区分。
+
+V0.3.0-beta 的 `bars`/`beats` 字面量仍是 `Duration` 类型，但携带“度量单位 + 数量”的
+常量信息；真正折叠发生在 Lowering 的 MeterMap + anchor 上下文中。`Rhythm` 与
+`Fragment` 是不同值类型，不能隐式互转；必须通过 `zip`/`cycle` 组合为 Fragment。
 
 ## 3. 字面量与单位
 
@@ -160,3 +168,38 @@ repeat(Curve, Integer) -> Curve
 | `sema-missing-arrangement` | 缺少 arrangement |
 | `sema-missing-export` | 缺少 export |
 | `sema-instance-id-collision` | 稳定实例 id 冲突 |
+
+## 9. V0.2.0-beta：Processor / Bus 类型与参数描述符
+
+类型层新增：
+
+| 类型 | 说明 |
+| --- | --- |
+| `Processor` | 处理器定义（gain / pan / biquad / compressor / delay / reverb / limiter） |
+| `Bus` | 混响/延迟等返回总线；可插入处理器、带 Gain/Pan |
+
+处理器参数不使用 `ParameterRegistry` 的 track 参数表，而使用 `ProcessorParameterDescriptor`：
+
+```text
+name / unit / minimum / maximum / defaultValue / text
+```
+
+单位与 TypeKind 的对应：
+
+| 描述符单位 | 期望类型 | 示例 |
+| --- | --- | --- |
+| `Decibel` | `Gain` | `-18 dB`、`4 dB` |
+| `Hertz` | `Frequency` | `1200 Hz` |
+| `Seconds` / `Milliseconds` | `PhysicalTime` | `10 ms`、`0.12 s` |
+| `Ratio` / `Pan` / `Generic` | `Scalar` | `4`、`0.7`、`-0.2` |
+
+校验规则：
+
+- 参数名必须属于该处理器类型；未知参数 → `sema-processor-parameter`。
+- 值必须带正确单位；否则 `type-mismatch`。
+- 常量值必须落在描述符范围；否则 `sema-parameter-range`。
+- `biquad` 必须有合法 mode；其他类型不得带 mode → `sema-processor-mode`。
+- Track/Bus/Master 的 `gain` 必须为 `Gain`（dB），`pan` 必须为 `Scalar` 且位于 [-1,1]。
+- Send level 必须为 `Scalar` 且位于 [0,1]。
+- `insert` 必须引用 `Processor`；`send` 必须引用 `Bus`；`sidechain` 目标必须是已插入当前轨道条的 `Compressor`，源必须是 `Track`。
+- 三段自动化的参数使用处理器描述符的范围校验；目标处理器必须已插入目标通道条。`

@@ -90,4 +90,43 @@ Fragment parallel(const std::vector<Fragment>& parts) {
     return Fragment::fromNotes(std::move(notes), span);
 }
 
+namespace {
+
+Rational positiveModulo(const Rational& value, const Rational& period) {
+    if (!period.isPositive()) {
+        return Rational(0, 1);
+    }
+    Rational result = value;
+    const Rational quotient = result / period;
+    const std::int64_t whole = quotient.numerator() / quotient.denominator();
+    result -= period * Rational(whole, 1);
+    if (result.isNegative()) {
+        result += period;
+    }
+    return result;
+}
+
+}  // namespace
+
+Fragment rotate(const Fragment& input, const Rational& amount) {
+    const Rational span = input.duration().inWholeNotes();
+    if (!span.isPositive() || span.isZero()) {
+        return input;
+    }
+    const Rational shift = positiveModulo(amount, span);
+    std::vector<Note> notes;
+    for (const Note& note : input.notes()) {
+        Note rotated = note;
+        const Rational offset = positiveModulo(note.offset.inWholeNotes() + shift, span);
+        const Rational remaining = span - offset;
+        const Rational duration = note.duration.inWholeNotes();
+        rotated.offset = Duration(offset);
+        rotated.duration = Duration(duration < remaining ? duration : remaining);
+        if (rotated.duration.inWholeNotes().isPositive()) {
+            notes.push_back(rotated);
+        }
+    }
+    return Fragment::fromNotes(std::move(notes), input.duration());
+}
+
 }  // namespace mpl

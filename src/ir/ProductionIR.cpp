@@ -1,5 +1,6 @@
 #include "mpl/ir/ProductionIR.hpp"
 
+#include "mpl/core/Error.hpp"
 #include "mpl/util/JsonWriter.hpp"
 
 #include <algorithm>
@@ -7,21 +8,33 @@
 namespace mpl {
 namespace {
 
-const Meter& primaryMeter(const ProductionIR& production) {
-    static const Meter kDefault{4, 4};
-    return production.meterMap.empty() ? kDefault : production.meterMap.front().meter;
+MeterMap meterMapOf(const ProductionIR& production) {
+    if (production.meterMap.empty()) {
+        return MeterMap{};
+    }
+    MeterMap map(production.meterMap.front().meter,
+                 effectiveGrouping(production.meterMap.front()));
+    for (std::size_t index = 1; index < production.meterMap.size(); ++index) {
+        const MeterEvent& event = production.meterMap[index];
+        std::string error;
+        if (!map.tryAdd(event.position, event.meter, effectiveGrouping(event), error)) {
+            return map;
+        }
+    }
+    return map;
 }
 
 std::string barBeatAt(const ProductionIR& production, const Position& position) {
-    const Rational& bars = primaryMeter(production).barLength();
-    if (bars.isZero()) {
+    if (position.inWholeNotes().isNegative()) {
         return position.toString();
     }
-    const Rational total = position.inWholeNotes() / bars;
-    const std::int64_t wholeBars = total.numerator() / total.denominator();
-    const Rational remainder = total - Rational(wholeBars, 1);
-    const Rational beats = remainder * Rational(primaryMeter(production).denominator, 1);
-    return std::to_string(wholeBars + 1) + ":" + (beats + Rational(1, 1)).toString();
+    try {
+        const MeterMap map = meterMapOf(production);
+        const MetricPosition metric = map.toMetric(position);
+        return std::to_string(metric.bar + 1) + ":" + (metric.beat + Rational(1, 1)).toString();
+    } catch (const Error&) {
+        return position.toString();
+    }
 }
 
 }  // namespace
@@ -89,7 +102,7 @@ std::string ProductionIR::toJson() const {
     JsonWriter json;
     json.beginObject();
     json.key("format").value("mpl.production-ir");
-    json.key("version").value(4);
+    json.key("version").value(5);
     json.key("timeUnit").value("whole-note");
 
     json.key("tempoMap").beginArray();
@@ -106,8 +119,12 @@ std::string ProductionIR::toJson() const {
     for (const MeterEvent& meter : meterMap) {
         json.beginObject();
         json.key("atWholeNotes").value(meter.position.toString());
+        json.key("barIndex").value(meter.barIndex);
         json.key("barBeat").value(barBeatAt(*this, meter.position));
         json.key("meter").value(meter.meter.toString());
+        const MetricGrouping grouping = effectiveGrouping(meter);
+        json.key("grouping").value(grouping.toString());
+        json.key("explicitGrouping").value(grouping.explicitGrouping);
         json.endObject();
     }
     json.endArray();
@@ -167,6 +184,14 @@ std::string ProductionIR::toJson() const {
                 json.key("offsetWholeNotes").value(note.offset.toString());
                 json.key("durationWholeNotes").value(note.duration.toString());
                 json.key("velocity").value(note.velocity);
+                if (note.rhythmOrigin != kInvalidObjectId) {
+                    json.key("rhythmOrigin")
+                        .value(static_cast<std::int64_t>(note.rhythmOrigin));
+                }
+                if (note.rhythmEventIndex != kInvalidRhythmEvent) {
+                    json.key("rhythmEvent")
+                        .value(static_cast<std::int64_t>(note.rhythmEventIndex));
+                }
                 json.endObject();
             }
             json.endArray();
@@ -258,17 +283,17 @@ std::string ProductionIR::toJson() const {
     writeStrip(mix.master);
     json.endObject();
     json.key("processorAutomation").beginArray();
-    for (const ProcessorAutomationSpec& automation : mix.processorAutomation) {
+    for (const ProcessorAutomationSpec& processorAutomation : mix.processorAutomation) {
         json.beginObject();
-        json.key("target").value(automation.target);
-        json.key("processor").value(automation.processor);
-        json.key("parameter").value(automation.parameter);
-        json.key("curve").value(automation.curve == kInvalidTemporalId
+        json.key("target").value(processorAutomation.target);
+        json.key("processor").value(processorAutomation.processor);
+        json.key("parameter").value(processorAutomation.parameter);
+        json.key("curve").value(processorAutomation.curve == kInvalidTemporalId
                                     ? std::int64_t{-1}
-                                    : static_cast<std::int64_t>(automation.curve));
-        json.key("mode").value(automationModeName(automation.mode));
-        json.key("minimum").value(automation.minimum);
-        json.key("maximum").value(automation.maximum);
+                                    : static_cast<std::int64_t>(processorAutomation.curve));
+        json.key("mode").value(automationModeName(processorAutomation.mode));
+        json.key("minimum").value(processorAutomation.minimum);
+        json.key("maximum").value(processorAutomation.maximum);
         json.endObject();
     }
     json.endArray();

@@ -1,0 +1,15 @@
+{
+  "format": "mpl.model-run",
+  "version": 1,
+  "label": "learnability-v1.1-local-edit-prompt-v2",
+  "arm": "B0",
+  "task": "mpl-bench-001-local-edit",
+  "model": "deepseek-flash",
+  "attempts": 1,
+  "status": "pass",
+  "candidate": "bench/results/learnability-002/local-edit/L3-prompt-v2/candidate-0.mpl",
+  "inputTokens": 3246,
+  "outputTokens": 158,
+  "modelCalls": 1,
+  "latencyMilliseconds": 1398
+}

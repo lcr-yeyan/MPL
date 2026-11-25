@@ -21,9 +21,10 @@ bool isAutomationMode(std::string_view text) {
 
 }  // namespace
 
-Parser::Parser(std::vector<Token> tokens, DiagnosticSink& diagnostics)
-    : tokens_(std::move(tokens)), diagnostics_(diagnostics) {
+Parser::Parser(std::vector<Token> tokens, DiagnosticSink& diagnostics, bool requireProject)
+    : tokens_(std::move(tokens)), diagnostics_(diagnostics), requireProject_(requireProject) {
     module_.file = tokens_.empty() ? std::string{} : tokens_.front().span.file;
+    module_.isLibrary = !requireProject;
 }
 
 const Token& Parser::current() const {
@@ -105,6 +106,7 @@ bool Parser::isDeclarationStart(TokenKind kind) const {
         case TokenKind::Processor:
         case TokenKind::Bus:
         case TokenKind::Master:
+        case TokenKind::Fn:
         case TokenKind::Track:
         case TokenKind::Section:
         case TokenKind::Automation:
@@ -145,9 +147,23 @@ SourceSpan Parser::merge(const SourceSpan& begin, const SourceSpan& end) const {
 Module Parser::parse() {
     module_.span = current().span;
 
+    if (check(TokenKind::Module)) {
+        advance();
+        if (check(TokenKind::Identifier)) {
+            module_.moduleName = advance().text;
+        } else {
+            errorAtCurrent("parse-expected-module-name", "expected a module name",
+                           "identifier");
+        }
+        expectSemicolon();
+    }
+    while (check(TokenKind::Import)) {
+        parseImport();
+    }
+
     if (check(TokenKind::Project)) {
         parseProject(true);
-    } else {
+    } else if (requireProject_) {
         errorAtCurrent("parse-expected-project", "a program must start with a project declaration",
                        "'project'", current().text);
     }
@@ -162,11 +178,39 @@ Module Parser::parse() {
             case TokenKind::Processor: parseProcessor(); break;
             case TokenKind::Bus: parseBus(); break;
             case TokenKind::Master: parseMaster(); break;
+            case TokenKind::Fn: parseFunction(); break;
             case TokenKind::Track: parseTrack(); break;
             case TokenKind::Section: parseSection(); break;
             case TokenKind::Automation: parseAutomation(); break;
             case TokenKind::Arrangement: parseArrangement(); break;
-            case TokenKind::Export: parseExport(); break;
+            case TokenKind::Export: {
+                const TokenKind next = position_ + 1 < tokens_.size()
+                                           ? tokens_[position_ + 1].kind
+                                           : TokenKind::End;
+                if (next == TokenKind::Fn) {
+                    advance();
+                    parseFunction(true);
+                } else if (next == TokenKind::Let) {
+                    advance();
+                    parseLet(true);
+                } else if (next == TokenKind::Curve) {
+                    advance();
+                    parseCurve(true);
+                } else {
+                    parseExport();
+                }
+                break;
+            }
+            case TokenKind::Import:
+                errorAtCurrent("parse-import-position",
+                               "imports must appear before the project declaration");
+                parseImport();
+                break;
+            case TokenKind::Module:
+                errorAtCurrent("parse-module-position",
+                               "the module declaration must be the first statement");
+                advance();
+                break;
             case TokenKind::Project:
                 errorAtCurrent("parse-project-not-first", "project must be the first declaration");
                 parseProject(false);
@@ -189,6 +233,20 @@ Module Parser::parse() {
         module_.span = merge(tokens_.front().span, previous().span);
     }
     return std::move(module_);
+}
+
+void Parser::parseImport() {
+    const Token& start = advance();
+    ImportDecl decl;
+    decl.span = start.span;
+    if (check(TokenKind::String)) {
+        decl.path = advance().text;
+    } else {
+        errorAtCurrent("parse-expected-import-path", "expected an import path string",
+                       "string");
+    }
+    expectSemicolon();
+    module_.imports.push_back(std::move(decl));
 }
 
 void Parser::parseProject(bool store) {
@@ -308,10 +366,11 @@ void Parser::parseAsset() {
     module_.assets.push_back(std::move(decl));
 }
 
-void Parser::parseLet() {
+void Parser::parseLet(bool exported) {
     const Token& start = advance();
     LetDecl decl;
     decl.span = start.span;
+    decl.exported = exported;
     if (check(TokenKind::Identifier)) {
         decl.name = advance().text;
     } else {
@@ -325,10 +384,11 @@ void Parser::parseLet() {
     module_.lets.push_back(std::move(decl));
 }
 
-void Parser::parseCurve() {
+void Parser::parseCurve(bool exported) {
     const Token& start = advance();
     CurveDecl decl;
     decl.span = start.span;
+    decl.exported = exported;
     if (check(TokenKind::Identifier)) {
         decl.name = advance().text;
     } else {
@@ -514,6 +574,124 @@ void Parser::parseMaster() {
     }
 }
 
+std::string Parser::parseTypeName() {
+    if (match(TokenKind::LBracket)) {
+        const std::string element = parseTypeName();
+        expect(TokenKind::RBracket, "parse-expected-rbracket", "expected ']' in list type");
+        return "[" + element + "]";
+    }
+    if (check(TokenKind::Identifier)) {
+        return advance().text;
+    }
+    if (check(TokenKind::Key)) {
+        advance();
+        return "Key";
+    }
+    if (check(TokenKind::Meter)) {
+        advance();
+        return "Meter";
+    }
+    errorAtCurrent("parse-expected-type", "expected a type name", "type");
+    return "Number";
+}
+
+void Parser::parseFunction(bool exported) {
+    const Token& start = advance();
+    FunctionDecl decl;
+    decl.span = start.span;
+    decl.exported = exported;
+    if (check(TokenKind::Identifier)) {
+        decl.name = advance().text;
+    } else {
+        errorAtCurrent("parse-expected-name", "expected function name", "identifier");
+    }
+    expect(TokenKind::LParen, "parse-expected-lparen", "expected '(' after function name");
+    while (!check(TokenKind::RParen) && !check(TokenKind::End)) {
+        const std::size_t before = position_;
+        ParamDecl param;
+        param.span = current().span;
+        if (check(TokenKind::Identifier)) {
+            param.name = advance().text;
+        } else {
+            errorAtCurrent("parse-expected-name", "expected parameter name", "identifier");
+        }
+        expect(TokenKind::Colon, "parse-expected-colon", "expected ':' after parameter name");
+        param.type = parseTypeName();
+        decl.params.push_back(std::move(param));
+        if (!match(TokenKind::Comma)) {
+            break;
+        }
+        if (position_ == before) {
+            advance();
+        }
+    }
+    expect(TokenKind::RParen, "parse-expected-rparen", "expected ')' after parameters");
+    expect(TokenKind::Arrow, "parse-expected-arrow", "expected '->' before return type");
+    decl.returnType = parseTypeName();
+
+    if (checkIdentifier("context")) {
+        advance();
+        while (!check(TokenKind::LBrace) && !check(TokenKind::End)) {
+            if (check(TokenKind::Key)) {
+                advance();
+                decl.contextKey = true;
+            } else if (check(TokenKind::Meter)) {
+                advance();
+                decl.contextMeter = true;
+            } else {
+                errorAtCurrent("parse-expected-context",
+                               "expected 'key' or 'meter' in context declaration");
+                break;
+            }
+            if (!match(TokenKind::Comma)) {
+                break;
+            }
+        }
+    }
+
+    expect(TokenKind::LBrace, "parse-expected-lbrace", "expected '{' to start function body");
+    while (!check(TokenKind::RBrace) && !check(TokenKind::End)) {
+        const std::size_t before = position_;
+        if (check(TokenKind::Let)) {
+            const Token& letToken = advance();
+            Stmt statement;
+            statement.kind = StmtKind::Let;
+            statement.span = letToken.span;
+            if (check(TokenKind::Identifier)) {
+                statement.name = advance().text;
+            } else {
+                errorAtCurrent("parse-expected-name", "expected local binding name", "identifier");
+            }
+            expect(TokenKind::Equal, "parse-expected-equal", "expected '=' after local binding");
+            statement.value = parseExpr();
+            expectSemicolon();
+            decl.body.push_back(std::move(statement));
+        } else if (check(TokenKind::Return)) {
+            const Token& returnToken = advance();
+            Stmt statement;
+            statement.kind = StmtKind::Return;
+            statement.span = returnToken.span;
+            statement.value = parseExpr();
+            expectSemicolon();
+            decl.body.push_back(std::move(statement));
+        } else {
+            errorAtCurrent("parse-unexpected-function-item",
+                           "expected 'let' or 'return' in function body");
+            synchronizeStatement();
+        }
+        if (position_ == before && !check(TokenKind::RBrace) && !check(TokenKind::End)) {
+            advance();
+        }
+    }
+    if (check(TokenKind::RBrace)) {
+        decl.span = merge(start.span, advance().span);
+    } else {
+        errorAtCurrent("parse-expected-rbrace", "expected '}' to close function", "'}'");
+    }
+    match(TokenKind::Semicolon);
+    module_.functions.push_back(std::move(decl));
+}
+
 void Parser::parseTrack() {
     const Token& start = advance();
     TrackDecl decl;
@@ -633,14 +811,50 @@ void Parser::parseSection() {
     expect(TokenKind::LParen, "parse-expected-lparen", "expected '(' after section name");
     decl.duration = parseExpr();
     expect(TokenKind::RParen, "parse-expected-rparen", "expected ')' after section duration");
+    if (check(TokenKind::Meter)) {
+        advance();
+        decl.meter = parseMeterSpec();
+    }
     expect(TokenKind::LBrace, "parse-expected-lbrace", "expected '{' to start section");
     while (!check(TokenKind::RBrace) && !check(TokenKind::End)) {
         const std::size_t before = position_;
         if (check(TokenKind::Clip)) {
             parseClip(decl);
+        } else if (check(TokenKind::Meter)) {
+            advance();
+            MeterChange change;
+            change.span = previous().span;
+            const std::optional<MeterSpec> spec = parseMeterSpec();
+            if (spec.has_value()) {
+                change.meter = *spec;
+            }
+            if (checkIdentifier("at")) {
+                advance();
+                change.at = parseExpr();
+            } else {
+                errorAtCurrent("parse-expected-at",
+                               "expected 'at <position>' after a section meter change", "'at'");
+            }
+            if (!change.meter.explicitGrouping && checkIdentifier("grouping")) {
+                advance();
+                change.meter.explicitGrouping = true;
+                while (!check(TokenKind::End)) {
+                    if (!check(TokenKind::Integer)) {
+                        errorAtCurrent("parse-expected-integer",
+                                       "expected a positive grouping component", "integer");
+                        break;
+                    }
+                    change.meter.grouping.push_back(static_cast<int>(advance().integer));
+                    if (!match(TokenKind::Plus)) {
+                        break;
+                    }
+                }
+            }
+            expectSemicolon();
+            decl.meterChanges.push_back(std::move(change));
         } else {
             errorAtCurrent("parse-unexpected-section-item",
-                           "expected a clip declaration in section");
+                           "expected a clip or meter change in section");
             synchronizeStatement();
         }
         if (position_ == before && !check(TokenKind::RBrace) && !check(TokenKind::End)) {
@@ -654,6 +868,39 @@ void Parser::parseSection() {
     }
     module_.declarationOrder.push_back(DeclRef{DeclKind::Section, module_.sections.size()});
     module_.sections.push_back(std::move(decl));
+}
+
+std::optional<MeterSpec> Parser::parseMeterSpec() {
+    if (!check(TokenKind::Rational)) {
+        errorAtCurrent("parse-expected-meter", "expected a meter such as '7/8'",
+                       "'<numerator>/<denominator>'");
+        return std::nullopt;
+    }
+    const Token& ratio = advance();
+    MeterSpec spec;
+    spec.span = ratio.span;
+    spec.numerator = static_cast<int>(ratio.numerator);
+    spec.denominator = static_cast<int>(ratio.denominator);
+    if (checkIdentifier("grouping")) {
+        advance();
+        spec.explicitGrouping = true;
+        while (!check(TokenKind::End)) {
+            if (!check(TokenKind::Integer)) {
+                errorAtCurrent("parse-expected-integer",
+                               "expected a positive grouping component", "integer");
+                break;
+            }
+            spec.grouping.push_back(static_cast<int>(advance().integer));
+            if (!match(TokenKind::Plus)) {
+                break;
+            }
+        }
+        if (spec.grouping.empty()) {
+            errorAtCurrent("parse-expected-grouping",
+                           "grouping requires at least one component", "2+2+3");
+        }
+    }
+    return spec;
 }
 
 void Parser::parseClip(SectionDecl& section) {
@@ -837,8 +1084,99 @@ void Parser::parseExport() {
     module_.exports.push_back(std::move(decl));
 }
 
-ExprId Parser::parseExpr() {
-    return parseUnary();
+ExprId Parser::parseExpr() { return parseOr(); }
+
+ExprId Parser::parseOr() {
+    ExprId left = parseAnd();
+    while (check(TokenKind::PipePipe)) {
+        const Token& op = advance();
+        const ExprId right = parseAnd();
+        Expr expr;
+        expr.kind = ExprKind::Binary;
+        expr.text = "||";
+        expr.span = merge(module_.expr(left).span, module_.expr(right).span);
+        expr.args = {left, right};
+        left = addExpr(std::move(expr));
+        (void)op;
+    }
+    return left;
+}
+
+ExprId Parser::parseAnd() {
+    ExprId left = parseEquality();
+    while (check(TokenKind::AmpAmp)) {
+        advance();
+        const ExprId right = parseEquality();
+        Expr expr;
+        expr.kind = ExprKind::Binary;
+        expr.text = "&&";
+        expr.span = merge(module_.expr(left).span, module_.expr(right).span);
+        expr.args = {left, right};
+        left = addExpr(std::move(expr));
+    }
+    return left;
+}
+
+ExprId Parser::parseEquality() {
+    ExprId left = parseComparison();
+    while (check(TokenKind::EqualEqual) || check(TokenKind::BangEqual)) {
+        const std::string op = advance().text;
+        const ExprId right = parseComparison();
+        Expr expr;
+        expr.kind = ExprKind::Binary;
+        expr.text = op;
+        expr.span = merge(module_.expr(left).span, module_.expr(right).span);
+        expr.args = {left, right};
+        left = addExpr(std::move(expr));
+    }
+    return left;
+}
+
+ExprId Parser::parseComparison() {
+    ExprId left = parseAdditive();
+    while (check(TokenKind::Less) || check(TokenKind::LessEqual) ||
+           check(TokenKind::Greater) || check(TokenKind::GreaterEqual)) {
+        const std::string op = advance().text;
+        const ExprId right = parseAdditive();
+        Expr expr;
+        expr.kind = ExprKind::Binary;
+        expr.text = op;
+        expr.span = merge(module_.expr(left).span, module_.expr(right).span);
+        expr.args = {left, right};
+        left = addExpr(std::move(expr));
+    }
+    return left;
+}
+
+ExprId Parser::parseAdditive() {
+    ExprId left = parseMultiplicative();
+    while (check(TokenKind::Plus) || check(TokenKind::Minus)) {
+        const std::string op = advance().text;
+        const ExprId right = parseMultiplicative();
+        Expr expr;
+        expr.kind = ExprKind::Binary;
+        expr.text = op;
+        expr.span = merge(module_.expr(left).span, module_.expr(right).span);
+        expr.args = {left, right};
+        left = addExpr(std::move(expr));
+    }
+    return left;
+}
+
+ExprId Parser::parseMultiplicative() {
+    ExprId left = parseUnary();
+    while (check(TokenKind::Star) || check(TokenKind::Slash) ||
+           check(TokenKind::Percent)) {
+        const std::string op = advance().text;
+        const ExprId right = parseUnary();
+        Expr expr;
+        expr.kind = ExprKind::Binary;
+        expr.text = op;
+        expr.span = merge(module_.expr(left).span, module_.expr(right).span);
+        expr.args = {left, right};
+        left = addExpr(std::move(expr));
+    }
+    return left;
 }
 
 ExprId Parser::parseUnary() {
@@ -851,12 +1189,32 @@ ExprId Parser::parseUnary() {
         expr.args.push_back(operand);
         return addExpr(std::move(expr));
     }
+    if (check(TokenKind::Bang)) {
+        const Token& start = advance();
+        const ExprId operand = parseUnary();
+        Expr expr;
+        expr.kind = ExprKind::Not;
+        expr.span = merge(start.span, module_.expr(operand).span);
+        expr.args.push_back(operand);
+        return addExpr(std::move(expr));
+    }
     return parsePrimary();
 }
 
 ExprId Parser::parsePrimary() {
     const Token& token = current();
     switch (token.kind) {
+        case TokenKind::True:
+        case TokenKind::False: {
+            advance();
+            Expr expr;
+            expr.kind = ExprKind::Boolean;
+            expr.span = token.span;
+            expr.boolean = token.kind == TokenKind::True;
+            return addExpr(std::move(expr));
+        }
+        case TokenKind::If: return parseIfExpr();
+        case TokenKind::For: return parseForExpr();
         case TokenKind::Integer:
         case TokenKind::Rational:
         case TokenKind::Number: {
@@ -897,6 +1255,20 @@ ExprId Parser::parsePrimary() {
             if (token.text == "notes") {
                 return parseNotes(token);
             }
+            if (token.text == "rhythm" &&
+                (position_ + 1 < tokens_.size()) &&
+                (tokens_[position_ + 1].kind == TokenKind::LBrace ||
+                 (tokens_[position_ + 1].kind == TokenKind::Identifier &&
+                  tokens_[position_ + 1].text == "span"))) {
+                return parseRhythm(token);
+            }
+            if (token.text == "harmony" &&
+                (position_ + 1 < tokens_.size()) &&
+                (tokens_[position_ + 1].kind == TokenKind::LBrace ||
+                 (tokens_[position_ + 1].kind == TokenKind::Identifier &&
+                  tokens_[position_ + 1].text == "span"))) {
+                return parseHarmony(token);
+            }
             if (token.text == "keyframes" && position_ + 1 < tokens_.size() &&
                 tokens_[position_ + 1].kind == TokenKind::LBrace) {
                 return parseKeyframes(token);
@@ -925,6 +1297,47 @@ ExprId Parser::parsePrimary() {
         advance();
     }
     return invalid;
+}
+
+ExprId Parser::parseIfExpr() {
+    const Token& start = advance();
+    const ExprId condition = parseExpr();
+    expect(TokenKind::LBrace, "parse-expected-lbrace", "expected '{' after if condition");
+    const ExprId thenValue = parseExpr();
+    expect(TokenKind::RBrace, "parse-expected-rbrace", "expected '}' after if branch");
+    expect(TokenKind::Else, "parse-expected-else", "expected 'else' after if branch");
+    expect(TokenKind::LBrace, "parse-expected-lbrace", "expected '{' after else");
+    const ExprId elseValue = parseExpr();
+    expect(TokenKind::RBrace, "parse-expected-rbrace", "expected '}' after else branch");
+    Expr expr;
+    expr.kind = ExprKind::If;
+    expr.span = merge(start.span, previous().span);
+    expr.args = {condition, thenValue, elseValue};
+    return addExpr(std::move(expr));
+}
+
+ExprId Parser::parseForExpr() {
+    const Token& start = advance();
+    Expr expr;
+    expr.kind = ExprKind::For;
+    expr.span = start.span;
+    if (check(TokenKind::Identifier)) {
+        expr.text = advance().text;
+    } else {
+        errorAtCurrent("parse-expected-name", "expected loop variable", "identifier");
+    }
+    if (checkIdentifier("in")) {
+        advance();
+    } else {
+        errorAtCurrent("parse-expected-in", "expected 'in' after loop variable", "'in'");
+    }
+    const ExprId iterable = parseExpr();
+    expect(TokenKind::LBrace, "parse-expected-lbrace", "expected '{' after for iterable");
+    const ExprId body = parseExpr();
+    expect(TokenKind::RBrace, "parse-expected-rbrace", "expected '}' after for body");
+    expr.args = {iterable, body};
+    expr.span = merge(start.span, previous().span);
+    return addExpr(std::move(expr));
 }
 
 ExprId Parser::parseCall(const Token& callee) {
@@ -1035,6 +1448,101 @@ ExprId Parser::parseNotes(const Token& start) {
         expr.span = merge(start.span, advance().span);
     } else {
         errorAtCurrent("parse-expected-rbrace", "expected '}' to close notes", "'}'");
+    }
+    return addExpr(std::move(expr));
+}
+
+ExprId Parser::parseRhythm(const Token& start) {
+    advance();  // rhythm
+    Expr expr;
+    expr.kind = ExprKind::Rhythm;
+    expr.span = start.span;
+    if (checkIdentifier("span")) {
+        advance();
+        expr.explicitSpan = parseExpr();
+    }
+    expect(TokenKind::LBrace, "parse-expected-lbrace", "expected '{' after rhythm");
+    while (!check(TokenKind::RBrace) && !check(TokenKind::End)) {
+        const std::size_t before = position_;
+        RhythmEntry entry;
+        entry.span = current().span;
+        if (checkIdentifier("hit")) {
+            advance();
+            entry.rest = false;
+            entry.duration = parseExpr();
+            if (checkIdentifier("accent")) {
+                advance();
+                if (check(TokenKind::Integer)) {
+                    entry.accent = static_cast<int>(advance().integer);
+                } else {
+                    errorAtCurrent("parse-expected-integer",
+                                   "expected an integer accent level", "integer");
+                }
+            }
+        } else if (checkIdentifier("rest")) {
+            advance();
+            entry.rest = true;
+            entry.duration = parseExpr();
+        } else {
+            errorAtCurrent("parse-expected-rhythm-entry",
+                           "expected 'hit <duration>' or 'rest <duration>'", "'hit' or 'rest'");
+            synchronizeStatement();
+            continue;
+        }
+        expr.rhythm.push_back(std::move(entry));
+        if (!match(TokenKind::Comma)) {
+            break;
+        }
+        if (position_ == before) {
+            advance();
+        }
+    }
+    if (check(TokenKind::RBrace)) {
+        expr.span = merge(start.span, advance().span);
+    } else {
+        errorAtCurrent("parse-expected-rbrace", "expected '}' to close rhythm", "'}'");
+    }
+    return addExpr(std::move(expr));
+}
+
+ExprId Parser::parseHarmony(const Token& start) {
+    advance();  // harmony
+    Expr expr;
+    expr.kind = ExprKind::Harmony;
+    expr.span = start.span;
+    if (checkIdentifier("span")) {
+        advance();
+        expr.explicitSpan = parseExpr();
+    }
+    expect(TokenKind::LBrace, "parse-expected-lbrace", "expected '{' after harmony");
+    while (!check(TokenKind::RBrace) && !check(TokenKind::End)) {
+        const std::size_t before = position_;
+        HarmonyEntry entry;
+        entry.span = current().span;
+        if (check(TokenKind::String)) {
+            entry.chord = advance().text;
+        } else {
+            errorAtCurrent("parse-expected-chord",
+                           "expected a chord string such as \"Dm7\"", "string");
+            synchronizeStatement();
+            continue;
+        }
+        expect(TokenKind::At, "parse-expected-at", "expected '@' before harmony start");
+        entry.offset = parseExpr();
+        expect(TokenKind::For, "parse-expected-for", "expected 'for' before harmony duration");
+        entry.duration = parseExpr();
+        expr.harmony.push_back(std::move(entry));
+        if (!match(TokenKind::Comma)) {
+            break;
+        }
+        if (position_ == before) {
+            advance();
+        }
+    }
+    if (check(TokenKind::RBrace)) {
+        expr.span = merge(start.span, advance().span);
+    } else {
+        errorAtCurrent("parse-expected-rbrace", "expected '}' to close harmony", "'}'");
     }
     return addExpr(std::move(expr));
 }

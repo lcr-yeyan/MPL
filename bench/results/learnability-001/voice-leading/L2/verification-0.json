@@ -1,0 +1,14 @@
+{
+  "format": "mpl.task-verification",
+  "version": 1,
+  "taskId": "mpl-bench-001-voice-leading",
+  "status": "error",
+  "validityStatus": "failed",
+  "targetStatus": "",
+  "preserveStatus": "",
+  "frameStatus": "",
+  "comparisons": [],
+  "diagnostics": [
+    "candidate compile failed: type-arity: operator 'voiceLead' expects 7 argument(s), got 6; type-mismatch: type mismatch: expected fragment"
+  ]
+}

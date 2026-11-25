@@ -1,0 +1,20 @@
+{
+  "id": "mpl-bench-001-mastering-target",
+  "title": "Mastering technical target (requires rendered WAV)",
+  "category": "mastering_technical_target",
+  "template": "mastering",
+  "seed": 1112,
+  "baseline": "../baselines/mastering.mpl",
+  "allowedScope": "program",
+  "tolerance": 0.1,
+  "budget": { "maxRepairs": 3, "maxSeconds": 180, "maxTokens": 8000 },
+  "target": [
+    { "name": "sample_peak", "value": -2.23, "tolerance": 0.5 },
+    { "name": "true_peak", "value": -2.22, "tolerance": 0.5 },
+    { "name": "integrated_loudness", "value": -14.0, "tolerance": 0.5 }
+  ],
+  "preserve": [
+    { "name": "event_count" },
+    { "name": "pitch_sequence" }
+  ]
+}

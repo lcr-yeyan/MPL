@@ -1,0 +1,14 @@
+{
+  "format": "mpl.task-verification",
+  "version": 1,
+  "taskId": "mpl-bench-001-voice-leading",
+  "status": "error",
+  "validityStatus": "failed",
+  "targetStatus": "",
+  "preserveStatus": "",
+  "frameStatus": "",
+  "comparisons": [],
+  "diagnostics": [
+    "candidate compile failed: parse-expected-rparen: expected ')' after operator arguments; parse-expected-rparen: expected ')' after operator arguments; parse-expected-semicolon: expected ';' after declaration or statement"
+  ]
+}

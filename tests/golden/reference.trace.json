@@ -1,10 +1,24 @@
 {
   "format": "mpl.trace",
-  "version": 3,
+  "version": 5,
   "context": {
     "key": "F minor",
     "meter": "4/4"
   },
+  "random": {
+    "algorithm": "splitmix64",
+    "version": 1,
+    "primitive": "random(seed,index)"
+  },
+  "meterMap": [
+    {
+      "atWholeNotes": "0",
+      "barIndex": 0,
+      "meter": "4/4",
+      "grouping": "1+1+1+1",
+      "explicitGrouping": false
+    }
+  ],
   "music": {
     "objects": 21,
     "evaluated": 21,

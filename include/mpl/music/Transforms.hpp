@@ -28,4 +28,9 @@ Fragment sequence(const std::vector<Fragment>& parts);
 /// Overlays fragments at the same start position.
 Fragment parallel(const std::vector<Fragment>& parts);
 
+/// Cyclic phase shift inside the fragment span. Onsets move by `amount`
+/// modulo the span; durations are unchanged. This is a period/phase primitive,
+/// not an artistic delay.
+Fragment rotate(const Fragment& input, const Rational& amount);
+
 }  // namespace mpl

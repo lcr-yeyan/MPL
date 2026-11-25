@@ -1,0 +1,41 @@
+{
+  "format": "mpl.task-verification",
+  "version": 1,
+  "taskId": "mpl-bench-001-multi-period",
+  "status": "pass",
+  "validityStatus": "ok",
+  "targetStatus": "pass",
+  "preserveStatus": "pass",
+  "frameStatus": "",
+  "comparisons": [
+    {
+      "name": "event_count",
+      "status": "pass",
+      "expected": "12",
+      "actual": "12",
+      "reason": ""
+    },
+    {
+      "name": "normalized_rhythm",
+      "status": "pass",
+      "expected": "[[\"1/16\",\"1/16\",\"1/16\",\"1/16\",\"1/16\",\"1/16\",\"1/16\",\"1/16\",\"1/16\",\"1/16\",\"1/16\"]]",
+      "actual": "[\n  [\n    \"1/16\",\n    \"1/16\",\n    \"1/16\",\n    \"1/16\",\n    \"1/16\",\n    \"1/16\",\n    \"1/16\",\n    \"1/16\",\n    \"1/16\",\n    \"1/16\",\n    \"1/16\"\n  ]\n]",
+      "reason": ""
+    },
+    {
+      "name": "preserve:logical_extent",
+      "status": "pass",
+      "expected": "\"2\"",
+      "actual": "\"2\"",
+      "reason": ""
+    },
+    {
+      "name": "preserve:pitch_sequence",
+      "status": "pass",
+      "expected": "[[60,64,67,60,64,67,60,64,67,60,64,67]]",
+      "actual": "[\n  [\n    60,\n    64,\n    67,\n    60,\n    64,\n    67,\n    60,\n    64,\n    67,\n    60,\n    64,\n    67\n  ]\n]",
+      "reason": ""
+    }
+  ],
+  "diagnostics": []
+}

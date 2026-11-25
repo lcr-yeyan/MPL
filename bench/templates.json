@@ -1,0 +1,19 @@
+{
+  "format": "mpl.bench-templates",
+  "version": 1,
+  "note": "Each task instance fixes a template id and a reproducible seed. The reference baseline and task targets are frozen before evaluation; held-out targets are never placed in model context.",
+  "templates": [
+    {"id":"basic-grid","category":"basic_notes_rhythm","seeds":[1101]},
+    {"id":"asymmetric-meter","category":"asymmetric_meter","seeds":[1102]},
+    {"id":"multi-period","category":"multi_period_relation","seeds":[1103]},
+    {"id":"theme-transform","category":"theme_transformation","seeds":[1104]},
+    {"id":"harmony-driven","category":"harmony_driven_generation","seeds":[1105]},
+    {"id":"chord-voicing","category":"chord_voicing","seeds":[1106]},
+    {"id":"voice-leading","category":"voice_leading","seeds":[1107]},
+    {"id":"rhythm-replacement","category":"rhythm_replacement","seeds":[1108]},
+    {"id":"harmony-replacement","category":"harmony_replacement","seeds":[1109]},
+    {"id":"local-edit","category":"local_structure_edit","seeds":[1110]},
+    {"id":"mix-automation","category":"mix_and_automation","seeds":[1111]},
+    {"id":"mastering","category":"mastering_technical_target","seeds":[1112]}
+  ]
+}

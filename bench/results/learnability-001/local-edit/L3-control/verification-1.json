@@ -1,0 +1,62 @@
+{
+  "format": "mpl.task-verification",
+  "version": 1,
+  "taskId": "mpl-bench-001-local-edit",
+  "status": "fail",
+  "validityStatus": "ok",
+  "targetStatus": "pass",
+  "preserveStatus": "pass",
+  "frameStatus": "failed",
+  "comparisons": [
+    {
+      "name": "pitch_sequence",
+      "status": "pass",
+      "expected": "[[60,62,64,67]]",
+      "actual": "[\n  [\n    60,\n    62,\n    64,\n    67\n  ]\n]",
+      "reason": ""
+    },
+    {
+      "name": "preserve:event_count",
+      "status": "pass",
+      "expected": "4",
+      "actual": "4",
+      "reason": ""
+    },
+    {
+      "name": "preserve:onset_set",
+      "status": "pass",
+      "expected": "[\"0\",\"1/4\",\"1/2\",\"3/4\"]",
+      "actual": "[\n  \"0\",\n  \"1/4\",\n  \"1/2\",\n  \"3/4\"\n]",
+      "reason": ""
+    },
+    {
+      "name": "preserve:logical_extent",
+      "status": "pass",
+      "expected": "\"1\"",
+      "actual": "\"1\"",
+      "reason": ""
+    },
+    {
+      "name": "frame:track.track",
+      "status": "fail",
+      "expected": "allowed by frame contract",
+      "actual": "",
+      "reason": "unauthorized removed of 'Piano' (track); before=melodic; source=track:Piano; cause=unknown"
+    },
+    {
+      "name": "frame:track.track",
+      "status": "fail",
+      "expected": "allowed by frame contract",
+      "actual": "melodic",
+      "reason": "unauthorized added of 'Keys' (track); before=; source=track:Keys; cause=unknown"
+    },
+    {
+      "name": "frame:production.mix",
+      "status": "fail",
+      "expected": "allowed by frame contract",
+      "actual": "{\n  \"tracks\": {\n    \"Keys\": \"{\\n  \\\"gainDb\\\": 0,\\n  \\\"pan\\\": 0,\\n  \\\"inserts\\\": []\\n}\"\n  },\n  \"master\": \"{\\n  \\\"gainDb\\\": 0,\\n  \\\"pan\\\": 0,\\n  \\\"inserts\\\": []\\n}\",\n  \"processors\": [],\n  \"processorAutomation\": []\n}",
+      "reason": "unauthorized modified of 'project' (mix); before={\n  \"tracks\": {\n    \"Piano\": \"{\\n  \\\"gainDb\\\": 0,\\n  \\\"pan\\\": 0,\\n  \\\"inserts\\\": []\\n}\"\n  },\n  \"master\": \"{\\n  \\\"gainDb\\\": 0,\\n  \\\"pan\\\": 0,\\n  \\\"inserts\\\": []\\n}\",\n  \"processors\": [],\n  \"processorAutomation\": []\n}; source=production:project; cause=unknown"
+    }
+  ],
+  "diagnostics": []
+}

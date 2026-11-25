@@ -8,6 +8,8 @@
 
 SoundBoxer 集成（V0.2.0-beta）本轮未实现，已完成基于真实源码的架构审查与适配方案。
 
+> 后续说明：V0.2.0-beta 已取消“必须接入 SoundBoxer”的要求。MPL 保持独立运行时；本报告中的 SoundBoxer 集成计划仅作为未来可选 Adapter 的参考，不再作为发布前提。Beta 的实现与验证见 `docs/reports/mpl-v0.2.0-beta.md`。
+
 ---
 
 ## 1. 架构审查

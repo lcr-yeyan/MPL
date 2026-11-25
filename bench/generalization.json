@@ -1,0 +1,34 @@
+{
+  "format": "mpl.bench-generalization",
+  "version": 1,
+  "levels": [
+    {
+      "level": "G0",
+      "description": "Known task with new parameters",
+      "tasks": ["01-basic-notes.json", "02-asymmetric-meter.json", "03-multi-period.json", "04-theme-transform.json"],
+      "split": "dev",
+      "referenceVisibility": "dev references may be inspected by harness developers"
+    },
+    {
+      "level": "G1",
+      "description": "Known algorithm with new material",
+      "tasks": ["05-harmony-driven.json", "06-chord-voicing.json"],
+      "split": "pilot",
+      "referenceVisibility": "reference candidates are not placed in model context"
+    },
+    {
+      "level": "G2",
+      "description": "Unseen combination of algorithms",
+      "tasks": ["07-voice-leading.json", "08-rhythm-replacement.json", "09-harmony-replacement.json"],
+      "split": "pilot",
+      "referenceVisibility": "reference candidates are not placed in model context"
+    },
+    {
+      "level": "G3",
+      "description": "Task without a directly provided solution",
+      "tasks": ["10-local-edit.json", "11-mix-automation.json", "12-mastering-target.json"],
+      "split": "heldout",
+      "referenceVisibility": "held-out reference solutions never enter model context"
+    }
+  ]
+}

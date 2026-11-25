@@ -27,8 +27,29 @@ std::string_view tokenKindName(TokenKind kind) {
         case TokenKind::Equal: return "'='";
         case TokenKind::At: return "'@'";
         case TokenKind::Minus: return "'-'";
+        case TokenKind::Arrow: return "'->'";
         case TokenKind::Slash: return "'/'";
+        case TokenKind::Plus: return "'+'";
+        case TokenKind::Star: return "'*'";
+        case TokenKind::Percent: return "'%'";
+        case TokenKind::EqualEqual: return "'=='";
+        case TokenKind::BangEqual: return "'!='";
+        case TokenKind::Less: return "'<'";
+        case TokenKind::LessEqual: return "'<='";
+        case TokenKind::Greater: return "'>'";
+        case TokenKind::GreaterEqual: return "'>='";
+        case TokenKind::AmpAmp: return "'&&'";
+        case TokenKind::PipePipe: return "'||'";
+        case TokenKind::Bang: return "'!'";
+        case TokenKind::Fn: return "'fn'";
+        case TokenKind::Return: return "'return'";
+        case TokenKind::If: return "'if'";
+        case TokenKind::Else: return "'else'";
+        case TokenKind::True: return "'true'";
+        case TokenKind::False: return "'false'";
         case TokenKind::Project: return "'project'";
+        case TokenKind::Module: return "'module'";
+        case TokenKind::Import: return "'import'";
         case TokenKind::Tempo: return "'tempo'";
         case TokenKind::Meter: return "'meter'";
         case TokenKind::Key: return "'key'";
@@ -156,6 +177,8 @@ Token Lexer::identifier(std::size_t startOffset, int startLine, int startColumn)
     std::string text(source_.substr(begin, offset_ - begin));
     const TokenKind kind = [&text]() {
         if (text == "project") return TokenKind::Project;
+        if (text == "module") return TokenKind::Module;
+        if (text == "import") return TokenKind::Import;
         if (text == "tempo") return TokenKind::Tempo;
         if (text == "meter") return TokenKind::Meter;
         if (text == "key") return TokenKind::Key;
@@ -163,6 +186,12 @@ Token Lexer::identifier(std::size_t startOffset, int startLine, int startColumn)
         if (text == "instrument") return TokenKind::Instrument;
         if (text == "sample") return TokenKind::Sample;
         if (text == "let") return TokenKind::Let;
+        if (text == "fn") return TokenKind::Fn;
+        if (text == "return") return TokenKind::Return;
+        if (text == "if") return TokenKind::If;
+        if (text == "else") return TokenKind::Else;
+        if (text == "true") return TokenKind::True;
+        if (text == "false") return TokenKind::False;
         if (text == "curve") return TokenKind::Curve;
         if (text == "on") return TokenKind::On;
         if (text == "for") return TokenKind::For;
@@ -304,9 +333,84 @@ std::vector<Token> Lexer::lex() {
             case ';': tokens.push_back(makeToken(TokenKind::Semicolon, startOffset, startLine, startColumn, ";")); break;
             case ',': tokens.push_back(makeToken(TokenKind::Comma, startOffset, startLine, startColumn, ",")); break;
             case '.': tokens.push_back(makeToken(TokenKind::Dot, startOffset, startLine, startColumn, ".")); break;
-            case '=': tokens.push_back(makeToken(TokenKind::Equal, startOffset, startLine, startColumn, "=")); break;
+            case '=':
+                if (peek() == '=') {
+                    advance();
+                    tokens.push_back(makeToken(TokenKind::EqualEqual, startOffset, startLine,
+                                               startColumn, "=="));
+                } else {
+                    tokens.push_back(makeToken(TokenKind::Equal, startOffset, startLine,
+                                               startColumn, "="));
+                }
+                break;
+            case '!':
+                if (peek() == '=') {
+                    advance();
+                    tokens.push_back(makeToken(TokenKind::BangEqual, startOffset, startLine,
+                                               startColumn, "!="));
+                } else {
+                    tokens.push_back(makeToken(TokenKind::Bang, startOffset, startLine,
+                                               startColumn, "!"));
+                }
+                break;
+            case '<':
+                if (peek() == '=') {
+                    advance();
+                    tokens.push_back(makeToken(TokenKind::LessEqual, startOffset, startLine,
+                                               startColumn, "<="));
+                } else {
+                    tokens.push_back(makeToken(TokenKind::Less, startOffset, startLine,
+                                               startColumn, "<"));
+                }
+                break;
+            case '>':
+                if (peek() == '=') {
+                    advance();
+                    tokens.push_back(makeToken(TokenKind::GreaterEqual, startOffset, startLine,
+                                               startColumn, ">="));
+                } else {
+                    tokens.push_back(makeToken(TokenKind::Greater, startOffset, startLine,
+                                               startColumn, ">"));
+                }
+                break;
+            case '&':
+                if (peek() == '&') {
+                    advance();
+                    tokens.push_back(makeToken(TokenKind::AmpAmp, startOffset, startLine,
+                                               startColumn, "&&"));
+                } else {
+                    Token token = makeToken(TokenKind::Identifier, startOffset, startLine,
+                                            startColumn, "&");
+                    diagnostics_.error("lex-unexpected-character", token.span,
+                                       "unexpected character '&' (use '&&')");
+                }
+                break;
+            case '|':
+                if (peek() == '|') {
+                    advance();
+                    tokens.push_back(makeToken(TokenKind::PipePipe, startOffset, startLine,
+                                               startColumn, "||"));
+                } else {
+                    Token token = makeToken(TokenKind::Identifier, startOffset, startLine,
+                                            startColumn, "|");
+                    diagnostics_.error("lex-unexpected-character", token.span,
+                                       "unexpected character '|' (use '||')");
+                }
+                break;
+            case '+': tokens.push_back(makeToken(TokenKind::Plus, startOffset, startLine, startColumn, "+")); break;
+            case '*': tokens.push_back(makeToken(TokenKind::Star, startOffset, startLine, startColumn, "*")); break;
+            case '%': tokens.push_back(makeToken(TokenKind::Percent, startOffset, startLine, startColumn, "%")); break;
             case '@': tokens.push_back(makeToken(TokenKind::At, startOffset, startLine, startColumn, "@")); break;
-            case '-': tokens.push_back(makeToken(TokenKind::Minus, startOffset, startLine, startColumn, "-")); break;
+            case '-':
+                if (peek() == '>') {
+                    advance();
+                    tokens.push_back(makeToken(TokenKind::Arrow, startOffset, startLine,
+                                               startColumn, "->"));
+                } else {
+                    tokens.push_back(makeToken(TokenKind::Minus, startOffset, startLine,
+                                               startColumn, "-"));
+                }
+                break;
             case '/': tokens.push_back(makeToken(TokenKind::Slash, startOffset, startLine, startColumn, "/")); break;
             default: {
                 Token token = makeToken(TokenKind::Identifier, startOffset, startLine, startColumn,

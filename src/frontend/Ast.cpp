@@ -87,6 +87,84 @@ void writeExprBody(JsonWriter& json, const Module& module, const Expr& expr) {
             }
             json.endArray();
             break;
+        case ExprKind::Rhythm:
+            if (expr.explicitSpan != kInvalidExprId) {
+                json.key("spanDuration");
+                writeExpr(json, module, expr.explicitSpan);
+            }
+            json.key("entries").beginArray();
+            for (const RhythmEntry& entry : expr.rhythm) {
+                json.beginObject();
+                json.key("rest").value(entry.rest);
+                json.key("duration");
+                writeExpr(json, module, entry.duration);
+                json.key("accent").value(entry.accent);
+                json.endObject();
+            }
+            json.endArray();
+            break;
+        case ExprKind::Harmony:
+            if (expr.explicitSpan != kInvalidExprId) {
+                json.key("spanDuration");
+                writeExpr(json, module, expr.explicitSpan);
+            }
+            json.key("entries").beginArray();
+            for (const HarmonyEntry& entry : expr.harmony) {
+                json.beginObject();
+                json.key("chord").value(entry.chord);
+                json.key("offset");
+                writeExpr(json, module, entry.offset);
+                json.key("duration");
+                writeExpr(json, module, entry.duration);
+                json.endObject();
+            }
+            json.endArray();
+            break;
+        case ExprKind::Boolean:
+            json.key("value").value(expr.boolean);
+            break;
+        case ExprKind::Binary:
+            json.key("operator").value(expr.text);
+            json.key("left");
+            if (!expr.args.empty()) {
+                writeExpr(json, module, expr.args[0]);
+            }
+            json.key("right");
+            if (expr.args.size() > 1) {
+                writeExpr(json, module, expr.args[1]);
+            }
+            break;
+        case ExprKind::Not:
+            json.key("operand");
+            if (!expr.args.empty()) {
+                writeExpr(json, module, expr.args.front());
+            }
+            break;
+        case ExprKind::If:
+            json.key("condition");
+            if (!expr.args.empty()) {
+                writeExpr(json, module, expr.args[0]);
+            }
+            json.key("then");
+            if (expr.args.size() > 1) {
+                writeExpr(json, module, expr.args[1]);
+            }
+            json.key("else");
+            if (expr.args.size() > 2) {
+                writeExpr(json, module, expr.args[2]);
+            }
+            break;
+        case ExprKind::For:
+            json.key("variable").value(expr.text);
+            json.key("iterable");
+            if (!expr.args.empty()) {
+                writeExpr(json, module, expr.args[0]);
+            }
+            json.key("body");
+            if (expr.args.size() > 1) {
+                writeExpr(json, module, expr.args[1]);
+            }
+            break;
         case ExprKind::Keyframes:
             json.key("entries").beginArray();
             for (const KeyframeEntry& entry : expr.keyframes) {
@@ -133,6 +211,13 @@ std::string_view exprKindName(ExprKind kind) {
         case ExprKind::Melody: return "melody";
         case ExprKind::Notes: return "notes";
         case ExprKind::Keyframes: return "keyframes";
+        case ExprKind::Boolean: return "boolean";
+        case ExprKind::Binary: return "binary";
+        case ExprKind::Not: return "not";
+        case ExprKind::If: return "if";
+        case ExprKind::For: return "for";
+        case ExprKind::Rhythm: return "rhythm";
+        case ExprKind::Harmony: return "harmony";
     }
     return "unknown";
 }
@@ -291,6 +376,36 @@ std::string astToJson(const Module& module) {
                 writeSpan(json, decl.span);
                 json.key("duration");
                 writeExpr(json, module, decl.duration);
+                if (decl.meter.has_value()) {
+                    json.key("meter").value(std::to_string(decl.meter->numerator) + "/" +
+                                            std::to_string(decl.meter->denominator));
+                    if (decl.meter->explicitGrouping) {
+                        json.key("grouping").beginArray();
+                        for (const int group : decl.meter->grouping) {
+                            json.value(group);
+                        }
+                        json.endArray();
+                    }
+                }
+                if (!decl.meterChanges.empty()) {
+                    json.key("meterChanges").beginArray();
+                    for (const MeterChange& change : decl.meterChanges) {
+                        json.beginObject();
+                        json.key("at");
+                        writeExpr(json, module, change.at);
+                        json.key("meter").value(std::to_string(change.meter.numerator) + "/" +
+                                                std::to_string(change.meter.denominator));
+                        if (change.meter.explicitGrouping) {
+                            json.key("grouping").beginArray();
+                            for (const int group : change.meter.grouping) {
+                                json.value(group);
+                            }
+                            json.endArray();
+                        }
+                        json.endObject();
+                    }
+                    json.endArray();
+                }
                 json.key("clips").beginArray();
                 for (const ClipDecl& clip : decl.clips) {
                     json.beginObject();
@@ -335,6 +450,42 @@ std::string astToJson(const Module& module) {
         json.endObject();
     }
     json.endArray();
+
+    if (!module.functions.empty()) {
+        json.key("functions").beginArray();
+        for (const FunctionDecl& decl : module.functions) {
+            json.beginObject();
+            json.key("name").value(decl.name);
+            writeSpan(json, decl.span);
+            json.key("returnType").value(decl.returnType);
+            json.key("contextKey").value(decl.contextKey);
+            json.key("contextMeter").value(decl.contextMeter);
+            json.key("parameters").beginArray();
+            for (const ParamDecl& param : decl.params) {
+                json.beginObject();
+                json.key("name").value(param.name);
+                json.key("type").value(param.type);
+                writeSpan(json, param.span);
+                json.endObject();
+            }
+            json.endArray();
+            json.key("body").beginArray();
+            for (const Stmt& statement : decl.body) {
+                json.beginObject();
+                json.key("kind").value(statement.kind == StmtKind::Let ? "let" : "return");
+                writeSpan(json, statement.span);
+                if (!statement.name.empty()) {
+                    json.key("name").value(statement.name);
+                }
+                json.key("value");
+                writeExpr(json, module, statement.value);
+                json.endObject();
+            }
+            json.endArray();
+            json.endObject();
+        }
+        json.endArray();
+    }
 
     if (module.master.has_value()) {
         const MasterDecl& decl = *module.master;

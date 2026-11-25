@@ -1,0 +1,15 @@
+{
+  "format": "mpl.model-run",
+  "version": 1,
+  "label": "learnability-v1.1-L2",
+  "arm": "B0",
+  "task": "mpl-bench-001-asymmetric-meter",
+  "model": "deepseek-flash",
+  "attempts": 1,
+  "status": "pass",
+  "candidate": "F:/MPL/bench/results/learnability-002/meter/L2/candidate-0.mpl",
+  "inputTokens": 1997,
+  "outputTokens": 225,
+  "modelCalls": 1,
+  "latencyMilliseconds": 1285
+}

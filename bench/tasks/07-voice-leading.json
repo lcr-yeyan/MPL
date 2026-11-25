@@ -1,0 +1,19 @@
+{
+  "id": "mpl-bench-001-voice-leading",
+  "title": "Dm9 to G7 bounded voice leading",
+  "category": "voice_leading",
+  "template": "voice-leading",
+  "seed": 1107,
+  "baseline": "../baselines/voice-leading.mpl",
+  "allowedScope": "program",
+  "tolerance": 0.0,
+  "budget": { "maxRepairs": 3, "maxSeconds": 120, "maxTokens": 8000 },
+  "target": [
+    { "name": "event_count", "value": 8 },
+    { "name": "pitch_sequence", "value": [[50, 53, 57, 60, 50, 53, 55, 59]] }
+  ],
+  "preserve": [
+    { "name": "logical_extent" },
+    { "name": "onset_set" }
+  ]
+}

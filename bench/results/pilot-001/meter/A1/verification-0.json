@@ -1,0 +1,41 @@
+{
+  "format": "mpl.task-verification",
+  "version": 1,
+  "taskId": "mpl-bench-001-asymmetric-meter",
+  "status": "pass",
+  "validityStatus": "ok",
+  "targetStatus": "pass",
+  "preserveStatus": "pass",
+  "frameStatus": "",
+  "comparisons": [
+    {
+      "name": "event_count",
+      "status": "pass",
+      "expected": "7",
+      "actual": "7",
+      "reason": ""
+    },
+    {
+      "name": "logical_extent",
+      "status": "pass",
+      "expected": "\"7/8\"",
+      "actual": "\"7/8\"",
+      "reason": ""
+    },
+    {
+      "name": "onset_set",
+      "status": "pass",
+      "expected": "[\"0\",\"1/8\",\"1/4\",\"3/8\",\"1/2\",\"5/8\",\"3/4\"]",
+      "actual": "[\n  \"0\",\n  \"1/8\",\n  \"1/4\",\n  \"3/8\",\n  \"1/2\",\n  \"5/8\",\n  \"3/4\"\n]",
+      "reason": ""
+    },
+    {
+      "name": "preserve:pitch_sequence",
+      "status": "pass",
+      "expected": "[[62,64,65,67,69,70,72]]",
+      "actual": "[\n  [\n    62,\n    64,\n    65,\n    67,\n    69,\n    70,\n    72\n  ]\n]",
+      "reason": ""
+    }
+  ],
+  "diagnostics": []
+}

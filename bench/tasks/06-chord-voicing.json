@@ -1,0 +1,20 @@
+{
+  "id": "mpl-bench-001-chord-voicing",
+  "title": "Dm9 four-voice close voicing",
+  "category": "chord_voicing",
+  "template": "chord-voicing",
+  "seed": 1106,
+  "baseline": "../baselines/voicing.mpl",
+  "allowedScope": "program",
+  "tolerance": 0.0,
+  "budget": { "maxRepairs": 3, "maxSeconds": 120, "maxTokens": 8000 },
+  "target": [
+    { "name": "event_count", "value": 4 },
+    { "name": "pitch_sequence", "value": [[50, 53, 57, 60]] },
+    { "name": "fragment_range", "fromBaseline": true }
+  ],
+  "preserve": [
+    { "name": "logical_extent" },
+    { "name": "onset_set" }
+  ]
+}

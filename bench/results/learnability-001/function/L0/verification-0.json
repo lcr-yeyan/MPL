@@ -1,0 +1,14 @@
+{
+  "format": "mpl.task-verification",
+  "version": 1,
+  "taskId": "mpl-bench-001-function",
+  "status": "error",
+  "validityStatus": "failed",
+  "targetStatus": "",
+  "preserveStatus": "",
+  "frameStatus": "",
+  "comparisons": [],
+  "diagnostics": [
+    "candidate compile failed: parse-expected-equal: expected '=' after tempo; parse-expected-equal: expected '=' after meter; parse-expected-equal: expected '=' after key; parse-unexpected-project-field: unknown project field; parse-unexpected-project-field: unknown project field; parse-unexpected-project-field: unknown project field; parse-unexpected-declaration: unexpected token at declaration scope; parse-expected-lbrace: expected '{' to start track block; parse-expected-equal: expected '=' after role; parse-expected-semicolon: expected ';' after declaration or statement; parse-unexpected-track-field: unknown track field; parse-unexpected-declaration: unexpected token at declaration scope; parse-unexpected-declaration: unexpected token at declaration scope"
+  ]
+}
