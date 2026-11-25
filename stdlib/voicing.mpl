@@ -23,3 +23,19 @@ export fn nextVoicingResult(previous: [Pitch], name: String, low: Pitch, high: P
 export fn sharedTones(a: [Pitch], b: [Pitch]) -> [Pitch] {
   return commonTones(a, b);
 }
+
+/// Highest voice. Precondition: non-empty, low-to-high input.
+export fn topVoice(ps: [Pitch]) -> Pitch {
+  return ps[length(ps) - 1];
+}
+
+/// Lowest voice. Precondition: non-empty, low-to-high input.
+export fn bottomVoice(ps: [Pitch]) -> Pitch {
+  return ps[0];
+}
+
+/// Inner voices as a new list. A two-voice input yields an empty list.
+/// Precondition: low-to-high input.
+export fn innerVoices(ps: [Pitch]) -> [Pitch] {
+  return ps[1:length(ps) - 1];
+}

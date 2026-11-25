@@ -1,0 +1,33 @@
+{
+  "format": "mpl.knowledge-schema",
+  "version": 1,
+  "required": ["knowledgeId", "version", "category", "kind", "referenceKind", "description", "implementationRef", "verificationStatus"],
+  "kind": ["executable", "relation", "verification", "construction", "practice"],
+  "verificationStatus": ["verified", "unverified", "unsupported", "deferred", "failed"],
+  "fields": {
+    "knowledgeId": "stable dot-separated id",
+    "version": "knowledge version string",
+    "category": "Rhythm | Melody | Harmony | Voicing | Arrangement | Production",
+    "kind": "executable | relation | verification | construction | practice",
+    "referenceKind": "callable | syntax | stdlib | observation | task | benchmark | deferred",
+    "inputTypes": "MPL type names",
+    "outputTypes": "MPL type names",
+    "parameters": "human-readable parameters",
+    "preconditions": "declarative preconditions",
+    "postconditions": "declarative postconditions",
+    "invariants": "declarative invariants",
+    "allowedEffects": "object.property strings; practice knowledge is advisory only",
+    "requiredContext": "meter | key | ...",
+    "dependencies": "knowledgeId list",
+    "implementationRef": "core: | syntax: | stdlib: | observation: | task: | benchmark: | deferred:",
+    "observationRefs": "Observation Registry ids",
+    "examples": [{"role": "legal|boundary|negative", "program": "path", "description": "text"}],
+    "checks": [{"phase": "precondition|postcondition|invariant|effect", "program": "path", "observation": "id", "comparator": "equals|gte|lte|tolerance", "expected": "JSON", "tolerance": 0}],
+    "source": "provenance",
+    "license": "license",
+    "verificationStatus": "verified | unverified | unsupported | deferred | failed",
+    "unsupportedReason": "required for unsupported/deferred",
+    "tags": "index tags"
+  },
+  "note": "contentHash and resolvedHash are computed by the registry and are not authored manually."
+}

@@ -1198,7 +1198,53 @@ ExprId Parser::parseUnary() {
         expr.args.push_back(operand);
         return addExpr(std::move(expr));
     }
-    return parsePrimary();
+    return parsePostfix();
+}
+
+ExprId Parser::parsePostfix() {
+    ExprId expression = parsePrimary();
+    while (check(TokenKind::LBracket)) {
+        const Token& start = advance();
+        expression = parseIndex(expression, start);
+    }
+    return expression;
+}
+
+ExprId Parser::parseIndex(ExprId base, const Token& start) {
+    Expr expr;
+    expr.kind = ExprKind::Index;
+    expr.span = start.span;
+    expr.args.push_back(base);
+
+    ExprId first = kInvalidExprId;
+    if (!check(TokenKind::Colon)) {
+        first = parseExpr();
+        expr.args.push_back(first);
+    }
+    if (match(TokenKind::Colon)) {
+        expr.text = "slice";
+        if (first == kInvalidExprId) {
+            Expr zero;
+            zero.kind = ExprKind::Integer;
+            zero.span = start.span;
+            zero.integer = 0;
+            zero.number = 0.0;
+            first = addExpr(std::move(zero));
+            expr.args.push_back(first);
+        }
+        if (!check(TokenKind::RBracket)) {
+            expr.args.push_back(parseExpr());
+        } else {
+            expr.args.push_back(kInvalidExprId);
+        }
+    } else if (first == kInvalidExprId) {
+        errorAtCurrent("parse-expected-index", "expected list index or slice", "index");
+        expr.args.push_back(invalidExpr(start.span));
+    }
+    const Token close = expect(TokenKind::RBracket, "parse-expected-rbracket",
+                               "expected ']' after list index");
+    expr.span = merge(start.span, close.span);
+    return addExpr(std::move(expr));
 }
 
 ExprId Parser::parsePrimary() {

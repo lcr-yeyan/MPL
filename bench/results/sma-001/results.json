@@ -1,0 +1,111 @@
+{
+    "format":  "mpl.sma-001-results",
+    "version":  1,
+    "executedAt":  "2026-11-25",
+    "modelCalls":  0,
+    "tasks":  [
+                  {
+                      "id":  "01-interval-extraction",
+                      "source":  "sources/01-interval-extraction.mpl",
+                      "compile":  "pass",
+                      "event_count":  3,
+                      "status":  "pass",
+                      "missing":  [
+
+                                  ]
+                  },
+                  {
+                      "id":  "02-interval-reconstruction",
+                      "source":  "sources/02-interval-reconstruction.mpl",
+                      "compile":  "pass (partial source)",
+                      "event_count":  1,
+                      "status":  "unsupported",
+                      "missing":  [
+                                      "list append/cons",
+                                      "fold/scan",
+                                      "mutable accumulation"
+                                  ]
+                  },
+                  {
+                      "id":  "03-melodic-slice-transform",
+                      "source":  "sources/03-melodic-slice-transform.mpl",
+                      "compile":  "pass",
+                      "event_count":  2,
+                      "status":  "pass",
+                      "missing":  [
+
+                                  ]
+                  },
+                  {
+                      "id":  "04-scale-pitch-filter",
+                      "source":  "sources/04-scale-pitch-filter.mpl",
+                      "compile":  "pass (partial source)",
+                      "event_count":  2,
+                      "status":  "unsupported",
+                      "missing":  [
+                                      "filter",
+                                      "list append/flatMap"
+                                  ]
+                  },
+                  {
+                      "id":  "05-periodic-rhythm",
+                      "source":  "sources/05-periodic-rhythm.mpl",
+                      "compile":  "pass",
+                      "event_count":  6,
+                      "status":  "pass",
+                      "missing":  [
+
+                                  ]
+                  },
+                  {
+                      "id":  "06-rhythm-density-reduction",
+                      "source":  "sources/06-rhythm-density-reduction.mpl",
+                      "compile":  "pass",
+                      "event_count":  4,
+                      "status":  "pass",
+                      "missing":  [
+
+                                  ]
+                  },
+                  {
+                      "id":  "07-chord-tone-analysis",
+                      "source":  "sources/07-chord-tone-analysis.mpl",
+                      "compile":  "pass",
+                      "event_count":  2,
+                      "status":  "pass",
+                      "missing":  [
+
+                                  ]
+                  },
+                  {
+                      "id":  "08-voice-movement",
+                      "source":  "sources/08-voice-movement.mpl",
+                      "compile":  "pass",
+                      "event_count":  2,
+                      "status":  "pass",
+                      "missing":  [
+
+                                  ]
+                  },
+                  {
+                      "id":  "09-theme-variation",
+                      "source":  "sources/09-theme-variation.mpl",
+                      "compile":  "pass",
+                      "event_count":  6,
+                      "status":  "pass",
+                      "missing":  [
+
+                                  ]
+                  },
+                  {
+                      "id":  "10-form-construction",
+                      "source":  "sources/10-form-construction.mpl",
+                      "compile":  "pass",
+                      "event_count":  4,
+                      "status":  "pass",
+                      "missing":  [
+
+                                  ]
+                  }
+              ]
+}

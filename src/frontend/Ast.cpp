@@ -58,6 +58,25 @@ void writeExprBody(JsonWriter& json, const Module& module, const Expr& expr) {
             }
             json.endArray();
             break;
+        case ExprKind::Index:
+            if (!expr.args.empty()) {
+                json.key("target");
+                writeExpr(json, module, expr.args[0]);
+            }
+            if (expr.text == "slice") {
+                if (expr.args.size() > 1) {
+                    json.key("start");
+                    writeExpr(json, module, expr.args[1]);
+                }
+                if (expr.args.size() > 2 && expr.args[2] != kInvalidExprId) {
+                    json.key("end");
+                    writeExpr(json, module, expr.args[2]);
+                }
+            } else if (expr.args.size() > 1) {
+                json.key("index");
+                writeExpr(json, module, expr.args[1]);
+            }
+            break;
         case ExprKind::Melody:
             json.key("entries").beginArray();
             for (const MelodyEntry& entry : expr.melody) {
@@ -208,6 +227,7 @@ std::string_view exprKindName(ExprKind kind) {
         case ExprKind::Call: return "call";
         case ExprKind::UnaryMinus: return "unary-minus";
         case ExprKind::List: return "list";
+        case ExprKind::Index: return "index";
         case ExprKind::Melody: return "melody";
         case ExprKind::Notes: return "notes";
         case ExprKind::Keyframes: return "keyframes";

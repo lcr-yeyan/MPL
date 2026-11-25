@@ -3,12 +3,13 @@
     "version":  1,
     "frozenAt":  "2026-11-25",
     "versions":  {
-                     "compiler":  "0.4.0",
-                     "language":  "0.3.0",
-                     "stdlib":  "0.3.0",
+                     "compiler":  "0.5.0-beta",
+                     "language":  "0.4.0",
+                     "stdlib":  "0.4.0",
                      "benchmark":  "0.4.0",
                      "observation":  "1.0.0",
-                     "protocol":  "0.4.0"
+                     "protocol":  "0.4.0",
+                     "knowledge":  "1"
                  },
     "environment":  {
                         "os":  "Microsoft Windows NT 10.0.22000.0",
@@ -16,8 +17,8 @@
                         "generator":  "Visual Studio 18 2026",
                         "buildType":  "Debug/Release"
                     },
-    "gitCommit":  "ca1a5ffe2bef2e9a4bbfb4c2e13f92fdbc5b5060",
-    "note":  "Task/baseline/reference/schema/prompt identity only; bench/results is excluded.",
+    "gitCommit":  "8fa8147979a301c86044fe45e988e53b1c48d736",
+    "note":  "Task/baseline/reference/schema/prompt/SMA identity; bench/results excluded.",
     "files":  {
                   "bench/baselines/basic.mpl":  "3d8336d3f3aa7fc318d0cb1326fdadb8fcd3b5c922afe52650a8d17eab7142b0",
                   "bench/baselines/function.mpl":  "acdf8cf75f99f1ebb6b7520f84fbb65a1fdcc818278ee3d507548e6aa137d6dc",
@@ -35,6 +36,7 @@
                   "bench/candidates/local-edit.mpl":  "b54c348c9dd8d8dd65442806fb38a2e52e482af1afff603292c705d7c3a3e1de",
                   "bench/candidates/local-edit-flat.json":  "2272408528a294d1a2d511143c9c36b9264c8a9848ef89ce02b7b2fb37c85086",
                   "bench/candidates/rhythm-replacement.mpl":  "f53df1212ebad5bc7fad8946ed9aa7062ca7ff4628df2dc9e0cf98d6dd486d47",
+                  "bench/context-benchmark.json":  "6aa83b448eb49dcb7896b29eb7b6e47f8afd131d23c5d5cfa340e108ad6d975c",
                   "bench/experiments/factorial-basic.json":  "3e7cbdff12aedc860619a92988f6587c3b5553305030a6237bc93a436e00734c",
                   "bench/experiments/offline-example.json":  "55c02f3434e03b2625c613ef3af8994f1cf4fc577aa9364310aee6d5c712edbe",
                   "bench/experiment-schema.json":  "48bfa564cb5513e088540b68dd748f77611c2956442f7c6210576863f64170f9",
@@ -64,6 +66,18 @@
                   "bench/reference/mastering.mastered.wav":  "91a76643d1c9b0462ab589662a5cd679510eada0dacc12adeac77dd7b3be7ae9",
                   "bench/reference/mastering.mastering-trace.json":  "e7dd5e7f2c358594c90a4b0b6183abbb578b46df3a3dc7571d3ed53a73d5c463",
                   "bench/reference/README.md":  "48323bff3077de340f5561461da7778a514c4168d48a6a2b3d6292d23b97c361",
+                  "bench/sma-001/generate_sources.py":  "dddd12a5b087a9d35ead2e8ea1e780cbf5b9700b666c76394c72c918d7e1a4e7",
+                  "bench/sma-001/sources/01-interval-extraction.mpl":  "5b37c036bd218e052590d447a5e9c6d55adc3ca9030713869411a649b69ebe2e",
+                  "bench/sma-001/sources/02-interval-reconstruction.mpl":  "55f43d2c9944b7d20e212552a97a91dcedfa308880ed76b751eb67f641c8243e",
+                  "bench/sma-001/sources/03-melodic-slice-transform.mpl":  "54feb3c94d9cc16f14b179dad3022340945141910fd555443ea0fa4004624d5c",
+                  "bench/sma-001/sources/04-scale-pitch-filter.mpl":  "ed06d163d7231795b498ca833d1d4c4e0b1a027cf038cd735f400808e7be5b14",
+                  "bench/sma-001/sources/05-periodic-rhythm.mpl":  "6e2c71b4f514c84007c96ce2f58f61ab5a9218ae1a7b2c620141f408723fd7cb",
+                  "bench/sma-001/sources/06-rhythm-density-reduction.mpl":  "62f4d0ec3836f0456038c4860ef926dba4bad6d7ad66a84bc94771f3727e5042",
+                  "bench/sma-001/sources/07-chord-tone-analysis.mpl":  "860ce11215cd37602a2d0a851556576d4dbaffe326016b68d2bcaac1f341fd0f",
+                  "bench/sma-001/sources/08-voice-movement.mpl":  "15a582789753e591ed4def59ee20257a44cc70d704b121869590d2a04682eae1",
+                  "bench/sma-001/sources/09-theme-variation.mpl":  "c0774b1b69965ff3f87441ca0fd0455273d60822d313d399bd4b7c994843f79a",
+                  "bench/sma-001/sources/10-form-construction.mpl":  "419c6d79427fb843b7b7fb216061a2901548df2a1a8f89ab046086a8b3ee6bb7",
+                  "bench/sma-001/tasks.json":  "4bd0743e8e3b0fce7ae15227a824dc1a1f346c2f5031c9e9b5ded9944fdc9ae1",
                   "bench/splits.json":  "c367cc5f150ebb6352d5f7584cc2372004c394396f3a767500e387763095da37",
                   "bench/tasks/01-basic-notes.json":  "d6f54ed71e8de43667fc22a74e90a2df8926cd308292677f532669724bc44fba",
                   "bench/tasks/02-asymmetric-meter.json":  "13bf03f723842d459e6d62f9fafca38d18e4c904566144a4c65df3ca6109988d",
@@ -78,6 +92,7 @@
                   "bench/tasks/11-mix-automation.json":  "63dfdddd65f9a854cd45efe9e44eddfe27da8bbd775a81e1e3a59339cb6f5bb6",
                   "bench/tasks/12-mastering-target.json":  "b24b6dd654cab4549edb3e8a4cea14626a2b2e459821087eacb1629a8ff57055",
                   "bench/tasks/13-function.json":  "9141bd9cf2a7deb8f8e70d131dfb04024a63015edaad0836b6f3f5edcd7fd833",
-                  "bench/templates.json":  "4f36d56fd8383529be1ed21d95f6d6df3368fc6b03604bf5b7e7e903bcd35257"
+                  "bench/templates.json":  "4f36d56fd8383529be1ed21d95f6d6df3368fc6b03604bf5b7e7e903bcd35257",
+                  "bench/v0.5/difficulty.json":  "325425a357e1126be1700651b9f0ac6239a5d0ecc72d6769035e1a3792968632"
               }
 }

@@ -1,0 +1,48 @@
+{
+  "format": "mpl.benchmark-difficulty",
+  "version": "0.5.0-alpha",
+  "frozen_v04_tasks": true,
+  "note": "Candidate V0.5 specifications; do not overwrite V0.4 frozen tasks. D1-D4 prompts must not expose complete reference note sequences.",
+  "levels": [
+    {
+      "level": "D0",
+      "description": "Exact specification transcription",
+      "tasks": ["01-basic-notes", "02-asymmetric-meter"],
+      "targetVisibility": "full specification allowed; used for legality/basic capability only",
+      "split": "dev"
+    },
+    {
+      "level": "D1",
+      "description": "Music algorithm construction",
+      "tasks": ["04-theme-transform", "13-function"],
+      "targetVisibility": "constraint-only; reference sequence not in prompt",
+      "split": "dev"
+    },
+    {
+      "level": "D2",
+      "description": "Music relation and constraint reasoning",
+      "tasks": ["06-chord-voicing", "07-voice-leading"],
+      "targetVisibility": "constraint-only; target sequence verified independently",
+      "split": "pilot"
+    },
+    {
+      "level": "D3",
+      "description": "Selective music editing",
+      "tasks": ["08-rhythm-replacement", "10-local-edit"],
+      "targetVisibility": "edit contract only; target notes not exposed",
+      "split": "heldout"
+    },
+    {
+      "level": "D4",
+      "description": "Multi-stage music production",
+      "tasks": ["11-mix-automation", "12-mastering-target"],
+      "targetVisibility": "technical goals + preserve/frame; reference audio not exposed",
+      "split": "heldout"
+    }
+  ],
+  "capabilityMatrix": {
+    "A0/A1": {"D0": true, "D1": true, "D2": false, "D3": false, "D4": false},
+    "B0/B1": {"D0": true, "D1": true, "D2": true, "D3": true, "D4": true},
+    "C0/C1": {"D0": true, "D1": true, "D2": true, "D3": true, "D4": true}
+  }
+}

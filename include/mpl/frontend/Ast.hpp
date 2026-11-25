@@ -26,6 +26,7 @@ enum class ExprKind {
     Call,
     UnaryMinus,
     List,
+    Index,
     Melody,
     Notes,
     Keyframes,

@@ -1275,6 +1275,9 @@ Type Sema::checkExpr(ExprId id, std::optional<Type> expected) {
         case ExprKind::List:
             type = checkList(expr);
             break;
+        case ExprKind::Index:
+            type = checkIndex(expr);
+            break;
         case ExprKind::Melody:
             type = checkMelody(expr);
             break;
@@ -1437,6 +1440,96 @@ Type Sema::checkIdentifier(ExprId id, const Expr& expr, std::optional<Type> expe
     const Type type = hir_.symbolTypes[*symbol];
     hir_.exprSymbols[id] = *symbol;
     return type;
+}
+
+Type Sema::checkIndex(const Expr& expr) {
+    if (expr.args.empty()) {
+        return kErrorType;
+    }
+    const Type base = checkExpr(expr.args[0]);
+    if (base.isError()) {
+        return kErrorType;
+    }
+    if (base.kind != TypeKind::List) {
+        errorAt(expr.span, "type-index-not-list", "indexing requires a list", "list",
+                typeName(base));
+        return kErrorType;
+    }
+    if (expr.text == "slice") {
+        if (expr.args.size() < 2) {
+            return kErrorType;
+        }
+        const Type start = checkExpr(expr.args[1], kIntegerType);
+        if (start.isError()) {
+            return kErrorType;
+        }
+        if (start.kind != TypeKind::Integer) {
+            errorAt(module_.expr(expr.args[1]).span, "type-index",
+                    "slice start must be an integer", "integer", typeName(start));
+            return kErrorType;
+        }
+        std::int64_t startValue = 0;
+        const Constant startConstant = hir_.constantOf(expr.args[1]);
+        if (startConstant.kind == Constant::Kind::Integer) {
+            startValue = startConstant.integer;
+            if (startValue < 0) {
+                errorAt(module_.expr(expr.args[1]).span, "index-negative",
+                        "slice start must be non-negative", ">= 0",
+                        std::to_string(startValue));
+                return kErrorType;
+            }
+        }
+        if (expr.args.size() > 2 && expr.args[2] != kInvalidExprId) {
+            const Type end = checkExpr(expr.args[2], kIntegerType);
+            if (end.isError()) {
+                return kErrorType;
+            }
+            if (end.kind != TypeKind::Integer) {
+                errorAt(module_.expr(expr.args[2]).span, "type-index",
+                        "slice end must be an integer", "integer", typeName(end));
+                return kErrorType;
+            }
+            const Constant endConstant = hir_.constantOf(expr.args[2]);
+            if (endConstant.kind == Constant::Kind::Integer) {
+                if (endConstant.integer < 0) {
+                    errorAt(module_.expr(expr.args[2]).span, "index-negative",
+                            "slice end must be non-negative", ">= 0",
+                            std::to_string(endConstant.integer));
+                    return kErrorType;
+                }
+                if (endConstant.integer < startValue) {
+                    errorAt(expr.span, "index-slice-bounds",
+                            "slice end must not be less than start", "end >= start",
+                            std::to_string(endConstant.integer));
+                    return kErrorType;
+                }
+            }
+        }
+        return Type::list(base.element);
+    }
+    if (expr.args.size() < 2) {
+        return kErrorType;
+    }
+    const Type index = checkExpr(expr.args[1], kIntegerType);
+    if (index.isError()) {
+        return kErrorType;
+    }
+    if (index.kind != TypeKind::Integer) {
+        errorAt(module_.expr(expr.args[1]).span, "type-index",
+                "list index must be an integer", "integer", typeName(index));
+        return kErrorType;
+    }
+    const Constant constant = hir_.constantOf(expr.args[1]);
+    if (constant.kind == Constant::Kind::Integer && constant.integer < 0) {
+        errorAt(module_.expr(expr.args[1]).span, "index-negative",
+                "list index must be non-negative", ">= 0",
+                std::to_string(constant.integer));
+        return kErrorType;
+    }
+    if (base.element == TypeKind::Error) {
+        return kErrorType;
+    }
+    return Type::simple(base.element);
 }
 
 Type Sema::checkList(const Expr& expr, std::optional<Type> expected) {
@@ -1888,6 +1981,15 @@ Type Sema::checkCall(const Expr& expr) {
                     typeName(value));
         }
         return kIntegerType;
+    }
+    if (name == "tie") {
+        if (!arity(2)) return kErrorType;
+        const Type first = argument(0, kFragmentType);
+        const Type second = argument(1, kFragmentType);
+        assignable(kFragmentType, first, module_.expr(expr.args[0]).span, "tie first fragment");
+        assignable(kFragmentType, second, module_.expr(expr.args[1]).span,
+                   "tie second fragment");
+        return kFragmentType;
     }
     if (name == "note") {
         if (!arity(3)) return kErrorType;

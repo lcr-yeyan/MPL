@@ -166,6 +166,11 @@ struct HarmonyQueryNode {
     Position at;
 };
 
+/// Explicit tie between the last sounding note of the first fragment and the
+/// first sounding note of the second. It is intentionally not a merge of all
+/// adjacent same-pitch notes.
+struct TieNode {};
+
 using NodePayload =
     std::variant<LiteralNode, TransposeNode, ReverseNode, StretchNode, RepeatNode, SequenceNode,
                  ParallelNode, DiatonicTransposeNode, HarmonizeNode, SyncopateNode, RotateNode,
@@ -174,7 +179,8 @@ using NodePayload =
                  RhythmAccentNode, RhythmRealignNode, RhythmQuantizeNode, RhythmAccentByMeterNode,
                  RhythmIntersectNode, RhythmUnionNode, RhythmDifferenceNode,
                  RhythmComplementNode, RhythmAccentFollowNode, RhythmCombineNode,
-                 RhythmOnsetSetNode, RhythmRetriggerNode, HarmonyLiteralNode, HarmonyQueryNode>;
+                 RhythmOnsetSetNode, RhythmRetriggerNode, HarmonyLiteralNode, HarmonyQueryNode,
+                 TieNode>;
 
 struct MusicNode {
     ObjectId id = kInvalidObjectId;
@@ -224,6 +230,7 @@ enum class NodeKind {
     RhythmRetrigger,
     HarmonyLiteral,
     HarmonyQuery,
+    Tie,
 };
 
 /// Non-graph dependencies that an operator reads while evaluating. Changing a
@@ -246,6 +253,11 @@ public:
     ObjectId repeat(ObjectId input, int count, std::string label = {});
     ObjectId sequence(const std::vector<ObjectId>& inputs, std::string label = {});
     ObjectId parallel(const std::vector<ObjectId>& inputs, std::string label = {});
+
+    /// Explicit tie across a fragment boundary. The boundary notes must share
+    /// pitch, be the only sounding notes at their respective boundaries, and
+    /// meet exactly at the first fragment's span end.
+    ObjectId tie(ObjectId first, ObjectId second, std::string label = {});
 
     /// Experimental V0.0.2 operators. Their evaluation reads the current IR
     /// context, so the node records a context dependency for invalidation.

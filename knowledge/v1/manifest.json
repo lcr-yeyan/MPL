@@ -1,0 +1,17 @@
+{
+    "format":  "mpl.knowledge-manifest",
+    "version":  1,
+    "frozenAt":  "2026-11-25",
+    "knowledgeVersion":  "1",
+    "language":  "0.4.0",
+    "stdlib":  "0.4.0",
+    "compiler":  "0.5.0-beta",
+    "units":  33,
+    "catalogSha256":  "5a7353110fd5676a50568b97c201be45d96a594b03b8ce2907bb370817f36778",
+    "schemaSha256":  "fa8206a75a209d6e74837c5dc86a9ec49362643f8b6a0448af6ed5793ebc32c7",
+    "verified":  31,
+    "unverified":  1,
+    "deferred":  1,
+    "checks":  36,
+    "source":  "V0.4.0 Final Core/Stdlib/Benchmark"
+}

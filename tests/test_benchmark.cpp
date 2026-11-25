@@ -363,8 +363,8 @@ MPL_TEST(BenchmarkCompilerReport) {
     const Compilation compilation = compileMrp();
     const std::string report = compilation.toReportJson();
     MPL_CHECK(report.find("\"format\": \"mpl.compiler-report\"") != std::string::npos);
-    MPL_CHECK(report.find("\"compilerVersion\": \"0.4.0\"") != std::string::npos);
-    MPL_CHECK(report.find("\"languageVersion\": \"0.3.0\"") != std::string::npos);
+    MPL_CHECK(report.find("\"compilerVersion\": \"0.5.0-beta\"") != std::string::npos);
+    MPL_CHECK(report.find("\"languageVersion\": \"0.4.0\"") != std::string::npos);
     MPL_CHECK(report.find("\"benchmarkVersion\": \"0.4.0\"") != std::string::npos);
     MPL_CHECK(report.find("\"observationVersion\": \"1.0.0\"") != std::string::npos);
     MPL_CHECK(report.find("\"compile\": \"ok\"") != std::string::npos);

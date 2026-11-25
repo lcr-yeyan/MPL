@@ -17,6 +17,46 @@ bool isPowerOfTwo(int value) {
     return value > 0 && (value & (value - 1)) == 0;
 }
 
+Fragment tieFragments(const Fragment& first, const Fragment& second) {
+    if (first.notes().empty() || second.notes().empty()) {
+        throw Error("tie requires two non-empty fragments", "tie-empty");
+    }
+    std::vector<std::size_t> ending;
+    for (std::size_t index = 0; index < first.notes().size(); ++index) {
+        const Note& note = first.notes()[index];
+        if (note.offset + note.duration == first.duration()) {
+            ending.push_back(index);
+        }
+    }
+    std::vector<std::size_t> starting;
+    for (std::size_t index = 0; index < second.notes().size(); ++index) {
+        if (second.notes()[index].offset.inWholeNotes() == Rational(0, 1)) {
+            starting.push_back(index);
+        }
+    }
+    if (ending.size() != 1 || starting.size() != 1) {
+        throw Error("tie boundary must contain exactly one sounding note on each side",
+                    "tie-ambiguous");
+    }
+    const std::size_t last = ending.front();
+    const std::size_t firstSecond = starting.front();
+    if (first.notes()[last].pitch.midi() != second.notes()[firstSecond].pitch.midi()) {
+        throw Error("tie boundary pitches differ", "tie-pitch");
+    }
+    std::vector<Note> merged = first.notes();
+    merged[last].duration = merged[last].duration + second.notes()[firstSecond].duration;
+    for (std::size_t index = 0; index < second.notes().size(); ++index) {
+        if (index == firstSecond) {
+            continue;
+        }
+        Note note = second.notes()[index];
+        note.offset = note.offset + first.duration();
+        merged.push_back(std::move(note));
+    }
+    return Fragment::fromNotes(std::move(merged),
+                               first.duration() + second.duration());
+}
+
 /// Beat-point syncopation under an explicit meter map. A note is displaced when
 /// its absolute position lands exactly on a denominator-unit beat, so 7/8 and
 /// 5/8 sections use their own beat grid instead of one global meter.
@@ -120,6 +160,7 @@ NodeKind nodeKind(const NodePayload& payload) {
         case 30: return NodeKind::RhythmRetrigger;
         case 31: return NodeKind::HarmonyLiteral;
         case 32: return NodeKind::HarmonyQuery;
+        case 33: return NodeKind::Tie;
         default: break;
     }
     throw Error("unknown music IR node payload", "music-ir");
@@ -160,6 +201,7 @@ std::string_view nodeKindName(NodeKind kind) {
         case NodeKind::RhythmRetrigger: return "rhythm-retrigger";
         case NodeKind::HarmonyLiteral: return "harmony-literal";
         case NodeKind::HarmonyQuery: return "harmony-query";
+        case NodeKind::Tie: return "tie";
     }
     return "unknown";
 }
@@ -302,6 +344,17 @@ ObjectId MusicIR::parallel(const std::vector<ObjectId>& inputs, std::string labe
     node.label = std::move(label);
     node.inputs = inputs;
     node.payload = ParallelNode{};
+    nodes_.push_back(std::move(node));
+    return nodes_.back().id;
+}
+
+ObjectId MusicIR::tie(ObjectId first, ObjectId second, std::string label) {
+    requireInputs({first, second}, 2, "tie");
+    MusicNode node;
+    node.id = static_cast<ObjectId>(nodes_.size());
+    node.label = std::move(label);
+    node.inputs = {first, second};
+    node.payload = TieNode{};
     nodes_.push_back(std::move(node));
     return nodes_.back().id;
 }
@@ -794,6 +847,8 @@ Fragment MusicIR::evaluateNode(const MusicNode& node) {
             }
             return mpl::parallel(parts);
         }
+        case NodeKind::Tie:
+            return tieFragments(evaluate(node.inputs[0]), evaluate(node.inputs[1]));
         case NodeKind::DiatonicTranspose:
             return mpl::diatonicTranspose(evaluate(node.inputs[0]),
                                           std::get<DiatonicTransposeNode>(node.payload).scaleSteps,

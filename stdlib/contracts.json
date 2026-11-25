@@ -1,0 +1,67 @@
+{
+  "format": "mpl.stdlib-contracts",
+  "version": 1,
+  "note": "Executable pre/post/invariant evidence is in tests/test_stdlib.cpp and knowledge contract tests.",
+  "functions": [
+    {
+      "module": "StdAnalysis",
+      "name": "pitchClasses",
+      "signature": "[Pitch] -> [Int]",
+      "preconditions": ["input list may be empty"],
+      "postconditions": ["result length equals input length", "order preserved"],
+      "invariants": ["no pitch spelling is changed"],
+      "complexity": "O(n) time, O(n) result",
+      "negativeCase": "empty input returns empty list"
+    },
+    {
+      "module": "StdAnalysis",
+      "name": "intervalsOf",
+      "signature": "[Pitch] -> [Int]",
+      "preconditions": ["length >= 2 for a non-empty result"],
+      "postconditions": ["result length is max(0, length-1)"],
+      "invariants": ["adjacent order"],
+      "complexity": "O(n) time, O(n) result",
+      "negativeCase": "single pitch returns empty list (tested)"
+    },
+    {
+      "module": "StdAnalysis",
+      "name": "spanOf",
+      "signature": "[Pitch] -> Int",
+      "preconditions": ["non-empty"],
+      "postconditions": ["max MIDI - min MIDI"],
+      "invariants": ["non-negative"],
+      "complexity": "O(n)",
+      "negativeCase": "empty input is an invalid precondition; not silently zero"
+    },
+    {
+      "module": "StdVoicing",
+      "name": "topVoice",
+      "signature": "[Pitch] -> Pitch",
+      "preconditions": ["non-empty", "low-to-high"],
+      "postconditions": ["returns last element"],
+      "invariants": ["identity of returned pitch"],
+      "complexity": "O(1)",
+      "negativeCase": "empty input raises index-out-of-range (tested)"
+    },
+    {
+      "module": "StdVoicing",
+      "name": "bottomVoice",
+      "signature": "[Pitch] -> Pitch",
+      "preconditions": ["non-empty", "low-to-high"],
+      "postconditions": ["returns first element"],
+      "invariants": ["identity of returned pitch"],
+      "complexity": "O(1)",
+      "negativeCase": "empty input raises index-out-of-range"
+    },
+    {
+      "module": "StdVoicing",
+      "name": "innerVoices",
+      "signature": "[Pitch] -> [Pitch]",
+      "preconditions": ["low-to-high"],
+      "postconditions": ["two-voice input returns empty list", "result is a new list"],
+      "invariants": ["order preserved"],
+      "complexity": "O(n) copy",
+      "negativeCase": "two voices -> empty (tested)"
+    }
+  ]
+}

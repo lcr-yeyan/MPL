@@ -64,6 +64,8 @@ private:
     ExprId parseAdditive();
     ExprId parseMultiplicative();
     ExprId parseUnary();
+    ExprId parsePostfix();
+    ExprId parseIndex(ExprId base, const Token& start);
     ExprId parsePrimary();
     ExprId parseIfExpr();
     ExprId parseForExpr();

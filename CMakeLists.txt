@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(MPL VERSION 0.4.0 LANGUAGES CXX)
+project(MPL VERSION 0.5.0 LANGUAGES CXX)
+option(MPL_BUILD_EXPERIMENTAL_AI "Build model/context experiment layer" ON)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -40,13 +41,9 @@ add_library(mpl_core STATIC
     src/util/Sha256.cpp
     src/observe/Observations.cpp
     src/lab/Task.cpp
-    src/lab/Harness.cpp
     src/lab/FlatEvents.cpp
     src/lab/RenderArtifacts.cpp
     src/lab/TrustedExecution.cpp
-    src/lab/Repair.cpp
-    src/lab/ModelAdapters.cpp
-    src/lab/Statistics.cpp
     src/analysis/SemanticDelta.cpp
     src/Project.cpp
     src/Compiler.cpp
@@ -68,12 +65,35 @@ add_library(mpl_core STATIC
     src/mastering/Mastering.cpp
 )
 target_include_directories(mpl_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
-if(WIN32)
-    target_link_libraries(mpl_core PUBLIC winhttp)
-endif()
 target_compile_definitions(mpl_core PRIVATE
     MPL_STDLIB_DIR="${CMAKE_CURRENT_SOURCE_DIR}/stdlib"
 )
+
+# Music knowledge and contract verification are semantic infrastructure. They
+# depend on the core but are not required by the compiler/runtime.
+add_library(mpl_knowledge STATIC
+    src/knowledge/Knowledge.cpp
+    src/knowledge/TaskRequirements.cpp
+    src/knowledge/KnowledgeVerifier.cpp
+)
+target_link_libraries(mpl_knowledge PUBLIC mpl_core)
+
+if(MPL_BUILD_EXPERIMENTAL_AI)
+# Model-agnostic experiment runner, repair loop, statistics and the optional
+# provider adapter. No model code is linked into mpl_core.
+add_library(mpl_experiment STATIC
+    src/lab/Harness.cpp
+    src/lab/Repair.cpp
+    src/lab/ModelAdapters.cpp
+    src/lab/Statistics.cpp
+    src/knowledge/KnowledgeResolver.cpp
+    src/knowledge/AdaptiveContext.cpp
+)
+target_link_libraries(mpl_experiment PUBLIC mpl_core mpl_knowledge)
+if(WIN32)
+    target_link_libraries(mpl_experiment PUBLIC winhttp)
+endif()
+endif()
 
 add_library(mpl_demo STATIC
     src/examples/CoreDemo.cpp
@@ -85,14 +105,16 @@ add_executable(mplc
 )
 target_link_libraries(mplc PRIVATE mpl_demo)
 
+if(MPL_BUILD_EXPERIMENTAL_AI)
 add_executable(mpl_lab
     tools/mpl_lab/main.cpp
 )
-target_link_libraries(mpl_lab PRIVATE mpl_demo)
+target_link_libraries(mpl_lab PRIVATE mpl_demo mpl_knowledge mpl_experiment)
+endif()
 
 enable_testing()
 
-add_executable(mpl_tests
+set(MPL_TEST_SOURCES
     tests/main.cpp
     tests/test_core.cpp
     tests/test_ir.cpp
@@ -106,8 +128,13 @@ add_executable(mpl_tests
     tests/test_harmony.cpp
     tests/test_modules.cpp
     tests/test_observe.cpp
+    tests/test_collections.cpp
+    tests/test_ties.cpp
+    tests/test_sma.cpp
+    tests/test_stdlib.cpp
     tests/test_lab.cpp
     tests/test_delta.cpp
+    tests/test_knowledge.cpp
     tests/test_render.cpp
     tests/test_repair.cpp
     tests/test_stats.cpp
@@ -119,12 +146,33 @@ add_executable(mpl_tests
     tests/test_functions.cpp
     tests/test_golden.cpp
 )
-target_link_libraries(mpl_tests PRIVATE mpl_demo mpl_core)
+if(NOT MPL_BUILD_EXPERIMENTAL_AI)
+    list(REMOVE_ITEM MPL_TEST_SOURCES
+        tests/test_lab.cpp
+        tests/test_repair.cpp
+        tests/test_stats.cpp
+    )
+endif()
+add_executable(mpl_tests ${MPL_TEST_SOURCES})
+if(MPL_BUILD_EXPERIMENTAL_AI)
+    target_link_libraries(mpl_tests PRIVATE mpl_demo mpl_core mpl_knowledge mpl_experiment)
+else()
+    target_link_libraries(mpl_tests PRIVATE mpl_demo mpl_core mpl_knowledge)
+endif()
 target_compile_definitions(mpl_tests PRIVATE
     MPL_GOLDEN_DIR="${CMAKE_CURRENT_SOURCE_DIR}/tests/golden"
     MPL_TEST_OUTPUT_DIR="${CMAKE_CURRENT_BINARY_DIR}/test-output"
     MPL_EXAMPLES_DIR="${CMAKE_CURRENT_SOURCE_DIR}/examples"
     MPL_BENCH_DIR="${CMAKE_CURRENT_SOURCE_DIR}/bench"
+    MPL_KNOWLEDGE_DIR="${CMAKE_CURRENT_SOURCE_DIR}/knowledge"
 )
+if(MPL_BUILD_EXPERIMENTAL_AI)
+    target_compile_definitions(mpl_tests PRIVATE MPL_EXPERIMENTAL_AI=1)
+endif()
 
 add_test(NAME mpl_core_tests COMMAND mpl_tests)
+set_tests_properties(mpl_core_tests PROPERTIES
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+add_test(NAME mpl_architecture_independence
+    COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/verify_dependencies.cmake
+)

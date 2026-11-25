@@ -25,6 +25,12 @@ Total: 117 calls, 264,999 tokens, 169,828 ms measured latency.
 - Held-out tasks were not used in prompt tuning or in this run.
 - No artistic-quality evaluation was performed.
 
+## Offline Context Benchmark
+
+`context-accessibility-001/context-accessibility.json` is a completely offline
+comparison of Full/Domain/Adaptive contexts. It makes no model calls and does
+not measure model success.
+
 ## Formal held-out Pilot
 
 Held-out six-arm evaluation has **not** been executed. Do not merge these
@@ -35,3 +41,7 @@ development/smoke counts into held-out success rates.
 Each experiment result JSON includes per-arm status, tokens, latency, repair
 attempts and verification evidence. Task definitions and `bench/freeze.json`
 must not change between the recorded pilot and held-out evaluation.
+
+## V0.5.0-beta Offline Benchmarks
+
+- sma-001/results.json: 10 self-hosted MPL algorithms, 8 pass / 2 unsupported, zero model calls.

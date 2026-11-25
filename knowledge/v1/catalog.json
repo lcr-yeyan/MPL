@@ -1,0 +1,2042 @@
+{
+  "format": "mpl.knowledge-catalog",
+  "version": 1,
+  "units": [
+    {
+      "knowledgeId": "rhythm.hit-rest",
+      "version": "1",
+      "category": "Rhythm",
+      "kind": "executable",
+      "referenceKind": "syntax",
+      "description": "Construct a Rhythm from hit/rest events with exact rational durations.",
+      "inputTypes": [
+        "Duration"
+      ],
+      "outputTypes": [
+        "Rhythm"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "event durations are positive rationals",
+        "event count <= 4096"
+      ],
+      "allowedEffects": [
+        "creates Rhythm value"
+      ],
+      "requiredContext": [],
+      "dependencies": [],
+      "implementationRef": "syntax:rhythm-literal",
+      "observationRefs": [
+        "onset_set",
+        "event_count"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/basic.mpl",
+          "description": "Note literals exercise durations; Rhythm literal grammar is in LCP."
+        },
+        {
+          "role": "boundary",
+          "program": "bench/baselines/meter.mpl",
+          "description": "Seven eighth-note span."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/basic.mpl",
+          "observation": "event_count",
+          "comparator": "equals",
+          "expected": 4,
+          "tolerance": 0.0,
+          "note": "event count is deterministic"
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "rhythm",
+        "construction"
+      ]
+    },
+    {
+      "knowledgeId": "rhythm.subdivide",
+      "version": "1",
+      "category": "Rhythm",
+      "kind": "executable",
+      "referenceKind": "callable",
+      "description": "Split rhythm events on a finer grid.",
+      "inputTypes": [
+        "Rhythm",
+        "Duration"
+      ],
+      "outputTypes": [
+        "Rhythm"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "event onsets remain sorted",
+        "total duration preserved"
+      ],
+      "allowedEffects": [
+        "splits events",
+        "does not change pitch"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "rhythm.hit-rest"
+      ],
+      "implementationRef": "core:rhythm.subdivide",
+      "observationRefs": [
+        "onset_set",
+        "event_count"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/poly.mpl",
+          "description": "Subdivision is used indirectly by common-period construction."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/poly.mpl",
+          "observation": "event_count",
+          "comparator": "equals",
+          "expected": 12,
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "rhythm"
+      ]
+    },
+    {
+      "knowledgeId": "rhythm.rotate",
+      "version": "1",
+      "category": "Rhythm",
+      "kind": "executable",
+      "referenceKind": "callable",
+      "description": "Rotate a rhythm by a rational offset, wrapping across the period.",
+      "inputTypes": [
+        "Rhythm",
+        "Position"
+      ],
+      "outputTypes": [
+        "Rhythm"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "logical length unchanged",
+        "continuations are not new attacks"
+      ],
+      "allowedEffects": [
+        "changes onset phase"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "rhythm.hit-rest"
+      ],
+      "implementationRef": "core:rhythm.rotate",
+      "observationRefs": [
+        "onset_set",
+        "event_count"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/poly.mpl",
+          "description": "Period construction uses realign/rotation-like operations."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/poly.mpl",
+          "observation": "event_count",
+          "comparator": "equals",
+          "expected": 12,
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "rhythm"
+      ]
+    },
+    {
+      "knowledgeId": "rhythm.stretch",
+      "version": "1",
+      "category": "Rhythm",
+      "kind": "executable",
+      "referenceKind": "callable",
+      "description": "Scale all rhythm durations and onsets by a rational factor.",
+      "inputTypes": [
+        "Rhythm",
+        "Number"
+      ],
+      "outputTypes": [
+        "Rhythm"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "all event durations scale by the same factor"
+      ],
+      "allowedEffects": [
+        "changes duration and onsets"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "rhythm.hit-rest"
+      ],
+      "implementationRef": "core:rhythm.stretch",
+      "observationRefs": [
+        "normalized_rhythm",
+        "logical_extent"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/poly.mpl",
+          "description": "Common-period construction spans multiple cycles."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/poly.mpl",
+          "observation": "logical_extent",
+          "comparator": "equals",
+          "expected": "2",
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "rhythm"
+      ]
+    },
+    {
+      "knowledgeId": "rhythm.common-period",
+      "version": "1",
+      "category": "Rhythm",
+      "kind": "executable",
+      "referenceKind": "callable",
+      "description": "Compute the exact common period of two rhythms.",
+      "inputTypes": [
+        "Rhythm",
+        "Rhythm"
+      ],
+      "outputTypes": [
+        "Rhythm"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "period is an exact rational LCM"
+      ],
+      "allowedEffects": [
+        "returns a new Rhythm"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "rhythm.hit-rest"
+      ],
+      "implementationRef": "core:rhythm.commonPeriod",
+      "observationRefs": [
+        "onset_set",
+        "normalized_rhythm"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/poly.mpl",
+          "description": "3/8 and 1/2 rhythms align at 3/2 whole."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/poly.mpl",
+          "observation": "event_count",
+          "comparator": "equals",
+          "expected": 12,
+          "tolerance": 0.0,
+          "note": ""
+        },
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/poly.mpl",
+          "observation": "logical_extent",
+          "comparator": "equals",
+          "expected": "2",
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "rhythm",
+        "period"
+      ]
+    },
+    {
+      "knowledgeId": "rhythm.onset-relations",
+      "version": "1",
+      "category": "Rhythm",
+      "kind": "relation",
+      "referenceKind": "callable",
+      "description": "Compare onset sets across rhythms.",
+      "inputTypes": [
+        "Rhythm",
+        "Rhythm"
+      ],
+      "outputTypes": [
+        "Rhythm"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "relations only compare attacks, not sustained tails"
+      ],
+      "allowedEffects": [
+        "returns Rhythm"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "rhythm.hit-rest"
+      ],
+      "implementationRef": "core:rhythm.onsetSet",
+      "observationRefs": [
+        "onset_set"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/poly.mpl",
+          "description": "Overlay/union/intersect are used in MRP."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/poly.mpl",
+          "observation": "onset_set",
+          "comparator": "equals",
+          "expected": [
+            "0",
+            "1/8",
+            "1/4",
+            "3/8",
+            "1/2",
+            "5/8",
+            "3/4",
+            "7/8",
+            "1",
+            "9/8",
+            "5/4",
+            "11/8"
+          ],
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "rhythm",
+        "relation"
+      ]
+    },
+    {
+      "knowledgeId": "melody.motif",
+      "version": "1",
+      "category": "Melody",
+      "kind": "construction",
+      "referenceKind": "callable",
+      "description": "Build a short motif from ordered notes/rests.",
+      "inputTypes": [
+        "Pitch",
+        "Duration"
+      ],
+      "outputTypes": [
+        "Fragment"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [
+        "motif is a Fragment"
+      ],
+      "invariants": [],
+      "allowedEffects": [
+        "creates Fragment"
+      ],
+      "requiredContext": [],
+      "dependencies": [],
+      "implementationRef": "core:sequence",
+      "observationRefs": [
+        "pitch_sequence",
+        "event_count"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/theme.mpl",
+          "description": "Three-note cell."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/theme.mpl",
+          "observation": "event_count",
+          "comparator": "equals",
+          "expected": 6,
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "melody"
+      ]
+    },
+    {
+      "knowledgeId": "melody.transpose",
+      "version": "1",
+      "category": "Melody",
+      "kind": "executable",
+      "referenceKind": "callable",
+      "description": "Transpose a melody by semitones without changing rhythm.",
+      "inputTypes": [
+        "Fragment",
+        "Int"
+      ],
+      "outputTypes": [
+        "Fragment"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "rhythm and durations unchanged"
+      ],
+      "allowedEffects": [
+        "pitch change only"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "melody.motif"
+      ],
+      "implementationRef": "core:transpose",
+      "observationRefs": [
+        "pitch_sequence",
+        "onset_set"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/theme.mpl",
+          "description": "Diatonic answer is a form of transposition."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/theme.mpl",
+          "observation": "pitch_sequence",
+          "comparator": "equals",
+          "expected": [
+            [
+              60,
+              62,
+              64,
+              64,
+              65,
+              67
+            ]
+          ],
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "melody",
+        "transposition"
+      ]
+    },
+    {
+      "knowledgeId": "melody.diatonic-transpose",
+      "version": "1",
+      "category": "Melody",
+      "kind": "executable",
+      "referenceKind": "callable",
+      "description": "Transpose within a key by scale degrees, preserving chromatic alterations.",
+      "inputTypes": [
+        "Fragment",
+        "Int"
+      ],
+      "outputTypes": [
+        "Fragment"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "scale-degree interval preserved"
+      ],
+      "allowedEffects": [
+        "pitch change only"
+      ],
+      "requiredContext": [
+        "key"
+      ],
+      "dependencies": [
+        "melody.motif"
+      ],
+      "implementationRef": "core:diatonicTranspose",
+      "observationRefs": [
+        "pitch_sequence"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/theme.mpl",
+          "description": "Answer is +2 degrees."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/theme.mpl",
+          "observation": "event_count",
+          "comparator": "equals",
+          "expected": 6,
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "melody",
+        "key"
+      ]
+    },
+    {
+      "knowledgeId": "melody.range",
+      "version": "1",
+      "category": "Melody",
+      "kind": "relation",
+      "referenceKind": "observation",
+      "description": "Analyze the sounding range of a fragment.",
+      "inputTypes": [
+        "Fragment"
+      ],
+      "outputTypes": [
+        "Int"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "range = max MIDI - min MIDI"
+      ],
+      "allowedEffects": [
+        "read-only"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "melody.motif"
+      ],
+      "implementationRef": "observation:fragment_range",
+      "observationRefs": [
+        "fragment_range"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/theme.mpl",
+          "description": "Seven-semitone range."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/theme.mpl",
+          "observation": "fragment_range",
+          "comparator": "equals",
+          "expected": [
+            {
+              "track": "Piano",
+              "clip": "Theme",
+              "range": 7
+            }
+          ],
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "melody",
+        "analysis"
+      ]
+    },
+    {
+      "knowledgeId": "melody.rhythmic-variation",
+      "version": "1",
+      "category": "Melody",
+      "kind": "construction",
+      "referenceKind": "callable",
+      "description": "Vary a motif rhythm while preserving its pitch contour.",
+      "inputTypes": [
+        "Fragment",
+        "Duration"
+      ],
+      "outputTypes": [
+        "Fragment"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "pitch sequence may change only by declared transformation"
+      ],
+      "allowedEffects": [
+        "onset/duration changes"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "melody.motif",
+        "rhythm.subdivide"
+      ],
+      "implementationRef": "core:syncopate",
+      "observationRefs": [
+        "onset_set",
+        "pitch_sequence"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/replacement.mpl",
+          "description": "Rhythm replacement preserves harmony."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/replacement.mpl",
+          "observation": "event_count",
+          "comparator": "equals",
+          "expected": 8,
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "melody",
+        "variation"
+      ]
+    },
+    {
+      "knowledgeId": "harmony.chord",
+      "version": "1",
+      "category": "Harmony",
+      "kind": "executable",
+      "referenceKind": "callable",
+      "description": "Parse a chord symbol into root, intervals and pitch-class set.",
+      "inputTypes": [
+        "String"
+      ],
+      "outputTypes": [
+        "Chord"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [
+        "chord has at least one pitch class"
+      ],
+      "invariants": [
+        "root pitch class in [0,11]"
+      ],
+      "allowedEffects": [
+        "creates Chord"
+      ],
+      "requiredContext": [],
+      "dependencies": [],
+      "implementationRef": "core:chord",
+      "observationRefs": [
+        "harmonic_timeline"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/voicing.mpl",
+          "description": "Dm9 parsed."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/voicing.mpl",
+          "observation": "event_count",
+          "comparator": "equals",
+          "expected": 4,
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "harmony"
+      ]
+    },
+    {
+      "knowledgeId": "harmony.timeline",
+      "version": "1",
+      "category": "Harmony",
+      "kind": "executable",
+      "referenceKind": "syntax",
+      "description": "Build a shared harmony timeline of [start,start+duration) events.",
+      "inputTypes": [
+        "Position",
+        "Duration",
+        "Chord"
+      ],
+      "outputTypes": [
+        "Harmony"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "events do not need to cover the timeline",
+        "eventAt is right-continuous"
+      ],
+      "allowedEffects": [
+        "creates Harmony"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "harmony.chord"
+      ],
+      "implementationRef": "syntax:harmony-literal",
+      "observationRefs": [
+        "harmonic_timeline"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/replacement.mpl",
+          "description": "Dm9 then G7b9."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/replacement.mpl",
+          "observation": "event_count",
+          "comparator": "equals",
+          "expected": 8,
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "harmony",
+        "timeline"
+      ]
+    },
+    {
+      "knowledgeId": "harmony.query",
+      "version": "1",
+      "category": "Harmony",
+      "kind": "executable",
+      "referenceKind": "callable",
+      "description": "Query the chord active at a position.",
+      "inputTypes": [
+        "Harmony",
+        "Duration"
+      ],
+      "outputTypes": [
+        "Chord"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [
+        "gap returns none"
+      ],
+      "invariants": [
+        "later declaration wins ties"
+      ],
+      "allowedEffects": [
+        "read-only"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "harmony.timeline"
+      ],
+      "implementationRef": "core:chordAt",
+      "observationRefs": [
+        "harmonic_timeline"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/replacement.mpl",
+          "description": "Chord queries drive arpeggios."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/replacement.mpl",
+          "observation": "event_count",
+          "comparator": "equals",
+          "expected": 8,
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "harmony",
+        "query"
+      ]
+    },
+    {
+      "knowledgeId": "harmony.voicing",
+      "version": "1",
+      "category": "Harmony",
+      "kind": "executable",
+      "referenceKind": "callable",
+      "description": "Construct a concrete voicing from a chord, range, voice count and inversion.",
+      "inputTypes": [
+        "Chord",
+        "Pitch",
+        "Pitch",
+        "Int",
+        "Int",
+        "Int"
+      ],
+      "outputTypes": [
+        "Voicing"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "voices low-to-high",
+        "all pitches chord tones"
+      ],
+      "allowedEffects": [
+        "creates Voicing"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "harmony.chord"
+      ],
+      "implementationRef": "core:voicing",
+      "observationRefs": [
+        "pitch_sequence",
+        "fragment_range"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/voicing.mpl",
+          "description": "Dm9 four-voice close voicing."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/voicing.mpl",
+          "observation": "pitch_sequence",
+          "comparator": "equals",
+          "expected": [
+            [
+              50,
+              53,
+              57,
+              60
+            ]
+          ],
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "voicing"
+      ]
+    },
+    {
+      "knowledgeId": "harmony.arp",
+      "version": "1",
+      "category": "Harmony",
+      "kind": "construction",
+      "referenceKind": "stdlib",
+      "description": "Combine a rhythm with a queried chord voicing at a bar/time.",
+      "inputTypes": [
+        "Rhythm",
+        "Harmony",
+        "Pitch",
+        "Pitch",
+        "Int"
+      ],
+      "outputTypes": [
+        "Fragment"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [
+        "all notes are chord tones"
+      ],
+      "invariants": [],
+      "allowedEffects": [
+        "creates Fragment"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "harmony.query",
+        "harmony.voicing",
+        "rhythm.hit-rest"
+      ],
+      "implementationRef": "stdlib:arpBarAt",
+      "observationRefs": [
+        "pitch_sequence",
+        "onset_set"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/replacement.mpl",
+          "description": "Arpeggiated harmonic bars."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/replacement.mpl",
+          "observation": "event_count",
+          "comparator": "equals",
+          "expected": 8,
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "harmony",
+        "rhythm"
+      ]
+    },
+    {
+      "knowledgeId": "voicing.inversion",
+      "version": "1",
+      "category": "Voicing",
+      "kind": "executable",
+      "referenceKind": "callable",
+      "description": "Select a chord inversion and place it in a range.",
+      "inputTypes": [
+        "Chord",
+        "Pitch",
+        "Pitch",
+        "Int",
+        "Int"
+      ],
+      "outputTypes": [
+        "Voicing"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "bass pitch class matches selected inversion"
+      ],
+      "allowedEffects": [
+        "creates Voicing"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "harmony.chord"
+      ],
+      "implementationRef": "core:voicing",
+      "observationRefs": [
+        "pitch_sequence"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/voicing.mpl",
+          "description": "Root position Dm9."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/voicing.mpl",
+          "observation": "pitch_sequence",
+          "comparator": "equals",
+          "expected": [
+            [
+              50,
+              53,
+              57,
+              60
+            ]
+          ],
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "voicing"
+      ]
+    },
+    {
+      "knowledgeId": "voicing.range",
+      "version": "1",
+      "category": "Voicing",
+      "kind": "relation",
+      "referenceKind": "callable",
+      "description": "Check that all voicing notes are inside the requested range.",
+      "inputTypes": [
+        "Voicing",
+        "Pitch",
+        "Pitch"
+      ],
+      "outputTypes": [
+        "Bool"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "low <= every note <= high"
+      ],
+      "allowedEffects": [
+        "read-only"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "voicing.inversion"
+      ],
+      "implementationRef": "core:voicing",
+      "observationRefs": [
+        "fragment_range"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/voicing.mpl",
+          "description": "D3..D5."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/voicing.mpl",
+          "observation": "fragment_range",
+          "comparator": "equals",
+          "expected": [
+            {
+              "track": "Piano",
+              "clip": "Voicing",
+              "range": 10
+            }
+          ],
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "voicing",
+        "range"
+      ]
+    },
+    {
+      "knowledgeId": "voicing.spacing",
+      "version": "1",
+      "category": "Voicing",
+      "kind": "verification",
+      "referenceKind": "callable",
+      "description": "Check maximum adjacent spacing in a voicing.",
+      "inputTypes": [
+        "Voicing",
+        "Int"
+      ],
+      "outputTypes": [
+        "Bool"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "adjacent pitch distance <= maxSpacing"
+      ],
+      "allowedEffects": [
+        "read-only"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "voicing.inversion"
+      ],
+      "implementationRef": "core:voicing",
+      "observationRefs": [
+        "voice_movement"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/voicing.mpl",
+          "description": "maxSpacing 12."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/voicing.mpl",
+          "observation": "pitch_sequence",
+          "comparator": "equals",
+          "expected": [
+            [
+              50,
+              53,
+              57,
+              60
+            ]
+          ],
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "voicing"
+      ]
+    },
+    {
+      "knowledgeId": "voicing.voice-leading",
+      "version": "1",
+      "category": "Voicing",
+      "kind": "construction",
+      "referenceKind": "callable",
+      "description": "Search a bounded voice-leading successor minimizing total movement.",
+      "inputTypes": [
+        "[Pitch]",
+        "Chord",
+        "Pitch",
+        "Pitch",
+        "Int",
+        "Int",
+        "Bool"
+      ],
+      "outputTypes": [
+        "Voicing"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "budget exhaustion is not unsatisfiability"
+      ],
+      "allowedEffects": [
+        "creates Voicing"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "voicing.inversion"
+      ],
+      "implementationRef": "core:voiceLead",
+      "observationRefs": [
+        "voice_movement",
+        "pitch_sequence"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/voice-leading.mpl",
+          "description": "Dm9 -> G7."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/voice-leading.mpl",
+          "observation": "pitch_sequence",
+          "comparator": "equals",
+          "expected": [
+            [
+              50,
+              53,
+              57,
+              60,
+              50,
+              53,
+              55,
+              59
+            ]
+          ],
+          "tolerance": 0.0,
+          "note": ""
+        },
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/voice-leading.mpl",
+          "observation": "event_count",
+          "comparator": "equals",
+          "expected": 8,
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "voicing",
+        "optimization"
+      ]
+    },
+    {
+      "knowledgeId": "voicing.crossing",
+      "version": "1",
+      "category": "Voicing",
+      "kind": "verification",
+      "referenceKind": "callable",
+      "description": "Count voice crossings in a low-to-high voicing.",
+      "inputTypes": [
+        "Voicing"
+      ],
+      "outputTypes": [
+        "Int"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "crossings >= 0"
+      ],
+      "allowedEffects": [
+        "read-only"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "voicing.voice-leading"
+      ],
+      "implementationRef": "core:voicingCrossings",
+      "observationRefs": [
+        "voice_movement"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/voice-leading.mpl",
+          "description": "No crossing."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/voice-leading.mpl",
+          "observation": "event_count",
+          "comparator": "equals",
+          "expected": 8,
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "voicing",
+        "analysis"
+      ]
+    },
+    {
+      "knowledgeId": "arrangement.section",
+      "version": "1",
+      "category": "Arrangement",
+      "kind": "construction",
+      "referenceKind": "syntax",
+      "description": "Organize clips into a metered section with an arrangement.",
+      "inputTypes": [
+        "Position",
+        "Duration",
+        "Clip"
+      ],
+      "outputTypes": [
+        "Section"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "section duration ends on a bar boundary"
+      ],
+      "allowedEffects": [
+        "creates arrangement structure"
+      ],
+      "requiredContext": [],
+      "dependencies": [],
+      "implementationRef": "syntax:section",
+      "observationRefs": [
+        "logical_extent",
+        "track_symbolic_events"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/basic.mpl",
+          "description": "One-bar section."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/basic.mpl",
+          "observation": "event_count",
+          "comparator": "equals",
+          "expected": 4,
+          "tolerance": 0.0,
+          "note": ""
+        },
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/basic.mpl",
+          "observation": "logical_extent",
+          "comparator": "equals",
+          "expected": "1",
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "arrangement"
+      ]
+    },
+    {
+      "knowledgeId": "arrangement.theme-reuse",
+      "version": "1",
+      "category": "Arrangement",
+      "kind": "construction",
+      "referenceKind": "callable",
+      "description": "Reuse a theme across sections/clips.",
+      "inputTypes": [
+        "Fragment",
+        "Section"
+      ],
+      "outputTypes": [
+        "Section"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "reuse may change instance but not source value"
+      ],
+      "allowedEffects": [
+        "adds clip instances"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "melody.motif",
+        "arrangement.section"
+      ],
+      "implementationRef": "core:sequence",
+      "observationRefs": [
+        "pitch_sequence"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/theme.mpl",
+          "description": "Cell and answer."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/theme.mpl",
+          "observation": "event_count",
+          "comparator": "equals",
+          "expected": 6,
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "arrangement",
+        "motif"
+      ]
+    },
+    {
+      "knowledgeId": "arrangement.rhythm-replacement",
+      "version": "1",
+      "category": "Arrangement",
+      "kind": "construction",
+      "referenceKind": "stdlib",
+      "description": "Replace rhythm while preserving harmony and logical extent.",
+      "inputTypes": [
+        "Fragment",
+        "Rhythm"
+      ],
+      "outputTypes": [
+        "Fragment"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "harmony timeline unchanged"
+      ],
+      "allowedEffects": [
+        "onset set changes"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "harmony.arp",
+        "arrangement.section"
+      ],
+      "implementationRef": "stdlib:arpBarAt",
+      "observationRefs": [
+        "onset_set",
+        "harmonic_timeline"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/replacement.mpl",
+          "description": "Base uses quarter-note arpeggio."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/replacement.mpl",
+          "observation": "event_count",
+          "comparator": "equals",
+          "expected": 8,
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "arrangement",
+        "replacement"
+      ]
+    },
+    {
+      "knowledgeId": "arrangement.harmony-replacement",
+      "version": "1",
+      "category": "Arrangement",
+      "kind": "construction",
+      "referenceKind": "stdlib",
+      "description": "Replace harmony while preserving rhythm.",
+      "inputTypes": [
+        "Fragment",
+        "Harmony"
+      ],
+      "outputTypes": [
+        "Fragment"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "normalized rhythm unchanged"
+      ],
+      "allowedEffects": [
+        "pitch changes only"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "harmony.arp",
+        "arrangement.section"
+      ],
+      "implementationRef": "stdlib:voicedBarAt",
+      "observationRefs": [
+        "harmonic_timeline",
+        "normalized_rhythm"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/replacement.mpl",
+          "description": "HAlt substitutes chords."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/replacement.mpl",
+          "observation": "event_count",
+          "comparator": "equals",
+          "expected": 8,
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "arrangement",
+        "replacement"
+      ]
+    },
+    {
+      "knowledgeId": "arrangement.local-edit",
+      "version": "1",
+      "category": "Arrangement",
+      "kind": "construction",
+      "referenceKind": "task",
+      "description": "Edit a local note while preserving frame and identity.",
+      "inputTypes": [
+        "Fragment",
+        "Position",
+        "Pitch"
+      ],
+      "outputTypes": [
+        "Fragment"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "unmodified identifiers preserved"
+      ],
+      "allowedEffects": [
+        "one note changes"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "arrangement.section"
+      ],
+      "implementationRef": "task:frame",
+      "observationRefs": [
+        "pitch_sequence",
+        "onset_set",
+        "logical_extent"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/basic.mpl",
+          "description": "Single-note local edit target."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/basic.mpl",
+          "observation": "event_count",
+          "comparator": "equals",
+          "expected": 4,
+          "tolerance": 0.0,
+          "note": ""
+        },
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/basic.mpl",
+          "observation": "pitch_sequence",
+          "comparator": "equals",
+          "expected": [
+            [
+              60,
+              62,
+              64,
+              65
+            ]
+          ],
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "arrangement",
+        "edit"
+      ]
+    },
+    {
+      "knowledgeId": "arrangement.motivic-development",
+      "version": "1",
+      "category": "Arrangement",
+      "kind": "construction",
+      "referenceKind": "deferred",
+      "description": "Develop a motif across sections without a complete algorithm.",
+      "inputTypes": [
+        "Fragment"
+      ],
+      "outputTypes": [
+        "Section"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [],
+      "allowedEffects": [],
+      "requiredContext": [],
+      "dependencies": [
+        "melody.motif"
+      ],
+      "implementationRef": "deferred:motivic-development",
+      "observationRefs": [
+        "pitch_sequence"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/theme.mpl",
+          "description": "Motif/answer only; full development is deferred."
+        }
+      ],
+      "checks": [],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "deferred",
+      "unsupportedReason": "No general motivic development algorithm in V0.4; defer.",
+      "tags": [
+        "arrangement",
+        "motif"
+      ]
+    },
+    {
+      "knowledgeId": "production.gain",
+      "version": "1",
+      "category": "Production",
+      "kind": "executable",
+      "referenceKind": "syntax",
+      "description": "Set track gain in dB.",
+      "inputTypes": [
+        "Track",
+        "Number"
+      ],
+      "outputTypes": [
+        "Track"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "gain applies to the track strip"
+      ],
+      "allowedEffects": [
+        "mix parameter"
+      ],
+      "requiredContext": [],
+      "dependencies": [],
+      "implementationRef": "syntax:track-parameter.gain",
+      "observationRefs": [
+        "track_symbolic_events"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/mix.mpl",
+          "description": "Track gain 0 dB."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/mix.mpl",
+          "observation": "event_count",
+          "comparator": "equals",
+          "expected": 4,
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "production"
+      ]
+    },
+    {
+      "knowledgeId": "production.pan",
+      "version": "1",
+      "category": "Production",
+      "kind": "executable",
+      "referenceKind": "syntax",
+      "description": "Set track pan in [-1,1].",
+      "inputTypes": [
+        "Track",
+        "Number"
+      ],
+      "outputTypes": [
+        "Track"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "pan range -1..1"
+      ],
+      "allowedEffects": [
+        "mix parameter"
+      ],
+      "requiredContext": [],
+      "dependencies": [],
+      "implementationRef": "syntax:track-parameter.pan",
+      "observationRefs": [
+        "track_symbolic_events"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/mix.mpl",
+          "description": "Default pan."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/mix.mpl",
+          "observation": "event_count",
+          "comparator": "equals",
+          "expected": 4,
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "production"
+      ]
+    },
+    {
+      "knowledgeId": "production.automation",
+      "version": "1",
+      "category": "Production",
+      "kind": "executable",
+      "referenceKind": "syntax",
+      "description": "Bind a temporal curve to a track parameter.",
+      "inputTypes": [
+        "Track",
+        "Curve"
+      ],
+      "outputTypes": [
+        "Automation"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "automation domain matches curve domain"
+      ],
+      "allowedEffects": [
+        "time-varying parameter"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "production.gain"
+      ],
+      "implementationRef": "syntax:automation",
+      "observationRefs": [
+        "track_symbolic_events"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/mix.mpl",
+          "description": "Volume automation."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/mix.mpl",
+          "observation": "event_count",
+          "comparator": "equals",
+          "expected": 4,
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "production",
+        "automation"
+      ]
+    },
+    {
+      "knowledgeId": "production.processor-chain",
+      "version": "1",
+      "category": "Production",
+      "kind": "construction",
+      "referenceKind": "syntax",
+      "description": "Insert processors into a track/bus/master chain.",
+      "inputTypes": [
+        "Track",
+        "Processor"
+      ],
+      "outputTypes": [
+        "Track"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "graph remains acyclic"
+      ],
+      "allowedEffects": [
+        "signal graph"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "production.gain"
+      ],
+      "implementationRef": "syntax:processor-chain",
+      "observationRefs": [
+        "track_symbolic_events"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/mix.mpl",
+          "description": "Reference mix has a track strip."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/mix.mpl",
+          "observation": "event_count",
+          "comparator": "equals",
+          "expected": 4,
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "production",
+        "dsp"
+      ]
+    },
+    {
+      "knowledgeId": "production.mastering-target",
+      "version": "1",
+      "category": "Production",
+      "kind": "verification",
+      "referenceKind": "benchmark",
+      "description": "Validate loudness/peak goals against rendered audio.",
+      "inputTypes": [
+        "Audio"
+      ],
+      "outputTypes": [
+        "MasteringStatus"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [
+        "audio observation requires trusted WAV"
+      ],
+      "allowedEffects": [
+        "mastering status"
+      ],
+      "requiredContext": [],
+      "dependencies": [
+        "production.gain",
+        "production.processor-chain"
+      ],
+      "implementationRef": "benchmark:mastering",
+      "observationRefs": [
+        "sample_peak",
+        "true_peak",
+        "integrated_loudness"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/mastering.mpl",
+          "description": "Reference mastering baseline."
+        }
+      ],
+      "checks": [
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/mastering.mpl",
+          "observation": "event_count",
+          "comparator": "equals",
+          "expected": 4,
+          "tolerance": 0.0,
+          "note": ""
+        },
+        {
+          "phase": "postcondition",
+          "program": "bench/baselines/mastering.mpl",
+          "observation": "logical_extent",
+          "comparator": "equals",
+          "expected": "2",
+          "tolerance": 0.0,
+          "note": ""
+        }
+      ],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "verified",
+      "unsupportedReason": "",
+      "tags": [
+        "production",
+        "mastering"
+      ]
+    },
+    {
+      "knowledgeId": "practice.voice-leading-preference",
+      "version": "1",
+      "category": "Voicing",
+      "kind": "practice",
+      "referenceKind": "callable",
+      "description": "Prefer common tones and stepwise motion when equally valid; advisory only.",
+      "inputTypes": [
+        "[Pitch]",
+        "Chord"
+      ],
+      "outputTypes": [
+        "Voicing"
+      ],
+      "parameters": [],
+      "preconditions": [],
+      "postconditions": [],
+      "invariants": [],
+      "allowedEffects": [],
+      "requiredContext": [],
+      "dependencies": [
+        "voicing.voice-leading"
+      ],
+      "implementationRef": "core:voiceLead",
+      "observationRefs": [
+        "voice_movement"
+      ],
+      "examples": [
+        {
+          "role": "legal",
+          "program": "bench/baselines/voice-leading.mpl",
+          "description": "Advisory preference, not a hard filter."
+        }
+      ],
+      "checks": [],
+      "source": "MPL V0.4.0 Final frozen semantics / Stdlib / benchmark",
+      "license": "MPL project",
+      "verificationStatus": "unverified",
+      "unsupportedReason": "",
+      "tags": [
+        "practice",
+        "voicing"
+      ]
+    }
+  ]
+}

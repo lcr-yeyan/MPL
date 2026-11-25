@@ -1,5 +1,10 @@
 #include "mpl/Compiler.hpp"
 #include "mpl/frontend/Frontend.hpp"
+#include "mpl/knowledge/AdaptiveContext.hpp"
+#include "mpl/knowledge/Knowledge.hpp"
+#include "mpl/knowledge/KnowledgeResolver.hpp"
+#include "mpl/knowledge/KnowledgeVerifier.hpp"
+#include "mpl/knowledge/TaskRequirements.hpp"
 #include "mpl/lab/Harness.hpp"
 #include "mpl/lab/ModelAdapters.hpp"
 #include "mpl/lab/Repair.hpp"
@@ -15,6 +20,7 @@
 #include <fstream>
 #include <iostream>
 #include <iterator>
+#include <set>
 #include <string>
 #include <chrono>
 
@@ -294,6 +300,306 @@ int verifyFlat(const std::filesystem::path& task, const std::filesystem::path& f
     return result.status == "pass" ? 0 : 1;
 }
 
+int knowledgeCommand(const std::vector<std::filesystem::path>& args) {
+    if (args.empty()) {
+        std::cerr << "knowledge requires list/describe/verify/resolve\n";
+        return 1;
+    }
+    const std::string sub = args[0].string();
+    mpl::KnowledgeRegistry registry;
+    std::string error;
+    if (!registry.loadCatalog("knowledge/v1/catalog.json", error)) {
+        std::cerr << "knowledge: " << error << "\n";
+        return 1;
+    }
+    if (sub == "list") {
+        if (args.size() > 1 && args[1].string() == "--json") {
+            mpl::JsonWriter json;
+            json.beginObject();
+            json.key("format").value("mpl.knowledge-list");
+            json.key("version").value(1);
+            json.key("units").beginArray();
+            for (const mpl::KnowledgeUnit& unit : registry.units()) {
+                json.beginObject();
+                json.key("knowledgeId").value(unit.knowledgeId);
+                json.key("version").value(unit.version);
+                json.key("category").value(unit.category);
+                json.key("kind").value(unit.kind);
+                json.key("verificationStatus").value(unit.verificationStatus);
+                json.key("contentHash").value(unit.contentHash);
+                json.key("resolvedHash").value(unit.resolvedHash);
+                json.endObject();
+            }
+            json.endArray();
+            json.endObject();
+            std::cout << json.take() << "\n";
+            return 0;
+        }
+        for (const mpl::KnowledgeUnit& unit : registry.units()) {
+            std::cout << unit.knowledgeId << "@" << unit.version << " "
+                      << unit.category << " " << unit.kind << " "
+                      << unit.verificationStatus << "\n";
+        }
+        return 0;
+    }
+    if (sub == "describe" && args.size() > 1) {
+        const mpl::KnowledgeUnit* unit = registry.resolve(args[1].string());
+        if (unit == nullptr) {
+            std::cerr << "knowledge: unknown id\n";
+            return 1;
+        }
+        std::cout << mpl::knowledgeCanonicalJson(*unit, true) << "\n";
+        return 0;
+    }
+    if (sub == "verify" && args.size() > 1) {
+        const mpl::KnowledgeUnit* unit = registry.resolve(args[1].string());
+        if (unit == nullptr) {
+            std::cerr << "knowledge: unknown id\n";
+            return 1;
+        }
+        const mpl::KnowledgeVerification verification =
+            mpl::verifyKnowledge(*unit, registry);
+        std::cout << verification.toJson() << "\n";
+        return verification.status == mpl::KnowledgeCheckStatus::Pass ? 0 : 1;
+    }
+    if (sub == "resolve" && args.size() > 1) {
+        mpl::TaskParseResult parsed =
+            mpl::parseTaskJson(readText(args[1]));
+        if (!parsed.ok) {
+            std::cerr << "knowledge: " << parsed.error << "\n";
+            return 1;
+        }
+        const std::filesystem::path baselinePath =
+            std::filesystem::path(parsed.task.baselinePath).is_relative()
+                ? args[1].parent_path() / parsed.task.baselinePath
+                : std::filesystem::path(parsed.task.baselinePath);
+        const std::string baseline = readText(baselinePath);
+        const mpl::TaskRequirementSet requirements =
+            mpl::analyzeTaskRequirements(parsed.task, baseline);
+        const mpl::KnowledgeResolution resolution =
+            mpl::resolveKnowledge(requirements, registry);
+        mpl::JsonWriter wrapper;
+        wrapper.beginObject();
+        wrapper.key("format").value("mpl.task-analysis");
+        wrapper.key("version").value(1);
+        wrapper.key("requirements").value(requirements.toJson());
+        wrapper.key("resolution").value(resolution.toJson());
+        wrapper.endObject();
+        std::cout << wrapper.take() << "\n";
+        return 0;
+    }
+    std::cerr << "knowledge: unknown subcommand\n";
+    return 1;
+}
+
+int contextCommand(const std::vector<std::filesystem::path>& args) {
+    if (args.size() < 2) {
+        std::cerr << "context requires build/compare\n";
+        return 1;
+    }
+    const std::string sub = args[0].string();
+    mpl::KnowledgeRegistry registry;
+    std::string error;
+    if (!registry.loadCatalog("knowledge/v1/catalog.json", error)) {
+        std::cerr << "context: " << error << "\n";
+        return 1;
+    }
+    auto loadTask = [&](const std::filesystem::path& path, mpl::Task& task) {
+        mpl::TaskParseResult parsed = mpl::parseTaskJson(readText(path));
+        if (!parsed.ok) {
+            return false;
+        }
+        task = parsed.task;
+        std::filesystem::path baseline(task.baselinePath);
+        if (baseline.is_relative()) {
+            baseline = path.parent_path() / baseline;
+        }
+        task.baselinePath = baseline.lexically_normal().generic_string();
+        return true;
+    };
+    if (sub == "build" && args.size() >= 4) {
+        mpl::Task task;
+        if (!loadTask(args[1], task)) {
+            std::cerr << "context: invalid task\n";
+            return 1;
+        }
+        const std::string modeText = args[2].string();
+        mpl::ContextBuildOptions options;
+        options.mode = modeText == "full" ? mpl::ContextMode::Full
+                       : modeText == "domain" ? mpl::ContextMode::Domain
+                                                : mpl::ContextMode::Adaptive;
+        options.foundationPath = "lcp/v1.1/contexts/L1.md";
+        options.fullPath = "lcp/v1.1/contexts/Core.md";
+        if (args.size() > 4) {
+            options.tokenBudget = static_cast<std::size_t>(std::stoi(args[4].string()));
+        }
+        if (args.size() > 5) {
+            options.domain = args[5].string();
+        }
+        const std::string baseline = readText(task.baselinePath);
+        const mpl::TaskRequirementSet requirements =
+            mpl::analyzeTaskRequirements(task, baseline);
+        const mpl::KnowledgeResolution resolution =
+            mpl::resolveKnowledge(requirements, registry, options.domain);
+        const mpl::ContextBuildReport report =
+            mpl::buildTaskContext(task, resolution, registry, options);
+        std::ofstream(args[3], std::ios::binary | std::ios::trunc) << report.content;
+        std::ofstream(std::string(args[3].string()) + ".report.json", std::ios::binary)
+            << report.toJson();
+        std::cout << report.toJson() << "\n";
+        return report.budgetStatus == "insufficient-budget" ? 1 : 0;
+    }
+    if (sub == "validate" && args.size() >= 3) {
+        const std::string context = readText(args[2]);
+        const bool hasTask = context.find("Task Contract") != std::string::npos;
+        const bool hasLanguage = context.find("MPL") != std::string::npos;
+        const bool ok = !context.empty() && hasTask && hasLanguage;
+        mpl::JsonWriter json;
+        json.beginObject();
+        json.key("format").value("mpl.context-validation");
+        json.key("version").value(1);
+        json.key("status").value(ok ? "pass" : "fail");
+        json.key("bytes").value(static_cast<std::int64_t>(context.size()));
+        json.key("sha256").value(mpl::sha256Hex(context));
+        json.key("hasTaskContract").value(hasTask);
+        json.key("hasLanguage").value(hasLanguage);
+        json.endObject();
+        std::cout << json.take() << "\n";
+        return ok ? 0 : 1;
+    }
+    if (sub == "compare" && args.size() >= 3) {        mpl::JsonValue config;
+        std::string parseError;
+        if (!mpl::parseJson(readText(args[1]), config, parseError) ||
+            !config.isObject()) {
+            std::cerr << "context: invalid compare config\n";
+            return 1;
+        }
+        const mpl::JsonValue* tasks = config.find("tasks");
+        if (tasks == nullptr || !tasks->isArray()) {
+            std::cerr << "context: compare config requires tasks\n";
+            return 1;
+        }
+        mpl::JsonWriter output;
+        output.beginObject();
+        output.key("format").value("mpl.context-accessibility");
+        output.key("version").value(1);
+        output.key("tasks").beginArray();
+        std::size_t totalFullBytes = 0;
+        std::size_t totalDomainBytes = 0;
+        std::size_t totalAdaptiveBytes = 0;
+        std::size_t fullCount = 0;
+        std::size_t domainCount = 0;
+        std::size_t adaptiveCount = 0;
+        for (const mpl::JsonValue& entry : tasks->array) {
+            if (!entry.isObject()) continue;
+            const mpl::JsonValue* taskValue = entry.find("task");
+            if (taskValue == nullptr || !taskValue->isString()) continue;
+            const std::filesystem::path taskPath =
+                std::filesystem::path(args[1]).parent_path() / taskValue->text;
+            mpl::Task task;
+            if (!loadTask(taskPath, task)) continue;
+            const std::string domain = entry.find("domain") != nullptr &&
+                                               entry.find("domain")->isString()
+                                           ? entry.find("domain")->text
+                                           : "";
+            const std::string baseline = readText(task.baselinePath);
+            const mpl::TaskRequirementSet requirements =
+                mpl::analyzeTaskRequirements(task, baseline);
+            const mpl::KnowledgeResolution resolution =
+                mpl::resolveKnowledge(requirements, registry, domain);
+            output.beginObject();
+            output.key("task").value(task.id);
+            output.key("domain").value(domain);
+            output.key("modes").beginArray();
+            for (const mpl::ContextMode mode :
+                 {mpl::ContextMode::Full, mpl::ContextMode::Domain,
+                  mpl::ContextMode::Adaptive}) {
+                mpl::ContextBuildOptions options;
+                options.mode = mode;
+                options.domain = domain;
+                options.tokenBudget = 3000;
+                options.foundationPath = "lcp/v1.1/contexts/L1.md";
+                options.fullPath = "lcp/v1.1/contexts/Core.md";
+                const mpl::ContextBuildReport first =
+                    mpl::buildTaskContext(task, resolution, registry, options);
+                const mpl::ContextBuildReport second =
+                    mpl::buildTaskContext(task, resolution, registry, options);
+                std::set<std::string> required;
+                for (const mpl::KnowledgeUnit* unit : registry.byCategory(domain)) {
+                    required.insert(unit->knowledgeId);
+                }
+                std::set<std::string> selected(first.selectedKnowledge.begin(),
+                                               first.selectedKnowledge.end());
+                std::size_t covered = 0;
+                for (const std::string& id : required) {
+                    covered += selected.count(id) != 0 ? 1 : 0;
+                }
+                bool depsComplete = true;
+                for (const std::string& id : selected) {
+                    const mpl::KnowledgeUnit* unit = registry.resolve(id);
+                    if (unit == nullptr) continue;
+                    for (const std::string& dependency : unit->dependencies) {
+                        depsComplete = depsComplete && selected.count(dependency) != 0;
+                    }
+                }
+                output.beginObject();
+                output.key("mode").value(std::string(mpl::contextModeName(mode)));
+                output.key("bytes").value(static_cast<std::int64_t>(first.bytes));
+                output.key("estimatedTokens")
+                    .value(static_cast<std::int64_t>(first.estimatedTokens));
+                output.key("budgetStatus").value(first.budgetStatus);
+                output.key("overflow").value(first.overflow);
+                output.key("coverage")
+                    .value(required.empty() ? 1.0
+                                            : static_cast<double>(covered) /
+                                                  static_cast<double>(required.size()));
+                output.key("dependencyComplete").value(depsComplete);
+                output.key("duplicateLines")
+                    .value(static_cast<std::int64_t>(first.duplicateLines));
+                output.key("elapsedMilliseconds").value(first.elapsedMilliseconds);
+                output.key("deterministic")
+                    .value(first.contextHash == second.contextHash);
+                output.key("contextHash").value(first.contextHash);
+                output.key("selectedKnowledge")
+                    .value(static_cast<std::int64_t>(first.selectedKnowledge.size()));
+                std::size_t irrelevant = 0;
+                for (const std::string& id : first.selectedKnowledge) {
+                    irrelevant += required.count(id) == 0 ? 1 : 0;
+                }
+                output.key("irrelevantKnowledge")
+                    .value(static_cast<std::int64_t>(irrelevant));
+                output.key("excludedKnowledge")
+                    .value(static_cast<std::int64_t>(first.excludedKnowledge.size()));
+                output.endObject();
+                if (mode == mpl::ContextMode::Full) {
+                    totalFullBytes += first.bytes;
+                    ++fullCount;
+                } else if (mode == mpl::ContextMode::Domain) {
+                    totalDomainBytes += first.bytes;
+                    ++domainCount;
+                } else {
+                    totalAdaptiveBytes += first.bytes;
+                    ++adaptiveCount;
+                }
+            }
+            output.endArray();
+            output.endObject();
+        }
+        output.endArray();
+        output.key("averages").beginObject();
+        output.key("fullBytes").value(fullCount == 0 ? 0 : static_cast<std::int64_t>(totalFullBytes / fullCount));
+        output.key("domainBytes").value(domainCount == 0 ? 0 : static_cast<std::int64_t>(totalDomainBytes / domainCount));
+        output.key("adaptiveBytes").value(adaptiveCount == 0 ? 0 : static_cast<std::int64_t>(totalAdaptiveBytes / adaptiveCount));
+        output.endObject();
+        output.endObject();
+        std::ofstream(args[2], std::ios::binary | std::ios::trunc) << output.take();
+        std::cout << readText(args[2]) << "\n";
+        return 0;
+    }
+    std::cerr << "context: unknown subcommand\n";
+    return 1;
+}
+
 int statistics(const std::filesystem::path& path) {
     std::vector<std::string> files;
     if (std::filesystem::is_directory(path)) {
@@ -342,7 +648,9 @@ int main(int argc, char** argv) {
                      "mpl_lab run <experiment.json>\n"
                      "mpl_lab stats <results-dir-or-json>\n"
                      "mpl_lab freeze-check <freeze.json>\n"
-                     "mpl_lab model <arm> <task> <prompt> <context> <outdir> [attempts] [label]\n";
+                     "mpl_lab model <arm> <task> <prompt> <context> <outdir> [attempts] [label]\n"
+                     "mpl_lab knowledge list|describe|verify|resolve ...\n"
+                     "mpl_lab context build|compare ...\n";
         return 1;
     }
     const std::string command = argv[1];
@@ -415,6 +723,12 @@ int main(int argc, char** argv) {
         return modelRun(positionalArgs[0].string(), positionalArgs[1],
                         positionalArgs[2], positionalArgs[3], positionalArgs[4],
                         attempts, label);
+    }
+    if (command == "knowledge") {
+        return knowledgeCommand(positionalArgs);
+    }
+    if (command == "context") {
+        return contextCommand(positionalArgs);
     }
     std::cerr << "mpl_lab: unknown command\n";
     return 1;

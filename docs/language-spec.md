@@ -749,3 +749,58 @@ export fn helper(...) -> Fragment { ... }
 
 LLM 集成、情绪映射、Taste 学习、通用约束求解、完整泛型、任意递归、完整插件宿主、
 SoundBoxer Adapter、大规模 DSP、完整微分音/调律、Tie、完整模块命名空间/包管理器。
+
+## 17. V0.5.0-beta：集合访问与显式 Tie
+
+### 17.1 列表索引
+
+```text
+P[0]          // 第 0 个元素
+P[i]          // 0 <= i < length
+```
+
+- 0 起点；索引必须为 Int；
+- 负索引、越界、非列表均为诊断；
+- 不支持负索引回绕；
+- 值语义，结果独立；列表不可变。
+
+### 17.2 列表切片
+
+```text
+P[1:3]        // [1,3)
+P[:2]         // [0,2)
+P[1:]         // [1,length)
+P[:]          // 副本
+```
+
+- 半开区间；start/end 缺省为 0/length；
+- 负边界、start > end 报错；
+- start 越过 length 报错；end 越过 length 被 clamp；
+- 不支持 step/负步长；
+- 结果为新列表。
+
+音乐时间切片不是本语法；Duration/Rhythm 的 span 语义独立。
+
+### 17.3 Tie
+
+```text
+tie(first, second)
+```
+
+- 显式连接 first 边界最后一个音与 second 边界第一个音；
+- 同音高、唯一边界音；
+- 合并为一个逻辑 Note，跨边界持续；
+- 普通相邻同音高不会自动合并；
+- 歧义/音高不匹配/空片段诊断；
+- 当前不支持跨 clip、voice id、链式专用语法。
+
+详见 `docs/collection-semantics-spec.md` 与
+`docs/tie-performance-continuity-spec.md`。
+
+### 17.4 本阶段不引入
+
+- 列表 append/filter/fold/map；
+- 高阶函数/递归；
+- 通用切片步长；
+- 语言级 contract 语法；
+- voice/continuation 完整演奏事件层。

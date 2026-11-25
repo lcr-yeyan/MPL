@@ -32,6 +32,7 @@ private:
     Type checkRhythm(const Expr& expr);
     Type checkHarmony(const Expr& expr);
     Type checkList(const Expr& expr, std::optional<Type> expected = std::nullopt);
+    Type checkIndex(const Expr& expr);
     Type checkCurveLiteral(ExprId id, TimeDomain domain, const Rational& extent);
     Type checkCurveKeyframes(ExprId id, TimeDomain domain, const Rational& extent);
 

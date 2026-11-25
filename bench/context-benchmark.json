@@ -1,0 +1,16 @@
+{
+  "format": "mpl.context-benchmark",
+  "version": 1,
+  "tasks": [
+    { "task": "tasks/01-basic-notes.json", "domain": "Rhythm" },
+    { "task": "tasks/02-asymmetric-meter.json", "domain": "Rhythm" },
+    { "task": "tasks/03-multi-period.json", "domain": "Rhythm" },
+    { "task": "tasks/04-theme-transform.json", "domain": "Melody" },
+    { "task": "tasks/05-harmony-driven.json", "domain": "Harmony" },
+    { "task": "tasks/06-chord-voicing.json", "domain": "Voicing" },
+    { "task": "tasks/07-voice-leading.json", "domain": "Voicing" },
+    { "task": "tasks/10-local-edit.json", "domain": "Arrangement" },
+    { "task": "tasks/11-mix-automation.json", "domain": "Production" },
+    { "task": "tasks/12-mastering-target.json", "domain": "Production" }
+  ]
+}

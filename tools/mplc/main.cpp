@@ -29,7 +29,7 @@
 namespace {
 
 void printUsage(std::ostream& out) {
-    out << "mplc 0.4.0 - MPL music compiler\n\n"
+    out << "mplc 0.5.0-beta - MPL music compiler\n\n"
            "Usage:\n"
            "  mplc check <file.mpl> [--json]\n"
            "  mplc report <file.mpl>\n"
@@ -335,7 +335,7 @@ int runSourceBuild(const std::filesystem::path& input,
     if (!options.quiet && !options.json) {
         const mpl::ProductionIR& production = compilation.production;
         const double tempo = production.tempoMap.front().bpm;
-        std::cout << "MPL V0.4.0 build\n";
+        std::cout << "MPL V0.5.0-beta build\n";
         std::cout << "  source     " << input.string() << "\n";
         std::cout << "  tempo      " << tempo << " bpm, meter "
                   << production.meterMap.front().meter.toString() << ", key "
@@ -487,7 +487,7 @@ int runMastering(const std::filesystem::path& input,
     if (json) {
         std::cout << reportJson << "\n";
     } else {
-        std::cout << "MPL V0.4.0 mastering\n";
+        std::cout << "MPL V0.5.0-beta mastering\n";
         std::cout << "  source       " << input.string() << "\n";
         std::cout << "  target       " << target.targetLufs << " LUFS +/- "
                   << target.loudnessToleranceLu << " LU, true peak <= "
@@ -631,7 +631,7 @@ int main(int argc, char** argv) {
             return 0;
         }
         if (argument == "--version") {
-            std::cout << "mplc 0.4.0\n";
+            std::cout << "mplc 0.5.0-beta\n";
             return 0;
         }
         if (argument == "-o" || argument == "--output") {

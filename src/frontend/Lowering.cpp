@@ -1807,6 +1807,66 @@ private:
                 }
                 return value;
             }
+            case ExprKind::Index: {
+                if (expr.args.empty()) {
+                    return Value{};
+                }
+                const Value base = lowerExpr(expr.args[0], label);
+                if (base.kind != TypeKind::List) {
+                    error(expr.span, "type-index-not-list",
+                          "indexing requires a list");
+                    return Value{};
+                }
+                if (expr.text == "slice") {
+                    const std::int64_t start =
+                        expr.args.size() > 1 ? integerOfValue(lowerExpr(expr.args[1], label))
+                                             : 0;
+                    std::int64_t end = static_cast<std::int64_t>(base.items.size());
+                    if (expr.args.size() > 2 && expr.args[2] != kInvalidExprId) {
+                        end = integerOfValue(lowerExpr(expr.args[2], label));
+                    }
+                    if (start < 0 || end < 0) {
+                        error(expr.span, "index-negative",
+                              "list slice bounds must be non-negative");
+                        return Value{};
+                    }
+                    if (start > end) {
+                        error(expr.span, "index-slice-bounds",
+                              "list slice end is less than start");
+                        return Value{};
+                    }
+                    if (start > static_cast<std::int64_t>(base.items.size())) {
+                        error(expr.span, "index-out-of-range",
+                              "list slice start is past the end");
+                        return Value{};
+                    }
+                    if (end > static_cast<std::int64_t>(base.items.size())) {
+                        end = static_cast<std::int64_t>(base.items.size());
+                    }
+                    Value result;
+                    result.kind = TypeKind::List;
+                    for (std::int64_t i = start; i < end; ++i) {
+                        result.items.push_back(
+                            base.items[static_cast<std::size_t>(i)]);
+                    }
+                    return result;
+                }
+                if (expr.args.size() < 2) {
+                    return Value{};
+                }
+                const std::int64_t index = integerOfValue(lowerExpr(expr.args[1], label));
+                if (index < 0) {
+                    error(expr.span, "index-negative",
+                          "list index must be non-negative");
+                    return Value{};
+                }
+                if (index >= static_cast<std::int64_t>(base.items.size())) {
+                    error(expr.span, "index-out-of-range",
+                          "list index " + std::to_string(index) + " is out of range");
+                    return Value{};
+                }
+                return base.items[static_cast<std::size_t>(index)];
+            }
             case ExprKind::Rhythm:
                 return lowerRhythmLiteral(expr, label);
             case ExprKind::Harmony:
@@ -1887,6 +1947,16 @@ private:
         }
 
         Value result;
+        if (name == "tie") {
+            const Value first = lowerExpr(expr.args[0], {});
+            const Value second = lowerExpr(expr.args[1], {});
+            if (first.fragment == kInvalidObjectId || second.fragment == kInvalidObjectId) {
+                return Value{};
+            }
+            result.kind = TypeKind::Fragment;
+            result.fragment = project_.music().tie(first.fragment, second.fragment, label);
+            return result;
+        }
         if (name == "transpose") {
             const Value source = lowerExpr(expr.args[0], {});
             const int semitones = static_cast<int>(integerOfValue(lowerExpr(expr.args[1], {})));

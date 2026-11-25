@@ -9,7 +9,7 @@
     "modelRequested":  "deepseek-chat",
     "modelReturned":  "deepseek-flash",
     "lcpManifestSha256":  "3f1424801b423fcdc8f0c7dd00e1c44291adac55a84ca8e907beada25bd9627b",
-    "note":  "Context variants and prompts frozen before held-out; held-out tasks not used for these prompts.",
+    "note":  "Context variants/prompts/task configs frozen; held-out tasks not used for prompts.",
     "files":  {
                   "lcp/v1.1/contexts/A.md":  "2ff7330424dd3e28cdf325807b9eaf265b09c569828d234c8bd870b5f944433d",
                   "lcp/v1.1/contexts/C.md":  "5da2d463e60c331930515b19489abda13f4875c59cd382be51668c28bf0b7e4f",
@@ -38,6 +38,8 @@
                   "bench/pilot/prompts/mpl/07-voice-leading.md":  "3925b5b6cebfb360ecc291b5ac3f3f38fd7f4b2384beda8a8fc89c114f6b6893",
                   "bench/learnability/tasks-v1.1.json":  "d65ab3c95cb396f298e0078b147523fd7093dbdc924ffae6659430d3144efd9d",
                   "bench/pilot/tasks.json":  "c53af0b28a7b7e944372130e9a212c2527c01697b01b3e6f480a944ce1223aca",
-                  "bench/tasks/13-function.json":  "9141bd9cf2a7deb8f8e70d131dfb04024a63015edaad0836b6f3f5edcd7fd833"
+                  "bench/tasks/13-function.json":  "9141bd9cf2a7deb8f8e70d131dfb04024a63015edaad0836b6f3f5edcd7fd833",
+                  "bench/context-benchmark.json":  "6aa83b448eb49dcb7896b29eb7b6e47f8afd131d23c5d5cfa340e108ad6d975c",
+                  "bench/v0.5/difficulty.json":  "325425a357e1126be1700651b9f0ac6239a5d0ecc72d6769035e1a3792968632"
               }
 }

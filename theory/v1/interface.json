@@ -1,0 +1,58 @@
+{
+  "format": "mpl.theory-engineering-interface",
+  "version": 1,
+  "theoryVersion": "UTPMP draft (external)",
+  "note": "This interface records claims; it does not assert that all UTPMP draft propositions are proven.",
+  "claims": [
+    {
+      "theoryClaimId": "UTPMP-METER-ANCHOR",
+      "theoryVersion": "draft",
+      "implementationRef": "core:MeterMap.resolveDuration",
+      "assumedSemantics": "positive bars are anchored to bar boundaries; negative bars are linear displacements",
+      "conformanceStatus": "conforms-by-design",
+      "verificationEvidence": ["tests/test_meter.cpp", "docs/meter-map-spec.md"],
+      "knownCounterexamples": [],
+      "limitations": "does not cover mid-bar meter changes"
+    },
+    {
+      "theoryClaimId": "UTPMP-RHYTHM-PERIOD",
+      "theoryVersion": "draft",
+      "implementationRef": "core:rhythm.commonPeriod",
+      "assumedSemantics": "exact rational LCM of event periods",
+      "conformanceStatus": "conforms-by-design",
+      "verificationEvidence": ["tests/test_rhythm.cpp"],
+      "knownCounterexamples": [],
+      "limitations": "bounded event/period limits"
+    },
+    {
+      "theoryClaimId": "UTPMP-VOICE-LEADING-COST",
+      "theoryVersion": "draft",
+      "implementationRef": "core:voiceLead",
+      "assumedSemantics": "minimum total semitone movement under hard constraints; bounded search",
+      "conformanceStatus": "implementation-approximation",
+      "verificationEvidence": ["tests/test_harmony.cpp", "docs/voice-relations-spec.md"],
+      "knownCounterexamples": ["budget exhaustion is not a proof of unsatisfiability"],
+      "limitations": "searchComplete distinguishes exhaustive vs budget-limited"
+    },
+    {
+      "theoryClaimId": "UTPMP-HARMONY-OVERLAP",
+      "theoryVersion": "draft",
+      "implementationRef": "core:harmony.eventAt",
+      "assumedSemantics": "right-continuous; greatest start; later declaration wins ties",
+      "conformanceStatus": "conforms-by-design",
+      "verificationEvidence": ["tests/test_harmony.cpp"],
+      "knownCounterexamples": [],
+      "limitations": "no functional-harmony inference"
+    },
+    {
+      "theoryClaimId": "UTPMP-CONTEXT-ADEQUACY",
+      "theoryVersion": "candidate",
+      "implementationRef": "knowledge:AdaptiveContext",
+      "assumedSemantics": "adaptive context is a cost optimization, not a proof of model success",
+      "conformanceStatus": "unverified",
+      "verificationEvidence": ["context-accessibility-001 (offline only)"],
+      "knownCounterexamples": [],
+      "limitations": "requires real-model comparison; not claimed"
+    }
+  ]
+}

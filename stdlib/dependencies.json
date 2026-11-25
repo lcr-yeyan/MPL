@@ -1,0 +1,28 @@
+{
+  "format": "mpl.stdlib-dependencies",
+  "version": 1,
+  "stdlibVersion": "0.4.0",
+  "functions": {
+    "StdHarmony.chordNotes": ["chord", "voicing", "voicingNotes"],
+    "StdHarmony.voicedBarAt": ["chordAt", "voicing", "voicingNotes", "cycle"],
+    "StdHarmony.arpBarAt": ["chordAt", "voicing", "voicingNotes", "cycle"],
+    "StdHarmony.bassBarAt": ["chordAt", "voicing", "voicingNotes", "cycle"],
+    "StdHarmony.leadBarAt": ["chordAt", "voiceLead"],
+    "StdHarmony.arpBar": ["chordAtBar", "voicing", "voicingNotes", "cycle"],
+    "StdHarmony.leadBar": ["chordAtBar", "voiceLead", "voicingNotes"],
+    "StdHarmony.harmonyBarChord": ["chordAtBar"],
+    "StdRhythm.pulseGrid": ["range", "note", "sequenceAll"],
+    "StdRhythm.accentGrid": ["range", "note", "sequenceAll"],
+    "StdRhythm.accentRhythm": ["metricAccent", "cycle"],
+    "StdVoicing.closeVoicing": ["voicing", "voicingNotes"],
+    "StdVoicing.nextVoicing": ["voiceLead", "voicingNotes"],
+    "StdVoicing.nextVoicingResult": ["voiceLead"],
+    "StdVoicing.sharedTones": ["commonTones"],
+    "StdVoicing.topVoice": ["list-index", "length"],
+    "StdVoicing.bottomVoice": ["list-index"],
+    "StdVoicing.innerVoices": ["list-slice", "length"],
+    "StdAnalysis.pitchClasses": ["pitchClass", "for"],
+    "StdAnalysis.intervalsOf": ["range", "length", "interval", "list-index", "for"],
+    "StdAnalysis.spanOf": ["pitchRange"]
+  }
+}

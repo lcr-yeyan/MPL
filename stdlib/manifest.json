@@ -1,0 +1,34 @@
+{
+    "format":  "mpl.stdlib-manifest",
+    "version":  1,
+    "frozenAt":  "2026-11-25",
+    "stdlibVersion":  "0.4.0",
+    "language":  "0.4.0",
+    "compiler":  "0.5.0-beta",
+    "modules":  4,
+    "exports":  21,
+    "contractsSha256":  "95e451f64daa736866973381440a7655672b8206874c357c8add4464d82cd794",
+    "modulesList":  [
+                        {
+                            "module":  "analysis",
+                            "exports":  3,
+                            "sha256":  "dfba4393934d1659598ea55e3bdb1e4d79de151ae941db8372fad0053a880697"
+                        },
+                        {
+                            "module":  "harmony",
+                            "exports":  8,
+                            "sha256":  "f79915227b9d44a6e5c732a6719a928fba5a63d602c35781a57727ed279e4e03"
+                        },
+                        {
+                            "module":  "rhythm",
+                            "exports":  3,
+                            "sha256":  "342021f1e3382982e3fe5951896be6d8a7eb811495ba9742fd7bba4398143c7d"
+                        },
+                        {
+                            "module":  "voicing",
+                            "exports":  7,
+                            "sha256":  "b767e8b0611ff3c2fccc60f2182a5c7ba27ce6c51225d56c557ba35531f05b4b"
+                        }
+                    ],
+    "dependenciesSha256":  "aaff915550832f99ad191453bbbf56a9dcdc8eeeebc584919b9a79b7edb793c9"
+}
