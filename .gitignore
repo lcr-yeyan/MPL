@@ -1,3 +1,37 @@
+# Build outputs
 /build/
-/.screenshots/
 /build-core-only/
+/.screenshots/
+*.log
+
+# Local test / repair artifacts
+.mpl-repair-*.mpl
+.DS_Store
+Thumbs.db
+
+# Web toolchain
+/web/node_modules/
+/web/dist/
+/web/dist-tauri/
+/web/.runtime/
+/web/coverage/
+/web/test-results/
+/web/playwright-report/
+/web/*.tsbuildinfo
+/web/vite.config.js
+/web/vite.config.d.ts
+/web/*.log
+
+# Tauri build outputs and generated resources
+/web/src-tauri/target/
+/web/src-tauri/gen/
+/web/src-tauri/resources/
+/web/src-tauri/icons/android/
+/web/src-tauri/icons/ios/
+
+# Screenshot / visual test artifacts
+# Official docs images live in docs/images and stay tracked.
+/web/*.png
+/web/inspector-*.png
+/web/studio-*.png
+/web/tauri-*.png

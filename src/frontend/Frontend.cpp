@@ -7,6 +7,7 @@
 
 #include <algorithm>
 #include <cstdint>
+#include <cstdlib>
 #include <filesystem>
 #include <fstream>
 #include <iterator>
@@ -42,7 +43,10 @@ std::string readFile(const Path& path) {
 
 std::vector<Path> defaultImportPaths() {
     std::vector<Path> paths;
-    const std::string stdlib = MPL_STDLIB_DIR;
+    const char* runtimeStdlib = std::getenv("MPL_STDLIB_DIR");
+    const std::string stdlib = runtimeStdlib != nullptr && *runtimeStdlib != '\0'
+                                   ? runtimeStdlib
+                                   : MPL_STDLIB_DIR;
     if (!stdlib.empty()) {
         paths.emplace_back(stdlib);
     }

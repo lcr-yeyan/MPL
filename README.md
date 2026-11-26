@@ -2,6 +2,11 @@
 
 **Programmable Music Production: A Formal Framework for Compilation, Execution, and Human–AI Co-Creation**
 
+> **MPL Studio:** a local-first React/CodeMirror editor for the real compiler is in
+> [`web/`](web/README.md). Run `cd web && pnpm install && pnpm dev` after building
+> `mplc`, then open `http://127.0.0.1:5178`. Native Windows build:
+> `web/dist-tauri/MPL-Studio_0.1.0_x64-setup.exe` (Tauri 2).
+
 ## 摘要
 
 随着生成式人工智能的发展，自然语言逐渐成为复杂计算任务的重要交互方式。然而，在音乐生产领域，直接生成音频或符号化音乐事件的方法，仍然面临生成逻辑不透明、局部修改困难、结构控制不足以及创作意图与执行结果之间缺乏明确语义契约等问题。
